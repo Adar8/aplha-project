@@ -2,6 +2,7 @@
 // במצב גלישה פרטית או כשהאחסון חסום, האפליקציה ממשיכה לעבוד בלי שמירה.
 const PROGRESS_KEY = 'alphatrader-learn:progress:v1'
 const PROFILE_KEY = 'alphatrader-learn:profile:v1'
+const PORTFOLIO_KEY = 'alphatrader-learn:portfolio:v1'
 
 function loadObject(key) {
   try {
@@ -40,4 +41,14 @@ export function loadProfile() {
 
 export function saveProfile(profile) {
   saveObject(PROFILE_KEY, profile)
+}
+
+/** ״התיק שלי״: עסקאות שהמשתמש הזין ומחירים נוכחיים שהקליד. null = תיק ריק */
+export function loadPortfolio() {
+  return loadObject(PORTFOLIO_KEY)
+}
+
+export function savePortfolio(portfolio) {
+  const empty = !portfolio || (!portfolio.transactions?.length && !Object.keys(portfolio.prices ?? {}).length)
+  saveObject(PORTFOLIO_KEY, empty ? null : portfolio)
 }
