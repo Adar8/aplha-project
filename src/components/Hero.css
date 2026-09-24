@@ -1,5 +1,12 @@
 .hero {
+  position: relative;
+  overflow-x: clip; /* רשת הרקע רחבה מהקונטיינר — לא ליצור גלילה אופקית */
   padding-block: var(--space-8) var(--space-6);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
   max-width: 44rem;
 }
 
@@ -13,12 +20,13 @@
 
 .hero__title {
   font-size: clamp(2.25rem, 6vw, 3.75rem);
+  font-weight: 800;
   line-height: 1.1;
   margin-bottom: var(--space-4);
 }
 
 .hero__highlight {
-  background: linear-gradient(90deg, var(--color-cyan), var(--color-pink));
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-purple), var(--color-pink));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -45,9 +53,24 @@
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-text);
 }
 
 .hero__stats dd.mono {
   font-family: var(--font-mono);
+}
+
+/* רשת synthwave דועכת ברקע */
+.hero__grid {
+  position: absolute;
+  inset-inline: -10%;
+  bottom: 0;
+  height: 60%;
+  background-image:
+    linear-gradient(to right, rgb(176 77 255 / 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(176 77 255 / 0.22) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(420px) rotateX(58deg);
+  transform-origin: bottom;
+  mask-image: linear-gradient(to top, black, transparent 85%);
+  pointer-events: none;
 }

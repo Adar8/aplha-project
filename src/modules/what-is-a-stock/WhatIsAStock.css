@@ -1,0 +1,255 @@
+.is-up { color: var(--color-up); }
+.is-down { color: var(--color-down); }
+.is-lime { color: var(--color-lime); }
+
+/* ---------- מחשבון בעלות ---------- */
+.ownership__setup {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.ownership__label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.ownership__label output {
+  color: var(--color-cyan);
+}
+
+.ownership input[type='range'] {
+  width: 100%;
+  accent-color: var(--color-cyan);
+  cursor: pointer;
+  margin-block: var(--space-2);
+}
+
+.ownership__bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+
+.ownership__bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-purple));
+  box-shadow: var(--glow-cyan);
+}
+
+.ownership__results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-3);
+}
+
+.ownership__results > div {
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.ownership__results dt {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.ownership__results dd {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* ---------- מסלול פקודה ---------- */
+.flow {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+  margin-block: var(--space-5);
+  counter-reset: none;
+}
+
+.flow__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.flow__step:nth-child(1) { border-top: 2px solid var(--color-cyan); }
+.flow__step:nth-child(2) { border-top: 2px solid var(--color-purple); }
+.flow__step:nth-child(3) { border-top: 2px solid var(--color-pink); }
+.flow__step:nth-child(4) { border-top: 2px solid var(--color-lime); }
+
+.flow__index {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.flow__who {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+}
+
+.flow__what {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- שוק ראשוני / משני ---------- */
+.markets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.markets__card {
+  --tone: var(--color-cyan);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--tone);
+}
+
+.markets__card--secondary {
+  --tone: var(--color-pink);
+}
+
+.markets__card .term__en {
+  color: var(--tone);
+}
+
+.markets__tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--tone);
+  margin-bottom: var(--space-2);
+}
+
+.markets__money {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--color-border);
+}
+
+.markets__money span {
+  display: block;
+  font-weight: 700;
+  color: var(--tone);
+}
+
+/* ---------- ספר פקודות לדוגמה ---------- */
+.book-snapshot {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
+  margin-block: var(--space-5);
+}
+
+@media (min-width: 760px) {
+  .book-snapshot {
+    grid-template-columns: minmax(260px, 340px) 1fr;
+  }
+}
+
+.book {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.book caption {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  padding-bottom: var(--space-2);
+  direction: rtl;
+  text-align: start;
+}
+
+.book th,
+.book td {
+  padding: 0.35rem 0.75rem;
+  text-align: left;
+}
+
+.book th {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.book td:nth-child(2) {
+  color: var(--color-text-muted);
+}
+
+.book td:nth-child(3) {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.book__ask td:first-child { color: var(--color-down); }
+.book__bid td:first-child { color: var(--color-up); }
+
+.book__ask.book__best { background: color-mix(in srgb, var(--color-down) 12%, transparent); }
+.book__bid.book__best { background: color-mix(in srgb, var(--color-up) 12%, transparent); }
+
+.book__best td {
+  font-weight: 600;
+}
+
+.book__ask.book__best td:nth-child(3) { color: var(--color-down); }
+.book__bid.book__best td:nth-child(3) { color: var(--color-up); }
+
+.book__spread td {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-lime);
+  border-block: 1px dashed var(--color-border);
+}
+
+.book-snapshot__explain p + p {
+  margin-top: var(--space-3);
+}
+
+/* ---------- סיכום ---------- */
+.takeaways {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.takeaways li {
+  position: relative;
+  padding-inline-start: var(--space-6);
+}
+
+.takeaways li::before {
+  content: '▸';
+  position: absolute;
+  inset-inline-start: var(--space-2);
+  color: var(--color-lime);
+  transform: scaleX(-1);
+}
+
+.lesson__body .markets__card h3 {
+  margin-top: 0;
+}

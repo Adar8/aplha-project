@@ -1,0 +1,247 @@
+/* עיצוב משותף לכל עמודי המודולים — כדי לשמור על עקביות בין מודולים */
+.lesson {
+  --accent: var(--color-cyan);
+  --accent-glow: var(--glow-cyan);
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.lesson--cyan   { --accent: var(--color-cyan);   --accent-glow: var(--glow-cyan); }
+.lesson--pink   { --accent: var(--color-pink);   --accent-glow: var(--glow-pink); }
+.lesson--purple { --accent: var(--color-purple); --accent-glow: var(--glow-purple); }
+.lesson--lime   { --accent: var(--color-lime);   --accent-glow: var(--glow-lime); }
+
+.lesson__breadcrumb a,
+.lesson__back {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.lesson__breadcrumb a:hover,
+.lesson__back:hover {
+  color: var(--accent);
+}
+
+.lesson__header {
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-6);
+}
+
+.lesson__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-2);
+}
+
+.lesson__title {
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: var(--space-3);
+  text-shadow: var(--accent-glow);
+}
+
+.lesson__intro {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  max-width: 42rem;
+}
+
+/* ---------- גוף השיעור ---------- */
+.lesson__body > section {
+  padding-block: var(--space-6);
+}
+
+.lesson__body > section + section {
+  border-top: 1px dashed var(--color-border);
+}
+
+.lesson__body h2 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: clamp(1.5rem, 3.5vw, 1.9rem);
+  margin-bottom: var(--space-4);
+}
+
+.lesson__body h2 .section-num {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.lesson__body h3 {
+  font-size: 1.2rem;
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+
+.lesson__body p,
+.lesson__body li {
+  max-width: 70ch;
+}
+
+.lesson__body p + p {
+  margin-top: var(--space-3);
+}
+
+.lesson__body ul.bullets {
+  margin-block: var(--space-4);
+  padding-inline-start: var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.lesson__body ul.bullets li::marker {
+  color: var(--accent);
+}
+
+/* ---------- מונחים ---------- */
+.term__he {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.term__en {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+/* ---------- Callout ---------- */
+.callout {
+  --callout-color: var(--color-cyan);
+  margin-block: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--callout-color) 7%, var(--color-surface));
+  border-inline-start: 3px solid var(--callout-color);
+  max-width: 70ch;
+}
+
+.callout--warning { --callout-color: var(--color-pink); }
+.callout--simple  { --callout-color: var(--color-lime); }
+
+.callout__title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--callout-color);
+  margin-bottom: var(--space-1);
+}
+
+/* ---------- כרטיס אינטראקטיבי (סימולטור / מחשבון) ---------- */
+.widget {
+  margin-block: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.03);
+}
+
+.widget__tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-bg);
+  background: var(--color-lime);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: var(--space-3);
+}
+
+.lesson__body .widget__title {
+  margin-top: 0;
+  font-size: 1.25rem;
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- כפתורים ---------- */
+.btn {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn--primary {
+  background: var(--color-cyan);
+  color: var(--color-bg);
+}
+
+.btn--primary:hover {
+  box-shadow: var(--glow-cyan);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+.btn--ghost:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+
+.btn--small {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+}
+
+.btn[aria-pressed='true'] {
+  color: var(--color-bg);
+  background: var(--color-purple);
+  border-color: var(--color-purple);
+}
+
+/* ---------- סיום ---------- */
+.lesson__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.complete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.complete--done {
+  border-color: var(--color-lime);
+  box-shadow: var(--glow-lime);
+}
+
+.complete__message {
+  font-weight: 500;
+}
+
+.complete__check {
+  color: var(--color-lime);
+  margin-inline-end: var(--space-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

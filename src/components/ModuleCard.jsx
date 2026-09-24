@@ -1,24 +1,51 @@
+import { Link } from 'react-router'
+import { useProgress } from '../progress/ProgressContext.js'
+import { formatDate } from '../progress/formatDate.js'
 import './ModuleCard.css'
 
-const STATUS_LABELS = {
-  soon: 'בקרוב',
-  available: 'זמין',
-}
-
 export default function ModuleCard({ module }) {
-  const { number, title, summary, accent, status } = module
+  const { progress } = useProgress()
+  const { kind, number, title, summary, accent, status, path, minutes } = module
+  const isGlossary = kind === 'glossary'
+  const isAvailable = status === 'available'
+  const completion = progress[module.id]
 
-  return (
-    <article className={`module-card module-card--${accent}`}>
+  let badge = <span className="module-card__status">בקרוב</span>
+  if (completion) {
+    badge = (
+      <span className="module-card__status module-card__status--done">
+        ✓ הושלם {formatDate(completion.completedAt)}
+      </span>
+    )
+  } else if (isAvailable) {
+    badge = <span className="module-card__status module-card__status--open">זמין</span>
+  }
+
+  const content = (
+    <>
       <div className="module-card__top">
-        <span className="module-card__number" dir="ltr">
-          {String(number).padStart(2, '0')}
+        <span className="module-card__number" dir="ltr" aria-hidden="true">
+          {isGlossary ? 'A–Z' : String(number).padStart(2, '0')}
         </span>
-        <span className="module-card__status">{STATUS_LABELS[status]}</span>
+        {badge}
       </div>
-      <p className="module-card__label">מודול {number}</p>
+      <p className="module-card__label">
+        {isGlossary ? 'כלי עזר' : `מודול ${number}`}
+        {minutes ? <span className="mono"> · {minutes} דק׳</span> : null}
+      </p>
       <h3 className="module-card__title">{title}</h3>
       <p className="module-card__summary">{summary}</p>
-    </article>
+      {isAvailable && <span className="module-card__cta">להתחיל ←</span>}
+    </>
+  )
+
+  const className = `module-card module-card--${accent}${isAvailable ? ' module-card--link' : ' module-card--locked'}`
+
+  return isAvailable ? (
+    <Link to={path} className={className}>
+      {content}
+    </Link>
+  ) : (
+    <article className={className}>{content}</article>
   )
 }

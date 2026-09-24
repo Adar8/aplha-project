@@ -1,11 +1,11 @@
 /* טוקני עיצוב — המקור היחיד לצבעים, פונטים ומרווחים. אין להשתמש בערכי hex בקומפוננטות. */
 :root {
-  /* רקע: כחול-נייבי כהה, לא שחור */
-  --color-bg: #0b1433;
-  --color-bg-deep: #070e26;
-  --color-surface: #131f47;
-  --color-surface-raised: #1a2857;
-  --color-border: #26366b;
+  /* רקע: נייבי-פחם כהה, לא שחור */
+  --color-bg: #0e1329;
+  --color-bg-deep: #0a0e1f;
+  --color-surface: #161c3a;
+  --color-surface-raised: #1e2549;
+  --color-border: #2a3360;
 
   /* טקסט */
   --color-text: #eef2ff;
@@ -16,6 +16,10 @@
   --color-pink: #ff2e97;   /* ורוד בוהק — דגש, ירידה/אזהרה */
   --color-purple: #b04dff; /* סגול זוהר — משני, גרדיאנטים */
   --color-lime: #b6ff3b;   /* ליים — הצלחה, תגיות, נתונים חיוביים */
+
+  /* משמעות בנתוני שוק */
+  --color-up: var(--color-cyan);
+  --color-down: var(--color-pink);
 
   /* זוהר */
   --glow-cyan: 0 0 24px rgb(0 240 255 / 0.25);

@@ -7,13 +7,13 @@ export default function ModuleList({ modules }) {
       <h2 id="modules-title" className="modules__title">
         מסלול הלימוד
       </h2>
-      <ol className="modules__grid">
+      <ul className="modules__grid">
         {modules.map((module) => (
           <li key={module.id}>
             <ModuleCard module={module} />
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   )
 }
