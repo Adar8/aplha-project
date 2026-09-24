@@ -523,7 +523,8 @@ export const TERMS = [
     definition:
       'פקודה ״רדומה״ שמתעוררת כשהמחיר מגיע לרמה שקבעתם, ואז הופכת לפקודת שוק. משתמשים בה בעיקר כדי להגביל הפסד. בתנועה חדה היא יכולה להתבצע רחוק מהרמה שקבעתם.',
     example: 'קניתם ב-₪100 וקבעתם סטופ ב-₪90: אם המחיר יורד ל-₪90, נשלחת פקודת מכירה בשוק.',
-    related: ['market-order', 'limit-order', 'slippage'],
+    related: ['market-order', 'limit-order', 'slippage', 'gap', 'position-sizing'],
+    module: 'risk-management',
   },
   {
     id: 'slippage',
@@ -618,6 +619,63 @@ export const TERMS = [
       'כשהמחיר עובר רמת תמיכה או התנגדות ונשאר מעבר לה. פריצה בנפח מסחר גבוה נחשבת אמינה יותר. כשהמחיר עובר לרגע וחוזר מיד, זו פריצת שווא.',
     related: ['support', 'resistance', 'volume'],
     module: 'chart-reading',
+  },
+  {
+    id: 'position-sizing',
+    he: 'גודל פוזיציה',
+    en: 'Position Sizing',
+    category: 'trading',
+    aliases: ['סיכון לעסקה', 'Risk per Trade', '1R'],
+    definition:
+      'כמה מניות לקנות, לפי הסכום שמוכנים להפסיד ולא לפי הסכום שרוצים להשקיע: (הון × אחוז סיכון) ÷ (מחיר כניסה − סטופ). הסכום שמסכנים בעסקה נקרא 1R.',
+    example: 'הון ₪100,000, סיכון 1% (₪1,000), כניסה ב-50 וסטופ ב-47.5: קונים 400 מניות.',
+    related: ['stop-order', 'risk-reward', 'drawdown'],
+    module: 'risk-management',
+  },
+  {
+    id: 'risk-reward',
+    he: 'יחס סיכון-סיכוי',
+    en: 'Risk/Reward Ratio',
+    category: 'trading',
+    aliases: ['R:R', 'יחס סיכוי-סיכון'],
+    definition:
+      'היחס בין מה שמסכנים בעסקה לבין מה שמצפים להרוויח. בעסקאות של 1:2 מספיק להצליח בקצת יותר משליש מהפעמים כדי לא להפסיד.',
+    related: ['expectancy', 'position-sizing'],
+    module: 'risk-management',
+  },
+  {
+    id: 'expectancy',
+    he: 'תוחלת',
+    en: 'Expectancy',
+    category: 'trading',
+    aliases: ['אחוז הצלחה', 'Win Rate', 'יתרון', 'Edge'],
+    definition:
+      'כמה מרוויחים (או מפסידים) בממוצע על כל עסקה: אחוז הצלחה × הרווח בהצלחה, פחות אחוז כישלון × ההפסד. שיטה עם תוחלת שלילית תפסיד לאורך זמן, לא משנה כמה טוב מנהלים את הסיכון.',
+    example: '45% הצלחה ברווח של 2R ו-55% כישלון בהפסד של 1R: תוחלת של ‎+0.35R לעסקה.',
+    related: ['risk-reward', 'drawdown'],
+    module: 'risk-management',
+  },
+  {
+    id: 'drawdown',
+    he: 'ירידה מהשיא',
+    en: 'Drawdown',
+    category: 'trading',
+    aliases: ['דרודאון', 'Max Drawdown'],
+    definition:
+      'כמה התיק ירד מהשיא האחרון שלו. גם שיטה רווחית עוברת ירידות כאלה, והשאלה היא אם אפשר לשרוד אותן כלכלית ורגשית. אחרי ירידה של 50% צריך רווח של 100% כדי לחזור.',
+    related: ['position-sizing', 'expectancy', 'volatility'],
+    module: 'risk-management',
+  },
+  {
+    id: 'gap',
+    he: 'פער פתיחה',
+    en: 'Gap',
+    category: 'trading',
+    aliases: ['גאפ'],
+    definition:
+      'כשהמחיר נפתח רחוק ממחיר הסגירה הקודם, בדרך כלל אחרי חדשות מחוץ לשעות המסחר, בלי מסחר באמצע. פקודת סטופ שנמצאת בתוך הפער תתבצע במחיר הפתיחה, רחוק מהסטופ.',
+    related: ['stop-order', 'slippage'],
+    module: 'risk-management',
   },
   {
     id: 'volatility',

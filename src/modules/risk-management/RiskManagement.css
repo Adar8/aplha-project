@@ -1,0 +1,394 @@
+/* ---------- מחשבון החזרה ---------- */
+.recovery__label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.recovery__slider,
+.eq-slider input {
+  inline-size: 100%;
+  cursor: pointer;
+}
+
+.recovery__slider {
+  accent-color: var(--color-pink);
+}
+
+.recovery__bars {
+  display: grid;
+  gap: var(--space-2);
+  margin-block: var(--space-4);
+}
+
+.recovery__bar {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr 4.5rem;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+}
+
+.recovery__bar-label {
+  color: var(--color-text-muted);
+}
+
+.recovery__track {
+  block-size: 14px;
+  border-radius: 999px;
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.recovery__fill {
+  display: block;
+  block-size: 100%;
+  transition: inline-size 0.2s ease;
+}
+
+.recovery__fill--loss {
+  background: var(--color-down);
+  box-shadow: var(--glow-pink);
+}
+
+.recovery__fill--gain {
+  background: var(--color-up);
+  box-shadow: var(--glow-cyan);
+}
+
+.recovery__example {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.recovery__ref {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: 0.85rem;
+}
+
+.recovery__ref li {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.recovery__ref li.is-current {
+  border-color: var(--color-lime);
+  box-shadow: var(--glow-lime);
+}
+
+/* ---------- מחשבון גודל פוזיציה ---------- */
+.position__layout {
+  display: grid;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (min-width: 820px) {
+  .position__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) 120px;
+  }
+}
+
+.position__inputs {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.position__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.position__field input {
+  inline-size: 8rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0.4rem 0.6rem;
+  color: var(--color-text);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.position__field input:focus-visible {
+  border-color: var(--color-cyan);
+}
+
+.position__headline {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: var(--space-3);
+}
+
+.position__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-2);
+}
+
+.position__stats > div {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.position__stats dt {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.position__stats dd {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.position__warn,
+.position__error {
+  margin-top: var(--space-3);
+  font-size: 0.9rem;
+  color: var(--color-pink);
+}
+
+.position__formula {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--color-border);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.position__formula strong {
+  color: var(--color-text);
+}
+
+.ladder {
+  direction: ltr; /* ב-SVG צריך CSS, המאפיין dir לא משפיע */
+  display: block;
+  inline-size: 120px;
+  block-size: auto;
+  margin-inline: auto;
+}
+
+.ladder__reward {
+  fill: color-mix(in srgb, var(--color-up) 22%, transparent);
+}
+
+.ladder__risk {
+  fill: color-mix(in srgb, var(--color-down) 26%, transparent);
+}
+
+.ladder__mark line {
+  stroke-width: 2;
+}
+
+.ladder__mark--target line { stroke: var(--color-up); }
+.ladder__mark--entry line { stroke: var(--color-text); }
+.ladder__mark--stop line { stroke: var(--color-down); }
+
+.ladder__mark text {
+  fill: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.ladder__mark text.ladder__label {
+  fill: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 10px;
+}
+
+/* ---------- נוסחת התוחלת ---------- */
+.formula {
+  max-inline-size: 70ch;
+  margin-block: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-purple);
+}
+
+.formula__title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-purple);
+}
+
+.formula__eq {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-block: var(--space-2);
+}
+
+.formula__example {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- סימולטור עקומות הון ---------- */
+.equity {
+  border-color: color-mix(in srgb, var(--color-pink) 40%, var(--color-border));
+  box-shadow: var(--glow-pink);
+}
+
+.equity__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.eq-slider {
+  --tone: var(--color-up);
+}
+
+.eq-slider--down { --tone: var(--color-down); }
+.eq-slider--purple { --tone: var(--color-purple); }
+
+.eq-slider label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  color: var(--tone);
+}
+
+.eq-slider input {
+  accent-color: var(--tone);
+  margin-top: var(--space-1);
+}
+
+.equity__presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.equity__presets .chip {
+  font-family: var(--font-body);
+}
+
+.equity__presets .chip[aria-pressed='true'] {
+  color: var(--color-bg);
+  background: var(--color-pink);
+  border-color: var(--color-pink);
+}
+
+.equity__edge {
+  font-size: 0.9rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
+  border-inline-start: 3px solid var(--color-lime);
+  background: color-mix(in srgb, var(--color-lime) 6%, transparent);
+}
+
+.equity__edge.is-negative {
+  border-color: var(--color-pink);
+  background: color-mix(in srgb, var(--color-pink) 8%, transparent);
+}
+
+.equity-chart {
+  direction: ltr; /* ב-SVG צריך CSS, המאפיין dir לא משפיע */
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.equity-chart__grid line {
+  stroke: var(--color-border);
+  stroke-dasharray: 2 4;
+}
+
+.equity-chart__grid.is-start line {
+  stroke: var(--color-text-muted);
+  stroke-dasharray: 6 4;
+}
+
+.equity-chart__grid text,
+.equity-chart__axis {
+  fill: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.equity-chart__path {
+  fill: none;
+  stroke-width: 1.2;
+  opacity: 0.45;
+}
+
+.equity-chart__path.is-up { stroke: var(--color-up); }
+.equity-chart__path.is-down { stroke: var(--color-down); }
+
+.equity-chart__path.is-median {
+  stroke: var(--color-lime);
+  stroke-width: 2.5;
+  opacity: 1;
+  filter: drop-shadow(0 0 4px var(--color-lime));
+}
+
+.equity__legend {
+  margin-top: var(--space-2);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.equity__swatch {
+  display: inline-block;
+  inline-size: 14px;
+  block-size: 3px;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+.equity__swatch--median { background: var(--color-lime); }
+.equity__swatch--up { background: var(--color-up); }
+.equity__swatch--down { background: var(--color-down); }
+
+.equity__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.equity__stats > div {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.equity__stats dt {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.equity__stats dd {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recovery__fill {
+    transition: none;
+  }
+}
