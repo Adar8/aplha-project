@@ -53,7 +53,7 @@
 .gl-search__input:focus-visible {
   outline: none;
   border-color: var(--color-amber);
-  box-shadow: var(--glow-amber);
+  box-shadow: 0 0 0 1px var(--color-amber);
 }
 
 .gl-search__kbd {
@@ -219,7 +219,7 @@
 
 .is-flash .gl-entry {
   border-color: var(--tone);
-  box-shadow: 0 0 0 1px var(--tone), 0 0 28px color-mix(in srgb, var(--tone) 40%, transparent);
+  box-shadow: 0 0 0 1px var(--tone);
 }
 
 .gl-entry__head {

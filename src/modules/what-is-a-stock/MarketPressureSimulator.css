@@ -82,9 +82,6 @@
   fill: var(--candle);
 }
 
-.candle--live {
-  filter: drop-shadow(0 0 6px var(--candle));
-}
 
 .candle-chart__last line {
   stroke: var(--color-lime);

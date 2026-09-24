@@ -42,7 +42,6 @@ export default function Hero() {
           </div>
         </dl>
       </div>
-      <div className="hero__grid" aria-hidden="true" />
     </section>
   )
 }

@@ -179,9 +179,9 @@
 }
 
 .lab__step.is-current {
-  color: var(--color-bg);
-  background: var(--color-cyan);
-  border-color: var(--color-cyan);
+  color: var(--color-cta-text);
+  background: var(--color-cta);
+  border-color: var(--color-cta);
 }
 
 .lab__source {
@@ -490,7 +490,6 @@
   block-size: 1.2rem;
   inline-size: 2px;
   background: var(--tone);
-  box-shadow: 0 0 8px var(--tone);
 }
 
 .scale__mark--history { --tone: var(--color-cyan); }

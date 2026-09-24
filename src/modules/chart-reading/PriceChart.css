@@ -80,7 +80,6 @@
 .price-chart__line.is-active line {
   stroke-width: 2.5;
   stroke-dasharray: none;
-  filter: drop-shadow(0 0 4px var(--line));
 }
 
 .price-chart__line rect {
