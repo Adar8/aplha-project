@@ -304,6 +304,7 @@ export const TERMS = [
     definition: 'כמה הבורסה מעריכה שהחברה שווה: מחיר המניה כפול מספר המניות.',
     example: 'חברה עם 50 מיליון מניות במחיר ₪40 שווה בבורסה ₪2 מיליארד.',
     related: ['stock', 'pe-ratio'],
+    module: 'fundamentals',
   },
   {
     id: 'eps',
@@ -314,6 +315,7 @@ export const TERMS = [
     definition: 'הרווח הנקי של החברה בשנה, חלקי מספר המניות. כמה רווח ״שייך״ לכל מניה.',
     example: 'רווח של ₪100 מיליון ו-50 מיליון מניות: ₪2 רווח למניה.',
     related: ['pe-ratio', 'net-income'],
+    module: 'fundamentals',
   },
   {
     id: 'pe-ratio',
@@ -325,6 +327,7 @@ export const TERMS = [
       'מחיר המניה חלקי הרווח למניה: כמה שנים של רווח (בקצב הנוכחי) משלמים במחיר של היום. מכפיל גבוה אומר שהשוק מצפה לצמיחה, או שהמניה יקרה.',
     example: 'מניה במחיר ₪40 עם רווח של ₪2 למניה: מכפיל 20.',
     related: ['eps', 'pb-ratio', 'market-cap'],
+    module: 'fundamentals',
   },
   {
     id: 'pb-ratio',
@@ -335,6 +338,7 @@ export const TERMS = [
     definition:
       'שווי השוק חלקי ההון העצמי במאזן. מכפיל מתחת ל-1 אומר שהבורסה מעריכה את החברה בפחות מהשווי ״בספרים״ שלה.',
     related: ['equity', 'pe-ratio'],
+    module: 'fundamentals',
   },
   {
     id: 'ps-ratio',
@@ -344,6 +348,7 @@ export const TERMS = [
     aliases: ['Price to Sales'],
     definition: 'שווי השוק חלקי ההכנסות השנתיות. שימושי במיוחד בחברות צעירות שעוד לא מרוויחות, ולכן אין להן מכפיל רווח.',
     related: ['pe-ratio', 'market-cap'],
+    module: 'fundamentals',
   },
   {
     id: 'dividend-yield',
@@ -353,6 +358,7 @@ export const TERMS = [
     definition: 'הדיבידנד השנתי למניה חלקי מחיר המניה. כמה ״ריבית״ המניה משלמת במזומן.',
     example: 'דיבידנד של ₪2 בשנה על מניה במחיר ₪50: תשואת דיבידנד של 4%.',
     related: ['dividend'],
+    module: 'fundamentals',
   },
   {
     id: 'equity',
@@ -361,6 +367,7 @@ export const TERMS = [
     category: 'valuation',
     definition: 'מה שנשאר לבעלי המניות אם החברה מוכרת את כל הנכסים ומשלמת את כל החובות: נכסים פחות התחייבויות.',
     related: ['pb-ratio', 'roe', 'debt-to-equity'],
+    module: 'fundamentals',
   },
   {
     id: 'roe',
@@ -371,6 +378,7 @@ export const TERMS = [
     definition: 'הרווח הנקי חלקי ההון העצמי: כמה ביעילות החברה מרוויחה על הכסף של בעלי המניות.',
     example: 'רווח של ₪15 מיליון על הון של ₪100 מיליון: תשואה על ההון של 15%.',
     related: ['equity', 'net-income'],
+    module: 'fundamentals',
   },
   {
     id: 'net-income',
@@ -379,6 +387,73 @@ export const TERMS = [
     category: 'valuation',
     definition: 'השורה התחתונה בדוח רווח והפסד: ההכנסות פחות כל ההוצאות, כולל ריבית ומסים.',
     related: ['eps', 'ebitda'],
+    module: 'fundamentals',
+  },
+  {
+    id: 'fundamental-analysis',
+    he: 'ניתוח יסודי',
+    en: 'Fundamental Analysis',
+    category: 'valuation',
+    aliases: ['ניתוח פונדמנטלי', 'ניתוח טכני', 'Technical Analysis'],
+    definition:
+      'ניתוח שמנסה להעריך כמה העסק שווה לפי הדוחות הכספיים, הענף והתחזיות, ולהשוות את זה למחיר בבורסה. ניתוח טכני, לעומתו, מסתכל על התנהגות המחיר בגרף.',
+    related: ['intrinsic-value', 'pe-ratio', 'income-statement'],
+    module: 'fundamentals',
+  },
+  {
+    id: 'income-statement',
+    he: 'דוח רווח והפסד',
+    en: 'Income Statement',
+    category: 'valuation',
+    aliases: ['דוח רוו״ה', 'P&L'],
+    definition:
+      'הדוח שמראה כמה החברה הרוויחה בתקופה: מתחיל בהכנסות, מוריד עלות מכר, הוצאות תפעול, מימון ומס, ונגמר ברווח הנקי.',
+    related: ['net-income', 'margins', 'balance-sheet'],
+    module: 'fundamentals',
+  },
+  {
+    id: 'balance-sheet',
+    he: 'מאזן',
+    en: 'Balance Sheet',
+    category: 'valuation',
+    definition:
+      'תמונת מצב של החברה ביום מסוים: מה יש לה (נכסים) ומה היא חייבת (התחייבויות). ההפרש הוא ההון העצמי, ותמיד: נכסים = התחייבויות + הון עצמי.',
+    related: ['equity', 'debt-to-equity', 'income-statement'],
+    module: 'fundamentals',
+  },
+  {
+    id: 'cash-flow-statement',
+    he: 'דוח תזרים מזומנים',
+    en: 'Cash Flow Statement',
+    category: 'valuation',
+    definition:
+      'הדוח שמראה כמה מזומן באמת נכנס ויצא: מהפעילות, מהשקעות ומגיוס או החזר של כסף. רווח חשבונאי ומזומן בבנק הם לא אותו דבר.',
+    related: ['free-cash-flow', 'income-statement'],
+    module: 'fundamentals',
+  },
+  {
+    id: 'margins',
+    he: 'שולי רווח',
+    en: 'Margins',
+    category: 'valuation',
+    aliases: ['שולי רווח גולמי', 'שולי רווח תפעולי', 'שולי רווח נקי', 'Gross Margin', 'Net Margin'],
+    definition:
+      'כמה אגורות רווח נשארות מכל שקל הכנסות, בכל שלב בדוח: גולמי (אחרי עלות המכר), תפעולי (אחרי הוצאות התפעול) ונקי (בשורה התחתונה).',
+    example: 'הכנסות של ₪1,000 ורווח נקי של ₪92: שולי רווח נקי של 9.2%.',
+    related: ['income-statement', 'net-income', 'ps-ratio'],
+    module: 'fundamentals',
+  },
+  {
+    id: 'value-trap',
+    he: 'מלכודת ערך',
+    en: 'Value Trap',
+    category: 'valuation',
+    aliases: ['רווח חד-פעמי', 'One-Off'],
+    definition:
+      'מניה שנראית זולה לפי המכפילים אבל נשארת זולה, או נעשית זולה עוד יותר, כי הרווח לא יחזור: רווח חד-פעמי, עסק בירידה או חוב גבוה.',
+    example: 'מכפיל רווח של 5 שנשען על מכירת קרקע חד-פעמית. בלי המכירה המכפיל הוא 13 והרווח יורד.',
+    related: ['pe-ratio', 'debt-to-equity', 'fundamental-analysis'],
+    module: 'fundamentals',
   },
   {
     id: 'ebitda',
@@ -407,6 +482,7 @@ export const TERMS = [
     category: 'valuation',
     definition: 'סך החובות של החברה חלקי ההון העצמי. יחס גבוה אומר שהחברה ממומנת בעיקר בהלוואות, וזה מגדיל את הסיכון כשהריבית עולה.',
     related: ['equity', 'leverage'],
+    module: 'fundamentals',
   },
   {
     id: 'intrinsic-value',
