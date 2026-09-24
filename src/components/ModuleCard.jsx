@@ -5,7 +5,7 @@ import './ModuleCard.css'
 
 export default function ModuleCard({ module }) {
   const { progress } = useProgress()
-  const { kind, number, title, summary, accent, status, path, minutes } = module
+  const { kind, number, title, summary, accent, status, path, minutes, termCount } = module
   const isGlossary = kind === 'glossary'
   const isAvailable = status === 'available'
   const completion = progress[module.id]
@@ -32,10 +32,11 @@ export default function ModuleCard({ module }) {
       <p className="module-card__label">
         {isGlossary ? 'כלי עזר' : `מודול ${number}`}
         {minutes ? <span className="mono"> · {minutes} דק׳</span> : null}
+        {termCount ? <span className="mono"> · {termCount} מונחים</span> : null}
       </p>
       <h3 className="module-card__title">{title}</h3>
       <p className="module-card__summary">{summary}</p>
-      {isAvailable && <span className="module-card__cta">להתחיל ←</span>}
+      {isAvailable && <span className="module-card__cta">{isGlossary ? 'לפתוח את המילון ←' : 'להתחיל ←'}</span>}
     </>
   )
 

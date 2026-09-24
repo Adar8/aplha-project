@@ -39,3 +39,54 @@
 .logo__accent {
   color: var(--color-cyan);
 }
+
+.site-nav {
+  margin-inline-start: auto;
+}
+
+.site-nav__link {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.site-nav__link:hover {
+  color: var(--color-text);
+}
+
+.site-nav__link.active {
+  color: var(--color-purple);
+  border-color: var(--color-purple);
+}
+
+.logo__text,
+.site-nav__link {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.05rem;
+  }
+
+  .logo__mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .site-nav__link {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-nav__long {
+    display: none;
+  }
+}

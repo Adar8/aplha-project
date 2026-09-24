@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import './Header.css'
 
 export default function Header() {
@@ -11,6 +11,11 @@ export default function Header() {
             AlphaTrader <span className="logo__accent">Learn</span>
           </span>
         </Link>
+        <nav className="site-nav" aria-label="ניווט ראשי">
+          <NavLink to="/glossary" className="site-nav__link">
+            מילון<span className="site-nav__long"> מונחים</span>
+          </NavLink>
+        </nav>
       </div>
     </header>
   )

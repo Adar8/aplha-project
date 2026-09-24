@@ -5,11 +5,13 @@ import HomePage from './pages/HomePage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import WhatIsAStock from './modules/what-is-a-stock/WhatIsAStock.jsx'
 import OrderTypes from './modules/order-types/OrderTypes.jsx'
+import GlossaryPage from './glossary/GlossaryPage.jsx'
 
 function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // גוללים רק במעבר עמוד. עם עוגן (/glossary#bid) העמוד עצמו גולל למקום הנכון
+    if (!hash) window.scrollTo(0, 0)
   }, [pathname])
   return null
 }
@@ -24,6 +26,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/modules/what-is-a-stock" element={<WhatIsAStock />} />
           <Route path="/modules/order-types" element={<OrderTypes />} />
+          <Route path="/glossary" element={<GlossaryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
