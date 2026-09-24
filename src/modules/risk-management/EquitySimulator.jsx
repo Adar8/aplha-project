@@ -86,12 +86,12 @@ export default function EquitySimulator() {
       <p className={`equity__edge ${exp > 0 ? 'is-positive' : 'is-negative'}`} aria-live="polite">
         {exp > 0 ? (
           <>
-            לשיטה יש יתרון: בממוצע <span className="mono">+{exp.toFixed(2)}R</span> לעסקה. אחוז ההצלחה המינימלי כדי לא
+            לשיטה יש יתרון: בממוצע <bdi className="mono">+{exp.toFixed(2)}R</bdi> לעסקה. אחוז ההצלחה המינימלי כדי לא
             להפסיד ביחס הזה: <span className="mono">{Math.round(breakEven * 100)}%</span>.
           </>
         ) : (
           <>
-            לשיטה <strong>אין</strong> יתרון: בממוצע <span className="mono">{exp.toFixed(2)}R</span> לעסקה. צריך לפחות{' '}
+            לשיטה <strong>אין</strong> יתרון: בממוצע <bdi className="mono">−{Math.abs(exp).toFixed(2)}R</bdi> לעסקה. צריך לפחות{' '}
             <span className="mono">{Math.round(breakEven * 100)}%</span> הצלחה ביחס הזה. שום ניהול סיכונים לא יציל שיטה כזו,
             הוא רק קובע כמה מהר תפסידו.
           </>
