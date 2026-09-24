@@ -4,6 +4,7 @@ import Header from './components/Header.jsx'
 import HomePage from './pages/HomePage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import WhatIsAStock from './modules/what-is-a-stock/WhatIsAStock.jsx'
+import OrderTypes from './modules/order-types/OrderTypes.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -22,6 +23,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/modules/what-is-a-stock" element={<WhatIsAStock />} />
+          <Route path="/modules/order-types" element={<OrderTypes />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

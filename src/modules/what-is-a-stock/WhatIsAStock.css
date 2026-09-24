@@ -1,7 +1,3 @@
-.is-up { color: var(--color-up); }
-.is-down { color: var(--color-down); }
-.is-lime { color: var(--color-lime); }
-
 /* ---------- מחשבון בעלות ---------- */
 .ownership__setup {
   color: var(--color-text-muted);
@@ -228,26 +224,6 @@
 
 .book-snapshot__explain p + p {
   margin-top: var(--space-3);
-}
-
-/* ---------- סיכום ---------- */
-.takeaways {
-  list-style: none;
-  display: grid;
-  gap: var(--space-3);
-}
-
-.takeaways li {
-  position: relative;
-  padding-inline-start: var(--space-6);
-}
-
-.takeaways li::before {
-  content: '▸';
-  position: absolute;
-  inset-inline-start: var(--space-2);
-  color: var(--color-lime);
-  transform: scaleX(-1);
 }
 
 .lesson__body .markets__card h3 {

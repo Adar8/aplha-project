@@ -51,6 +51,13 @@ a {
   padding-inline: var(--space-4);
 }
 
+/* צבעי משמעות לטקסט: עלייה/ירידה ודגשים */
+.is-up { color: var(--color-up); }
+.is-down { color: var(--color-down); }
+.is-lime { color: var(--color-lime); }
+.is-purple { color: var(--color-purple); }
+.is-muted { color: var(--color-text-muted); }
+
 .mono {
   font-family: var(--font-mono);
 }

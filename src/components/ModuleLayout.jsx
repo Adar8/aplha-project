@@ -1,9 +1,11 @@
 import { Link } from 'react-router'
+import { modules } from '../data/modules.js'
 import CompleteButton from './CompleteButton.jsx'
 import './ModuleLayout.css'
 
 export default function ModuleLayout({ module, intro, children }) {
   const { id, number, title, accent, minutes } = module
+  const next = modules.find((m) => m.kind === 'module' && m.number === number + 1)
 
   return (
     <article className={`lesson lesson--${accent}`}>
@@ -24,9 +26,16 @@ export default function ModuleLayout({ module, intro, children }) {
 
       <footer className="lesson__footer">
         <CompleteButton moduleId={id} />
-        <Link to="/" className="lesson__back">
-          → חזרה לכל המודולים
-        </Link>
+        <div className="lesson__nav">
+          <Link to="/" className="lesson__back">
+            → חזרה לכל המודולים
+          </Link>
+          {next?.status === 'available' && (
+            <Link to={next.path} className="lesson__next">
+              המודול הבא: {next.title} ←
+            </Link>
+          )}
+        </div>
       </footer>
     </article>
   )

@@ -98,6 +98,26 @@
   color: var(--accent);
 }
 
+/* ---------- סיכום ---------- */
+.takeaways {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.takeaways li {
+  position: relative;
+  padding-inline-start: var(--space-6);
+}
+
+.takeaways li::before {
+  content: '▸';
+  position: absolute;
+  inset-inline-start: var(--space-2);
+  color: var(--color-lime);
+  transform: scaleX(-1);
+}
+
 /* ---------- מונחים ---------- */
 .term__he {
   color: var(--color-text);
@@ -206,6 +226,25 @@
 }
 
 /* ---------- סיום ---------- */
+.lesson__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lesson__next {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-cyan);
+  text-decoration: none;
+}
+
+.lesson__next:hover {
+  text-shadow: var(--glow-cyan);
+}
+
 .lesson__footer {
   display: flex;
   flex-direction: column;
