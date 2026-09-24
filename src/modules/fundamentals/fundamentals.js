@@ -89,7 +89,7 @@ export const COMPANIES = [
     id: 'cloud',
     name: 'ענן-טק',
     sector: 'תוכנה',
-    accent: 'purple',
+    accent: 'amber',
     price: 120,
     shares: 25,
     revenue: 600,

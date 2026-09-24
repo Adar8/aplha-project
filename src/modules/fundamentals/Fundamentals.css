@@ -15,7 +15,7 @@
   border-top: 3px solid var(--tone);
 }
 
-.reports__card--balance { --tone: var(--color-purple); }
+.reports__card--balance { --tone: var(--color-amber); }
 .reports__card--cash { --tone: var(--color-lime); }
 
 .lesson__body .reports__card h3 {
@@ -73,7 +73,7 @@
 
 .pnl__slider input {
   inline-size: 100%;
-  accent-color: var(--color-purple);
+  accent-color: var(--color-amber);
   cursor: pointer;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .wf-row--cost { --tone: var(--color-down); }
-.wf-row--sub { --tone: var(--color-purple); }
+.wf-row--sub { --tone: var(--color-amber); }
 .wf-row--net { --tone: var(--color-lime); }
 .wf-row--loss { --tone: var(--color-down); }
 
@@ -190,8 +190,8 @@
 
 /* ---------- השוואת חברות ---------- */
 .cmp {
-  border-color: color-mix(in srgb, var(--color-purple) 40%, var(--color-border));
-  box-shadow: var(--glow-purple);
+  border-color: color-mix(in srgb, var(--color-amber) 40%, var(--color-border));
+  box-shadow: var(--glow-amber);
 }
 
 .cmp-cards {
@@ -216,7 +216,7 @@
 }
 
 .cmp-card--pink { --tone: var(--color-pink); }
-.cmp-card--purple { --tone: var(--color-purple); }
+.cmp-card--amber { --tone: var(--color-amber); }
 .cmp-card--lime { --tone: var(--color-lime); }
 
 .cmp-card__sector {
@@ -280,8 +280,8 @@
 
 .cmp-metrics .chip[aria-pressed='true'] {
   color: var(--color-bg);
-  background: var(--color-purple);
-  border-color: var(--color-purple);
+  background: var(--color-amber);
+  border-color: var(--color-amber);
 }
 
 .cmp-toggle {
@@ -314,7 +314,7 @@
 
 .cmp-chart__title .mono {
   font-size: 0.8em;
-  color: var(--color-purple);
+  color: var(--color-amber);
 }
 
 .cmp-bars {
@@ -333,12 +333,12 @@
 }
 
 .cmp-bars__row--pink { --tone: var(--color-pink); }
-.cmp-bars__row--purple { --tone: var(--color-purple); }
+.cmp-bars__row--amber { --tone: var(--color-amber); }
 .cmp-bars__row--lime { --tone: var(--color-lime); }
 
 .cmp-bars__track {
   block-size: 14px;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   background: var(--color-surface);
   overflow: hidden;
 }
@@ -346,7 +346,7 @@
 .cmp-bars__fill {
   display: block;
   block-size: 100%;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   background: var(--tone);
   transition: inline-size 0.25s ease;
 }

@@ -7,7 +7,7 @@
 
 .lesson--cyan   { --accent: var(--color-cyan);   --accent-glow: var(--glow-cyan); }
 .lesson--pink   { --accent: var(--color-pink);   --accent-glow: var(--glow-pink); }
-.lesson--purple { --accent: var(--color-purple); --accent-glow: var(--glow-purple); }
+.lesson--amber { --accent: var(--color-amber); --accent-glow: var(--glow-amber); }
 .lesson--lime   { --accent: var(--color-lime);   --accent-glow: var(--glow-lime); }
 
 .lesson__breadcrumb a,
@@ -111,11 +111,13 @@
 }
 
 .takeaways li::before {
-  content: '▸';
+  content: '';
   position: absolute;
   inset-inline-start: var(--space-2);
-  color: var(--color-lime);
-  transform: scaleX(-1);
+  top: 0.7em;
+  inline-size: 6px;
+  block-size: 6px;
+  background: var(--color-lime);
 }
 
 /* ---------- מונחים ---------- */
@@ -172,7 +174,7 @@
   color: var(--color-bg);
   background: var(--color-lime);
   padding: 0.1rem 0.5rem;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   margin-bottom: var(--space-3);
 }
 
@@ -188,7 +190,7 @@
   font-weight: 700;
   font-size: 1rem;
   padding: 0.6rem 1.4rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   cursor: pointer;
   border: 1px solid transparent;
   transition: box-shadow 0.2s ease, background 0.2s ease;
@@ -221,8 +223,8 @@
 
 .btn[aria-pressed='true'] {
   color: var(--color-bg);
-  background: var(--color-purple);
-  border-color: var(--color-purple);
+  background: var(--color-amber);
+  border-color: var(--color-amber);
 }
 
 /* ---------- צ'יפ: כפתור קטן ---------- */
@@ -230,7 +232,7 @@
   font-family: var(--font-mono);
   font-size: 0.8rem;
   padding: 0.3rem 0.7rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text-muted);
@@ -249,19 +251,19 @@
   grid-auto-columns: 1fr;
   gap: 2px;
   padding: 3px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-control);
   background: var(--color-bg-deep);
   border: 1px solid var(--color-border);
 }
 
 .segmented__btn {
-  --tone: var(--color-purple);
+  --tone: var(--color-amber);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.95rem;
   padding: 0.5rem 0.75rem;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius-control);
   background: transparent;
   color: var(--color-text-muted);
   cursor: pointer;
@@ -327,11 +329,6 @@
   font-weight: 500;
 }
 
-.complete__check {
-  color: var(--color-lime);
-  margin-inline-end: var(--space-2);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;
@@ -378,7 +375,7 @@
 }
 
 .depth--deep {
-  --tone: var(--color-purple);
+  --tone: var(--color-amber);
 }
 
 .depth__summary {
@@ -412,7 +409,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   padding: 0.05rem 0.4rem;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   color: var(--color-bg);
   background: var(--tone);
 }

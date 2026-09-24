@@ -18,7 +18,7 @@ export default function ModuleCard({ module, isNext = false, isKnown = false }) 
   if (completion) {
     badge = (
       <span className="module-card__status module-card__status--done">
-        ✓ הושלם {formatDate(completion.completedAt)}
+        הושלם {formatDate(completion.completedAt)}
       </span>
     )
   } else if (isNext) {

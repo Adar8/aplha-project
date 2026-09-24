@@ -1,3 +1,4 @@
+import { TERMS } from '../data/glossary.js'
 import { modules } from '../data/modules.js'
 import { useProgress } from '../progress/ProgressContext.js'
 import { useProfile } from '../profile/ProfileContext.js'
@@ -15,14 +16,14 @@ export default function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero__content">
-        <p className="hero__eyebrow">שוק ההון · מהיסוד</p>
+        <p className="hero__eyebrow">לימוד עצמי של שוק ההון</p>
         <h1 id="hero-title" className="hero__title">
-          לומדים את שוק ההון <span className="hero__highlight">עם סדר</span>
+          ממה זו מניה ועד קריאת <span className="hero__highlight">דוח שנתי</span>
         </h1>
         <p className="hero__lead">
-          יודעים קצת, אבל חסרה התמונה המלאה? AlphaTrader Learn בונה את הידע מהבסיס,
-          צעד אחרי צעד ובסדר הגיוני: ממה זו בכלל מניה, דרך סוגי פקודות, ועד דוחות
-          ומכפילים. כל מודול מותאם לרמה שלכם וכולל סימולטור שאפשר לשחק איתו.
+          {lessons.length} יחידות לימוד בעברית, כל אחת עם סימולטור: ספר פקודות, גרפים, ניהול סיכונים, דוחות
+          כספיים וחקירת חברה. לצידן מילון של {TERMS.length} מונחים. התוכן מסביר איך השוק עובד. הוא לא ממליץ
+          על מניות, ואין בו כסף אמיתי.
         </p>
         <dl className="hero__stats">
           <div>
@@ -36,8 +37,8 @@ export default function Hero() {
             <dd>{level}</dd>
           </div>
           <div>
-            <dt>כסף אמיתי</dt>
-            <dd className="mono">₪0</dd>
+            <dt>מונחים במילון</dt>
+            <dd className="mono">{TERMS.length}</dd>
           </div>
         </dl>
       </div>

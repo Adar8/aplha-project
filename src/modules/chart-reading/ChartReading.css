@@ -32,7 +32,7 @@
 }
 
 .trends__card--down { --tone: var(--color-down); }
-.trends__card--sideways { --tone: var(--color-purple); }
+.trends__card--sideways { --tone: var(--color-amber); }
 
 .lesson__body .trends__card h3 {
   margin-top: 0;
@@ -193,7 +193,7 @@
 }
 
 .level-row--down { --tone: var(--color-down); }
-.level-row--flip { --tone: var(--color-purple); }
+.level-row--flip { --tone: var(--color-amber); }
 
 .level-row.is-active {
   border-color: var(--tone);
@@ -262,13 +262,13 @@
   margin-top: var(--space-4);
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--color-purple) 8%, var(--color-surface));
-  border-inline-start: 3px solid var(--color-purple);
+  background: color-mix(in srgb, var(--color-amber) 8%, var(--color-surface));
+  border-inline-start: 3px solid var(--color-amber);
 }
 
 .levels__reveal-title {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--color-purple);
+  color: var(--color-amber);
   margin-bottom: var(--space-1);
 }

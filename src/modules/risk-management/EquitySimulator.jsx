@@ -69,7 +69,7 @@ export default function EquitySimulator() {
       <div className="equity__controls">
         <Slider id="eq-risk" label="סיכון לעסקה" value={risk} min={0.5} max={40} step={0.5} suffix="%" onChange={setRisk} tone="down" />
         <Slider id="eq-win" label="אחוז הצלחה" value={winRate} min={20} max={80} step={5} suffix="%" onChange={setWinRate} tone="up" />
-        <Slider id="eq-rr" label="רווח בהצלחה (ב-R)" value={rr} min={0.5} max={4} step={0.5} suffix="R" onChange={setRr} tone="purple" />
+        <Slider id="eq-rr" label="רווח בהצלחה (ב-R)" value={rr} min={0.5} max={4} step={0.5} suffix="R" onChange={setRr} tone="amber" />
       </div>
 
       <div className="equity__presets" role="group" aria-label="רמות סיכון מוכנות">
@@ -79,7 +79,7 @@ export default function EquitySimulator() {
           </button>
         ))}
         <button type="button" className="btn btn--ghost btn--small" onClick={() => setSeed((s) => s + 1)}>
-          🎲 מזל אחר
+          מזל אחר
         </button>
       </div>
 

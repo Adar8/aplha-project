@@ -17,7 +17,7 @@
 }
 
 .rq__card--quality { --tone: var(--color-lime); }
-.rq__card--health { --tone: var(--color-purple); }
+.rq__card--health { --tone: var(--color-amber); }
 .rq__card--price { --tone: var(--color-pink); }
 
 .rq__num {
@@ -78,7 +78,7 @@
   display: grid;
   gap: var(--space-1);
   padding: var(--space-2) var(--space-4);
-  border-inline-start: 3px solid var(--color-purple);
+  border-inline-start: 3px solid var(--color-amber);
   background: var(--color-surface);
   border-radius: var(--radius-sm);
 }
@@ -161,7 +161,7 @@
   font-family: var(--font-body);
   font-size: 0.85rem;
   padding: 0.3rem 0.8rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text-muted);
@@ -206,7 +206,7 @@
 .excerpt__title {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--color-purple);
+  color: var(--color-amber);
   margin-bottom: var(--space-2);
 }
 
@@ -247,7 +247,7 @@
   font-family: var(--font-body);
   font-size: 0.9rem;
   text-align: start;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-control);
 }
 
 .lab__opt:disabled {
@@ -301,7 +301,7 @@
 }
 
 .lab__finding--warning { --tone: var(--color-pink); }
-.lab__finding--question { --tone: var(--color-purple); }
+.lab__finding--question { --tone: var(--color-amber); }
 
 .lab__finding-kind {
   font-family: var(--font-mono);
@@ -345,7 +345,7 @@
 }
 
 .sheet__col--warning { --tone: var(--color-pink); }
-.sheet__col--question { --tone: var(--color-purple); }
+.sheet__col--question { --tone: var(--color-amber); }
 
 .sheet__col-title {
   font-family: var(--font-heading);
@@ -379,8 +379,8 @@
 
 /* ---------- מחשבון ״מה המחיר מניח״ ---------- */
 .priced {
-  border-color: color-mix(in srgb, var(--color-purple) 40%, var(--color-border));
-  box-shadow: var(--glow-purple);
+  border-color: color-mix(in srgb, var(--color-amber) 40%, var(--color-border));
+  box-shadow: var(--glow-amber);
 }
 
 .priced__intro {
@@ -412,7 +412,7 @@
 
 .priced__slider input {
   inline-size: 100%;
-  accent-color: var(--color-purple);
+  accent-color: var(--color-amber);
   cursor: pointer;
 }
 
@@ -479,8 +479,8 @@
   inset-inline: 0;
   top: 2rem;
   block-size: 4px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-border), var(--color-purple));
+  border-radius: var(--radius-control);
+  background: var(--color-border);
 }
 
 .scale__mark {

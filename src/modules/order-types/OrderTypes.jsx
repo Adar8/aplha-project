@@ -216,7 +216,7 @@ export default function OrderTypes() {
         <SectionTitle num="2.4" id="compare">
           השוואה מהירה
         </SectionTitle>
-        <div className="compare-wrap">
+        <div className="compare-wrap" tabIndex={0} role="region" aria-label="טבלת השוואה: פקודת שוק מול פקודה מוגבלת">
           <table className="compare">
             <thead>
               <tr>
@@ -278,7 +278,7 @@ export default function OrderTypes() {
         </SectionTitle>
         <p>
           זה ספר פקודות חי של מניה דמיונית. בחרו כיוון, סוג פקודה וכמות, ולפני השליחה תראו מה
-          בדיוק יקרה. הפקודות שלכם מסומנות בספר ב-<span className="is-lime">◆</span>.
+          בדיוק יקרה. הפקודות שלכם מסומנות בספר במסגרת, והכמות שלהן מופיעה בעמודה <bdi className="mono">Yours</bdi>.
         </p>
 
         <OrderBookSimulator />
@@ -313,7 +313,7 @@ export default function OrderTypes() {
 
       {/* ---------- סיכום ---------- */}
       <section aria-labelledby="summary">
-        <SectionTitle num="✓" id="summary">
+        <SectionTitle num="2.6" id="summary">
           מה לוקחים מהמודול
         </SectionTitle>
         <ul className="takeaways">

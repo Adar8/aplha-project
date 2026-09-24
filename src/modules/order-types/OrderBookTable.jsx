@@ -11,7 +11,7 @@ function Row({ level, side, maxSize, isBest }) {
         <span className="ob__depth" style={{ inlineSize: `${depth}%` }} aria-hidden="true" />
         <span className="ob__size-num">{qty.format(level.size)}</span>
       </td>
-      <td className="ob__mine">{level.mine ? `◆ ${qty.format(level.mine)}` : ''}</td>
+      <td className="ob__mine">{level.mine ? qty.format(level.mine) : ''}</td>
     </tr>
   )
 }
@@ -42,9 +42,9 @@ export default function OrderBookTable({ book }) {
           <td colSpan="3">
             {spread != null ? (
               <>
-                <span className="ob__spread-label">ASK ▲</span>
+                <span className="ob__spread-label">ASK</span>
                 <span>spread {formatPrice(spread)}</span>
-                <span className="ob__spread-label">BID ▼</span>
+                <span className="ob__spread-label">BID</span>
               </>
             ) : (
               '—'

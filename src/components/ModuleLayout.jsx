@@ -4,12 +4,14 @@ import { useProfile, LevelContext } from '../profile/ProfileContext.js'
 import { LEVELS, levelFor, moduleMinutes } from '../profile/profile.js'
 import Callout from './Callout.jsx'
 import CompleteButton from './CompleteButton.jsx'
+import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 import './ModuleLayout.css'
 
 export default function ModuleLayout({ module, intro, children }) {
   const { id, number, title, accent, why } = module
   const next = modules.find((m) => m.kind === 'module' && m.number === number + 1)
   const { profile, answers, setModuleLevel } = useProfile()
+  useDocumentTitle(title)
   const level = levelFor(profile, id)
   const minutes = moduleMinutes(module, level)
   const goalWhy = answers?.goal && why?.[answers.goal]

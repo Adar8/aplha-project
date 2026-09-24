@@ -118,7 +118,7 @@ export const STEPS = [
 ]
 
 export const FINDING_KINDS = {
-  strength: { label: 'חוזקות', one: 'חוזקה', icon: '＋' },
-  warning: { label: 'סימני אזהרה', one: 'אזהרה', icon: '!' },
-  question: { label: 'שאלות פתוחות', one: 'שאלה פתוחה', icon: '?' },
+  strength: { label: 'חוזקות', one: 'חוזקה' },
+  warning: { label: 'סימני אזהרה', one: 'אזהרה' },
+  question: { label: 'שאלות פתוחות', one: 'שאלה פתוחה' },
 }
