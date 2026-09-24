@@ -25,7 +25,7 @@
 
 - [x] 01 — מהי מניה: מה זה אומר להיות בעלים, מה זו בורסה, שוק ראשוני מול משני, Bid/Ask. סימולטור: סליידרים של לחץ קונים מול מוכרים שיוצרים נר עולה או יורד בזמן אמת.
 - [x] 02 — סוגי פקודות: Market מול Limit, כולל סימולטור ספר פקודות
-- [ ] מילון מונחים: חיפוש וסינון לפי קטגוריות — כלי השקעה וקרנות, ניירות ערך, מדדי הערכה, מסחר ותנודתיות, מאקרו, משכנתאות, גופי פיקוח
+- [x] מילון מונחים: חיפוש וסינון לפי קטגוריות — כלי השקעה וקרנות, ניירות ערך, מדדי הערכה, מסחר ותנודתיות, מאקרו, משכנתאות, גופי פיקוח
 
 ## מפת דרכים
 - חודשים 1–2: MVP — מילון + 3–4 מודולים אינטראקטיביים
@@ -63,6 +63,8 @@ index.html                        # lang="he" dir="rtl", טעינת פונטים
 src/
   App.jsx                         # ראוטים (react-router)
   data/modules.js                 # רשימת המודולים + המילון — מקור האמת לדף הבית
+  data/glossary.js                # כל מונחי המילון והקטגוריות
+  glossary/                       # עמוד המילון: חיפוש (search.js), כרטיס מונח, עיצוב
   pages/                          # HomePage, NotFound
   components/                     # רכיבים משותפים: Header, ModuleCard, ModuleLayout, Callout, Term, CompleteButton
   modules/<slug>/                 # כל מודול בתיקייה משלו: עמוד + סימולטורים + CSS
@@ -75,6 +77,9 @@ src/
 1. רשומה ב-`src/data/modules.js` (`id`, `number`, `title`, `summary`, `accent`, `path`, `status: 'available'`).
 2. תיקייה `src/modules/<slug>/` עם עמוד שעטוף ב-`<ModuleLayout module={...}>` — הוא מספק כותרת, ניווט וכפתור "סמן כהושלם".
 3. Route ב-`src/App.jsx`.
+
+### הוספת מונח למילון
+רשומה ב-`TERMS` שב-`src/data/glossary.js`: `id` (באנגלית, ייחודי — משמש כעוגן `/glossary#id`), `he`, `en`, `category`, `definition`, ולא חובה: `example`, `aliases` (שמות נוספים לחיפוש), `related` (ids של מונחים קשורים), `module` (id של מודול שמסביר את המונח לעומק). כשמודול חדש מלמד מונח — להוסיף לו `module`.
 
 ### מוסכמות
 - טוקני צבע: `--color-bg`, `--color-surface`, `--color-cyan` / `--color-pink` / `--color-purple` / `--color-lime`, ו-`--color-up` (טורקיז) / `--color-down` (ורוד) לעלייה וירידה.

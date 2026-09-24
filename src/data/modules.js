@@ -1,3 +1,5 @@
+import { TERMS } from './glossary.js'
+
 // מודולי הלימוד והמילון. הדף הראשי נבנה מהמערך הזה.
 // accent: cyan | pink | purple | lime (ממופה לטוקנים ב-tokens.css)
 // status: available (יש עמוד) | soon (כרטיס בלבד)
@@ -33,7 +35,9 @@ export const modules = [
     summary:
       'חיפוש וסינון מונחים לפי קטגוריות: כלי השקעה וקרנות, ניירות ערך, מדדי הערכה, מסחר ותנודתיות, מאקרו, משכנתאות וגופי פיקוח.',
     accent: 'purple',
-    status: 'soon',
+    status: 'available',
+    path: '/glossary',
+    termCount: TERMS.length,
   },
 ]
 
