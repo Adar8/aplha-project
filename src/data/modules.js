@@ -41,6 +41,18 @@ export const modules = [
     minutes: 20,
   },
   {
+    id: 'risk-management',
+    kind: 'module',
+    number: 4,
+    title: 'ניהול סיכונים',
+    summary:
+      'למה הפסד של 50% דורש רווח של 100%, איפה שמים סטופ, כמה לקנות, ויחס סיכון-סיכוי. כולל מחשבון גודל פוזיציה וסימולטור של 100 עסקאות.',
+    accent: 'pink',
+    status: 'available',
+    path: '/modules/risk-management',
+    minutes: 20,
+  },
+  {
     id: 'glossary',
     kind: 'glossary',
     title: 'מילון מונחים',
