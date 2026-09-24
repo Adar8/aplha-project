@@ -77,6 +77,20 @@
   gap: var(--space-2);
 }
 
+/* בטלפון: שורה אחת שגוללים הצידה, כדי ש-13 הקטגוריות לא ידחפו את המונחים למטה */
+@media (max-width: 600px) {
+  .gl-cats {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-block-end: var(--space-2);
+    scrollbar-width: thin;
+  }
+
+  .gl-cat {
+    flex: none;
+  }
+}
+
 .gl-cat {
   --tone: var(--color-text-muted);
   font-family: var(--font-body);

@@ -9,18 +9,27 @@
 //   module    — (לא חובה) id של מודול שבו המונח מוסבר לעומק
 //
 // תוכן לימודי בלבד — אין כאן המלצות השקעה.
+// מונחים נוספים נמצאים ב-glossaryMore.js ומתמזגים ל-TERMS בסוף הקובץ.
+
+import { MORE_TERMS } from './glossaryMore.js'
 
 export const CATEGORIES = [
   { id: 'funds', label: 'כלי השקעה וקרנות', accent: 'cyan' },
   { id: 'securities', label: 'ניירות ערך', accent: 'amber' },
-  { id: 'valuation', label: 'מדדי הערכה', accent: 'lime' },
+  { id: 'us-market', label: 'השוק האמריקאי', accent: 'lime' },
   { id: 'trading', label: 'מסחר ותנודתיות', accent: 'pink' },
+  { id: 'technical', label: 'ניתוח טכני', accent: 'cyan' },
+  { id: 'risk', label: 'ניהול סיכונים', accent: 'amber' },
+  { id: 'valuation', label: 'מדדי הערכה', accent: 'lime' },
+  { id: 'accounting', label: 'דוחות כספיים', accent: 'pink' },
   { id: 'macro', label: 'מאקרו', accent: 'cyan' },
-  { id: 'mortgages', label: 'משכנתאות', accent: 'amber' },
-  { id: 'regulators', label: 'גופי פיקוח', accent: 'lime' },
+  { id: 'tax', label: 'מיסוי', accent: 'amber' },
+  { id: 'mortgages', label: 'משכנתאות', accent: 'lime' },
+  { id: 'behavior', label: 'פסיכולוגיה של משקיעים', accent: 'pink' },
+  { id: 'regulators', label: 'גופי פיקוח', accent: 'cyan' },
 ]
 
-export const TERMS = [
+const BASE_TERMS = [
   // ---------------------------------------------------------------- כלי השקעה וקרנות
   {
     id: 'mutual-fund',
@@ -395,7 +404,7 @@ export const TERMS = [
     id: 'net-income',
     he: 'רווח נקי',
     en: 'Net Income',
-    category: 'valuation',
+    category: 'accounting',
     definition: 'השורה התחתונה בדוח רווח והפסד: ההכנסות פחות כל ההוצאות, כולל ריבית ומסים.',
     related: ['eps', 'ebitda'],
     module: 'fundamentals',
@@ -415,7 +424,7 @@ export const TERMS = [
     id: 'income-statement',
     he: 'דוח רווח והפסד',
     en: 'Income Statement',
-    category: 'valuation',
+    category: 'accounting',
     aliases: ['דוח רוו״ה', 'P&L'],
     definition:
       'הדוח שמראה כמה החברה הרוויחה בתקופה: מתחיל בהכנסות, מוריד עלות מכר, הוצאות תפעול, מימון ומס, ונגמר ברווח הנקי.',
@@ -426,7 +435,7 @@ export const TERMS = [
     id: 'balance-sheet',
     he: 'מאזן',
     en: 'Balance Sheet',
-    category: 'valuation',
+    category: 'accounting',
     definition:
       'תמונת מצב של החברה ביום מסוים: מה יש לה (נכסים) ומה היא חייבת (התחייבויות). ההפרש הוא ההון העצמי, ותמיד: נכסים = התחייבויות + הון עצמי.',
     related: ['equity', 'debt-to-equity', 'income-statement'],
@@ -436,7 +445,7 @@ export const TERMS = [
     id: 'cash-flow-statement',
     he: 'דוח תזרים מזומנים',
     en: 'Cash Flow Statement',
-    category: 'valuation',
+    category: 'accounting',
     definition:
       'הדוח שמראה כמה מזומן באמת נכנס ויצא: מהפעילות, מהשקעות ומגיוס או החזר של כסף. רווח חשבונאי ומזומן בבנק הם לא אותו דבר.',
     related: ['free-cash-flow', 'income-statement'],
@@ -446,7 +455,7 @@ export const TERMS = [
     id: 'margins',
     he: 'שולי רווח',
     en: 'Margins',
-    category: 'valuation',
+    category: 'accounting',
     aliases: ['שולי רווח גולמי', 'שולי רווח תפעולי', 'שולי רווח נקי', 'Gross Margin', 'Net Margin'],
     definition:
       'כמה אגורות רווח נשארות מכל שקל הכנסות, בכל שלב בדוח: גולמי (אחרי עלות המכר), תפעולי (אחרי הוצאות התפעול) ונקי (בשורה התחתונה).',
@@ -470,7 +479,7 @@ export const TERMS = [
     id: 'ebitda',
     he: 'EBITDA',
     en: 'EBITDA',
-    category: 'valuation',
+    category: 'accounting',
     aliases: ['רווח תפעולי לפני פחת'],
     definition:
       'רווח לפני ריבית, מסים, פחת והפחתות. מראה כמה העסק עצמו מייצר, בלי השפעה של מבנה החוב והחשבונאות. נוח להשוואה בין חברות.',
@@ -480,7 +489,7 @@ export const TERMS = [
     id: 'free-cash-flow',
     he: 'תזרים מזומנים חופשי',
     en: 'Free Cash Flow',
-    category: 'valuation',
+    category: 'accounting',
     aliases: ['FCF'],
     definition:
       'הכסף שנכנס לקופה מהפעילות, פחות מה שהושקע בציוד ובמבנים. זה הכסף שהחברה יכולה לחלק, להחזיר חוב או להשקיע בצמיחה. קשה ״לייפות״ אותו יותר מאשר רווח.',
@@ -544,7 +553,7 @@ export const TERMS = [
     id: 'stock-based-compensation',
     he: 'תגמול מבוסס מניות',
     en: 'Stock-Based Compensation',
-    category: 'valuation',
+    category: 'accounting',
     aliases: ['SBC', 'אופציות לעובדים'],
     definition:
       'שכר שמשולם לעובדים במניות או באופציות. הוא לא יוצא מהקופה, ולכן מוחזר בדוח התזרים, אבל הוא מדלל את בעלי המניות ולכן הוא הוצאה אמיתית.',
@@ -650,7 +659,7 @@ export const TERMS = [
     id: 'candlestick',
     he: 'נר',
     en: 'Candlestick',
-    category: 'trading',
+    category: 'technical',
     aliases: ['OHLC', 'גרף נרות'],
     definition:
       'דרך להציג את המחיר בפרק זמן: הגוף מראה את מחיר הפתיחה והסגירה, והפתילים מראים את הגבוה והנמוך. נר עולה נסגר מעל הפתיחה, נר יורד מתחתיה.',
@@ -745,7 +754,7 @@ export const TERMS = [
     id: 'timeframe',
     he: 'טווח זמן',
     en: 'Timeframe',
-    category: 'trading',
+    category: 'technical',
     aliases: ['טיימפריים'],
     definition:
       'כמה זמן מייצג כל נר בגרף: דקה, שעה, יום, שבוע. אותה מניה יכולה להיראות במגמת ירידה בגרף של דקות ובמגמת עלייה בגרף יומי.',
@@ -756,7 +765,7 @@ export const TERMS = [
     id: 'trend',
     he: 'מגמה',
     en: 'Trend',
-    category: 'trading',
+    category: 'technical',
     aliases: ['מגמת עלייה', 'מגמת ירידה', 'דשדוש', 'Uptrend', 'Downtrend', 'Sideways'],
     definition:
       'הכיוון הכללי של המחיר. מגמת עלייה: שיאים ושפלים עולים. מגמת ירידה: שיאים ושפלים יורדים. דשדוש: המחיר נע בטווח בלי שיאים ושפלים חדשים.',
@@ -767,7 +776,7 @@ export const TERMS = [
     id: 'support',
     he: 'תמיכה',
     en: 'Support',
-    category: 'trading',
+    category: 'technical',
     definition:
       'אזור מחיר שבו ירידות נוטות להיעצר, כי קונים נכנסים שם שוב ושוב. זה אזור ולא קו מדויק, וכשהוא נשבר הוא נוטה להפוך להתנגדות.',
     example: 'מניה שירדה שלוש פעמים ל-₪96 ובכל פעם עלתה בחזרה: ₪96 הוא אזור תמיכה.',
@@ -778,7 +787,7 @@ export const TERMS = [
     id: 'resistance',
     he: 'התנגדות',
     en: 'Resistance',
-    category: 'trading',
+    category: 'technical',
     definition:
       'אזור מחיר שבו עליות נוטות להיעצר, כי מוכרים ממתינים שם. כשהמחיר פורץ אותו, הוא נוטה להפוך לתמיכה.',
     related: ['support', 'breakout'],
@@ -788,7 +797,7 @@ export const TERMS = [
     id: 'breakout',
     he: 'פריצה',
     en: 'Breakout',
-    category: 'trading',
+    category: 'technical',
     aliases: ['פריצת שווא', 'False Breakout', 'שבירה'],
     definition:
       'כשהמחיר עובר רמת תמיכה או התנגדות ונשאר מעבר לה. פריצה בנפח מסחר גבוה נחשבת אמינה יותר. כשהמחיר עובר לרגע וחוזר מיד, זו פריצת שווא.',
@@ -799,7 +808,7 @@ export const TERMS = [
     id: 'position-sizing',
     he: 'גודל פוזיציה',
     en: 'Position Sizing',
-    category: 'trading',
+    category: 'risk',
     aliases: ['סיכון לעסקה', 'Risk per Trade', '1R'],
     definition:
       'כמה מניות לקנות, לפי הסכום שמוכנים להפסיד ולא לפי הסכום שרוצים להשקיע: (הון × אחוז סיכון) ÷ (מחיר כניסה − סטופ). הסכום שמסכנים בעסקה נקרא 1R.',
@@ -811,7 +820,7 @@ export const TERMS = [
     id: 'risk-reward',
     he: 'יחס סיכון-סיכוי',
     en: 'Risk/Reward Ratio',
-    category: 'trading',
+    category: 'risk',
     aliases: ['R:R', 'יחס סיכוי-סיכון'],
     definition:
       'היחס בין מה שמסכנים בעסקה לבין מה שמצפים להרוויח. בעסקאות של 1:2 מספיק להצליח בקצת יותר משליש מהפעמים כדי לא להפסיד.',
@@ -822,7 +831,7 @@ export const TERMS = [
     id: 'expectancy',
     he: 'תוחלת',
     en: 'Expectancy',
-    category: 'trading',
+    category: 'risk',
     aliases: ['אחוז הצלחה', 'Win Rate', 'יתרון', 'Edge'],
     definition:
       'כמה מרוויחים (או מפסידים) בממוצע על כל עסקה: אחוז הצלחה × הרווח בהצלחה, פחות אחוז כישלון × ההפסד. שיטה עם תוחלת שלילית תפסיד לאורך זמן, לא משנה כמה טוב מנהלים את הסיכון.',
@@ -834,7 +843,7 @@ export const TERMS = [
     id: 'drawdown',
     he: 'ירידה מהשיא',
     en: 'Drawdown',
-    category: 'trading',
+    category: 'risk',
     aliases: ['דרודאון', 'Max Drawdown'],
     definition:
       'כמה התיק ירד מהשיא האחרון שלו. גם שיטה רווחית עוברת ירידות כאלה, והשאלה היא אם אפשר לשרוד אותן כלכלית ורגשית. אחרי ירידה של 50% צריך רווח של 100% כדי לחזור.',
@@ -1270,5 +1279,7 @@ export const TERMS = [
     related: ['sec', 'broker'],
   },
 ]
+
+export const TERMS = [...BASE_TERMS, ...MORE_TERMS]
 
 export const getCategory = (id) => CATEGORIES.find((c) => c.id === id)

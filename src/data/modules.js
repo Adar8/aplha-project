@@ -1,4 +1,4 @@
-import { TERMS } from './glossary.js'
+import { CATEGORIES, TERMS } from './glossary.js'
 
 // מודולי הלימוד והמילון. הדף הראשי נבנה מהמערך הזה.
 // accent: cyan | pink | amber | lime (ממופה לטוקנים ב-tokens.css)
@@ -118,8 +118,7 @@ export const modules = [
     id: 'glossary',
     kind: 'glossary',
     title: 'מילון מונחים',
-    summary:
-      'חיפוש וסינון מונחים לפי קטגוריות: כלי השקעה וקרנות, ניירות ערך, מדדי הערכה, מסחר ותנודתיות, מאקרו, משכנתאות וגופי פיקוח.',
+    summary: `חיפוש וסינון לפי ${CATEGORIES.length} קטגוריות: קרנות וניירות ערך, השוק האמריקאי, מסחר וניתוח טכני, ניהול סיכונים, דוחות כספיים ומדדי הערכה, מאקרו, מיסוי, משכנתאות ופסיכולוגיה של משקיעים.`,
     accent: 'amber',
     status: 'available',
     path: '/glossary',
