@@ -125,7 +125,7 @@
 .ticket__submit--sell { --tone: var(--color-down); }
 
 .ticket__submit:hover:not(:disabled) {
-  box-shadow: 0 0 24px color-mix(in srgb, var(--tone) 40%, transparent);
+  filter: brightness(1.1);
 }
 
 .ticket__submit:disabled {

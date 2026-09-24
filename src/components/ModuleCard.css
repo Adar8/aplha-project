@@ -87,10 +87,9 @@
 }
 
 .module-card__status--next {
-  color: var(--color-bg);
-  background: var(--color-cyan);
-  border-color: var(--color-cyan);
-  box-shadow: var(--glow-cyan);
+  color: var(--color-cta-text);
+  background: var(--color-cta);
+  border-color: var(--color-cta);
 }
 
 .module-card__status--known {

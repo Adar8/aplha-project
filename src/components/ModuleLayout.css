@@ -197,12 +197,12 @@
 }
 
 .btn--primary {
-  background: var(--color-cyan);
-  color: var(--color-bg);
+  background: var(--color-cta);
+  color: var(--color-cta-text);
 }
 
 .btn--primary:hover {
-  box-shadow: var(--glow-cyan);
+  background: var(--color-cta-hover);
 }
 
 .btn--ghost {
@@ -272,7 +272,6 @@
 .segmented__btn[aria-pressed='true'] {
   background: var(--tone);
   color: var(--color-bg);
-  box-shadow: 0 0 16px color-mix(in srgb, var(--tone) 35%, transparent);
 }
 
 .segmented__btn .mono {

@@ -58,7 +58,6 @@
   stroke-width: 2.5;
   stroke-linejoin: round;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 4px var(--tone));
 }
 
 .trends__rule {
@@ -197,7 +196,6 @@
 
 .level-row.is-active {
   border-color: var(--tone);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--tone) 30%, transparent);
 }
 
 .level-row__pick {

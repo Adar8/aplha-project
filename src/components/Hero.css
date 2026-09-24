@@ -55,19 +55,3 @@
 .hero__stats dd.mono {
   font-family: var(--font-mono);
 }
-
-/* רשת synthwave דועכת ברקע */
-.hero__grid {
-  position: absolute;
-  inset-inline: -10%;
-  bottom: 0;
-  height: 60%;
-  background-image:
-    linear-gradient(to right, rgb(0 240 255 / 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(0 240 255 / 0.1) 1px, transparent 1px);
-  background-size: 48px 48px;
-  transform: perspective(420px) rotateX(58deg);
-  transform-origin: bottom;
-  mask-image: linear-gradient(to top, black, transparent 85%);
-  pointer-events: none;
-}

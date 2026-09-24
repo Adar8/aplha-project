@@ -48,8 +48,7 @@
 }
 
 .onb__dot.is-on {
-  background: var(--color-cyan);
-  box-shadow: var(--glow-cyan);
+  background: var(--color-cta);
 }
 
 .onb__question {
@@ -99,9 +98,9 @@
 }
 
 .onb__option[aria-pressed='true'] {
-  border-color: var(--color-cyan);
-  box-shadow: var(--glow-cyan);
-  background: color-mix(in srgb, var(--color-cyan) 8%, var(--color-surface));
+  border-color: var(--color-cta);
+  box-shadow: inset 0 0 0 2px var(--color-cta);
+  background: color-mix(in srgb, var(--color-cta) 22%, var(--color-surface));
 }
 
 .onb__option-label {
@@ -165,9 +164,9 @@
 }
 
 .onb__quiz-opt[aria-pressed='true'] {
-  color: var(--color-bg);
-  background: var(--color-cyan);
-  border-color: var(--color-cyan);
+  color: var(--color-cta-text);
+  background: var(--color-cta);
+  border-color: var(--color-cta);
 }
 
 .onb__result-list {

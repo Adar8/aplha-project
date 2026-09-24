@@ -5,8 +5,8 @@
   padding: var(--space-5);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
-  border: 1px solid color-mix(in srgb, var(--color-cyan) 40%, var(--color-border));
-  box-shadow: var(--glow-cyan);
+  border: 1px solid var(--color-border);
+  border-inline-start: 3px solid var(--color-cta);
 }
 
 @media (min-width: 900px) {
