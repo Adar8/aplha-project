@@ -1,0 +1,515 @@
+/* ---------- ארבע השאלות ---------- */
+.rq {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--space-3);
+  margin-block: var(--space-5);
+}
+
+.rq__card {
+  --tone: var(--color-cyan);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--tone);
+}
+
+.rq__card--quality { --tone: var(--color-lime); }
+.rq__card--health { --tone: var(--color-purple); }
+.rq__card--price { --tone: var(--color-pink); }
+
+.rq__num {
+  font-size: 0.8rem;
+  color: var(--tone);
+}
+
+.lesson__body .rq__q {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-block: var(--space-1);
+}
+
+.rq__text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- מקורות מידע ---------- */
+.sources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--space-2);
+  margin-block: var(--space-4);
+}
+
+.sources__item {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.sources__item dt {
+  justify-self: start;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.sources__item dd {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- סוגי חפיר ---------- */
+.moats {
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+  margin-block: var(--space-4);
+  max-width: 70ch;
+}
+
+.moats__item {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  border-inline-start: 3px solid var(--color-purple);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+}
+
+.moats__text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- טבלה פיננסית (משותפת למעבדה ולמחשבון) ---------- */
+.fin-wrap {
+  overflow-x: auto;
+  margin-block: var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-deep);
+}
+
+.fin {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.fin caption {
+  caption-side: bottom;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: start;
+}
+
+.fin th,
+.fin td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.fin tbody tr:last-child th,
+.fin tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.fin thead th {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.fin tbody th {
+  text-align: start;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.fin td {
+  text-align: end;
+}
+
+/* ---------- מעבדת החקירה ---------- */
+.lab {
+  border-color: color-mix(in srgb, var(--color-cyan) 40%, var(--color-border));
+  box-shadow: var(--glow-cyan);
+}
+
+.lab__ticker {
+  font-size: 0.8em;
+  color: var(--color-cyan);
+}
+
+.lab__steps {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.lab__step {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.lab__step:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.lab__step.is-done {
+  color: var(--color-lime);
+  border-color: color-mix(in srgb, var(--color-lime) 50%, var(--color-border));
+}
+
+.lab__step.is-current {
+  color: var(--color-bg);
+  background: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+
+.lab__source {
+  font-size: 0.85rem;
+  margin-bottom: var(--space-3);
+}
+
+.lab__excerpts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-3);
+}
+
+.excerpt {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px dashed var(--color-border);
+  font-size: 0.9rem;
+}
+
+.excerpt__title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-purple);
+  margin-bottom: var(--space-2);
+}
+
+.lab__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-2);
+}
+
+.lab__facts > div {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.lab__facts dt {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.lab__facts dd {
+  font-weight: 600;
+}
+
+.lab__question {
+  font-weight: 600;
+  margin-block: var(--space-4) var(--space-2);
+}
+
+.lab__options {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.lab__opt {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-align: start;
+  border-radius: var(--radius-sm);
+}
+
+.lab__opt:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.lab__opt.is-correct {
+  opacity: 1;
+  color: var(--color-bg);
+  background: var(--color-lime);
+  border-color: var(--color-lime);
+}
+
+.lab__opt.is-wrong {
+  opacity: 1;
+  color: var(--color-pink);
+  border-color: var(--color-pink);
+  text-decoration: line-through;
+}
+
+.lab__feedback {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  margin-top: var(--space-4);
+}
+
+.lab__explain {
+  color: var(--color-text);
+}
+
+.lab__findings {
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+  inline-size: 100%;
+}
+
+.lab__finding {
+  --tone: var(--color-lime);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border-inline-start: 3px solid var(--tone);
+  background: color-mix(in srgb, var(--tone) 6%, var(--color-surface));
+  font-size: 0.9rem;
+}
+
+.lab__finding--warning { --tone: var(--color-pink); }
+.lab__finding--question { --tone: var(--color-purple); }
+
+.lab__finding-kind {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--tone);
+}
+
+/* ---------- דף המחקר ---------- */
+.sheet {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.sheet__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-cyan);
+}
+
+.lesson__body .sheet__title {
+  font-size: 1.2rem;
+  margin-block: var(--space-1) var(--space-4);
+}
+
+.sheet__cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-3);
+}
+
+.sheet__col {
+  --tone: var(--color-lime);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border-top: 3px solid var(--tone);
+}
+
+.sheet__col--warning { --tone: var(--color-pink); }
+.sheet__col--question { --tone: var(--color-purple); }
+
+.sheet__col-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--tone);
+  margin-bottom: var(--space-2);
+}
+
+.sheet__col ul {
+  display: grid;
+  gap: var(--space-2);
+  padding-inline-start: var(--space-4);
+  font-size: 0.9rem;
+}
+
+.sheet__note {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.sheet__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--color-border);
+}
+
+/* ---------- מחשבון ״מה המחיר מניח״ ---------- */
+.priced {
+  border-color: color-mix(in srgb, var(--color-purple) 40%, var(--color-border));
+  box-shadow: var(--glow-purple);
+}
+
+.priced__intro {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.priced__controls {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.priced__slider {
+  display: grid;
+  gap: var(--space-1);
+  font-size: 0.9rem;
+}
+
+.priced__slider-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.priced__slider-head output {
+  color: var(--color-text);
+}
+
+.priced__slider input {
+  inline-size: 100%;
+  accent-color: var(--color-purple);
+  cursor: pointer;
+}
+
+.priced__toggle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.priced__toggle input {
+  accent-color: var(--color-lime);
+  cursor: pointer;
+}
+
+.priced__result {
+  margin-block: var(--space-5);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.priced__big {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.priced__big .mono {
+  font-size: 1.3em;
+}
+
+.priced__compare {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.lesson__body .priced__subtitle {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-3);
+}
+
+.priced__my {
+  margin-block: var(--space-3);
+}
+
+.priced__grid thead th,
+.priced__grid tbody th {
+  font-size: 0.8rem;
+}
+
+/* ציר הצמיחה: שלושה סמנים, כל אחד בגובה אחר כדי שהתוויות לא יתנגשו */
+.scale {
+  position: relative;
+  direction: ltr;
+  block-size: 6.5rem;
+  margin-block: var(--space-3);
+}
+
+.scale__track {
+  position: absolute;
+  inset-inline: 0;
+  top: 2rem;
+  block-size: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-border), var(--color-purple));
+}
+
+.scale__mark {
+  --tone: var(--color-lime);
+  position: absolute;
+  top: 1.5rem;
+  block-size: 1.2rem;
+  inline-size: 2px;
+  background: var(--tone);
+  box-shadow: 0 0 8px var(--tone);
+}
+
+.scale__mark--history { --tone: var(--color-cyan); }
+.scale__mark--recent { --tone: var(--color-pink); }
+
+.scale__label {
+  position: absolute;
+  inset-inline-start: 0;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: var(--tone);
+  direction: rtl;
+}
+
+.scale__mark--implied .scale__label { bottom: calc(100% + 2px); }
+.scale__mark--history .scale__label { top: calc(100% + 4px); }
+.scale__mark--recent .scale__label { top: calc(100% + 1.4rem); }
+
+.scale__mark--flip .scale__label {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}

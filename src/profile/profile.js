@@ -84,10 +84,10 @@ export function levelFor(profile, moduleId) {
 
 // הסדר המומלץ לפי המטרה. המודולים בנויים אחד על השני, אז מודול 01 תמיד ראשון.
 const ORDER_BY_GOAL = {
-  understand: ['what-is-a-stock', 'order-types', 'fundamentals', 'chart-reading', 'risk-management'],
-  longterm: ['what-is-a-stock', 'fundamentals', 'risk-management', 'order-types', 'chart-reading'],
-  active: ['what-is-a-stock', 'order-types', 'chart-reading', 'risk-management', 'fundamentals'],
-  track: ['what-is-a-stock', 'fundamentals', 'risk-management', 'chart-reading', 'order-types'],
+  understand: ['what-is-a-stock', 'order-types', 'fundamentals', 'stock-research', 'chart-reading', 'risk-management'],
+  longterm: ['what-is-a-stock', 'fundamentals', 'stock-research', 'risk-management', 'order-types', 'chart-reading'],
+  active: ['what-is-a-stock', 'order-types', 'chart-reading', 'risk-management', 'fundamentals', 'stock-research'],
+  track: ['what-is-a-stock', 'fundamentals', 'stock-research', 'risk-management', 'chart-reading', 'order-types'],
 }
 
 // סכום ברירת מחדל לחשבון בסימולטורים, לפי טווח ההשקעה

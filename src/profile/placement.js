@@ -112,6 +112,28 @@ export const PLACEMENT = [
     ],
     answer: 'a',
   },
+  {
+    module: 'stock-research',
+    id: 'filing',
+    text: 'איפה מוצאים את התיאור המלא של העסק וגורמי הסיכון של חברה אמריקאית?',
+    options: [
+      { id: 'a', label: 'בדוח השנתי 10-K שהיא מגישה ל-SEC' },
+      { id: 'b', label: 'בגרף המחיר של המניה' },
+      { id: 'c', label: 'בדירוג של האנליסטים' },
+    ],
+    answer: 'a',
+  },
+  {
+    module: 'stock-research',
+    id: 'quality',
+    text: 'חברה מדווחת רווח נקי של 100 כל שנה, אבל התזרים מפעילות שוטפת הוא רק 20. מה זה מרמז?',
+    options: [
+      { id: 'a', label: 'שהרווח לא הופך למזומן, וכדאי לבדוק למה' },
+      { id: 'b', label: 'שהחברה חוסכת במיסים' },
+      { id: 'c', label: 'כלום, תזרים ורווח הם אותו דבר' },
+    ],
+    answer: 'a',
+  },
 ]
 
 /** @returns Record<moduleId, boolean> — true אם כל השאלות של המודול נענו נכון */
