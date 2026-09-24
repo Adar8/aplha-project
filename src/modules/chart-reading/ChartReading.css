@@ -1,0 +1,274 @@
+/* ---------- טווחי זמן ---------- */
+.tf__switch {
+  max-width: 420px;
+  margin-bottom: var(--space-4);
+}
+
+.tf__caption {
+  margin-top: var(--space-3);
+  min-height: 3.2em;
+  color: var(--color-text-muted);
+}
+
+.tf__caption strong {
+  color: var(--color-text);
+}
+
+/* ---------- כרטיסי מגמה ---------- */
+.trends {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.trends__card {
+  --tone: var(--color-up);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--tone);
+}
+
+.trends__card--down { --tone: var(--color-down); }
+.trends__card--sideways { --tone: var(--color-purple); }
+
+.lesson__body .trends__card h3 {
+  margin-top: 0;
+}
+
+.trends__card .term__en {
+  color: var(--tone);
+}
+
+.trends__svg {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 160px;
+  block-size: auto;
+  margin-bottom: var(--space-3);
+  /* הגרף תמיד משמאל לימין, כמו זמן על ציר */
+  direction: ltr;
+}
+
+.trends__svg polyline {
+  fill: none;
+  stroke: var(--tone);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px var(--tone));
+}
+
+.trends__rule {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--tone);
+  margin-bottom: var(--space-1);
+}
+
+/* ---------- תרגיל זיהוי מגמה ---------- */
+.quiz__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: var(--space-4);
+}
+
+.quiz__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.quiz__num {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.quiz__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.quiz__opt {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+}
+
+.quiz__opt:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.quiz__opt.is-correct {
+  opacity: 1;
+  color: var(--color-bg);
+  background: var(--color-lime);
+  border-color: var(--color-lime);
+}
+
+.quiz__opt.is-wrong {
+  opacity: 1;
+  color: var(--color-pink);
+  border-color: var(--color-pink);
+  text-decoration: line-through;
+}
+
+.quiz__feedback {
+  font-size: 0.9rem;
+}
+
+.quiz__feedback strong {
+  display: block;
+}
+
+.quiz__summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-border);
+  font-weight: 500;
+}
+
+/* ---------- סימולטור תמיכה והתנגדות ---------- */
+.levels {
+  border-color: color-mix(in srgb, var(--color-lime) 40%, var(--color-border));
+  box-shadow: var(--glow-lime);
+}
+
+.levels__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.levels__steps .chip {
+  font-family: var(--font-body);
+}
+
+.levels__steps .chip[aria-pressed='true'] {
+  color: var(--color-bg);
+  background: var(--color-lime);
+  border-color: var(--color-lime);
+}
+
+.levels__prompt {
+  font-weight: 500;
+  margin-bottom: var(--space-3);
+}
+
+.levels__hint {
+  margin-top: var(--space-2);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.levels__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.level-row {
+  --tone: var(--color-up);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+  border-inline-start: 3px solid var(--tone);
+}
+
+.level-row--down { --tone: var(--color-down); }
+.level-row--flip { --tone: var(--color-purple); }
+
+.level-row.is-active {
+  border-color: var(--tone);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--tone) 30%, transparent);
+}
+
+.level-row__pick {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--tone);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.level-row__pick:disabled {
+  cursor: default;
+}
+
+.level-row__pick .mono {
+  font-size: 0.75em;
+  font-weight: 400;
+}
+
+.level-row__value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.level-row__price {
+  min-inline-size: 4.5em;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.level-row__grade {
+  flex-basis: 100%;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.levels__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.levels__actions .btn--primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.levels__zone-note {
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.levels__reveal {
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-purple) 8%, var(--color-surface));
+  border-inline-start: 3px solid var(--color-purple);
+}
+
+.levels__reveal-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-purple);
+  margin-bottom: var(--space-1);
+}

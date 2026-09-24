@@ -25,6 +25,7 @@
 
 - [x] 01 — מהי מניה: מה זה אומר להיות בעלים, מה זו בורסה, שוק ראשוני מול משני, Bid/Ask. סימולטור: סליידרים של לחץ קונים מול מוכרים שיוצרים נר עולה או יורד בזמן אמת.
 - [x] 02 — סוגי פקודות: Market מול Limit, כולל סימולטור ספר פקודות
+- [x] 03 — קריאת גרף: טווחי זמן, מגמות, תמיכה והתנגדות, נפח מסחר. תרגיל זיהוי מגמה + סימולטור סימון רמות עם חשיפת ההמשך.
 - [x] מילון מונחים: חיפוש וסינון לפי קטגוריות — כלי השקעה וקרנות, ניירות ערך, מדדי הערכה, מסחר ותנודתיות, מאקרו, משכנתאות, גופי פיקוח
 
 ## מפת דרכים
@@ -68,6 +69,7 @@ src/
   pages/                          # HomePage, NotFound
   components/                     # רכיבים משותפים: Header, ModuleCard, ModuleLayout, Callout, Term, CompleteButton
   modules/<slug>/                 # כל מודול בתיקייה משלו: עמוד + סימולטורים + CSS
+  hooks/                          # הוקים משותפים (useCompact)
   progress/                       # שמירת התקדמות ב-localStorage (storage.js) + Context/Hook
   styles/tokens.css               # כל הצבעים, הפונטים, המרווחים — המקום היחיד להגדרתם
   styles/global.css               # reset, טיפוגרפיה בסיסית
@@ -84,9 +86,9 @@ src/
 ### מוסכמות
 - טוקני צבע: `--color-bg`, `--color-surface`, `--color-cyan` / `--color-pink` / `--color-purple` / `--color-lime`, ו-`--color-up` (טורקיז) / `--color-down` (ורוד) לעלייה וירידה.
 - בלי ערכי צבע או פונט קשיחים בקומפוננטות — רק `var(--token)`.
-- RTL: להשתמש ב-logical properties (`margin-inline`, `inset-inline-start`). גרפים, מחירים וטיקרים עטופים ב-`dir="ltr"`.
+- RTL: להשתמש ב-logical properties (`margin-inline`, `inset-inline-start`). גרפים, מחירים וטיקרים עטופים ב-`dir="ltr"`. ב-`<svg>` צריך גם `direction: ltr` ב-CSS — המאפיין `dir` לא משפיע עליו, וטקסט הצירים "גדל" לתוך הגרף.
 - מונח מקצועי מוצג עם `<Term he="..." en="..." />` כדי שיהיה עקבי בכל המודולים.
-- מחלקות משותפות: צבעי טקסט `.is-up` / `.is-down` / `.is-lime` / `.is-purple` / `.is-muted` ב-`global.css`; `.widget` (סימולטור), `.bullets`, `.takeaways`, `.btn`, `.callout` ב-`ModuleLayout.css`. מודול חדש משתמש בהן ולא מגדיר מחדש.
+- מחלקות משותפות: צבעי טקסט `.is-up` / `.is-down` / `.is-lime` / `.is-purple` / `.is-muted` ב-`global.css`; `.widget` (סימולטור), `.bullets`, `.takeaways`, `.btn`, `.callout`, `.chip`, `.segmented` ב-`ModuleLayout.css`. הוק `useCompact` (מסך צר) ב-`src/hooks/`. מודול חדש משתמש בהן ולא מגדיר מחדש.
 - כל גישה ל-localStorage עוברת דרך `src/progress/storage.js` (עטוף ב-try/catch).
 - קומפוננטה = קובץ JSX + קובץ CSS באותו שם, מחלקות בסגנון BEM.
 - תוכן לימודי בלבד — לא לנסח שום דבר כהמלצת השקעה.

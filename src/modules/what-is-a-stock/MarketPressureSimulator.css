@@ -50,6 +50,8 @@
 }
 
 .candle-chart {
+  /* dir="ltr" לא משפיע על <svg> — בלי זה טקסט הצירים יורש rtl ו"גדל" שמאלה לתוך הגרף */
+  direction: ltr;
   display: block;
   width: 100%;
   height: auto;

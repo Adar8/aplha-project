@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useCompact } from '../../hooks/useCompact.js'
 import CandleChart from './CandleChart.jsx'
 import {
   START_PRICE,
@@ -55,19 +56,6 @@ function PressureSlider({ id, label, hint, value, onChange, tone }) {
       </p>
     </div>
   )
-}
-
-const COMPACT_QUERY = '(max-width: 600px)'
-
-function useCompact() {
-  const [compact, setCompact] = useState(() => window.matchMedia(COMPACT_QUERY).matches)
-  useEffect(() => {
-    const mq = window.matchMedia(COMPACT_QUERY)
-    const onChange = (e) => setCompact(e.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
-  return compact
 }
 
 export default function MarketPressureSimulator() {

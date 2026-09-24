@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import WhatIsAStock from './modules/what-is-a-stock/WhatIsAStock.jsx'
 import OrderTypes from './modules/order-types/OrderTypes.jsx'
+import ChartReading from './modules/chart-reading/ChartReading.jsx'
 import GlossaryPage from './glossary/GlossaryPage.jsx'
 
 function ScrollToTop() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/modules/what-is-a-stock" element={<WhatIsAStock />} />
           <Route path="/modules/order-types" element={<OrderTypes />} />
+          <Route path="/modules/chart-reading" element={<ChartReading />} />
           <Route path="/glossary" element={<GlossaryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
