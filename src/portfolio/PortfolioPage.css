@@ -1,0 +1,290 @@
+.pf {
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.pf__header {
+  padding-block: var(--space-5);
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pf__title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  margin-bottom: var(--space-3);
+}
+
+.pf__lead {
+  max-width: 70ch;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+.pf__privacy {
+  margin-top: var(--space-2);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.pf__h2 {
+  font-size: 1.3rem;
+  margin-block: var(--space-6) var(--space-3);
+}
+
+.pf__hint,
+.pf__note {
+  max-width: 70ch;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.pf__note {
+  margin-top: var(--space-3);
+  color: var(--color-amber);
+}
+
+.pf__empty {
+  max-width: 70ch;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-inline-start: 3px solid var(--color-cta);
+}
+
+/* ---------- סיכום ---------- */
+.pf-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: var(--space-2);
+}
+
+.pf-summary > div {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.pf-summary dt {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.pf-summary dd {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* ---------- טבלאות ---------- */
+.pf-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-deep);
+}
+
+.pf-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.pf-table th,
+.pf-table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.pf-table tbody tr:last-child > * {
+  border-bottom: none;
+}
+
+.pf-table thead th {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+}
+
+.pf-table tbody th {
+  font-weight: 700;
+}
+
+.pf-table__since,
+.pf-table__updated,
+.pf-table__pct {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.pf-table__pct {
+  font-family: var(--font-mono);
+  color: inherit;
+}
+
+.pf-table__muted {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.pf-table__confirm {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.chip.chip--danger {
+  color: var(--color-bg);
+  background: var(--color-down);
+  border-color: var(--color-down);
+}
+
+.price-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.price-input input {
+  inline-size: 7rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 0.3rem 0.5rem;
+}
+
+.price-input__error {
+  inline-size: 100%;
+  font-size: 0.75rem;
+  color: var(--color-down);
+}
+
+.pf-closed {
+  display: grid;
+  gap: var(--space-2);
+  padding-inline-start: var(--space-5);
+}
+
+/* ---------- טופס עסקה ---------- */
+.tx-form {
+  max-width: 48rem;
+  padding: var(--space-5);
+  margin-top: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.tx-form .pf__h2 {
+  margin-top: 0;
+}
+
+.tx-form__type {
+  max-inline-size: 16rem;
+  margin-bottom: var(--space-4);
+}
+
+.tx-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--space-3) var(--space-4);
+}
+
+.tx-field {
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-inline-size: 0;
+}
+
+.tx-field legend {
+  padding: 0;
+  margin-bottom: var(--space-1);
+}
+
+.tx-field input[type='text'],
+.tx-field input[type='date'],
+.tx-field input[type='number'] {
+  inline-size: 100%;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 0.45rem 0.6rem;
+  color-scheme: dark;
+}
+
+.tx-form__mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin-bottom: var(--space-1);
+  color: var(--color-text);
+}
+
+.tx-form__mode label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  cursor: pointer;
+}
+
+.tx-form__mode input {
+  accent-color: var(--color-cta);
+}
+
+.tx-form__preview {
+  margin-top: var(--space-4);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.tx-form__errors {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  padding-inline-start: var(--space-6);
+  border-radius: var(--radius-sm);
+  border-inline-start: 3px solid var(--color-down);
+  background: color-mix(in srgb, var(--color-down) 8%, var(--color-bg-deep));
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.tx-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.tx-form__status {
+  font-size: 0.9rem;
+  color: var(--color-lime);
+}
+
+/* מיקוד תמיד נראה בשדות: גם כשהמיקוד נמצא בחלק פנימי של השדה (למשל כפתור לוח השנה בשדה תאריך) */
+.tx-field input:focus,
+.tx-field input:focus-within,
+.price-input input:focus {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}

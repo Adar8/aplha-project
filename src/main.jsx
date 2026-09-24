@@ -5,6 +5,7 @@ import './styles/tokens.css'
 import './styles/global.css'
 import ProgressProvider from './progress/ProgressProvider.jsx'
 import ProfileProvider from './profile/ProfileProvider.jsx'
+import PortfolioProvider from './portfolio/PortfolioProvider.jsx'
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ProgressProvider>
         <ProfileProvider>
-          <App />
+          <PortfolioProvider>
+            <App />
+          </PortfolioProvider>
         </ProfileProvider>
       </ProgressProvider>
     </BrowserRouter>

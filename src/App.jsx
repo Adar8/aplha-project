@@ -12,6 +12,7 @@ import Fundamentals from './modules/fundamentals/Fundamentals.jsx'
 import StockResearch from './modules/stock-research/StockResearch.jsx'
 import GlossaryPage from './glossary/GlossaryPage.jsx'
 import OnboardingPage from './onboarding/OnboardingPage.jsx'
+import PortfolioPage from './portfolio/PortfolioPage.jsx'
 import AccessibilityPage from './legal/AccessibilityPage.jsx'
 import PrivacyPage from './legal/PrivacyPage.jsx'
 import TermsPage from './legal/TermsPage.jsx'
@@ -52,6 +53,7 @@ export default function App() {
           <Route path="/modules/stock-research" element={<StockResearch />} />
           <Route path="/glossary" element={<GlossaryPage />} />
           <Route path="/start" element={<OnboardingPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/accessibility" element={<AccessibilityPage />} />

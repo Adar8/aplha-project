@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { SITE } from '../data/site.js'
 import { useProfile } from '../profile/ProfileContext.js'
+import { usePortfolio } from '../portfolio/PortfolioContext.js'
 import { useProgress } from '../progress/ProgressContext.js'
 import { Field } from './Missing.jsx'
 import LegalLayout from './LegalLayout.jsx'
@@ -8,12 +9,13 @@ import LegalLayout from './LegalLayout.jsx'
 function DeleteMyData() {
   const { resetProgress } = useProgress()
   const { resetProfile } = useProfile()
+  const { resetPortfolio } = usePortfolio()
   const [done, setDone] = useState(false)
   return (
     <div className="legal__data">
       <p>
-        אפשר למחוק מכאן את כל מה שהאתר שמר בדפדפן הזה: ההתקדמות, תשובות השאלון, תוצאות מבחן המיקום ובחירות הרמה.
-        המחיקה סופית.
+        אפשר למחוק מכאן את כל מה שהאתר שמר בדפדפן הזה: ההתקדמות, תשובות השאלון, תוצאות מבחן המיקום, בחירות הרמה
+        והעסקאות בעמוד ״התיק שלי״. המחיקה סופית.
       </p>
       <button
         type="button"
@@ -21,6 +23,7 @@ function DeleteMyData() {
         onClick={() => {
           resetProgress()
           resetProfile()
+          resetPortfolio()
           setDone(true)
         }}
       >
@@ -64,6 +67,9 @@ export default function PrivacyPage() {
           התשובות בשאלון ההתאמה: ניסיון, מטרה וזמן לימוד שבועי, ואם בחרתם לענות, גם טווח גילאים וסדר גודל של השקעה.
         </li>
         <li>התוצאות של מבחן המיקום, ורמת ההסבר (בסיסי או מעמיק) שבחרתם בכל מודול.</li>
+        <li>
+          בעמוד ״התיק שלי״: העסקאות שהזנתם (סימול, תאריך, קנייה או מכירה, כמות, מחיר ועמלה) והמחירים הנוכחיים שהקלדתם.
+        </li>
       </ul>
       <p>
         התשובות משמשות רק כדי להתאים את הלימוד: סדר המודולים, רמת ההסבר, הערכת הזמן וסכומי ברירת המחדל בסימולטורים.
@@ -90,8 +96,8 @@ export default function PrivacyPage() {
 
       <h2>שינויים עתידיים</h2>
       <p>
-        אנחנו מתכננים להוסיף חשבונות משתמש, אפשרות להזין השקעות שביצעתם אצל ברוקר אחר כדי לעקוב אחריהן, ואזור שוק עם
-        גרפים וחדשות מ-TradingView. אלה יחייבו שמירת מידע בשרת ויכניסו שירותים של צד שלישי. לפני שהם יעלו לאוויר, המסמך הזה יעודכן ויפרט מה נשמר, איפה, לכמה זמן ומי יכול לגשת אליו.
+        אנחנו מתכננים להוסיף חשבונות משתמש, כדי שהתיק וההתקדמות יסונכרנו בין מכשירים, מחירים שמתעדכנים אוטומטית,
+        ואזור שוק עם גרפים וחדשות מ-TradingView. אלה יחייבו שמירת מידע בשרת ויכניסו שירותים של צד שלישי. לפני שהם יעלו לאוויר, המסמך הזה יעודכן ויפרט מה נשמר, איפה, לכמה זמן ומי יכול לגשת אליו.
       </p>
 
       <h2>הזכויות שלכם</h2>

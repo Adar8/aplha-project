@@ -93,8 +93,24 @@
   }
 }
 
-/* שני קישורים בתפריט: במסך צר מציגים רק את המילה הראשונה */
-@media (max-width: 480px) {
+/* במסך צר התפריט עובר לשורה שנייה מתחת ללוגו, כדי שלא ייחתך בצד */
+@media (max-width: 600px) {
+  .site-header__inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding-block: var(--space-2);
+    row-gap: var(--space-1);
+  }
+
+  .site-nav {
+    inline-size: 100%;
+    margin-inline-start: 0;
+    margin-inline-end: calc(-1 * 0.7rem);
+  }
+}
+
+/* במסך צר מאוד מציגים רק את המילה הראשונה בכל קישור */
+@media (max-width: 360px) {
   .site-nav__long {
     display: none;
   }

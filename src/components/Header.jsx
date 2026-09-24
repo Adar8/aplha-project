@@ -19,6 +19,9 @@ export default function Header() {
           </span>
         </Link>
         <nav className="site-nav" aria-label="ניווט ראשי">
+          <NavLink to="/portfolio" className="site-nav__link">
+            התיק<span className="site-nav__long"> שלי</span>
+          </NavLink>
           <NavLink to="/start" className="site-nav__link">
             המסלול<span className="site-nav__long"> שלי</span>
           </NavLink>
