@@ -243,7 +243,7 @@ export default function ChartReading() {
 
       {/* ---------- סיכום ---------- */}
       <section aria-labelledby="summary">
-        <SectionTitle num="✓" id="summary">
+        <SectionTitle num="3.6" id="summary">
           מה לוקחים מהמודול
         </SectionTitle>
         <ul className="takeaways">

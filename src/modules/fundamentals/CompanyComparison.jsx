@@ -74,7 +74,7 @@ function Question({ q, answer, onAnswer }) {
       </div>
       {answer && (
         <p className={`cmp-q__feedback ${answer === q.answer ? 'is-lime' : 'is-down'}`} aria-live="polite">
-          <strong>{answer === q.answer ? '✓ נכון.' : '✗ לא בדיוק.'}</strong> {q.explain}
+          <strong>{answer === q.answer ? 'נכון.' : 'לא בדיוק.'}</strong> {q.explain}
         </p>
       )}
     </li>
@@ -130,7 +130,7 @@ export default function CompanyComparison() {
                 <p className={`cmp-card__flag${adjusted ? ' is-adjusted' : ''}`}>
                   {adjusted
                     ? `נוטרל רווח חד-פעמי של ₪${c.oneOffGain}M`
-                    : `⚠ כולל רווח חד-פעמי של ₪${c.oneOffGain}M`}
+                    : `כולל רווח חד-פעמי של ₪${c.oneOffGain}M`}
                 </p>
               )}
             </li>
@@ -183,7 +183,7 @@ export default function CompanyComparison() {
             ענו נכון על <span className="mono">{correct}</span> מתוך <span className="mono">{QUESTIONS.length}</span>.
           </p>
           <button type="button" className="btn btn--ghost btn--small" onClick={() => setAnswers({})}>
-            ↺ עוד פעם
+            עוד פעם
           </button>
         </div>
       )}

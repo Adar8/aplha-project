@@ -4,9 +4,11 @@ import { modules } from '../data/modules.js'
 import PlanPanel from '../onboarding/PlanPanel.jsx'
 import { useProfile } from '../profile/ProfileContext.js'
 import { buildPlan } from '../profile/profile.js'
+import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 import { useProgress } from '../progress/ProgressContext.js'
 
 export default function HomePage() {
+  useDocumentTitle(null)
   const { progress } = useProgress()
   const { profile } = useProfile()
   const plan = buildPlan(modules, profile, progress)

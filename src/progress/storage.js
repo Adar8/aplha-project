@@ -29,7 +29,8 @@ export function loadProgress() {
 }
 
 export function saveProgress(progress) {
-  saveObject(PROGRESS_KEY, progress)
+  // בלי התקדמות לא משאירים מפתח ריק בדפדפן
+  saveObject(PROGRESS_KEY, progress && Object.keys(progress).length ? progress : null)
 }
 
 /** פרופיל הלמידה (תשובות השאלון, רמה לכל מודול). null = עוד לא מילאו שאלון */

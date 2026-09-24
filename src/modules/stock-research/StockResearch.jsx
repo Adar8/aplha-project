@@ -328,7 +328,7 @@ export default function StockResearch() {
 
       {/* ---------- סיכום ---------- */}
       <section aria-labelledby="summary">
-        <SectionTitle num="✓" id="summary">
+        <SectionTitle num="6.7" id="summary">
           מה לוקחים מהמודול
         </SectionTitle>
         <ul className="takeaways">

@@ -1,6 +1,8 @@
 import { Link } from 'react-router'
+import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 
 export default function NotFound() {
+  useDocumentTitle('העמוד לא נמצא')
   return (
     <section className="not-found">
       <p className="mono not-found__code">404</p>

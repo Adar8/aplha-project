@@ -62,7 +62,8 @@ export default function MarketPressureSimulator() {
   const compact = useCompact()
   const [pressure, setPressure] = useState({ buyers: 60, sellers: 40 })
   const [market, setMarket] = useState(() => createMarket())
-  const [running, setRunning] = useState(true)
+  // מי שביקש במערכת להפחית תנועה מקבל את הסימולטור עצור, ומפעיל אותו בעצמו
+  const [running, setRunning] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches)
 
   // ה-interval קורא את הלחץ העדכני דרך ref, כדי לא לאתחל את הטיימר בכל הזזת סליידר
   const pressureRef = useRef(pressure)
@@ -198,10 +199,10 @@ export default function MarketPressureSimulator() {
 
           <div className="simulator__actions">
             <button type="button" className="btn btn--ghost btn--small" onClick={() => setRunning((r) => !r)}>
-              {running ? '⏸ השהה' : '▶ המשך'}
+              {running ? 'השהה' : 'המשך'}
             </button>
             <button type="button" className="btn btn--ghost btn--small" onClick={reset}>
-              ↺ התחל מחדש
+              התחל מחדש
             </button>
           </div>
         </div>

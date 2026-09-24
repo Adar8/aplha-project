@@ -1,7 +1,7 @@
 import { TERMS } from './glossary.js'
 
 // מודולי הלימוד והמילון. הדף הראשי נבנה מהמערך הזה.
-// accent: cyan | pink | purple | lime (ממופה לטוקנים ב-tokens.css)
+// accent: cyan | pink | amber | lime (ממופה לטוקנים ב-tokens.css)
 // status: available (יש עמוד) | soon (כרטיס בלבד)
 // minutes: זמן לימוד כולל סימולטורים, לכל רמה (basic | deep)
 // why: למה המודול חשוב, לכל מטרה מהשאלון (ראו profile/profile.js)
@@ -85,7 +85,7 @@ export const modules = [
     title: 'ניתוח יסודי ומכפילים',
     summary:
       'שלושת הדוחות הכספיים, מכפיל רווח, מכפיל הון ו-ROE, ולמה מניה ״זולה״ יכולה להיות מלכודת. כולל בונה דוח רווח והפסד ובלש מכפילים.',
-    accent: 'purple',
+    accent: 'amber',
     status: 'available',
     path: '/modules/fundamentals',
     minutes: { basic: 20, deep: 35 },
@@ -120,7 +120,7 @@ export const modules = [
     title: 'מילון מונחים',
     summary:
       'חיפוש וסינון מונחים לפי קטגוריות: כלי השקעה וקרנות, ניירות ערך, מדדי הערכה, מסחר ותנודתיות, מאקרו, משכנתאות וגופי פיקוח.',
-    accent: 'purple',
+    accent: 'amber',
     status: 'available',
     path: '/glossary',
     termCount: TERMS.length,

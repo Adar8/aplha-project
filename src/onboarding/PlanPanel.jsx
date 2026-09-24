@@ -13,19 +13,16 @@ export default function PlanPanel({ plan }) {
     return (
       <section className="plan plan--invite" aria-labelledby="plan-title">
         <div>
-          <p className="plan__eyebrow" dir="ltr">
-            PERSONAL PATH
-          </p>
           <h2 id="plan-title" className="plan__title">
-            בואו נתאים את המסלול אליכם
+            התאמת המסלול
           </h2>
           <p className="plan__text">
-            חמש שאלות קצרות, ואם תרצו גם מבחן מיקום. אחרי זה כל מודול ייפתח ברמה שמתאימה לכם, עם סדר מומלץ והערכת זמן
-            אמיתית. תמיד אפשר לעבור לרמה אחרת.
+            חמש שאלות על ניסיון, מטרה וזמן פנוי, ואחריהן מבחן מיקום שאפשר לדלג עליו. לפי התשובות נקבעים סדר
+            המודולים, רמת ההסבר שבה כל מודול נפתח, והערכת הזמן. בכל מודול אפשר להחליף רמה.
           </p>
         </div>
         <Link to="/start" className="btn btn--primary">
-          להתחיל את השאלון
+          למילוי השאלון
         </Link>
       </section>
     )

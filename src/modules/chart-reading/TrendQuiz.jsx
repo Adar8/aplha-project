@@ -46,7 +46,7 @@ export default function TrendQuiz() {
               </div>
               {picked && (
                 <p className={`quiz__feedback ${isRight ? 'is-lime' : 'is-down'}`} aria-live="polite">
-                  <strong>{isRight ? '✓ נכון.' : `✗ לא בדיוק: זו ${TREND_LABELS[q.answer]}.`}</strong> {q.explain}
+                  <strong>{isRight ? 'נכון.' : `לא בדיוק: זו ${TREND_LABELS[q.answer]}.`}</strong> {q.explain}
                 </p>
               )}
             </li>
@@ -61,7 +61,7 @@ export default function TrendQuiz() {
             <span className="mono">{TREND_QUIZ.length}</span>.
           </p>
           <button type="button" className="btn btn--ghost btn--small" onClick={() => setAnswers({})}>
-            ↺ עוד פעם
+            עוד פעם
           </button>
         </div>
       )}

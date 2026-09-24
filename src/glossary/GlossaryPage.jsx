@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router'
 import { CATEGORIES, TERMS } from '../data/glossary.js'
+import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 import GlossaryEntry from './GlossaryEntry.jsx'
 import { firstLetter, searchTerms } from './search.js'
 import '../components/ModuleLayout.css'
@@ -22,6 +23,7 @@ function groupByLetter(terms) {
 }
 
 export default function GlossaryPage() {
+  useDocumentTitle('מילון מונחים')
   const [params, setParams] = useSearchParams()
   const location = useLocation()
   const navigate = useNavigate()
@@ -124,7 +126,7 @@ export default function GlossaryPage() {
   )
 
   return (
-    <div className="lesson lesson--purple glossary">
+    <div className="lesson lesson--amber glossary">
       <nav className="lesson__breadcrumb" aria-label="ניווט">
         <Link to="/">→ דף הבית</Link>
       </nav>
@@ -145,9 +147,6 @@ export default function GlossaryPage() {
           <label htmlFor="glossary-search" className="visually-hidden">
             חיפוש מונח
           </label>
-          <span className="gl-search__icon" aria-hidden="true">
-            ⌕
-          </span>
           <input
             ref={searchRef}
             id="glossary-search"
@@ -194,7 +193,7 @@ export default function GlossaryPage() {
             : `מציג ${visible.length} מתוך ${TERMS.length} מונחים`}
           {(query || activeCat) && (
             <button type="button" className="gl-status__clear" onClick={clearFilters}>
-              ניקוי סינון ✕
+              ניקוי סינון
             </button>
           )}
         </p>

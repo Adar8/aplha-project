@@ -245,7 +245,7 @@ export default function WhatIsAStock() {
                 <tr key={row.price} className={`book__ask${i === BOOK.asks.length - 1 ? ' book__best' : ''}`}>
                   <td>{row.price}</td>
                   <td>{row.size}</td>
-                  <td>{i === BOOK.asks.length - 1 ? 'ASK ◀ best' : 'ask'}</td>
+                  <td>{i === BOOK.asks.length - 1 ? 'ASK · best' : 'ask'}</td>
                 </tr>
               ))}
               <tr className="book__spread">
@@ -255,7 +255,7 @@ export default function WhatIsAStock() {
                 <tr key={row.price} className={`book__bid${i === 0 ? ' book__best' : ''}`}>
                   <td>{row.price}</td>
                   <td>{row.size}</td>
-                  <td>{i === 0 ? 'BID ◀ best' : 'bid'}</td>
+                  <td>{i === 0 ? 'BID · best' : 'bid'}</td>
                 </tr>
               ))}
             </tbody>
@@ -341,7 +341,7 @@ export default function WhatIsAStock() {
 
       {/* ---------- סיכום ---------- */}
       <section aria-labelledby="summary">
-        <SectionTitle num="✓">
+        <SectionTitle num="1.6">
           <span id="summary">מה לוקחים מהמודול</span>
         </SectionTitle>
         <ul className="takeaways">

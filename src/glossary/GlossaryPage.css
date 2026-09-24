@@ -33,23 +33,16 @@
   align-items: center;
 }
 
-.gl-search__icon {
-  position: absolute;
-  inset-inline-start: var(--space-4);
-  font-size: 1.3rem;
-  color: var(--color-purple);
-  pointer-events: none;
-}
-
 .gl-search__input {
   inline-size: 100%;
   font-family: var(--font-body);
   font-size: 1.1rem;
-  padding: 0.8rem 3rem;
+  padding-block: 0.8rem;
+  padding-inline: var(--space-4) 3rem;
   color: var(--color-text);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: var(--radius-control);
 }
 
 .gl-search__input::placeholder {
@@ -59,8 +52,8 @@
 
 .gl-search__input:focus-visible {
   outline: none;
-  border-color: var(--color-purple);
-  box-shadow: var(--glow-purple);
+  border-color: var(--color-amber);
+  box-shadow: var(--glow-amber);
 }
 
 .gl-search__kbd {
@@ -69,7 +62,7 @@
   font-family: var(--font-mono);
   font-size: 0.75rem;
   padding: 0.05rem 0.45rem;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
 }
@@ -90,7 +83,7 @@
   font-weight: 500;
   font-size: 0.85rem;
   padding: 0.3rem 0.8rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text-muted);
@@ -99,7 +92,7 @@
 
 .gl-cat--cyan { --tone: var(--color-cyan); }
 .gl-cat--pink { --tone: var(--color-pink); }
-.gl-cat--purple { --tone: var(--color-purple); }
+.gl-cat--amber { --tone: var(--color-amber); }
 .gl-cat--lime { --tone: var(--color-lime); }
 
 .gl-cat:hover:not(:disabled) {
@@ -159,9 +152,9 @@
   font-size: 0.9rem;
   padding: 0.15rem 0.35rem;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   background: transparent;
-  color: var(--color-purple);
+  color: var(--color-amber);
   cursor: pointer;
 }
 
@@ -188,8 +181,8 @@
   scroll-margin-top: var(--gl-anchor-offset);
   font-size: 1.75rem;
   font-weight: 800;
-  color: var(--color-purple);
-  text-shadow: var(--glow-purple);
+  color: var(--color-amber);
+  text-shadow: var(--glow-amber);
   margin-bottom: var(--space-3);
 }
 
@@ -217,7 +210,7 @@
 }
 
 .gl-entry--pink { --tone: var(--color-pink); }
-.gl-entry--purple { --tone: var(--color-purple); }
+.gl-entry--amber { --tone: var(--color-amber); }
 .gl-entry--lime { --tone: var(--color-lime); }
 
 .gl-entry:focus {
@@ -252,7 +245,7 @@
   font-size: 0.7rem;
   color: var(--color-text-muted);
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   padding: 0.05rem 0.55rem;
 }
 
@@ -300,7 +293,7 @@
 .gl-chip {
   font-size: 0.8rem;
   padding: 0.1rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--color-border);
   color: var(--color-text);
   text-decoration: none;

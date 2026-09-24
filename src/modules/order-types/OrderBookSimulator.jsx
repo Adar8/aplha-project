@@ -88,7 +88,7 @@ function Preview({ book, order }) {
   if (result.restedId) {
     parts.push(
       <p key="rest">
-        <strong className="is-purple">{result.filled ? 'היתרה' : 'לא תבוצע מיד'}</strong>
+        <strong className="is-amber">{result.filled ? 'היתרה' : 'לא תבוצע מיד'}</strong>
         {result.filled ? ` (${num.format(result.remaining)} מניות)` : ''} תיכנס לספר כהצעת{' '}
         {order.side === 'buy' ? 'קנייה' : 'מכירה'} ב-<bdi className="mono">{formatPrice(order.limit)}</bdi>
         {queue > 0 ? (
@@ -186,7 +186,7 @@ export default function OrderBookSimulator() {
     for (const f of myFills) {
       entries.push({
         tone: 'fill',
-        text: `✓ הפקודה המוגבלת שלכם בוצעה: ${SIDE_LABEL[f.side]} ${num.format(f.size)} מניות ב-${formatPrice(f.price)}`,
+        text: `הפקודה המוגבלת שלכם בוצעה: ${SIDE_LABEL[f.side]} ${num.format(f.size)} מניות ב-${formatPrice(f.price)}`,
       })
     }
     addLog(entries)
@@ -343,7 +343,7 @@ export default function OrderBookSimulator() {
           <OrderBookTable book={book} />
           <div className="obsim__controls">
             <button type="button" className="btn btn--ghost btn--small" onClick={step} disabled={live}>
-              ⏭ צעד בשוק
+              צעד בשוק
             </button>
             <button
               type="button"
@@ -351,10 +351,10 @@ export default function OrderBookSimulator() {
               aria-pressed={live}
               onClick={() => setLive((v) => !v)}
             >
-              {live ? '⏸ עצרו את השוק' : '▶ שוק חי'}
+              {live ? 'עצרו את השוק' : 'שוק חי'}
             </button>
             <button type="button" className="btn btn--ghost btn--small" onClick={reset}>
-              ↺ התחלה מחדש
+              התחלה מחדש
             </button>
           </div>
           <p className="obsim__hint">

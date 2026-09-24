@@ -12,11 +12,11 @@
 
 export const CATEGORIES = [
   { id: 'funds', label: 'כלי השקעה וקרנות', accent: 'cyan' },
-  { id: 'securities', label: 'ניירות ערך', accent: 'purple' },
+  { id: 'securities', label: 'ניירות ערך', accent: 'amber' },
   { id: 'valuation', label: 'מדדי הערכה', accent: 'lime' },
   { id: 'trading', label: 'מסחר ותנודתיות', accent: 'pink' },
   { id: 'macro', label: 'מאקרו', accent: 'cyan' },
-  { id: 'mortgages', label: 'משכנתאות', accent: 'purple' },
+  { id: 'mortgages', label: 'משכנתאות', accent: 'amber' },
   { id: 'regulators', label: 'גופי פיקוח', accent: 'lime' },
 ]
 

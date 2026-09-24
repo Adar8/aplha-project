@@ -25,15 +25,21 @@
 }
 
 .logo__mark {
-  display: grid;
-  place-items: center;
+  display: block;
+  flex: none;
   width: 36px;
   height: 36px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
-  color: var(--color-bg);
-  font-weight: 800;
   box-shadow: var(--glow-cyan);
+}
+
+.logo__mark-bg {
+  fill: var(--color-cyan);
+}
+
+.logo__mark-alpha {
+  fill: none;
+  stroke: var(--color-bg);
+  stroke-width: 3;
 }
 
 .logo__accent {
@@ -53,7 +59,7 @@
   color: var(--color-text-muted);
   text-decoration: none;
   padding: 0.35rem 0.9rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid transparent;
 }
 
@@ -62,8 +68,8 @@
 }
 
 .site-nav__link.active {
-  color: var(--color-purple);
-  border-color: var(--color-purple);
+  color: var(--color-amber);
+  border-color: var(--color-amber);
 }
 
 .logo__text,

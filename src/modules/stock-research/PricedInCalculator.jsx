@@ -122,7 +122,7 @@ export default function PricedInCalculator() {
         לעומת מחיר של <bdi className="mono">${price}</bdi>.
       </p>
 
-      <div className="fin-wrap">
+      <div className="fin-wrap" tabIndex={0} role="region" aria-label="טבלת רגישות: שווי למניה לפי צמיחה ושיעור היוון">
         <table className="fin priced__grid">
           <caption>שווי למניה לפי צמיחה ושיעור היוון: שינוי קטן בהנחה, הבדל גדול בתוצאה</caption>
           <thead>

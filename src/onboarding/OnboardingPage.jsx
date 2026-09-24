@@ -4,6 +4,7 @@ import { getModule } from '../data/modules.js'
 import { useProfile } from '../profile/ProfileContext.js'
 import { PLACEMENT, gradePlacement } from '../profile/placement.js'
 import { QUESTIONS, defaultLevel, LEVELS } from '../profile/profile.js'
+import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 import './OnboardingPage.css'
 
 function QuestionStep({ question, value, onChoose }) {
@@ -78,6 +79,7 @@ function Placement({ onDone, onSkip }) {
 }
 
 export default function OnboardingPage() {
+  useDocumentTitle('התאמה אישית')
   const { answers: saved, profile, saveAnswers, savePlacement } = useProfile()
   const navigate = useNavigate()
   const [draft, setDraft] = useState(() => saved ?? {})
@@ -160,7 +162,7 @@ export default function OnboardingPage() {
       {step === 'placement' && (
         <>
           <p className="onb__saved is-lime" role="status">
-            ✓ התשובות נשמרו. המודולים ייפתחו ברמה <strong>{level.label}</strong>, ובכל מודול אפשר להחליף.
+            התשובות נשמרו. המודולים ייפתחו ברמה <strong>{level.label}</strong>, ובכל מודול אפשר להחליף.
           </p>
           <Placement
             onDone={finishPlacement}
@@ -178,7 +180,7 @@ export default function OnboardingPage() {
           <ul className="onb__result-list">
             {Object.entries(result).map(([id, ok]) => (
               <li key={id} className={ok ? 'is-lime' : 'is-muted'}>
-                {ok ? '✓ אפשר לדלג: ' : '○ מומלץ ללמוד: '}
+                {ok ? 'אפשר לדלג: ' : 'מומלץ ללמוד: '}
                 {getModule(id).title}
               </li>
             ))}

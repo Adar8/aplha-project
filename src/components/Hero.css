@@ -26,10 +26,7 @@
 }
 
 .hero__highlight {
-  background: linear-gradient(90deg, var(--color-cyan), var(--color-purple), var(--color-pink));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-cyan);
 }
 
 .hero__lead {
@@ -66,8 +63,8 @@
   bottom: 0;
   height: 60%;
   background-image:
-    linear-gradient(to right, rgb(176 77 255 / 0.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(176 77 255 / 0.22) 1px, transparent 1px);
+    linear-gradient(to right, rgb(0 240 255 / 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 240 255 / 0.1) 1px, transparent 1px);
   background-size: 48px 48px;
   transform: perspective(420px) rotateX(58deg);
   transform-origin: bottom;

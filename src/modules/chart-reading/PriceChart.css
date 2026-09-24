@@ -45,13 +45,13 @@
 .price-chart__vol.is-down { fill: var(--color-down); }
 
 .price-chart__future rect {
-  fill: color-mix(in srgb, var(--color-purple) 8%, transparent);
-  stroke: color-mix(in srgb, var(--color-purple) 40%, transparent);
+  fill: color-mix(in srgb, var(--color-amber) 8%, transparent);
+  stroke: color-mix(in srgb, var(--color-amber) 40%, transparent);
   stroke-dasharray: 4 4;
 }
 
 .price-chart__future text {
-  fill: var(--color-purple);
+  fill: var(--color-amber);
   font-family: var(--font-heading);
   font-size: 40px;
   font-weight: 800;
@@ -69,7 +69,7 @@
 /* ---------- קווים שהמשתמש סימן ---------- */
 .price-chart__line--up { --line: var(--color-up); }
 .price-chart__line--down { --line: var(--color-down); }
-.price-chart__line--flip { --line: var(--color-purple); }
+.price-chart__line--flip { --line: var(--color-amber); }
 
 .price-chart__line line {
   stroke: var(--line);

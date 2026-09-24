@@ -21,7 +21,7 @@
 
 .module-card--cyan   { --accent: var(--color-cyan);   --accent-glow: var(--glow-cyan); }
 .module-card--pink   { --accent: var(--color-pink);   --accent-glow: var(--glow-pink); }
-.module-card--purple { --accent: var(--color-purple); --accent-glow: var(--glow-purple); }
+.module-card--amber { --accent: var(--color-amber); --accent-glow: var(--glow-amber); }
 .module-card--lime   { --accent: var(--color-lime);   --accent-glow: var(--glow-lime); }
 
 .module-card--link:hover,
@@ -50,7 +50,7 @@
   font-size: 0.75rem;
   font-weight: 500;
   padding: 0.2rem 0.65rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   color: var(--color-text-muted);
   border: 1px solid var(--color-border);
 }
@@ -94,8 +94,8 @@
 }
 
 .module-card__status--known {
-  color: var(--color-purple);
-  border-color: var(--color-purple);
+  color: var(--color-amber);
+  border-color: var(--color-amber);
 }
 
 .module-card__cta {

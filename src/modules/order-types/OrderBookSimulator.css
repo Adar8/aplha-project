@@ -26,7 +26,7 @@
   color: var(--color-bg);
   background: var(--color-pink);
   padding: 0.05rem 0.45rem;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
 }
 
 .obsim__layout {
@@ -81,7 +81,7 @@
   color: var(--color-text);
   background: var(--color-bg-deep);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-control);
 }
 
 .ticket__input:focus-visible {
@@ -287,7 +287,7 @@
 }
 
 .report__note strong {
-  color: var(--color-purple);
+  color: var(--color-amber);
 }
 
 .report__fills {
@@ -302,7 +302,7 @@
 
 .report__fills li {
   padding: 0.15rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
 }

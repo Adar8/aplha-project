@@ -11,7 +11,7 @@ const VALUATION = valuation(COMPANY.price, years.at(-1))
 
 function FinTable({ rows }) {
   return (
-    <div className="fin-wrap">
+    <div className="fin-wrap" tabIndex={0} role="region" aria-label={`נתונים כספיים של ${COMPANY.name} לפי שנה`}>
       <table className="fin">
         <thead>
           <tr>
@@ -93,7 +93,7 @@ function ResearchSheet({ answers, onReset }) {
         {Object.entries(FINDING_KINDS).map(([kind, meta]) => (
           <div key={kind} className={`sheet__col sheet__col--${kind}`}>
             <p className="sheet__col-title">
-              <span aria-hidden="true">{meta.icon}</span> {meta.label}
+              {meta.label}
             </p>
             <ul>
               {findings
@@ -114,7 +114,7 @@ function ResearchSheet({ answers, onReset }) {
           ענו נכון על <span className="mono">{correct}</span> מתוך <span className="mono">{STEPS.length}</span> שלבים.
         </p>
         <button type="button" className="btn btn--ghost btn--small" onClick={onReset}>
-          ↺ לחקור מההתחלה
+          לחקור מההתחלה
         </button>
       </div>
     </div>
@@ -158,7 +158,7 @@ export default function ResearchLab() {
             disabled={!STEPS.every((s) => answers[s.id])}
             onClick={() => setIndex(STEPS.length)}
           >
-            <span className="mono">✓</span> דף המחקר
+            <span className="mono">{STEPS.length + 1}</span> דף המחקר
           </button>
         </li>
       </ol>
@@ -212,7 +212,7 @@ export default function ResearchLab() {
           {answer && (
             <div className="lab__feedback" aria-live="polite">
               <p className={answer === step.answer ? 'is-lime' : 'is-down'}>
-                <strong>{answer === step.answer ? '✓ נכון.' : '✗ לא בדיוק.'}</strong>{' '}
+                <strong>{answer === step.answer ? 'נכון.' : 'לא בדיוק.'}</strong>{' '}
                 <span className="lab__explain">{step.explain}</span>
               </p>
               <ul className="lab__findings">

@@ -14,7 +14,7 @@
 }
 
 .anatomy__item:nth-child(1) { border-top: 2px solid var(--color-cyan); }
-.anatomy__item:nth-child(2) { border-top: 2px solid var(--color-purple); }
+.anatomy__item:nth-child(2) { border-top: 2px solid var(--color-amber); }
 .anatomy__item:nth-child(3) { border-top: 2px solid var(--color-pink); }
 .anatomy__item:nth-child(4) { border-top: 2px solid var(--color-lime); }
 
@@ -130,7 +130,7 @@
 }
 
 .cases__card--rest {
-  --tone: var(--color-purple);
+  --tone: var(--color-amber);
 }
 
 .lesson__body .cases__card h3 {
@@ -180,7 +180,7 @@
 }
 
 .compare__market { color: var(--color-cyan); }
-.compare__limit { color: var(--color-purple); }
+.compare__limit { color: var(--color-amber); }
 
 .compare tbody th {
   font-weight: 700;

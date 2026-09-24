@@ -4,9 +4,9 @@ import PriceChart from './PriceChart.jsx'
 import { LEVEL_META, SCENARIOS, TOLERANCE, countTouches, gradeLevel } from './chartData.js'
 
 const GRADE_TEXT = {
-  exact: { label: '✓ מדויק', tone: 'is-lime' },
-  close: { label: '≈ קרוב', tone: 'is-purple' },
-  far: { label: '✗ רחוק', tone: 'is-down' },
+  exact: { label: 'מדויק', tone: 'is-lime' },
+  close: { label: '≈ קרוב', tone: 'is-amber' },
+  far: { label: 'רחוק', tone: 'is-down' },
 }
 
 function rangeOf(candles) {
@@ -109,7 +109,7 @@ export default function LevelsSimulator() {
 
       {!checked && (
         <p className="levels__hint">
-          לחצו על הגרף כדי למקם את הקו המודגש, וכוונו עם ▲▼. האזור המקווקו מימין הוא העתיד, ועוד לא
+          לחצו על הגרף כדי למקם את הקו המודגש, וכוונו עם הכפתורים + ו-−. האזור המקווקו מימין הוא העתיד, ועוד לא
           רואים אותו.
         </p>
       )}
@@ -141,7 +141,7 @@ export default function LevelsSimulator() {
                   disabled={checked}
                   onClick={() => nudge(level.kind, -1)}
                 >
-                  ▼
+                  −
                 </button>
                 <bdi className="level-row__price mono">{guess != null ? guess.toFixed(2) : '—'}</bdi>
                 <button
@@ -151,7 +151,7 @@ export default function LevelsSimulator() {
                   disabled={checked}
                   onClick={() => nudge(level.kind, 1)}
                 >
-                  ▲
+                  +
                 </button>
               </div>
               {grade && (
@@ -174,12 +174,12 @@ export default function LevelsSimulator() {
         )}
         {checked && !revealed && (
           <button type="button" className="btn btn--primary" onClick={() => setRevealed(true)}>
-            מה קרה אחר כך? ▶
+            מה קרה אחר כך?
           </button>
         )}
         {checked && (
           <button type="button" className="btn btn--ghost btn--small" onClick={() => goTo(index)}>
-            ↺ נסו שוב
+            נסו שוב
           </button>
         )}
         {revealed && index < SCENARIOS.length - 1 && (

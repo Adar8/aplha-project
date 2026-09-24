@@ -21,9 +21,11 @@ export default function ProgressProvider({ children }) {
     })
   }, [])
 
+  const resetProgress = useCallback(() => setProgress({}), [])
+
   const value = useMemo(
-    () => ({ progress, markComplete, markIncomplete }),
-    [progress, markComplete, markIncomplete],
+    () => ({ progress, markComplete, markIncomplete, resetProgress }),
+    [progress, markComplete, markIncomplete, resetProgress],
   )
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>
