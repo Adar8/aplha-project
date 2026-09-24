@@ -8,6 +8,7 @@ import OrderTypes from './modules/order-types/OrderTypes.jsx'
 import ChartReading from './modules/chart-reading/ChartReading.jsx'
 import RiskManagement from './modules/risk-management/RiskManagement.jsx'
 import Fundamentals from './modules/fundamentals/Fundamentals.jsx'
+import StockResearch from './modules/stock-research/StockResearch.jsx'
 import GlossaryPage from './glossary/GlossaryPage.jsx'
 import OnboardingPage from './onboarding/OnboardingPage.jsx'
 
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/modules/chart-reading" element={<ChartReading />} />
           <Route path="/modules/risk-management" element={<RiskManagement />} />
           <Route path="/modules/fundamentals" element={<Fundamentals />} />
+          <Route path="/modules/stock-research" element={<StockResearch />} />
           <Route path="/glossary" element={<GlossaryPage />} />
           <Route path="/start" element={<OnboardingPage />} />
           <Route path="*" element={<NotFound />} />

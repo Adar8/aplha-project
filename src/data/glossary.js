@@ -275,6 +275,17 @@ export const TERMS = [
     related: ['stock', 'dividend'],
   },
   {
+    id: 'dilution',
+    he: 'דילול',
+    en: 'Dilution',
+    category: 'securities',
+    definition:
+      'ירידה בחלק של כל בעל מניות בחברה כשנוצרות מניות חדשות: בהנפקה, בתגמול לעובדים או בהמרה של אג״ח. העוגה אולי גדלה, אבל יש יותר פרוסות.',
+    example: 'מספר המניות עלה מ-100 ל-116 מיליון בארבע שנים: מי שהחזיק 1% מהחברה מחזיק היום כ-0.86%.',
+    related: ['stock-based-compensation', 'stock', 'ipo'],
+    module: 'stock-research',
+  },
+  {
     id: 'option',
     he: 'אופציה',
     en: 'Option',
@@ -473,7 +484,8 @@ export const TERMS = [
     aliases: ['FCF'],
     definition:
       'הכסף שנכנס לקופה מהפעילות, פחות מה שהושקע בציוד ובמבנים. זה הכסף שהחברה יכולה לחלק, להחזיר חוב או להשקיע בצמיחה. קשה ״לייפות״ אותו יותר מאשר רווח.',
-    related: ['ebitda', 'intrinsic-value'],
+    related: ['ebitda', 'intrinsic-value', 'stock-based-compensation'],
+    module: 'stock-research',
   },
   {
     id: 'debt-to-equity',
@@ -492,7 +504,94 @@ export const TERMS = [
     aliases: ['שווי פנימי', 'DCF'],
     definition:
       'הערכה של כמה החברה ״באמת״ שווה, לפי הכסף שהיא צפויה לייצר בעתיד. משווים אותה למחיר בבורסה כדי להחליט אם המניה זולה או יקרה. זו הערכה, לא עובדה.',
-    related: ['free-cash-flow', 'pe-ratio'],
+    related: ['free-cash-flow', 'pe-ratio', 'reverse-dcf'],
+    module: 'stock-research',
+  },
+  {
+    id: 'economic-moat',
+    he: 'חפיר כלכלי',
+    en: 'Economic Moat',
+    category: 'valuation',
+    aliases: ['Moat', 'יתרון תחרותי'],
+    definition:
+      'יתרון שמגן על הרווחים של חברה מפני מתחרים, כמו חפיר סביב טירה: אפקט רשת, עלויות מעבר, מותג, יתרון עלות או רגולציה.',
+    example: 'מערכת תשלומים שכל החנויות כבר מחוברות אליה: לקוח חדש מצטרף אליה כי כולם שם, ולעזוב אותה מסובך.',
+    related: ['roic', 'margins'],
+    module: 'stock-research',
+  },
+  {
+    id: 'roic',
+    he: 'תשואה על ההון המושקע',
+    en: 'ROIC',
+    category: 'valuation',
+    aliases: ['Return on Invested Capital'],
+    definition:
+      'כמה רווח תפעולי (אחרי מס) החברה מייצרת על כל דולר שהושקע בה, מבעלי מניות ומנושים יחד. ROIC גבוה לאורך שנים הוא סימן לחפיר כלכלי.',
+    related: ['roe', 'economic-moat'],
+    module: 'stock-research',
+  },
+  {
+    id: 'operating-leverage',
+    he: 'מינוף תפעולי',
+    en: 'Operating Leverage',
+    category: 'valuation',
+    definition:
+      'כשחלק גדול מההוצאות קבוע, כל דולר הכנסות נוסף מגדיל את הרווח יותר מבעבר, והשוליים עולים. זה עובד גם הפוך: כשההכנסות יורדות, הרווח נופל מהר.',
+    related: ['margins', 'income-statement'],
+    module: 'stock-research',
+  },
+  {
+    id: 'stock-based-compensation',
+    he: 'תגמול מבוסס מניות',
+    en: 'Stock-Based Compensation',
+    category: 'valuation',
+    aliases: ['SBC', 'אופציות לעובדים'],
+    definition:
+      'שכר שמשולם לעובדים במניות או באופציות. הוא לא יוצא מהקופה, ולכן מוחזר בדוח התזרים, אבל הוא מדלל את בעלי המניות ולכן הוא הוצאה אמיתית.',
+    related: ['dilution', 'free-cash-flow'],
+    module: 'stock-research',
+  },
+  {
+    id: 'net-debt',
+    he: 'חוב נטו',
+    en: 'Net Debt',
+    category: 'valuation',
+    aliases: ['חוב נטו ל-EBITDA', 'Net Debt/EBITDA'],
+    definition:
+      'החוב של החברה פחות המזומן שלה. מספר שלילי אומר שיש לה יותר מזומן מחוב. מחלקים אותו ב-EBITDA כדי לדעת כמה שנים של רווח תפעולי יידרשו להחזרתו.',
+    related: ['debt-to-equity', 'ebitda', 'interest-coverage'],
+    module: 'stock-research',
+  },
+  {
+    id: 'interest-coverage',
+    he: 'יחס כיסוי ריבית',
+    en: 'Interest Coverage',
+    category: 'valuation',
+    definition: 'הרווח התפעולי חלקי הוצאות הריבית. כיסוי נמוך (סביב 2 ומטה) אומר שחלק גדול מהרווח הולך לנושים.',
+    example: 'רווח תפעולי של 213 וריבית של 22: כיסוי של כמעט פי 10.',
+    related: ['net-debt', 'debt-to-equity'],
+    module: 'stock-research',
+  },
+  {
+    id: 'reverse-dcf',
+    he: 'DCF הפוך',
+    en: 'Reverse DCF',
+    category: 'valuation',
+    aliases: ['מה המחיר מניח'],
+    definition:
+      'במקום להעריך שווי ולהשוות למחיר, לוקחים את המחיר כנתון ומחשבים איזו צמיחה עתידית הוא מניח. אחר כך בודקים אם ההנחה סבירה.',
+    related: ['intrinsic-value', 'free-cash-flow'],
+    module: 'stock-research',
+  },
+  {
+    id: 'investment-thesis',
+    he: 'תזת השקעה',
+    en: 'Investment Thesis',
+    category: 'valuation',
+    definition:
+      'סיכום של מחקר בכמה משפטים: למה העסק יצליח, מה המחיר מניח, ומה יפריך את הסיפור. החלק האחרון הוא מה שבודקים בכל דוח חדש.',
+    related: ['fundamental-analysis'],
+    module: 'stock-research',
   },
 
   // ---------------------------------------------------------------- מסחר ותנודתיות
@@ -1150,6 +1249,17 @@ export const TERMS = [
     aliases: ['Securities and Exchange Commission'],
     definition: 'הרגולטור של שוק ההון בארה״ב, המקבילה האמריקאית של רשות ניירות ערך. חברות אמריקאיות מדווחות אליה במערכת EDGAR.',
     related: ['isa', 'finra'],
+  },
+  {
+    id: '10-k',
+    he: 'דוח שנתי 10-K',
+    en: '10-K',
+    category: 'regulators',
+    aliases: ['10-Q', 'דוח רבעוני', '8-K', 'EDGAR'],
+    definition:
+      'הדוח השנתי שחברה אמריקאית מגישה ל-SEC: תיאור העסק, גורמי סיכון, ניתוח ההנהלה והדוחות הכספיים המבוקרים. הדוח הרבעוני נקרא 10-Q, ודיווח מיידי על אירוע נקרא 8-K. כולם פתוחים לציבור במערכת EDGAR.',
+    related: ['sec', 'income-statement'],
+    module: 'stock-research',
   },
   {
     id: 'finra',
