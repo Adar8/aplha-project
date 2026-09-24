@@ -1,11 +1,15 @@
 import { Link } from 'react-router'
 import { useProgress } from '../progress/ProgressContext.js'
 import { formatDate } from '../progress/formatDate.js'
+import { useProfile } from '../profile/ProfileContext.js'
+import { levelFor, moduleMinutes } from '../profile/profile.js'
 import './ModuleCard.css'
 
-export default function ModuleCard({ module }) {
+export default function ModuleCard({ module, isNext = false, isKnown = false }) {
   const { progress } = useProgress()
-  const { kind, number, title, summary, accent, status, path, minutes, termCount } = module
+  const { profile } = useProfile()
+  const { kind, number, title, summary, accent, status, path, termCount } = module
+  const minutes = moduleMinutes(module, levelFor(profile, module.id))
   const isGlossary = kind === 'glossary'
   const isAvailable = status === 'available'
   const completion = progress[module.id]
@@ -17,6 +21,10 @@ export default function ModuleCard({ module }) {
         ✓ הושלם {formatDate(completion.completedAt)}
       </span>
     )
+  } else if (isNext) {
+    badge = <span className="module-card__status module-card__status--next">הבא במסלול שלך</span>
+  } else if (isKnown) {
+    badge = <span className="module-card__status module-card__status--known">אפשר לדלג</span>
   } else if (isAvailable) {
     badge = <span className="module-card__status module-card__status--open">זמין</span>
   }

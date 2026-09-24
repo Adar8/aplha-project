@@ -9,6 +9,7 @@ import ChartReading from './modules/chart-reading/ChartReading.jsx'
 import RiskManagement from './modules/risk-management/RiskManagement.jsx'
 import Fundamentals from './modules/fundamentals/Fundamentals.jsx'
 import GlossaryPage from './glossary/GlossaryPage.jsx'
+import OnboardingPage from './onboarding/OnboardingPage.jsx'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -33,11 +34,15 @@ export default function App() {
           <Route path="/modules/risk-management" element={<RiskManagement />} />
           <Route path="/modules/fundamentals" element={<Fundamentals />} />
           <Route path="/glossary" element={<GlossaryPage />} />
+          <Route path="/start" element={<OnboardingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <footer className="site-footer container">
-        <p>התוכן לימודי בלבד ואינו מהווה ייעוץ השקעות.</p>
+        <p>
+          AlphaTrader Learn היא מערכת ללימוד עצמי. התוכן לימודי בלבד ואינו מהווה ייעוץ השקעות: אנחנו לא ממליצים על ניירות
+          ערך ולא מבצעים עסקאות.
+        </p>
       </footer>
     </>
   )

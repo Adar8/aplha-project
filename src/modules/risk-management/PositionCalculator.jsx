@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useProfile } from '../../profile/ProfileContext.js'
+import { accountSize } from '../../profile/profile.js'
 import { positionSize } from './riskMath.js'
 
 const shekel = new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS', maximumFractionDigits: 0 })
@@ -42,7 +44,15 @@ function Ladder({ entry, stop, target }) {
 }
 
 export default function PositionCalculator() {
-  const [values, setValues] = useState({ capital: '100000', riskPct: '1', entry: '50', stop: '47.5', target: '55' })
+  const { answers } = useProfile()
+  // הסכום ההתחלתי לפי טווח ההשקעה מהשאלון, כדי שהמספרים ירגישו מוכרים
+  const [values, setValues] = useState(() => ({
+    capital: String(accountSize(answers, 100000)),
+    riskPct: '1',
+    entry: '50',
+    stop: '47.5',
+    target: '55',
+  }))
   const result = positionSize({
     capital: Number(values.capital),
     riskPct: Number(values.riskPct) / 100,

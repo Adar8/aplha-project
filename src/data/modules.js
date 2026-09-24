@@ -3,6 +3,8 @@ import { TERMS } from './glossary.js'
 // מודולי הלימוד והמילון. הדף הראשי נבנה מהמערך הזה.
 // accent: cyan | pink | purple | lime (ממופה לטוקנים ב-tokens.css)
 // status: available (יש עמוד) | soon (כרטיס בלבד)
+// minutes: זמן לימוד כולל סימולטורים, לכל רמה (basic | deep)
+// why: למה המודול חשוב, לכל מטרה מהשאלון (ראו profile/profile.js)
 export const modules = [
   {
     id: 'what-is-a-stock',
@@ -14,7 +16,13 @@ export const modules = [
     accent: 'cyan',
     status: 'available',
     path: '/modules/what-is-a-stock',
-    minutes: 15,
+    minutes: { basic: 15, deep: 25 },
+    why: {
+      understand: 'כל חדשה כלכלית מתחילה כאן: מי הבעלים, איפה נקבע המחיר, ולמה הוא זז.',
+      longterm: 'כשקונים קרן מחקה או מניה לשנים, קונים חלק מעסקים. כדאי לדעת מה זה אומר.',
+      active: 'לפני כל פקודה: מה עומד מאחורי המחיר במסך, ולמה יש שני מחירים ולא אחד.',
+      track: 'כדי להבין את התיק שלך, קודם צריך להבין מה בעצם מחזיקים בו.',
+    },
   },
   {
     id: 'order-types',
@@ -26,7 +34,13 @@ export const modules = [
     accent: 'pink',
     status: 'available',
     path: '/modules/order-types',
-    minutes: 15,
+    minutes: { basic: 15, deep: 25 },
+    why: {
+      understand: '״המניה נפתחה בפער״, ״נזילות נמוכה״: כאן מבינים מה המשפטים האלה אומרים.',
+      longterm: 'גם מי שקונה פעם בחודש שולח פקודה. ההבדל בין Market ל-Limit יכול לעלות כסף.',
+      active: 'איך פקודה פוגשת פקודה, ולמה המחיר שביקשת הוא לא תמיד המחיר שקיבלת.',
+      track: 'המחיר שקנית בו מופיע בדוח של הברוקר. כאן מבינים איך הוא נקבע.',
+    },
   },
   {
     id: 'chart-reading',
@@ -38,7 +52,13 @@ export const modules = [
     accent: 'lime',
     status: 'available',
     path: '/modules/chart-reading',
-    minutes: 20,
+    minutes: { basic: 20, deep: 30 },
+    why: {
+      understand: 'גרפים מופיעים בכל כתבה. כאן לומדים לקרוא אותם בלי להיבהל מתנודה של יום אחד.',
+      longterm: 'בטווח ארוך רואים תמונה אחרת לגמרי מבטווח של יום. כאן רואים את זה בעיניים.',
+      active: 'מגמות, תמיכה, התנגדות ונפח: השפה שבה סוחרים מתארים את מה שהם רואים.',
+      track: 'איך לקרוא את הגרף של מניה שכבר יש לך, ולהבין מה קרה לה מאז שקנית.',
+    },
   },
   {
     id: 'risk-management',
@@ -50,7 +70,13 @@ export const modules = [
     accent: 'pink',
     status: 'available',
     path: '/modules/risk-management',
-    minutes: 20,
+    minutes: { basic: 20, deep: 30 },
+    why: {
+      understand: 'למה ירידה של 50% דורשת עלייה של 100% כדי להתאושש, ומה זה אומר על כל תיק.',
+      longterm: 'גם בטווח ארוך, גודל ההפסד הגדול ביותר קובע כמה קשה יהיה לחזור. זה חשבון, לא מזל.',
+      active: 'כמה לקנות ואיפה לצאת: החלק שמפריד בין מסחר מסודר להימור.',
+      track: 'כמה ירידה חדה בתיק באמת עולה, ולמה הגודל של כל השקעה חשוב לא פחות מהבחירה בה.',
+    },
   },
   {
     id: 'fundamentals',
@@ -62,7 +88,13 @@ export const modules = [
     accent: 'purple',
     status: 'available',
     path: '/modules/fundamentals',
-    minutes: 20,
+    minutes: { basic: 20, deep: 35 },
+    why: {
+      understand: 'דוחות רבעוניים ומכפילים הם מה שכל כתבה כלכלית מצטטת. כאן מבינים אותם.',
+      longterm: 'מי שמחזיק שנים מחזיק עסק. כאן לומדים לקרוא את המספרים של העסק.',
+      active: 'גם מי שמסתכל בעיקר על גרפים צריך לדעת מה קורה ביום הדוחות.',
+      track: 'איך לבדוק אם החברות שבתיק שלך מרוויחות, כמה הן חייבות, וכמה משלמים עליהן.',
+    },
   },
   {
     id: 'glossary',

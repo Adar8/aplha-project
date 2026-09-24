@@ -41,6 +41,8 @@
 }
 
 .site-nav {
+  display: flex;
+  gap: var(--space-1);
   margin-inline-start: auto;
 }
 
@@ -85,8 +87,20 @@
   }
 }
 
-@media (max-width: 360px) {
+/* שני קישורים בתפריט: במסך צר מציגים רק את המילה הראשונה */
+@media (max-width: 480px) {
   .site-nav__long {
     display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo {
+    font-size: 0.95rem;
+  }
+
+  .site-nav__link {
+    font-size: 0.8rem;
+    padding-inline: 0.45rem;
   }
 }
