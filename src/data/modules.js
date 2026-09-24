@@ -53,6 +53,18 @@ export const modules = [
     minutes: 20,
   },
   {
+    id: 'fundamentals',
+    kind: 'module',
+    number: 5,
+    title: 'ניתוח יסודי ומכפילים',
+    summary:
+      'שלושת הדוחות הכספיים, מכפיל רווח, מכפיל הון ו-ROE, ולמה מניה ״זולה״ יכולה להיות מלכודת. כולל בונה דוח רווח והפסד ובלש מכפילים.',
+    accent: 'purple',
+    status: 'available',
+    path: '/modules/fundamentals',
+    minutes: 20,
+  },
+  {
     id: 'glossary',
     kind: 'glossary',
     title: 'מילון מונחים',

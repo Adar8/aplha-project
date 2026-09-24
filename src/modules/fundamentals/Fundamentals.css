@@ -1,0 +1,438 @@
+/* ---------- שלושת הדוחות ---------- */
+.reports {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.reports__card {
+  --tone: var(--color-cyan);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--tone);
+}
+
+.reports__card--balance { --tone: var(--color-purple); }
+.reports__card--cash { --tone: var(--color-lime); }
+
+.lesson__body .reports__card h3 {
+  margin-top: 0;
+}
+
+.reports__card .term__en {
+  color: var(--tone);
+}
+
+.reports__q {
+  font-weight: 700;
+  color: var(--tone);
+  margin-block: var(--space-1) var(--space-2);
+}
+
+/* ---------- בונה דוח רווח והפסד ---------- */
+.pnl__intro {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.pnl__layout {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .pnl__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  }
+}
+
+.pnl__sliders {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.pnl__slider {
+  display: grid;
+  gap: var(--space-1);
+  font-size: 0.9rem;
+}
+
+.pnl__slider-head {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+}
+
+.pnl__slider-head output {
+  color: var(--color-text);
+}
+
+.pnl__slider input {
+  inline-size: 100%;
+  accent-color: var(--color-purple);
+  cursor: pointer;
+}
+
+.pnl__waterfall {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.wf-row {
+  --tone: var(--color-cyan);
+  display: grid;
+  grid-template-columns: 7.5rem 1fr 5.5rem;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.85rem;
+}
+
+.wf-row--cost { --tone: var(--color-down); }
+.wf-row--sub { --tone: var(--color-purple); }
+.wf-row--net { --tone: var(--color-lime); }
+.wf-row--loss { --tone: var(--color-down); }
+
+.wf-row--sub .wf-row__label,
+.wf-row--net .wf-row__label,
+.wf-row--loss .wf-row__label {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.wf-row__label {
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.wf-row__track {
+  position: relative;
+  block-size: 16px;
+}
+
+/* במסך צר: תווית וסכום בשורה אחת, הפס מתחתיהם לכל הרוחב */
+@media (max-width: 600px) {
+  .wf-row {
+    grid-template-columns: 1fr auto;
+    row-gap: var(--space-1);
+  }
+
+  .wf-row__track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+.wf-row__bar {
+  position: absolute;
+  inset-block: 0;
+  border-radius: 3px;
+  background: var(--tone);
+  transition: inset-inline-start 0.2s ease, inline-size 0.2s ease;
+}
+
+.wf-row--cost .wf-row__bar {
+  background: color-mix(in srgb, var(--tone) 55%, transparent);
+}
+
+.wf-row--net .wf-row__bar {
+  box-shadow: var(--glow-lime);
+}
+
+.wf-row__zero {
+  position: absolute;
+  inset-block: -3px;
+  inline-size: 1px;
+  background: var(--color-text-muted);
+}
+
+.wf-row__value {
+  text-align: end;
+  color: var(--tone);
+}
+
+.wf-row--cost .wf-row__value {
+  color: var(--color-text-muted);
+}
+
+.pnl__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.pnl__stats > div,
+.cmp-card__facts > div {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.pnl__stats dt,
+.cmp-card__facts dt {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.pnl__stats dd {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ---------- השוואת חברות ---------- */
+.cmp {
+  border-color: color-mix(in srgb, var(--color-purple) 40%, var(--color-border));
+  box-shadow: var(--glow-purple);
+}
+
+.cmp-cards {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.cmp-card {
+  --tone: var(--color-cyan);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--tone);
+}
+
+.cmp-card--pink { --tone: var(--color-pink); }
+.cmp-card--purple { --tone: var(--color-purple); }
+.cmp-card--lime { --tone: var(--color-lime); }
+
+.cmp-card__sector {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--tone);
+}
+
+.cmp-card__name {
+  font-size: 1.15rem;
+}
+
+.cmp-card__story {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.cmp-card__facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+.cmp-card__facts dd {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cmp-card__history {
+  font-size: 0.8rem;
+}
+
+.cmp-card__flag {
+  font-size: 0.8rem;
+  color: var(--color-pink);
+}
+
+.cmp-card__flag.is-adjusted {
+  color: var(--color-lime);
+}
+
+.cmp-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.cmp-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.cmp-metrics .chip {
+  font-family: var(--font-body);
+}
+
+.cmp-metrics .chip[aria-pressed='true'] {
+  color: var(--color-bg);
+  background: var(--color-purple);
+  border-color: var(--color-purple);
+}
+
+.cmp-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cmp-toggle input {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+  accent-color: var(--color-lime);
+  cursor: pointer;
+}
+
+.cmp-chart {
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.cmp-chart__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+
+.cmp-chart__title .mono {
+  font-size: 0.8em;
+  color: var(--color-purple);
+}
+
+.cmp-bars {
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.cmp-bars__row {
+  --tone: var(--color-cyan);
+  display: grid;
+  grid-template-columns: 7rem 1fr 5rem;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+}
+
+.cmp-bars__row--pink { --tone: var(--color-pink); }
+.cmp-bars__row--purple { --tone: var(--color-purple); }
+.cmp-bars__row--lime { --tone: var(--color-lime); }
+
+.cmp-bars__track {
+  block-size: 14px;
+  border-radius: 999px;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.cmp-bars__fill {
+  display: block;
+  block-size: 100%;
+  border-radius: 999px;
+  background: var(--tone);
+  transition: inline-size 0.25s ease;
+}
+
+.cmp-bars__fill.is-negative {
+  background: repeating-linear-gradient(45deg, var(--color-down) 0 6px, transparent 6px 10px);
+}
+
+.cmp-bars__value {
+  text-align: end;
+  font-weight: 600;
+}
+
+.cmp-chart__note {
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.cmp-q__heading {
+  margin-top: var(--space-5);
+  font-size: 1.1rem;
+}
+
+.cmp-q__list {
+  display: grid;
+  gap: var(--space-4);
+  padding-inline-start: var(--space-5);
+  margin-top: var(--space-3);
+}
+
+.cmp-q__text {
+  font-weight: 500;
+  margin-bottom: var(--space-2);
+}
+
+.cmp-q__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.cmp-q__opt {
+  font-family: var(--font-body);
+  text-align: start;
+}
+
+.cmp-q__opt:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.cmp-q__opt.is-correct {
+  opacity: 1;
+  color: var(--color-bg);
+  background: var(--color-lime);
+  border-color: var(--color-lime);
+}
+
+.cmp-q__opt.is-wrong {
+  opacity: 1;
+  color: var(--color-pink);
+  border-color: var(--color-pink);
+  text-decoration: line-through;
+}
+
+.cmp-q__feedback {
+  margin-top: var(--space-2);
+  font-size: 0.9rem;
+}
+
+.cmp-q__summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-border);
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-row__bar,
+  .cmp-bars__fill {
+    transition: none;
+  }
+}
