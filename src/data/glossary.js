@@ -479,7 +479,7 @@ export const TERMS = [
     aliases: ['OHLC', 'גרף נרות'],
     definition:
       'דרך להציג את המחיר בפרק זמן: הגוף מראה את מחיר הפתיחה והסגירה, והפתילים מראים את הגבוה והנמוך. נר עולה נסגר מעל הפתיחה, נר יורד מתחתיה.',
-    related: ['volatility'],
+    related: ['volatility', 'timeframe'],
     module: 'what-is-a-stock',
   },
   {
@@ -562,7 +562,62 @@ export const TERMS = [
     category: 'trading',
     aliases: ['ווליום'],
     definition: 'כמה מניות (או כמה כסף) החליפו ידיים בפרק זמן מסוים. מחזור גבוה מעיד על עניין ועל נזילות.',
-    related: ['liquidity'],
+    related: ['liquidity', 'breakout'],
+    module: 'chart-reading',
+  },
+  {
+    id: 'timeframe',
+    he: 'טווח זמן',
+    en: 'Timeframe',
+    category: 'trading',
+    aliases: ['טיימפריים'],
+    definition:
+      'כמה זמן מייצג כל נר בגרף: דקה, שעה, יום, שבוע. אותה מניה יכולה להיראות במגמת ירידה בגרף של דקות ובמגמת עלייה בגרף יומי.',
+    related: ['candlestick', 'trend'],
+    module: 'chart-reading',
+  },
+  {
+    id: 'trend',
+    he: 'מגמה',
+    en: 'Trend',
+    category: 'trading',
+    aliases: ['מגמת עלייה', 'מגמת ירידה', 'דשדוש', 'Uptrend', 'Downtrend', 'Sideways'],
+    definition:
+      'הכיוון הכללי של המחיר. מגמת עלייה: שיאים ושפלים עולים. מגמת ירידה: שיאים ושפלים יורדים. דשדוש: המחיר נע בטווח בלי שיאים ושפלים חדשים.',
+    related: ['support', 'resistance', 'timeframe', 'correction'],
+    module: 'chart-reading',
+  },
+  {
+    id: 'support',
+    he: 'תמיכה',
+    en: 'Support',
+    category: 'trading',
+    definition:
+      'אזור מחיר שבו ירידות נוטות להיעצר, כי קונים נכנסים שם שוב ושוב. זה אזור ולא קו מדויק, וכשהוא נשבר הוא נוטה להפוך להתנגדות.',
+    example: 'מניה שירדה שלוש פעמים ל-₪96 ובכל פעם עלתה בחזרה: ₪96 הוא אזור תמיכה.',
+    related: ['resistance', 'breakout', 'trend'],
+    module: 'chart-reading',
+  },
+  {
+    id: 'resistance',
+    he: 'התנגדות',
+    en: 'Resistance',
+    category: 'trading',
+    definition:
+      'אזור מחיר שבו עליות נוטות להיעצר, כי מוכרים ממתינים שם. כשהמחיר פורץ אותו, הוא נוטה להפוך לתמיכה.',
+    related: ['support', 'breakout'],
+    module: 'chart-reading',
+  },
+  {
+    id: 'breakout',
+    he: 'פריצה',
+    en: 'Breakout',
+    category: 'trading',
+    aliases: ['פריצת שווא', 'False Breakout', 'שבירה'],
+    definition:
+      'כשהמחיר עובר רמת תמיכה או התנגדות ונשאר מעבר לה. פריצה בנפח מסחר גבוה נחשבת אמינה יותר. כשהמחיר עובר לרגע וחוזר מיד, זו פריצת שווא.',
+    related: ['support', 'resistance', 'volume'],
+    module: 'chart-reading',
   },
   {
     id: 'volatility',

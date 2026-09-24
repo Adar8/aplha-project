@@ -29,6 +29,18 @@ export const modules = [
     minutes: 15,
   },
   {
+    id: 'chart-reading',
+    kind: 'module',
+    number: 3,
+    title: 'קריאת גרף',
+    summary:
+      'טווחי זמן, מגמות, תמיכה והתנגדות, ונפח מסחר. כולל תרגיל זיהוי מגמה וסימולטור שבו מסמנים רמות על גרף.',
+    accent: 'lime',
+    status: 'available',
+    path: '/modules/chart-reading',
+    minutes: 20,
+  },
+  {
     id: 'glossary',
     kind: 'glossary',
     title: 'מילון מונחים',
