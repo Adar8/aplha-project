@@ -1,0 +1,223 @@
+.simulator {
+  border-color: color-mix(in srgb, var(--color-purple) 40%, var(--color-border));
+  box-shadow: var(--glow-purple);
+}
+
+.simulator__layout {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .simulator__layout {
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  }
+}
+
+.is-up { color: var(--color-up); }
+.is-down { color: var(--color-down); }
+.is-muted { color: var(--color-text-muted); }
+
+/* ---------- גרף ---------- */
+.simulator__chart {
+  min-width: 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.simulator__ticker {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-2);
+}
+
+.simulator__symbol {
+  font-size: 0.8rem;
+  color: var(--color-bg);
+  background: var(--color-purple);
+  padding: 0.05rem 0.45rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.simulator__price {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.simulator__change {
+  font-size: 0.95rem;
+}
+
+.candle-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.candle-chart__grid line {
+  stroke: var(--color-border);
+  stroke-dasharray: 2 4;
+}
+
+.candle-chart__grid text {
+  fill: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.candle--up { --candle: var(--color-up); }
+.candle--down { --candle: var(--color-down); }
+
+.candle__wick {
+  stroke: var(--candle);
+  stroke-width: 1.5;
+}
+
+.candle__body {
+  fill: var(--candle);
+}
+
+.candle--live {
+  filter: drop-shadow(0 0 6px var(--candle));
+}
+
+.candle-chart__last line {
+  stroke: var(--color-lime);
+  stroke-dasharray: 4 3;
+  opacity: 0.7;
+}
+
+.candle-chart__last rect {
+  fill: var(--color-lime);
+}
+
+.candle-chart__last text {
+  fill: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.simulator__candle-timer {
+  height: 3px;
+  margin-top: var(--space-2);
+  border-radius: 2px;
+  background: var(--color-border);
+  overflow: hidden;
+  direction: ltr;
+}
+
+.simulator__candle-timer span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-purple), var(--color-cyan));
+}
+
+.simulator__caption {
+  margin-top: var(--space-2);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- פאנל שליטה ---------- */
+.simulator__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.simulator__status {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  min-height: 1.6em;
+}
+
+.pressure {
+  --tone: var(--color-up);
+}
+
+.pressure--down {
+  --tone: var(--color-down);
+}
+
+.pressure__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.pressure__label {
+  font-weight: 700;
+  color: var(--tone);
+}
+
+.pressure__value {
+  font-size: 1.1rem;
+  color: var(--tone);
+}
+
+.pressure input[type='range'] {
+  width: 100%;
+  accent-color: var(--tone);
+  cursor: pointer;
+  margin-block: var(--space-1);
+}
+
+.pressure__hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.simulator__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.simulator__quote {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.simulator__quote > div,
+.simulator__ohlc > div {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-border);
+}
+
+.simulator__quote dt {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.simulator__quote dd {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.simulator__ohlc {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.simulator__ohlc dt {
+  color: var(--color-purple);
+  font-weight: 600;
+}
+
+.simulator__actions {
+  display: flex;
+  gap: var(--space-2);
+}

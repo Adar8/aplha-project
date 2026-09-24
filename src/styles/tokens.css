@@ -1,0 +1,49 @@
+/* טוקני עיצוב — המקור היחיד לצבעים, פונטים ומרווחים. אין להשתמש בערכי hex בקומפוננטות. */
+:root {
+  /* רקע: נייבי-פחם כהה, לא שחור */
+  --color-bg: #0e1329;
+  --color-bg-deep: #0a0e1f;
+  --color-surface: #161c3a;
+  --color-surface-raised: #1e2549;
+  --color-border: #2a3360;
+
+  /* טקסט */
+  --color-text: #eef2ff;
+  --color-text-muted: #9aa6d1;
+
+  /* הדגשות */
+  --color-cyan: #00f0ff;   /* טורקיז חשמלי — פעולה ראשית, עלייה */
+  --color-pink: #ff2e97;   /* ורוד בוהק — דגש, ירידה/אזהרה */
+  --color-purple: #b04dff; /* סגול זוהר — משני, גרדיאנטים */
+  --color-lime: #b6ff3b;   /* ליים — הצלחה, תגיות, נתונים חיוביים */
+
+  /* משמעות בנתוני שוק */
+  --color-up: var(--color-cyan);
+  --color-down: var(--color-pink);
+
+  /* זוהר */
+  --glow-cyan: 0 0 24px rgb(0 240 255 / 0.25);
+  --glow-pink: 0 0 24px rgb(255 46 151 / 0.25);
+  --glow-purple: 0 0 24px rgb(176 77 255 / 0.25);
+  --glow-lime: 0 0 24px rgb(182 255 59 / 0.22);
+
+  /* פונטים */
+  --font-heading: 'Rubik', system-ui, sans-serif;
+  --font-body: 'Heebo', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* מרווחים (סקאלה של 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 4rem;
+
+  /* פינות */
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+
+  --container-width: 1120px;
+}

@@ -1,0 +1,76 @@
+.hero {
+  position: relative;
+  overflow-x: clip; /* רשת הרקע רחבה מהקונטיינר — לא ליצור גלילה אופקית */
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 44rem;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-lime);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-3);
+}
+
+.hero__title {
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+}
+
+.hero__highlight {
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__lead {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.hero__stats dt {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.hero__stats dd {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.hero__stats dd.mono {
+  font-family: var(--font-mono);
+}
+
+/* רשת synthwave דועכת ברקע */
+.hero__grid {
+  position: absolute;
+  inset-inline: -10%;
+  bottom: 0;
+  height: 60%;
+  background-image:
+    linear-gradient(to right, rgb(176 77 255 / 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(176 77 255 / 0.22) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(420px) rotateX(58deg);
+  transform-origin: bottom;
+  mask-image: linear-gradient(to top, black, transparent 85%);
+  pointer-events: none;
+}
