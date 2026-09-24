@@ -19,9 +19,12 @@ export const modules = [
     kind: 'module',
     number: 2,
     title: 'סוגי פקודות',
-    summary: 'פקודת שוק (Market) מול פקודה מוגבלת (Limit), כולל סימולטור ספר פקודות.',
+    summary:
+      'פקודת שוק (Market) מול פקודה מוגבלת (Limit), החלקה, עדיפות בתור, וסימולטור ספר פקודות חי.',
     accent: 'pink',
-    status: 'soon',
+    status: 'available',
+    path: '/modules/order-types',
+    minutes: 15,
   },
   {
     id: 'glossary',

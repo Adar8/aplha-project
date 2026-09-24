@@ -14,10 +14,6 @@
   }
 }
 
-.is-up { color: var(--color-up); }
-.is-down { color: var(--color-down); }
-.is-muted { color: var(--color-text-muted); }
-
 /* ---------- גרף ---------- */
 .simulator__chart {
   min-width: 0;
