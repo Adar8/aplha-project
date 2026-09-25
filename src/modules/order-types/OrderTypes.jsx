@@ -124,7 +124,7 @@ export default function OrderTypes() {
               <dd className="mono is-down">100.043</dd>
             </div>
             <div>
-              <dt>כמה זה עלה לכם</dt>
+              <dt>כמה ההחלקה עלתה לכם</dt>
               <dd className="mono is-down">₪8</dd>
             </div>
           </dl>

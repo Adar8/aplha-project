@@ -9,6 +9,16 @@ const GRADE_TEXT = {
   far: { label: 'רחוק', tone: 'is-down' },
 }
 
+function TouchCount({ count }) {
+  if (count === 0) return 'המחיר לא נגע בה'
+  if (count === 1) return 'המחיר נגע בה פעם אחת'
+  return (
+    <>
+      המחיר נגע בה <span className="mono">{count}</span> פעמים
+    </>
+  )
+}
+
 function rangeOf(candles) {
   let min = Infinity
   let max = -Infinity
@@ -157,8 +167,8 @@ export default function LevelsSimulator() {
               {grade && (
                 <p className="level-row__grade">
                   <strong className={GRADE_TEXT[grade].tone}>{GRADE_TEXT[grade].label}</strong>{' '}
-                  הרמה: <bdi className="mono">{level.price.toFixed(2)}</bdi> · המחיר נגע בה{' '}
-                  <span className="mono">{countTouches(visible, level.price, level.kind)}</span> פעמים
+                  הרמה: <bdi className="mono">{level.price.toFixed(2)}</bdi> ·{' '}
+                  <TouchCount count={countTouches(visible, level.price, level.kind)} />
                 </p>
               )}
             </div>

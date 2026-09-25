@@ -4,7 +4,7 @@ import { useProgress } from '../progress/ProgressContext.js'
 import { useProfile } from '../profile/ProfileContext.js'
 import './Hero.css'
 
-const LEVEL_NAMES = { new: 'מתחילים', some: 'בסיסית', experienced: 'מנוסים' }
+const LEVEL_NAMES = { new: 'מתחילים', some: 'ביניים', experienced: 'מתקדמים' }
 
 export default function Hero() {
   const { progress } = useProgress()
@@ -22,7 +22,7 @@ export default function Hero() {
         </h1>
         <p className="hero__lead">
           {lessons.length} יחידות לימוד בעברית, כל אחת עם סימולטור: ספר פקודות, גרפים, ניהול סיכונים, דוחות
-          כספיים וחקירת חברה. לצידן מילון של {TERMS.length} מונחים. התוכן מסביר איך השוק עובד. הוא לא ממליץ
+          כספיים וחקירת חברה. לצדן מילון של {TERMS.length} מונחים. התוכן מסביר איך השוק עובד. הוא לא ממליץ
           על מניות, ואין בו כסף אמיתי.
         </p>
         <dl className="hero__stats">

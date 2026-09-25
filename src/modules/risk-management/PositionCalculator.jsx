@@ -112,7 +112,7 @@ export default function PositionCalculator() {
                   </div>
                   <div>
                     <dt>
-                      יחס סיכוי/סיכון <bdi className="mono">(R:R)</bdi>
+                      יחס סיכון-סיכוי <bdi className="mono">(R:R)</bdi>
                     </dt>
                     <dd className="mono">
                       <bdi>1:{Number.isInteger(Math.round(result.rr * 10) / 10) ? Math.round(result.rr) : result.rr.toFixed(1)}</bdi>

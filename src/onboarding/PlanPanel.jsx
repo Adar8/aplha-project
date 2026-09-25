@@ -50,8 +50,8 @@ export default function PlanPanel({ plan }) {
         )}
         {known.size > 0 && (
           <p className="plan__note">
-            לפי מבחן המיקום אפשר לדלג על {known.size === 1 ? 'מודול אחד' : `${known.size} מודולים`}. הם נשארים פתוחים אם
-            תרצו לרענן.
+            לפי מבחן המיקום אפשר לדלג על {known.size === 1 ? 'מודול אחד' : `${known.size} מודולים`}. הם נשארים פתוחים
+            לרענון.
           </p>
         )}
       </div>

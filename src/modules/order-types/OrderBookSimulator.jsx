@@ -358,7 +358,7 @@ export default function OrderBookSimulator() {
             </button>
           </div>
           <p className="obsim__hint">
-            &quot;צעד בשוק&quot; שולח פקודת שוק של סוחר אחר ומוסיף פקודות חדשות לספר. ככה פקודה
+            ״צעד בשוק״ שולח פקודת שוק של סוחר אחר ומוסיף פקודות חדשות לספר. ככה פקודה
             מוגבלת שלכם יכולה להתבצע גם אחרי שכבר שלחתם אותה.
           </p>
         </div>
@@ -449,7 +449,7 @@ export default function OrderBookSimulator() {
         <div className="panel">
           <p className="panel__title">יומן אירועים</p>
           {log.length === 0 ? (
-            <p className="panel__empty">עוד לא קרה כלום. שלחו פקודה או לחצו &quot;צעד בשוק&quot;.</p>
+            <p className="panel__empty">עוד לא קרה כלום. שלחו פקודה או לחצו ״צעד בשוק״.</p>
           ) : (
             <ol className="event-log">
               {log.map((entry) => (
