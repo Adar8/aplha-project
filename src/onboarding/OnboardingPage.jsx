@@ -51,7 +51,7 @@ function Placement({ onDone, onSkip }) {
               {q.text}
             </p>
             <div className="onb__quiz-options" role="group">
-              {[...q.options, { id: 'unsure', label: 'לא יודע' }].map((o) => (
+              {[...q.options, { id: 'unsure', label: 'אין לי תשובה' }].map((o) => (
                 <button
                   key={o.id}
                   type="button"
@@ -129,7 +129,7 @@ export default function OnboardingPage() {
           התאמה אישית
         </h1>
         <p className="onb__lead">
-          התשובות משמשות רק כדי להתאים את הלימוד: רמת ההסבר, סדר המודולים והערכת הזמן. הן נשמרות בדפדפן שלך, ואנחנו לא
+          התשובות משמשות רק כדי להתאים את הלימוד: רמת ההסבר, סדר המודולים והערכת הזמן. הן נשמרות רק בדפדפן הזה, ואנחנו לא
           משתמשים בהן כדי להמליץ על השקעות.
         </p>
         {isQuestion && (

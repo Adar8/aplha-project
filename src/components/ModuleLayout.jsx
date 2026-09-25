@@ -60,7 +60,7 @@ export default function ModuleLayout({ module, intro, children }) {
           </div>
 
           {goalWhy && (
-            <Callout title="למה זה רלוונטי אליך" variant="simple">
+            <Callout title="למה זה רלוונטי לך" variant="simple">
               <p>{goalWhy}</p>
             </Callout>
           )}

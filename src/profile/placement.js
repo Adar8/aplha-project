@@ -16,7 +16,7 @@ export const PLACEMENT = [
   {
     module: 'what-is-a-stock',
     id: 'bidask',
-    text: 'במסך רואים Bid 99.8 ו-Ask 100.0. אם תקנה עכשיו בפקודת שוק, באיזה מחיר סביר שתקנה?',
+    text: 'במסך רואים Bid 99.8 ו-Ask 100.0. בקנייה עכשיו בפקודת שוק, באיזה מחיר סביר שהעסקה תתבצע?',
     options: [
       { id: 'a', label: '99.8' },
       { id: 'b', label: '100.0' },

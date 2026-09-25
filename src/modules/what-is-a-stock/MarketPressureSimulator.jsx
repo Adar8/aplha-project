@@ -199,10 +199,10 @@ export default function MarketPressureSimulator() {
 
           <div className="simulator__actions">
             <button type="button" className="btn btn--ghost btn--small" onClick={() => setRunning((r) => !r)}>
-              {running ? 'השהה' : 'המשך'}
+              {running ? 'השהיה' : 'המשך'}
             </button>
             <button type="button" className="btn btn--ghost btn--small" onClick={reset}>
-              התחל מחדש
+              התחלה מחדש
             </button>
           </div>
         </div>

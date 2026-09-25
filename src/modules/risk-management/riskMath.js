@@ -43,7 +43,7 @@ export function positionSize({ capital, riskPct, entry, stop, target }) {
   return result
 }
 
-/** אחוז ההצלחה המינימלי כדי לא להפסיד, ביחס סיכוי/סיכון נתון */
+/** אחוז ההצלחה המינימלי כדי לא להפסיד, ביחס סיכון-סיכוי נתון */
 export const breakEvenWinRate = (rr) => 1 / (1 + rr)
 
 /** תוחלת לעסקה ביחידות R: כמה מרוויחים (או מפסידים) בממוצע על כל ₪1 שמסכנים */

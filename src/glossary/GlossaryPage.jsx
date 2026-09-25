@@ -171,7 +171,7 @@ export default function GlossaryPage() {
             aria-pressed={!activeCat}
             onClick={() => updateParams({ cat: '' })}
           >
-            הכל <span className="gl-cat__count">{matches.length}</span>
+            הכול <span className="gl-cat__count">{matches.length}</span>
           </button>
           {CATEGORIES.map((cat) => (
             <button

@@ -12,7 +12,7 @@ export default function PriceInput({ symbol, price }) {
     e.preventDefault()
     const next = Number(value)
     if (!(next > 0)) {
-      setError('מחיר גדול מאפס')
+      setError('המחיר צריך להיות גדול מאפס.')
       return
     }
     setError('')
