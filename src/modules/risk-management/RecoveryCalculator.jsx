@@ -12,8 +12,8 @@ export default function RecoveryCalculator() {
 
   return (
     <div className="widget recovery">
-      <span className="widget__tag" dir="ltr">
-        INTERACTIVE
+      <span className="widget__tag">
+        תרגול
       </span>
       <h3 className="widget__title">כמה צריך להרוויח כדי לחזור?</h3>
 

@@ -14,12 +14,7 @@ function Layer({ kind, title, children }) {
   return (
     // key מאפס את מצב הפתיחה כשמחליפים רמה
     <details key={level} className={`depth depth--${kind}`} open={isOpen}>
-      <summary className="depth__summary">
-        <span className="depth__tag" dir="ltr">
-          {kind === 'basic' ? 'BASIC' : 'DEEP'}
-        </span>
-        {label}
-      </summary>
+      <summary className="depth__summary">{label}</summary>
       <div className="depth__body">{children}</div>
     </details>
   )

@@ -218,8 +218,8 @@ export default function OrderBookSimulator() {
 
   return (
     <div className="widget obsim">
-      <span className="widget__tag" dir="ltr">
-        SIMULATOR
+      <span className="widget__tag">
+        סימולטור
       </span>
       <h3 className="widget__title">ספר פקודות: שלחו פקודה וראו מה קורה</h3>
 

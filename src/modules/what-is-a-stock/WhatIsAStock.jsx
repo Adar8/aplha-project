@@ -29,15 +29,8 @@ const BOOK = {
   ],
 }
 
-function SectionTitle({ num, children }) {
-  return (
-    <h2>
-      <span className="section-num" dir="ltr">
-        {num}
-      </span>
-      {children}
-    </h2>
-  )
+function SectionTitle({ children }) {
+  return <h2>{children}</h2>
 }
 
 export default function WhatIsAStock() {
@@ -48,12 +41,12 @@ export default function WhatIsAStock() {
     >
       {/* ---------- 1. בעלות ---------- */}
       <section aria-labelledby="ownership">
-        <SectionTitle num="1.1">
+        <SectionTitle>
           <span id="ownership">מה זה אומר להיות בעלים</span>
         </SectionTitle>
         <p>
           כל חברה ציבורית מחולקת להמון חלקים שווים שנקראים <Term he="מניות" en="Shares" />. מי
-          שמחזיק מניה הוא <Term he="בעל מניות" en="Shareholder" /> — כלומר שותף בחברה. לא עובד
+          שמחזיק מניה הוא <Term he="בעל מניות" en="Shareholder" />, כלומר שותף בחברה. לא עובד
           שלה ולא לקוח שלה: שותף, עם חלק אמיתי בעסק.
         </p>
         <p>
@@ -101,7 +94,7 @@ export default function WhatIsAStock() {
 
       {/* ---------- 2. בורסה ---------- */}
       <section aria-labelledby="exchange">
-        <SectionTitle num="1.2">
+        <SectionTitle>
           <span id="exchange">מה זו בורסה</span>
         </SectionTitle>
         <p>
@@ -118,7 +111,7 @@ export default function WhatIsAStock() {
         <ol className="flow" aria-label="המסלול של פקודת קנייה">
           {FLOW.map((step, i) => (
             <li key={step.who} className="flow__step">
-              <span className="flow__index mono">{String(i + 1).padStart(2, '0')}</span>
+              <span className="flow__index">שלב {i + 1}</span>
               <strong className="flow__who">{step.who}</strong>
               <span className="flow__what">{step.what}</span>
             </li>
@@ -142,7 +135,7 @@ export default function WhatIsAStock() {
 
       {/* ---------- 3. ראשוני מול משני ---------- */}
       <section aria-labelledby="markets">
-        <SectionTitle num="1.3">
+        <SectionTitle>
           <span id="markets">שוק ראשוני מול שוק משני</span>
         </SectionTitle>
         <p>
@@ -153,9 +146,6 @@ export default function WhatIsAStock() {
 
         <div className="markets">
           <div className="markets__card markets__card--primary">
-            <p className="markets__tag mono" dir="ltr">
-              PRIMARY
-            </p>
             <h3>
               <Term he="שוק ראשוני" en="Primary Market" />
             </h3>
@@ -170,9 +160,6 @@ export default function WhatIsAStock() {
           </div>
 
           <div className="markets__card markets__card--secondary">
-            <p className="markets__tag mono" dir="ltr">
-              SECONDARY
-            </p>
             <h3>
               <Term he="שוק משני" en="Secondary Market" />
             </h3>
@@ -207,7 +194,7 @@ export default function WhatIsAStock() {
 
       {/* ---------- 4. Bid / Ask ---------- */}
       <section aria-labelledby="bid-ask">
-        <SectionTitle num="1.4">
+        <SectionTitle>
           <span id="bid-ask">Bid ו-Ask: לכל מניה יש שני מחירים</span>
         </SectionTitle>
         <p>
@@ -235,9 +222,9 @@ export default function WhatIsAStock() {
             </caption>
             <thead>
               <tr>
-                <th scope="col">Price</th>
-                <th scope="col">Size</th>
-                <th scope="col">Side</th>
+                <th scope="col">מחיר</th>
+                <th scope="col">כמות</th>
+                <th scope="col">צד</th>
               </tr>
             </thead>
             <tbody>
@@ -245,17 +232,17 @@ export default function WhatIsAStock() {
                 <tr key={row.price} className={`book__ask${i === BOOK.asks.length - 1 ? ' book__best' : ''}`}>
                   <td>{row.price}</td>
                   <td>{row.size}</td>
-                  <td>{i === BOOK.asks.length - 1 ? 'ASK · best' : 'ask'}</td>
+                  <td>{i === BOOK.asks.length - 1 ? 'היצע, הזול ביותר' : 'היצע'}</td>
                 </tr>
               ))}
               <tr className="book__spread">
-                <td colSpan="3">spread 0.05</td>
+                <td colSpan="3">מרווח 0.05</td>
               </tr>
               {BOOK.bids.map((row, i) => (
                 <tr key={row.price} className={`book__bid${i === 0 ? ' book__best' : ''}`}>
                   <td>{row.price}</td>
                   <td>{row.size}</td>
-                  <td>{i === 0 ? 'BID · best' : 'bid'}</td>
+                  <td>{i === 0 ? 'ביקוש, הגבוה ביותר' : 'ביקוש'}</td>
                 </tr>
               ))}
             </tbody>
@@ -296,7 +283,7 @@ export default function WhatIsAStock() {
 
       {/* ---------- 5. סימולטור ---------- */}
       <section aria-labelledby="simulator">
-        <SectionTitle num="1.5">
+        <SectionTitle>
           <span id="simulator">למה המחיר זז: לחץ קונים מול מוכרים</span>
         </SectionTitle>
         <p>
@@ -341,7 +328,7 @@ export default function WhatIsAStock() {
 
       {/* ---------- סיכום ---------- */}
       <section aria-labelledby="summary">
-        <SectionTitle num="1.6">
+        <SectionTitle>
           <span id="summary">מה לוקחים מהמודול</span>
         </SectionTitle>
         <ul className="takeaways">

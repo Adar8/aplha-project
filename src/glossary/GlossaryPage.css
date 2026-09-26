@@ -11,7 +11,7 @@
 
   .gl-controls {
     position: sticky;
-    top: 64px; /* מתחת להדר הדביק */
+    top: var(--topbar-height); /* מתחת לפס העליון הדביק (במסך צר) */
     z-index: 5;
   }
 }
@@ -131,9 +131,8 @@
 }
 
 .gl-cat__count {
-  font-family: var(--font-mono);
-  font-size: 0.75em;
-  opacity: 0.8;
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
 }
 
 .gl-status {

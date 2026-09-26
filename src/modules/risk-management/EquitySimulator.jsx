@@ -61,8 +61,8 @@ export default function EquitySimulator() {
 
   return (
     <div className="widget equity">
-      <span className="widget__tag" dir="ltr">
-        SIMULATOR
+      <span className="widget__tag">
+        סימולטור
       </span>
       <h3 className="widget__title">100 עסקאות, 20 עתידים אפשריים</h3>
 

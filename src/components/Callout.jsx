@@ -1,4 +1,4 @@
-// variant: tip (טורקיז) | warning (ורוד) | simple (ליים)
+// variant: tip / simple = מידע (כחול), warning = אזהרה (ענבר)
 export default function Callout({ title, variant = 'tip', children }) {
   return (
     <aside className={`callout callout--${variant}`}>

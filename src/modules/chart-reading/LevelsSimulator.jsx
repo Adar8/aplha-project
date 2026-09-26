@@ -85,8 +85,8 @@ export default function LevelsSimulator() {
 
   return (
     <div className="widget levels">
-      <span className="widget__tag" dir="ltr">
-        SIMULATOR
+      <span className="widget__tag">
+        סימולטור
       </span>
       <h3 className="widget__title">סמנו תמיכה והתנגדות</h3>
 

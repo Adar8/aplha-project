@@ -5,6 +5,7 @@ import { usePortfolio } from '../portfolio/PortfolioContext.js'
 import { useProgress } from '../progress/ProgressContext.js'
 import { Field } from './Missing.jsx'
 import LegalLayout from './LegalLayout.jsx'
+import { resetDisplay } from '../theme/theme.js'
 
 function DeleteMyData() {
   const { resetProgress } = useProgress()
@@ -14,8 +15,8 @@ function DeleteMyData() {
   return (
     <div className="legal__data">
       <p>
-        אפשר למחוק מכאן את כל מה שהאתר שמר בדפדפן הזה: ההתקדמות, תשובות השאלון, תוצאות מבחן המיקום, בחירות הרמה
-        והעסקאות בעמוד ״התיק שלי״. המחיקה סופית.
+        אפשר למחוק מכאן את כל מה שהאתר שמר בדפדפן הזה: ההתקדמות, תשובות השאלון, תוצאות מבחן המיקום, בחירות הרמה,
+        העסקאות בעמוד ״התיק שלי״ ובחירות התצוגה (מצב כהה וסגנון). המחיקה סופית.
       </p>
       <button
         type="button"
@@ -24,6 +25,7 @@ function DeleteMyData() {
           resetProgress()
           resetProfile()
           resetPortfolio()
+          resetDisplay()
           setDone(true)
         }}
       >
@@ -54,7 +56,7 @@ export default function PrivacyPage() {
         <li>אין באתר הרשמה, ואין לו כרגע שרת שאוסף מידע על המשתמשים.</li>
         <li>ההתקדמות ותשובות השאלון נשמרות רק בדפדפן שלכם, במכשיר שלכם. הן לא נשלחות אלינו.</li>
         <li>האתר לא משתמש בעוגיות (Cookies), לא בכלי מדידה וסטטיסטיקה ולא בפרסום.</li>
-        <li>הגופנים של האתר נטענים משרתי Google, ולכן Google מקבלת פרטים טכניים על הבקשה.</li>
+        <li>הגופן של האתר נטען מהשרת של האתר עצמו, ולא משירות חיצוני.</li>
       </ul>
 
       <h2>מה נשמר בדפדפן שלכם</h2>
@@ -70,9 +72,12 @@ export default function PrivacyPage() {
         <li>
           בעמוד ״התיק שלי״: העסקאות שהזנתם (סימול, תאריך, קנייה או מכירה, כמות, מחיר ועמלה) והמחירים הנוכחיים שהקלדתם.
         </li>
+        <li>
+          אם בחרתם במצב כהה או בסגנון תצוגה (תוסס או רגוע): הבחירה הזו, כדי שהאתר ייפתח כך גם בפעם הבאה.
+        </li>
       </ul>
       <p>
-        התשובות משמשות רק כדי להתאים את הלימוד: סדר המודולים, רמת ההסבר, הערכת הזמן וסכומי ברירת המחדל בסימולטורים.
+        התשובות משמשות רק כדי להתאים את הלימוד: סדר המודולים, רמת ההסבר, הערכת הזמן, סכומי ברירת המחדל בסימולטורים, וסגנון התצוגה שנבחר כברירת מחדל לפי טווח הגילאים.
         הן לא משמשות להמלצה על השקעות, ואנחנו לא רואים אותן.
       </p>
       <DeleteMyData />
@@ -82,12 +87,7 @@ export default function PrivacyPage() {
 
       <h2>מידע שנשלח לצדדים שלישיים</h2>
       <p>
-        <strong>Google Fonts.</strong> הגופנים של האתר נטענים מהשרתים של Google. כשהדפדפן מבקש אותם, Google מקבלת את
-        כתובת ה-IP שלכם ופרטים טכניים כמו סוג הדפדפן. השימוש של Google במידע הזה כפוף ל
-        <a href="https://policies.google.com/privacy?hl=iw" rel="noopener noreferrer" target="_blank">
-          מדיניות הפרטיות של Google
-        </a>
-        .
+        האתר לא טוען קבצים משירותים חיצוניים: גם הגופן (Assistant) מוגש מהשרת של האתר.
       </p>
       <p>
         <strong>שרת האחסון.</strong> כמו כל אתר, גם השרת שמגיש את קובצי האתר עשוי לרשום פרטים טכניים על כל בקשה:

@@ -1,8 +1,3 @@
-.simulator {
-  border-color: color-mix(in srgb, var(--color-amber) 40%, var(--color-border));
-  box-shadow: var(--glow-amber);
-}
-
 .simulator__layout {
   display: grid;
   /* minmax(0) ולא 1fr: בלי זה רכיב פנימי רחב דוחף את הפריסה אל מחוץ למסך צר */
@@ -21,7 +16,7 @@
   min-width: 0;
   padding: var(--space-3);
   border-radius: var(--radius-sm);
-  background: var(--color-bg-deep);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
 }
 
@@ -29,22 +24,20 @@
   display: flex;
   align-items: baseline;
   gap: var(--space-3);
-  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
   margin-bottom: var(--space-2);
 }
 
 .simulator__symbol {
-  font-size: 0.8rem;
-  color: var(--color-bg);
-  background: var(--color-amber);
-  padding: 0.05rem 0.45rem;
-  border-radius: var(--radius-control);
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-heading);
 }
 
 .simulator__price {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--color-heading);
 }
 
 .simulator__change {
@@ -60,22 +53,22 @@
 }
 
 .candle-chart__grid line {
-  stroke: var(--color-border);
-  stroke-dasharray: 2 4;
+  stroke: var(--chart-grid);
 }
 
 .candle-chart__grid text {
-  fill: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
+  fill: var(--chart-axis);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
-.candle--up { --candle: var(--color-up); }
-.candle--down { --candle: var(--color-down); }
+.candle--up { --candle: var(--chart-up); }
+.candle--down { --candle: var(--chart-down); }
 
 .candle__wick {
   stroke: var(--candle);
-  stroke-width: 1.5;
+  stroke-width: 1;
 }
 
 .candle__body {
@@ -83,28 +76,32 @@
 }
 
 
+/* קו המחיר האחרון ותווית על הציר, בצבע הנר הנוכחי (כמו בפלטפורמות מסחר) */
+.candle-chart__last--up { --last: var(--chart-up); --last-label: var(--color-up); }
+.candle-chart__last--down { --last: var(--chart-down); --last-label: var(--color-down); }
+
 .candle-chart__last line {
-  stroke: var(--color-lime);
-  stroke-dasharray: 4 3;
-  opacity: 0.7;
+  stroke: var(--last);
+  stroke-dasharray: 1 3;
 }
 
+/* התווית בגוון הטקסט של עלייה/ירידה ולא בגוון הנר, כדי שהמספר יעמוד ב-4.5:1 */
 .candle-chart__last rect {
-  fill: var(--color-lime);
+  fill: var(--last-label);
 }
 
 .candle-chart__last text {
-  fill: var(--color-bg);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
+  fill: var(--color-cta-text);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .simulator__candle-timer {
   height: 3px;
   margin-top: var(--space-2);
-  border-radius: 2px;
-  background: var(--color-border);
+  background: var(--chart-grid);
   overflow: hidden;
   direction: ltr;
 }
@@ -112,7 +109,7 @@
 .simulator__candle-timer span {
   display: block;
   height: 100%;
-  background: var(--color-cyan);
+  background: var(--color-accent);
 }
 
 .simulator__caption {
@@ -129,7 +126,6 @@
 }
 
 .simulator__status {
-  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.05rem;
   min-height: 1.6em;
@@ -156,6 +152,8 @@
 
 .pressure__value {
   font-size: 1.1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   color: var(--tone);
 }
 
@@ -188,29 +186,33 @@
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
   background: var(--color-bg-deep);
-  border: 1px solid var(--color-border);
 }
 
 .simulator__quote dt {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: var(--color-text-muted);
 }
 
 .simulator__quote dd {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .simulator__ohlc {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.simulator__ohlc > div {
+  padding-inline: var(--space-2);
 }
 
 .simulator__ohlc dt {
-  color: var(--color-amber);
+  color: var(--color-text-muted);
   font-weight: 600;
 }
 

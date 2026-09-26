@@ -7,15 +7,14 @@
 }
 
 html {
-  color-scheme: dark;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 1.0625rem; /* 17px: Assistant קטן יחסית, והטקסט נקרא הרבה */
+  line-height: 1.7;
   color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -32,13 +31,19 @@ h4 {
 }
 
 a {
-  color: var(--color-cyan);
+  color: var(--color-accent);
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-cyan);
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-control);
 }
 
 .container {
@@ -48,11 +53,28 @@ a {
   padding-inline: var(--space-4);
 }
 
+/* מבנה העמוד: ניווט צד + תוכן. במסך צר הניווט הופך לפס עליון */
+.app__content {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .app {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .app__content .container {
+    padding-inline: var(--space-6);
+  }
+}
+
 /* צבעי משמעות לטקסט: עלייה/ירידה ודגשים */
 .is-up { color: var(--color-up); }
 .is-down { color: var(--color-down); }
-.is-lime { color: var(--color-lime); }
-.is-amber { color: var(--color-amber); }
+.is-lime { color: var(--color-up); }
+.is-amber { color: var(--color-warning); }
 .is-muted { color: var(--color-text-muted); }
 
 /* מוסתר ויזואלית, נשאר זמין לקוראי מסך */
@@ -67,6 +89,7 @@ a {
 
 .mono {
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
 .site-footer {
@@ -99,8 +122,7 @@ a {
 
 .not-found__code {
   font-size: 4rem;
-  color: var(--color-pink);
-  text-shadow: var(--glow-pink);
+  color: var(--color-text-muted);
 }
 
 /* קישור ״דלג לתוכן״: מוסתר עד שמגיעים אליו במקלדת */

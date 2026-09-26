@@ -45,8 +45,8 @@ export default function IncomeStatementBuilder() {
 
   return (
     <div className="widget pnl">
-      <span className="widget__tag" dir="ltr">
-        INTERACTIVE
+      <span className="widget__tag">
+        תרגול
       </span>
       <h3 className="widget__title">בנו דוח רווח והפסד</h3>
       <p className="pnl__intro">

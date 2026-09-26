@@ -47,8 +47,8 @@ export default function PricedInCalculator() {
 
   return (
     <div className="widget priced">
-      <span className="widget__tag" dir="ltr">
-        REVERSE DCF
+      <span className="widget__tag">
+        מחשבון
       </span>
       <h3 className="widget__title">מה המחיר מניח?</h3>
       <p className="priced__intro">

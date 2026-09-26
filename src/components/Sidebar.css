@@ -1,0 +1,299 @@
+/* ניווט צד: קבוע בצד ימין בדסקטופ, ובמסך צר פס עליון עם כפתור ״תפריט״ שפותח את הרשימה */
+.sidebar {
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+  border-bottom: 1px solid var(--color-navy-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.sidebar__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  height: var(--topbar-height);
+  padding-inline: var(--space-4);
+}
+
+.sidebar__logo {
+  text-decoration: none;
+  color: var(--color-on-navy);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 800;
+  font-size: 1.15rem;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.logo__mark {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+
+.logo__wick {
+  stroke: var(--color-on-navy-accent);
+  stroke-width: 1.5;
+}
+
+.logo__body {
+  fill: var(--color-on-navy-accent);
+}
+
+.logo__sub {
+  font-weight: 500;
+  color: var(--color-on-navy-muted);
+}
+
+.sidebar__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: inherit;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--color-navy-border);
+  background: var(--color-navy-raised);
+  color: var(--color-on-navy);
+  cursor: pointer;
+}
+
+.sidebar__panel {
+  display: none;
+  padding: var(--space-2) var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-navy-border);
+  max-height: calc(100dvh - var(--topbar-height));
+  overflow-y: auto;
+}
+
+.sidebar--open .sidebar__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__link,
+.sidebar__module {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.45rem var(--space-3);
+  border-radius: var(--radius-control);
+  color: var(--color-on-navy);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.sidebar__link:hover,
+.sidebar__module:hover {
+  background: var(--color-navy-raised);
+  color: var(--color-on-navy);
+}
+
+/* העמוד הנוכחי: רקע בהיר יותר ופס תכלת בצד */
+.sidebar__link.active,
+.sidebar__module.active {
+  background: var(--color-navy-raised);
+  color: var(--color-on-navy);
+  font-weight: 700;
+  box-shadow: inset -3px 0 0 var(--color-on-navy-accent);
+}
+
+.sidebar__link .icon {
+  color: var(--color-on-navy-muted);
+}
+
+.sidebar__link.active .icon {
+  color: var(--color-on-navy-accent);
+}
+
+.sidebar :focus-visible {
+  outline-color: var(--color-on-navy-accent);
+}
+
+.sidebar__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-inline: var(--space-3);
+  padding-bottom: var(--space-1);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-on-navy-muted);
+}
+
+.sidebar__count {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar__modules {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__module {
+  font-size: 0.95rem;
+}
+
+/* אריח צבעוני לכל מודול. הושלם: ירוק עם מסגרת בהירה */
+.sidebar__tile {
+  display: grid;
+  place-items: center;
+  inline-size: 1.6rem;
+  block-size: 1.6rem;
+  flex: none;
+  border-radius: var(--radius-control);
+  background: var(--tile);
+  color: var(--color-on-tone);
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar__tile--done {
+  background: var(--tone-done);
+  box-shadow: 0 0 0 2px var(--color-navy), 0 0 0 3px var(--tone-done-ring);
+}
+
+.sidebar__theme {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font: inherit;
+  font-weight: 500;
+  padding: 0.45rem var(--space-3);
+  border-radius: var(--radius-control);
+  border: 1px solid var(--color-navy-border);
+  background: transparent;
+  color: var(--color-on-navy);
+  cursor: pointer;
+}
+
+.sidebar__theme:hover {
+  background: var(--color-navy-raised);
+}
+
+.sidebar__theme[aria-pressed='true'] {
+  border-color: var(--color-on-navy-accent);
+}
+
+.sidebar__display {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sidebar__display .sidebar__heading {
+  margin-top: 0;
+}
+
+.sidebar__style {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 2px;
+  border-radius: var(--radius-control);
+  background: var(--color-navy-raised);
+}
+
+.sidebar__style button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.35rem;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--color-on-navy-muted);
+  cursor: pointer;
+}
+
+.sidebar__style button[aria-pressed='true'] {
+  background: var(--color-on-navy-accent);
+  color: var(--color-navy);
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;
+    border-inline-end: none;
+  }
+
+  .sidebar__bar {
+    height: auto;
+    padding: var(--space-5) var(--space-5) var(--space-4);
+  }
+
+  .sidebar__toggle {
+    display: none;
+  }
+
+  .sidebar__panel,
+  .sidebar--open .sidebar__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-5);
+    flex: 1;
+    max-height: none;
+    border-top: none;
+    padding: 0 var(--space-3) var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar__link,
+  .sidebar__module {
+    transition: none;
+  }
+}
+
+/* מסך צר מאוד: לוגו וכפתור קטנים יותר, כדי שהפס לא יחרוג לרוחב גם לפני שהגופן נטען */
+@media (max-width: 359px) {
+  .sidebar__bar {
+    padding-inline: var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .sidebar__toggle {
+    padding-inline: 0.5rem;
+  }
+}

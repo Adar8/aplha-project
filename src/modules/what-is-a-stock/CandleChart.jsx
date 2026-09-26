@@ -81,15 +81,14 @@ export default function CandleChart({ candles, current, price, compact = false }
               y={top}
               width={bodyW}
               height={Math.max(1.5, bottom - top)}
-              rx={1.5}
             />
           </g>
         )
       })}
 
-      <g className="candle-chart__last">
+      <g className={`candle-chart__last candle-chart__last--${liveUp ? 'up' : 'down'}`}>
         <line x1={PAD.left} x2={PAD.left + plotW} y1={y(price)} y2={y(price)} />
-        <rect x={width - PAD.right + 2} y={y(price) - 10} width={PAD.right - 4} height={20} rx={4} />
+        <rect x={width - PAD.right + 2} y={y(price) - 10} width={PAD.right - 4} height={20} rx={2} />
         <text x={width - PAD.right / 2} y={y(price)} dominantBaseline="middle" textAnchor="middle">
           {price.toFixed(2)}
         </text>

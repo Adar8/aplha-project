@@ -22,13 +22,13 @@ const PRESETS = [
 ]
 
 function describeMarket(pressure) {
-  if (activityLevel(pressure) < 0.08) return { text: 'כמעט אין מסחר — המחיר קפוא', tone: 'muted' }
+  if (activityLevel(pressure) < 0.08) return { text: 'כמעט אין מסחר, המחיר קפוא', tone: 'muted' }
   const i = imbalance(pressure)
-  if (i > 0.4) return { text: 'לחץ קנייה חזק — המחיר מטפס', tone: 'up' }
-  if (i > 0.1) return { text: 'יותר קונים ממוכרים — נטייה לעלייה', tone: 'up' }
-  if (i < -0.4) return { text: 'לחץ מכירה חזק — המחיר צונח', tone: 'down' }
-  if (i < -0.1) return { text: 'יותר מוכרים מקונים — נטייה לירידה', tone: 'down' }
-  return { text: 'שיווי משקל — המחיר מדשדש', tone: 'muted' }
+  if (i > 0.4) return { text: 'לחץ קנייה חזק, המחיר מטפס', tone: 'up' }
+  if (i > 0.1) return { text: 'יותר קונים ממוכרים: נטייה לעלייה', tone: 'up' }
+  if (i < -0.4) return { text: 'לחץ מכירה חזק, המחיר צונח', tone: 'down' }
+  if (i < -0.1) return { text: 'יותר מוכרים מקונים: נטייה לירידה', tone: 'down' }
+  return { text: 'שיווי משקל, המחיר מדשדש', tone: 'muted' }
 }
 
 function PressureSlider({ id, label, hint, value, onChange, tone }) {
@@ -92,8 +92,8 @@ export default function MarketPressureSimulator() {
 
   return (
     <div className="widget simulator">
-      <span className="widget__tag" dir="ltr">
-        SIMULATOR
+      <span className="widget__tag">
+        סימולטור
       </span>
       <h3 className="widget__title">לחץ קונים מול מוכרים</h3>
 
@@ -114,7 +114,7 @@ export default function MarketPressureSimulator() {
             <span style={{ inlineSize: `${candleProgress * 100}%` }} />
           </div>
           <p className="simulator__caption">
-            הנר הימני ביותר הוא הנר הנוכחי — הוא נבנה עכשיו ונסגר כל{' '}
+            הנר הימני ביותר הוא הנר הנוכחי. הוא נבנה עכשיו ונסגר כל{' '}
             <span className="mono">{(TICKS_PER_CANDLE * TICK_MS) / 1000}</span> שניות.
           </p>
         </div>
