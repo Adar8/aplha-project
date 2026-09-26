@@ -1,42 +1,86 @@
 /* טוקני עיצוב — המקור היחיד לצבעים, פונטים ומרווחים. אין להשתמש בערכי hex בקומפוננטות. */
+
+/* מצב בהיר (ברירת המחדל): טקסט כהה על רקע בהיר קריא יותר ומדויק יותר בקריאה ארוכה
+   (Piepenbrock et al., 2013; Nielsen Norman Group). הרקע אפור-ניטרלי ולא לבן מלא, כדי להפחית סנוור. */
 :root {
-  /* רקע: כחול כהה עמוק ואחיד (Midnight Blue). משדר אמון ולא מעייף את העין בקריאה ארוכה */
-  --color-bg: #0b132b;
-  --color-bg-deep: #070d20;
-  --color-surface: #1c2541;
-  --color-surface-raised: #243053;
-  --color-border: #34426a;
+  color-scheme: light;
 
-  /* טקסט: אוף-וייט לגוף הטקסט (פחות בוהק מלבן מלא), לבן מלא לכותרות */
-  --color-text: #f8f9fa;
-  --color-heading: #ffffff;
-  --color-text-muted: #a9b4cc;
+  /* משטחים: רקע בהיר בגוון כחלחל, פאנלים לבנים */
+  --color-bg: #eef2f9;
+  --color-bg-deep: #e3e9f3;      /* אזורים שקועים: שדות, ספר פקודות, תאי נתונים */
+  --color-surface: #ffffff;      /* פאנלים של כלים וסימולטורים */
+  --color-surface-raised: #f3f6fb;
+  --color-border: #d5dcea;
+  --color-border-strong: #b3bdd0;
 
-  /* הנעה לפעולה: ירוק עמוק. טקסט כהה עליו (ניגודיות 5.5:1; לבן עליו רק 3.3:1) */
-  --color-cta: #2a9d8f;
-  --color-cta-hover: #33b3a3;
-  --color-cta-text: #0b132b;
+  /* כחול נייבי: ניווט הצד, כותרות השיעורים והפאנל הראשי בלוח הבקרה */
+  --color-navy: #0f1e3d;
+  --color-navy-raised: #1a2b52;
+  --color-navy-border: #2a3d68;
+  --color-on-navy: #eef3ff;
+  --color-on-navy-muted: #b3c0dc;
+  --color-on-navy-accent: #86adff;
 
-  /* הדגשות */
-  --color-cyan: #00f0ff;   /* טורקיז חשמלי — פעולה ראשית, עלייה */
-  --color-pink: #ff6eb6;   /* ורוד בוהק — דגש, ירידה/אזהרה (בהיר מספיק לניגודיות AA גם על רקעים צבועים) */
-  --color-amber: #ffb020;  /* ענבר — משני. בלי גוונים סגולים באתר */
-  --color-lime: #b6ff3b;   /* ליים — הצלחה, תגיות, נתונים חיוביים */
+  /* צבעי משחק: אריחי מודולים, הישגים. כולם עומדים ב-4.5:1 מול טקסט לבן */
+  --tone-1: #2458d6;
+  --tone-2: #0b7a6c;
+  --tone-3: #a35f00;
+  --tone-4: #c2393a;
+  --tone-5: #177a43;
+  --tone-6: #0f6fa8;
+  --tone-done: #177a43;
+  --tone-done-ring: #4fd49a;
+  --color-on-tone: #ffffff;
 
-  /* משמעות בנתוני שוק */
-  --color-up: var(--color-cyan);
-  --color-down: var(--color-pink);
+  --shadow-card: 0 1px 2px rgb(15 30 61 / 0.06), 0 2px 8px rgb(15 30 61 / 0.06);
+  --shadow-lift: 0 4px 10px rgb(15 30 61 / 0.1), 0 12px 28px rgb(15 30 61 / 0.1);
 
-  /* זוהר: מבוטל. ממשק נקי, בלי אפקטים זרחניים שמסיחים מהתוכן */
+  /* טקסט */
+  --color-text: #1c1f24;
+  --color-heading: #0b0d10;
+  --color-text-muted: #525c6e;
+
+  /* צבע ראשי: כחול. כפתור ראשי, קישורים, התקדמות, בחירה */
+  --color-accent: #2458d6;
+  --color-accent-hover: #1d49b5;
+  --color-accent-soft: #e7eefc;
+  --color-cta: var(--color-accent);
+  --color-cta-hover: var(--color-accent-hover);
+  --color-cta-text: #ffffff;
+
+  /* שוק: ירוק לעלייה, אדום לירידה. גוונים כהים מספיק לטקסט (AA) */
+  --color-up: #086b4a;
+  --color-down: #b01e33;
+  --color-up-soft: #e3f3ec;
+  --color-down-soft: #fbe8eb;
+
+  /* נרות ועמודות בגרפים, בסגנון פלטפורמות מסחר */
+  --chart-up: #089981;
+  --chart-down: #f23645;
+  --chart-grid: #e4e9f2;
+  --chart-axis: #525c6e;
+
+  /* הדגשות: מידע (כחול) ואזהרה (ענבר) */
+  --color-info: var(--color-accent);
+  --color-info-soft: #eef3fd;
+  --color-warning: #8a5100;
+  --color-warning-soft: #fdf4e3;
+
+  /* שמות ישנים, ממופים לפלטה החדשה (בשימוש במודולים שעוד לא עוצבו מחדש) */
+  --color-cyan: var(--color-accent);
+  --color-pink: var(--color-down);
+  --color-amber: var(--color-warning);
+  --color-lime: var(--color-up);
+
   --glow-cyan: none;
   --glow-pink: none;
   --glow-amber: none;
   --glow-lime: none;
 
-  /* פונטים */
-  --font-heading: 'Rubik', system-ui, sans-serif;
-  --font-body: 'Heebo', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* פונטים: גופן אחד לכל האתר. מספרים בספרות ברוחב קבוע (tabular-nums), לא בגופן מונו */
+  --font-heading: 'Assistant Variable', 'Assistant', system-ui, sans-serif;
+  --font-body: 'Assistant Variable', 'Assistant', system-ui, sans-serif;
+  --font-mono: 'Assistant Variable', 'Assistant', system-ui, sans-serif;
 
   /* מרווחים (סקאלה של 4px) */
   --space-1: 0.25rem;
@@ -47,11 +91,72 @@
   --space-6: 2rem;
   --space-8: 4rem;
 
-  /* פינות */
+  /* פינות: קטנות וחדות. בלי כפתורים מעוגלים */
+  --radius-control: 4px;
   --radius-sm: 4px;
-  --radius-lg: 8px;
-  /* כפתורים, צ'יפים, שדות ותגיות: פינות כמעט ישרות. בלי כפתורים מעוגלים */
-  --radius-control: 2px;
+  --radius-lg: 6px;
 
-  --container-width: 1120px;
+  --sidebar-width: 256px;
+  --topbar-height: 56px;          /* הפס העליון במסך צר. בדסקטופ יש ניווט צד במקומו */
+  --container-width: 1040px;
+  --reading-width: 42rem;
+
+  --transition-fast: 120ms ease;
+  --transition-lift: 180ms ease;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --topbar-height: 0px;
+  }
+}
+
+/* מצב כהה (לבחירה): גרפיט ניטרלי, בלי גוון כחול */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* מצב כהה: נייבי עמוק */
+  --color-bg: #0b1428;
+  --color-bg-deep: #081021;
+  --color-surface: #121e38;
+  --color-surface-raised: #1a2848;
+  --color-border: #26365a;
+  --color-border-strong: #3a4d78;
+
+  --color-navy: #081021;
+  --color-navy-raised: #15223f;
+  --color-navy-border: #22335a;
+
+  --color-text: #e4e9f4;
+  --color-heading: #ffffff;
+  --color-text-muted: #a3b0cb;
+
+  --color-accent: #7aa5ff;
+  --color-accent-hover: #9cbcff;
+  --color-accent-soft: #1b2c52;
+  --color-cta-text: #081021;
+
+  --color-up: #34c98f;
+  --color-down: #ff7584;
+  --color-up-soft: #10302b;
+  --color-down-soft: #3a1b27;
+
+  --chart-up: #089981;
+  --chart-down: #f23645;
+  --chart-grid: #1f2d4d;
+  --chart-axis: #a3b0cb;
+
+  --color-info-soft: #16264a;
+  --color-warning: #e8ac45;
+  --color-warning-soft: #2e2716;
+
+  --shadow-card: none;
+  --shadow-lift: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+/* סגנון ״רגוע״: טקסט גדול יותר, בלי תנועה ובלי הרמת כרטיסים. ברירת המחדל לגילאי 50 ומעלה */
+:root[data-style='calm'] {
+  font-size: 106.25%;
+  --transition-lift: 0s;
+  --shadow-lift: var(--shadow-card);
 }

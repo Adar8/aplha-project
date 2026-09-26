@@ -52,3 +52,44 @@ export function savePortfolio(portfolio) {
   const empty = !portfolio || (!portfolio.transactions?.length && !Object.keys(portfolio.prices ?? {}).length)
   saveObject(PORTFOLIO_KEY, empty ? null : portfolio)
 }
+
+const THEME_KEY = 'alphatrader-learn:theme:v1'
+
+/** מצב התצוגה שהמשתמש בחר ('dark'). null = ברירת המחדל הבהירה */
+export function loadTheme() {
+  try {
+    return window.localStorage.getItem(THEME_KEY) === 'dark' ? 'dark' : null
+  } catch {
+    return null
+  }
+}
+
+export function saveTheme(theme) {
+  try {
+    if (theme === 'dark') window.localStorage.setItem(THEME_KEY, 'dark')
+    else window.localStorage.removeItem(THEME_KEY)
+  } catch {
+    // אחסון לא זמין — הבחירה תקפה עד רענון הדף
+  }
+}
+
+const STYLE_KEY = 'alphatrader-learn:style:v1'
+
+/** סגנון תצוגה שנבחר ידנית: 'vivid' | 'calm', או null (לפי הגיל בשאלון) */
+export function loadStyle() {
+  try {
+    const value = window.localStorage.getItem(STYLE_KEY)
+    return value === 'vivid' || value === 'calm' ? value : null
+  } catch {
+    return null
+  }
+}
+
+export function saveStyle(style) {
+  try {
+    if (style) window.localStorage.setItem(STYLE_KEY, style)
+    else window.localStorage.removeItem(STYLE_KEY)
+  } catch {
+    // אחסון לא זמין — הבחירה תקפה עד רענון הדף
+  }
+}

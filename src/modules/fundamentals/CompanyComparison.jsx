@@ -91,8 +91,8 @@ export default function CompanyComparison() {
 
   return (
     <div className="widget cmp">
-      <span className="widget__tag" dir="ltr">
-        SIMULATOR
+      <span className="widget__tag">
+        סימולטור
       </span>
       <h3 className="widget__title">בלש המכפילים: ארבע חברות, ארבעה סיפורים</h3>
 

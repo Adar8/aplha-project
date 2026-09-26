@@ -18,8 +18,8 @@ export const SITE = {
     email: null,
   },
   // תאריך העדכון האחרון של המסמכים המשפטיים ושל בדיקת הנגישות (YYYY-MM-DD)
-  policiesUpdatedAt: '2026-09-24',
-  accessibilityCheckedAt: '2026-09-24',
+  policiesUpdatedAt: '2026-09-26',
+  accessibilityCheckedAt: '2026-09-26',
 }
 
 /** כל השדות שעוד חסרים, לבדיקה לפני עלייה לאוויר */

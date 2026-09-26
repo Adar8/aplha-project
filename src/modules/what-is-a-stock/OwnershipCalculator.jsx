@@ -16,8 +16,8 @@ export default function OwnershipCalculator() {
 
   return (
     <div className="widget ownership">
-      <span className="widget__tag" dir="ltr">
-        INTERACTIVE
+      <span className="widget__tag">
+        תרגול
       </span>
       <h3 className="widget__title">כמה מהחברה שלכם?</h3>
       <p className="ownership__setup">

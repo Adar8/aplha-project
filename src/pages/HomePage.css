@@ -1,0 +1,478 @@
+/* לוח הבקרה */
+.dash {
+  padding-block: var(--space-5) var(--space-6);
+}
+
+/* ---------- פאנל ראשי בנייבי ---------- */
+.dash-hero {
+  position: relative;
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+@media (min-width: 900px) {
+  .dash-hero {
+    grid-template-columns: minmax(0, 1.6fr) minmax(15rem, 1fr);
+    padding: var(--space-6);
+  }
+}
+
+.dash-hero__pattern {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  block-size: 100%;
+  inline-size: min(60%, 26rem);
+  z-index: -1;
+  opacity: 0.18;
+}
+
+.dash-hero__pattern line {
+  stroke: var(--color-on-navy);
+  stroke-width: 1.5;
+}
+
+.dash-hero__pattern .is-up rect {
+  fill: var(--chart-up);
+}
+
+.dash-hero__pattern .is-down rect {
+  fill: var(--chart-down);
+}
+
+.dash-hero__title {
+  font-size: clamp(1.9rem, 3.8vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-on-navy);
+  margin-bottom: var(--space-2);
+}
+
+.dash-hero__lead {
+  max-width: 38rem;
+  color: var(--color-on-navy-muted);
+}
+
+.dash-hero__next {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-navy-border);
+}
+
+.dash-hero__label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-on-navy-muted);
+  margin-bottom: var(--space-2);
+}
+
+.dash-hero__next-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+  font-weight: 800;
+  color: var(--color-on-navy);
+  line-height: 1.3;
+}
+
+.dash-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.dash-hero__meta {
+  font-size: 0.95rem;
+  color: var(--color-on-navy-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-hero__stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-navy-raised) 88%, transparent);
+  align-self: end;
+}
+
+.dash-hero__big {
+  color: var(--color-on-navy-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-hero__big span {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-on-navy);
+}
+
+.dash-hero :focus-visible {
+  outline-color: var(--color-on-navy-accent);
+}
+
+/* התקדמות בשלבים: משבצת לכל מודול. ירוק = הושלם, תכלת = הבא */
+.dash-steps {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  margin-block: var(--space-1) var(--space-2);
+}
+
+.dash-steps__step {
+  block-size: 10px;
+  border-radius: 2px;
+  background: var(--color-navy-border);
+}
+
+.dash-steps__step.is-done {
+  background: var(--tone-done-ring);
+  animation: dash-step-in 360ms ease both;
+  animation-delay: calc(var(--i) * 70ms + 150ms);
+}
+
+.dash-steps__step.is-next {
+  background: var(--color-on-navy-accent);
+  opacity: 0.55;
+}
+
+@keyframes dash-step-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* אריח מספר המודול, בצבע של המודול */
+.dash-tile {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  flex: none;
+  border-radius: var(--radius-sm);
+  background: var(--tile);
+  color: var(--color-on-tone);
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- כותרות סעיפים ---------- */
+.dash__section {
+  margin-block: var(--space-6);
+}
+
+.dash__section-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+}
+
+.dash__section-count {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- כרטיסי מודולים ---------- */
+.dash-modules {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-4);
+}
+
+.dash-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--tile);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--transition-lift),
+    box-shadow var(--transition-lift);
+  animation: dash-rise 320ms ease both;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+.dash-card:hover,
+.dash-card:focus-within {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+@keyframes dash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.dash-card--next {
+  border-color: var(--color-accent);
+  border-top-color: var(--tile);
+  box-shadow:
+    0 0 0 1px var(--color-accent),
+    var(--shadow-card);
+}
+
+.dash-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.dash-card__status {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-control);
+  background: var(--color-bg-deep);
+}
+
+.dash-card__status--done {
+  color: var(--color-up);
+  background: var(--color-up-soft);
+}
+
+.dash-card__status--next {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.dash-card__title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+/* כל הכרטיס לחיץ: הקישור נמתח על פניו */
+.dash-card__title::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+}
+
+.dash-card__title:focus-visible {
+  outline: none;
+}
+
+.dash-card__title:focus-visible::after {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.dash-card__summary {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.dash-card__time {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- הישגים ---------- */
+.dash-badges {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  gap: var(--space-3);
+}
+
+.dash-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border-strong);
+}
+
+.dash-badge--earned {
+  border-style: solid;
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+/* סימן ההישג: מעוין. מלא בצבע כשהושג, קו מתאר כשלא */
+.dash-badge__mark {
+  position: relative;
+  inline-size: 1.6rem;
+  block-size: 1.6rem;
+  margin: var(--space-1) var(--space-1) var(--space-2);
+  transform: rotate(45deg);
+  border: 2px solid var(--color-border-strong);
+}
+
+.dash-badge--earned .dash-badge__mark {
+  border-color: var(--tile);
+  background: var(--tile);
+}
+
+.dash-badge--earned .dash-badge__mark::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  background: var(--color-surface);
+}
+
+.dash-badge__title {
+  font-weight: 800;
+  color: var(--color-heading);
+}
+
+.dash-badge:not(.dash-badge--earned) .dash-badge__title {
+  color: var(--color-text-muted);
+}
+
+.dash-badge__rule {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- פאנלים: תיק, מילון, מסלול ---------- */
+.dash__tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-4);
+}
+
+.dash-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.dash-panel .btn {
+  margin-top: auto;
+}
+
+.dash-panel__label {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-heading);
+}
+
+.dash-panel__text,
+.dash-panel__note {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.dash-panel__note {
+  margin-bottom: var(--space-2);
+}
+
+.dash-stat {
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-stat__value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  line-height: 1.1;
+}
+
+.dash-facts {
+  display: grid;
+  gap: var(--space-2);
+  inline-size: 100%;
+  margin-bottom: var(--space-2);
+}
+
+.dash-facts > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dash-facts dt {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.dash-facts dd {
+  font-weight: 700;
+  color: var(--color-heading);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.dash-facts dd.is-up {
+  color: var(--color-up);
+}
+
+.dash-facts dd.is-down {
+  color: var(--color-down);
+}
+
+/* סגנון רגוע והפחתת תנועה: בלי אנימציות כניסה ובלי הרמה */
+:root[data-style='calm'] .dash-card,
+:root[data-style='calm'] .dash-steps__step {
+  animation: none;
+}
+
+:root[data-style='calm'] .dash-card:hover,
+:root[data-style='calm'] .dash-card:focus-within {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-card,
+  .dash-steps__step {
+    animation: none;
+    transition: none;
+  }
+
+  .dash-card:hover,
+  .dash-card:focus-within {
+    transform: none;
+  }
+}
+
+:root[data-theme='dark'] .dash-hero {
+  border: 1px solid var(--color-navy-border);
+}

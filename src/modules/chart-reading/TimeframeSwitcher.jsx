@@ -11,8 +11,8 @@ export default function TimeframeSwitcher() {
 
   return (
     <div className="widget tf">
-      <span className="widget__tag" dir="ltr">
-        INTERACTIVE
+      <span className="widget__tag">
+        תרגול
       </span>
       <h3 className="widget__title">אותה מניה, שלושה טווחי זמן</h3>
 

@@ -63,8 +63,8 @@ export default function PositionCalculator() {
 
   return (
     <div className="widget position">
-      <span className="widget__tag" dir="ltr">
-        CALCULATOR
+      <span className="widget__tag">
+        מחשבון
       </span>
       <h3 className="widget__title">מחשבון גודל פוזיציה</h3>
 

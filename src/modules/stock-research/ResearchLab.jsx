@@ -130,8 +130,8 @@ export default function ResearchLab() {
 
   return (
     <div className="widget lab">
-      <span className="widget__tag" dir="ltr">
-        RESEARCH LAB
+      <span className="widget__tag">
+        מעבדה
       </span>
       <h3 className="widget__title">
         חוקרים את {COMPANY.name} <bdi className="mono lab__ticker">({COMPANY.ticker})</bdi>

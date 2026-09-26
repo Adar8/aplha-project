@@ -7,9 +7,13 @@ import CompleteButton from './CompleteButton.jsx'
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 import './ModuleLayout.css'
 
+// ״ברמה בסיסית״: שם התואר מתאים ל״רמה״ (נקבה)
+const LEVEL_FEMININE = { basic: 'בסיסית', deep: 'מעמיקה' }
+
 export default function ModuleLayout({ module, intro, children }) {
   const { id, number, title, accent, why } = module
-  const next = modules.find((m) => m.kind === 'module' && m.number === number + 1)
+  const lessons = modules.filter((m) => m.kind === 'module')
+  const next = lessons.find((m) => m.number === number + 1)
   const { profile, answers, setModuleLevel } = useProfile()
   useDocumentTitle(title)
   const level = levelFor(profile, id)
@@ -18,20 +22,18 @@ export default function ModuleLayout({ module, intro, children }) {
 
   return (
     <LevelContext.Provider value={level}>
-      <article className={`lesson lesson--${accent}`}>
+      <article
+        className={`lesson lesson--${accent}`}
+        style={{ '--lesson-tone': `var(--tone-${((number - 1) % 6) + 1})` }}
+      >
         <nav className="lesson__breadcrumb" aria-label="ניווט">
-          <Link to="/">→ כל המודולים</Link>
+          <Link to="/">לוח הבקרה</Link>
         </nav>
 
         <header className="lesson__header">
           <p className="lesson__eyebrow">
-            <span dir="ltr">MODULE {String(number).padStart(2, '0')}</span>
-            {minutes && (
-              <span>
-                {' '}
-                · כ-{minutes} דק׳ ברמה {LEVELS.find((l) => l.id === level).label}
-              </span>
-            )}
+            מודול {number} מתוך {lessons.length}
+            {minutes && `, כ-${minutes} דקות ברמה ${LEVEL_FEMININE[level]}`}
           </p>
           <h1 className="lesson__title">{title}</h1>
           {intro && <p className="lesson__intro">{intro}</p>}
@@ -54,8 +56,7 @@ export default function ModuleLayout({ module, intro, children }) {
               ))}
             </div>
             <p className="level-switch__hint">
-              {LEVELS.find((l) => l.id === level).hint}. אפשר להחליף בכל רגע, והרמה השנייה תמיד זמינה בתוך
-              השיעור.
+              {LEVELS.find((l) => l.id === level).hint}. אפשר להחליף בכל רגע, והרמה השנייה תמיד זמינה בתוך השיעור.
             </p>
           </div>
 
@@ -72,11 +73,11 @@ export default function ModuleLayout({ module, intro, children }) {
           <CompleteButton moduleId={id} />
           <div className="lesson__nav">
             <Link to="/" className="lesson__back">
-              → חזרה לכל המודולים
+              חזרה ללוח הבקרה
             </Link>
             {next?.status === 'available' && (
               <Link to={next.path} className="lesson__next">
-                המודול הבא: {next.title} ←
+                המודול הבא: {next.title}
               </Link>
             )}
           </div>

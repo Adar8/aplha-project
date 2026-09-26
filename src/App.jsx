@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router'
 import Footer from './components/Footer.jsx'
-import Header from './components/Header.jsx'
+import Sidebar from './components/Sidebar.jsx'
 import HomePage from './pages/HomePage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import WhatIsAStock from './modules/what-is-a-stock/WhatIsAStock.jsx'
@@ -41,26 +41,30 @@ export default function App() {
         דלג לתוכן הראשי
       </a>
       <ScrollToTop />
-      <Header />
-      <main id="main" className="container" tabIndex={-1}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/modules/what-is-a-stock" element={<WhatIsAStock />} />
-          <Route path="/modules/order-types" element={<OrderTypes />} />
-          <Route path="/modules/chart-reading" element={<ChartReading />} />
-          <Route path="/modules/risk-management" element={<RiskManagement />} />
-          <Route path="/modules/fundamentals" element={<Fundamentals />} />
-          <Route path="/modules/stock-research" element={<StockResearch />} />
-          <Route path="/glossary" element={<GlossaryPage />} />
-          <Route path="/start" element={<OnboardingPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/accessibility" element={<AccessibilityPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
+      <div className="app">
+        <Sidebar />
+        <div className="app__content">
+          <main id="main" className="container" tabIndex={-1}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/modules/what-is-a-stock" element={<WhatIsAStock />} />
+              <Route path="/modules/order-types" element={<OrderTypes />} />
+              <Route path="/modules/chart-reading" element={<ChartReading />} />
+              <Route path="/modules/risk-management" element={<RiskManagement />} />
+              <Route path="/modules/fundamentals" element={<Fundamentals />} />
+              <Route path="/modules/stock-research" element={<StockResearch />} />
+              <Route path="/glossary" element={<GlossaryPage />} />
+              <Route path="/start" element={<OnboardingPage />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/accessibility" element={<AccessibilityPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </div>
     </>
   )
 }

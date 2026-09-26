@@ -11,8 +11,8 @@ export default function TrendQuiz() {
 
   return (
     <div className="widget quiz">
-      <span className="widget__tag" dir="ltr">
-        EXERCISE
+      <span className="widget__tag">
+        תרגיל
       </span>
       <h3 className="widget__title">זהו את המגמה</h3>
 
