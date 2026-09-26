@@ -4,23 +4,64 @@ import { Deep, Simple } from '../../profile/Depth.jsx'
 import ModuleLayout from '../../components/ModuleLayout.jsx'
 import Term from '../../components/Term.jsx'
 import { getModule } from '../../data/modules.js'
+import Quiz from '../../components/Quiz.jsx'
 import EquitySimulator from './EquitySimulator.jsx'
 import PositionCalculator from './PositionCalculator.jsx'
 import RecoveryCalculator from './RecoveryCalculator.jsx'
+import TradeRunSimulator from './TradeRunSimulator.jsx'
 import './RiskManagement.css'
 
 const lesson = getModule('risk-management')
 
-function SectionTitle({ num, id, children }) {
+function SectionTitle({ id, children }) {
   return (
     <h2>
-      <span className="section-num" dir="ltr">
-        {num}
-      </span>
       <span id={id}>{children}</span>
     </h2>
   )
 }
+
+const QUIZ = [
+  {
+    id: 'streak',
+    prompt: 'תיק של ₪100,000, סיכון של 10% מהתיק בכל עסקה, ורצף של 5 הפסדים. כמה נשאר בתיק בערך?',
+    options: [
+      { text: '₪50,000', feedback: 'זה היה נכון אם כל הפסד היה ₪10,000 קבועים. בפועל כל הפסד הוא 10% ממה שנשאר, אז יוצא קצת יותר: כ-₪59,000.' },
+      {
+        text: '₪59,000',
+        correct: true,
+        feedback: '0.9 בחזקת 5 זה כ-0.59. התיק איבד כ-41%, וכדי לחזור לנקודת ההתחלה צריך עכשיו רווח של כ-69%.',
+      },
+      { text: '₪90,000', feedback: 'זה הפסד של 10% בסך הכול, כמו אחרי עסקה אחת. אחרי חמישה הפסדים ברצף נשארים כ-₪59,000.' },
+    ],
+  },
+  {
+    id: 'size',
+    prompt: 'תיק של ₪50,000, סיכון של 1% לעסקה, כניסה ב-₪40 וסטופ ב-₪38. כמה מניות קונים לפי כלל הסיכון?',
+    options: [
+      { text: '12 מניות', feedback: 'זה ₪500 חלקי ₪40, כלומר חישוב לפי מחיר המניה. הסיכון נמדד לפי המרחק לסטופ: ₪2 למניה.' },
+      {
+        text: '250 מניות',
+        correct: true,
+        feedback: '1% מ-₪50,000 הוא ₪500. המרחק לסטופ הוא ₪2 למניה, ו-₪500 חלקי ₪2 הם 250 מניות. הפוזיציה עצמה שווה ₪10,000, אבל ההפסד בסטופ הוא ₪500.',
+      },
+      { text: '1,250 מניות', feedback: 'זה כל התיק חלקי ₪40. הקנייה הזו מסכנת ₪2,500 עד הסטופ, פי 5 מהכלל של 1%.' },
+    ],
+  },
+  {
+    id: 'winrate',
+    prompt: 'לשיטה יש 60% הצלחה. מה נכון לגבי סיכון של 10% מהתיק בכל עסקה?',
+    options: [
+      { text: 'עם 60% הצלחה אין סכנה אמיתית, כי רוב העסקאות מרוויחות', feedback: 'אחוז הצלחה לא מונע רצפים. גם ב-60% הצלחה, רצף של 4 הפסדים לפחות קורה ביותר ממחצית הסדרות של 50 עסקאות, ובסיכון של 10% רצף כזה מוריד כ-34% מהתיק.' },
+      {
+        text: 'רצף הפסדים רגיל יכול להוריד את התיק בעשרות אחוזים',
+        correct: true,
+        feedback: 'נכון. בסימולטור, עם 60% הצלחה ויחס 1:1, ברוב הריצות התיק יורד בשלב כלשהו ביותר מ-30% מהשיא. בסיכון של 1% זה כמעט לא קורה.',
+      },
+      { text: 'אפשר לתקן את זה בהגדלת הסיכון אחרי כל הפסד', feedback: 'הגדלת הסיכון אחרי הפסד מגדילה את הנזק של הרצף הבא. זו אחת הדרכים המהירות לרוקן תיק.' },
+    ],
+  },
+]
 
 export default function RiskManagement() {
   return (
@@ -28,9 +69,8 @@ export default function RiskManagement() {
       module={lesson}
       intro="אף אחד לא צודק בכל עסקה. מה שמבדיל סוחר ששורד מסוחר שנמחק הוא לא כמה הוא צודק, אלא כמה הוא מפסיד כשהוא טועה. במודול הזה נבנה את הכלים לזה: סטופ, גודל פוזיציה ויחס סיכון-סיכוי."
     >
-      {/* ---------- 4.1 ---------- */}
       <section aria-labelledby="asymmetry">
-        <SectionTitle num="4.1" id="asymmetry">
+        <SectionTitle id="asymmetry">
           החשבון הלא-הוגן של הפסדים
         </SectionTitle>
         <p>
@@ -53,10 +93,8 @@ export default function RiskManagement() {
           <p>לכן התשואה הממוצעת הפשוטה תמיד גבוהה מהתשואה שמקבלים בפועל לאורך זמן, והפער גדל ככל שהתנודות גדולות יותר.</p>
         </Deep>
       </section>
-
-      {/* ---------- 4.2 ---------- */}
       <section aria-labelledby="stop">
-        <SectionTitle num="4.2" id="stop">
+        <SectionTitle id="stop">
           סטופ: להחליט מראש איפה טעיתם
         </SectionTitle>
         <p>
@@ -98,10 +136,48 @@ export default function RiskManagement() {
           <p>יש סוחרים שמודדים את התנודה ״הרגילה״ של המניה בעזרת <Term he="טווח אמיתי ממוצע" en="ATR" />, ומציבים את הסטופ במרחק של כמה ATR, כדי שתנודה רגילה לא תוציא אותם.</p>
         </Deep>
       </section>
+      <section aria-labelledby="streaks">
+        <SectionTitle id="streaks">כמה אחוז מסכנים, ולמה רצף הפסדים מסוכן</SectionTitle>
+        <Simple>
+          <p>
+            לפני כל עסקה כדאי לדעת כמה מהתיק תפסידו אם הסטופ ייפגע. זה <Term he="הסיכון לעסקה" en="Risk per Trade" />, והוא
+            נמדד באחוזים מהתיק. סוחרים רבים משתמשים ב-<bdi className="mono">1%</bdi> עד <bdi className="mono">2%</bdi>.
+          </p>
+          <p>
+            הסיבה היא רצפים. גם שיטה שמצליחה ב-55% מהעסקאות תפגוש רצף של 5 הפסדים ויותר בערך ב-4 מכל 10 סדרות של 50
+            עסקאות. בסיכון של <bdi className="mono">1%</bdi> רצף כזה מוריד כ-5% מהתיק. בסיכון של{' '}
+            <bdi className="mono">10%</bdi> הוא מוריד כ-41%, ואז צריך רווח של כ-69% רק כדי לחזור לנקודת ההתחלה.
+          </p>
+        </Simple>
+        <Deep>
+          <p>
+            ההפסד ברצף מצטבר בכפל ולא בחיבור: אחרי n הפסדים של r נשאר (1 − r) בחזקת n. ב-
+            <bdi className="mono">10%</bdi> ו-5 הפסדים: <bdi className="mono">0.9⁵ ≈ 0.59</bdi>. ההסתברות לרצף ארוך גדלה עם
+            מספר העסקאות, לכן מי שסוחר הרבה צריך להניח שרצפים כאלה יקרו לו.
+          </p>
+          <p>
+            בנוסף, אחוז ההצלחה שמודדים מהעבר הוא הערכה בלבד. סיכון קטן לעסקה משאיר מקום לטעות גם בהערכה הזו.
+          </p>
+        </Deep>
 
-      {/* ---------- 4.3 ---------- */}
+        <TradeRunSimulator />
+
+        <h3>נסו בעצמכם</h3>
+        <ul className="bullets">
+          <li>
+            לחצו כמה פעמים על ״הרץ 50 עסקאות״ עם סיכון של <bdi className="mono">10%</bdi>. הקו המקווקו האפור הוא אותו רצף
+            בדיוק עם סיכון של <bdi className="mono">1%</bdi>.
+          </li>
+          <li>
+            העלו את אחוז ההצלחה ל-<bdi className="mono">60%</bdi> והשאירו סיכון של <bdi className="mono">10%</bdi>. הסתכלו
+            בשורה התחתונה כמה ריצות עדיין יורדות ביותר מ-30%.
+          </li>
+          <li>הורידו את הסיכון ל-1% או 2% בלי לשנות את שאר ההגדרות, ובדקו שוב את השורה התחתונה.</li>
+        </ul>
+      </section>
+
       <section aria-labelledby="sizing">
-        <SectionTitle num="4.3" id="sizing">
+        <SectionTitle id="sizing">
           גודל פוזיציה: כמה לקנות
         </SectionTitle>
         <p>
@@ -129,10 +205,8 @@ export default function RiskManagement() {
           <p>השני הוא מתאם: חמש עסקאות של 1R בחמש חברות שבבים שונות עלולות ליפול יחד, ואז ההפסד הוא 5R ביום אחד. ומגבלה מעשית: כשהסטופ צמוד מאוד, הנוסחה יכולה ״לבקש״ יותר מניות ממה שיש בחשבון.</p>
         </Deep>
       </section>
-
-      {/* ---------- 4.4 ---------- */}
       <section aria-labelledby="rr">
-        <SectionTitle num="4.4" id="rr">
+        <SectionTitle id="rr">
           יחס סיכון-סיכוי: למה אפשר לטעות רוב הזמן ועדיין להרוויח
         </SectionTitle>
         <p>
@@ -165,10 +239,8 @@ export default function RiskManagement() {
           <p>ותוחלת היא ממוצע ארוך טווח. עם <bdi className="mono">45%</bdi> הצלחה, הסיכוי לרצף של 8 כישלונות לפחות בתוך 100 עסקאות הוא בערך אחד לשלושה.</p>
         </Deep>
       </section>
-
-      {/* ---------- 4.5 ---------- */}
       <section aria-labelledby="sim">
-        <SectionTitle num="4.5" id="sim">
+        <SectionTitle id="sim">
           סימולטור: אותו מזל, סיכון אחר
         </SectionTitle>
         <p>
@@ -225,9 +297,14 @@ export default function RiskManagement() {
         </Deep>
       </section>
 
+      <section aria-labelledby="quiz">
+        <SectionTitle id="quiz">בוחן: סיכון וגודל פוזיציה</SectionTitle>
+        <Quiz questions={QUIZ} />
+      </section>
+
       {/* ---------- סיכום ---------- */}
       <section aria-labelledby="summary">
-        <SectionTitle num="4.6" id="summary">
+        <SectionTitle id="summary">
           מה לוקחים מהמודול
         </SectionTitle>
         <ul className="takeaways">

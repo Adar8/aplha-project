@@ -1,0 +1,165 @@
+/* ---------- מחשבון מס ---------- */
+.tax-calc__hint,
+.tax-calc__caveat {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.tax-calc__hint {
+  margin-bottom: var(--space-4);
+}
+
+.tax-calc__caveat {
+  margin-top: var(--space-4);
+}
+
+.tax-calc__fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+  gap: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.tax-calc__field {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.tax-calc__field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tax-calc__field input {
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg-deep);
+  color: var(--color-heading);
+  text-align: right;
+}
+
+.tax-calc__field input:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.tax-calc__error {
+  color: var(--color-down);
+  font-weight: 600;
+}
+
+.tax-calc__results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-3);
+}
+
+.tax-calc__results > div {
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+}
+
+.tax-calc__results dt {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.tax-calc__results dd {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.tax-calc__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+}
+
+.tax-calc__bottom strong {
+  font-size: 1.2rem;
+  color: var(--color-heading);
+}
+
+.tax-calc__bottom strong.is-up {
+  color: var(--color-up);
+}
+
+.tax-calc__bottom strong.is-down {
+  color: var(--color-down);
+}
+
+.tax-calc__split {
+  margin-top: var(--space-5);
+}
+
+.tax-calc__split figcaption {
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.tax-calc__bar {
+  display: flex;
+  gap: 2px;
+  block-size: 14px;
+  border-radius: var(--radius-control);
+  overflow: hidden;
+}
+
+.tax-calc__seg {
+  display: block;
+  min-inline-size: 3px;
+}
+
+.tax-calc__seg--cost {
+  background: var(--color-border-strong);
+}
+
+.tax-calc__seg--fees {
+  background: var(--color-warning);
+}
+
+.tax-calc__seg--tax {
+  background: var(--color-down);
+}
+
+.tax-calc__seg--net {
+  background: var(--color-up);
+}
+
+.tax-calc__legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-3);
+  font-size: 0.9rem;
+}
+
+.tax-calc__legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tax-calc__swatch {
+  inline-size: 12px;
+  block-size: 12px;
+  border-radius: 2px;
+}
+
+.tax-calc__note {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-inline-start: 3px solid var(--color-accent);
+  background: var(--color-surface-raised);
+}

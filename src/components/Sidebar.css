@@ -168,6 +168,7 @@
 
 /* אריח צבעוני לכל מודול. הושלם: ירוק עם מסגרת בהירה */
 .sidebar__tile {
+  font-family: var(--font-mono);
   display: grid;
   place-items: center;
   inline-size: 1.6rem;

@@ -13,7 +13,7 @@ html {
 body {
   min-height: 100vh;
   font-family: var(--font-body);
-  font-size: 1.0625rem; /* 17px: Assistant קטן יחסית, והטקסט נקרא הרבה */
+  font-size: 1rem;
   line-height: 1.7;
   color: var(--color-text);
   background: var(--color-bg);

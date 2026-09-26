@@ -1368,6 +1368,7 @@ export const MORE_TERMS = [
     definition:
       'מס על הרווח ממכירת נכס, כמו מניה. ליחיד בישראל השיעור על רווח ריאלי מניירות ערך הוא 25%, ולבעל מניות מהותי 30%. משלמים רק כשמוכרים, לא על רווח ״על הנייר״. הכללים מפורטים ומשתנים, ולפרטים המלאים יש לפנות לרשות המסים או ליועץ מס.',
     related: ['real-capital-gain', 'loss-offset', 'withholding-tax'],
+    module: 'taxes-israel',
   },
   {
     id: 'real-capital-gain',
@@ -1378,6 +1379,7 @@ export const MORE_TERMS = [
     definition:
       'החלק מהרווח שנשאר אחרי ניכוי ההשפעה של האינפלציה. על החלק שנובע מאינפלציה (״הסכום האינפלציוני״) לא משלמים מס בישראל. יש כללים מיוחדים לניירות ערך במטבע חוץ.',
     related: ['capital-gains-tax', 'inflation'],
+    module: 'taxes-israel',
   },
   {
     id: 'dividend-tax',
@@ -1397,6 +1399,7 @@ export const MORE_TERMS = [
     definition:
       'מס שהבנק או הברוקר מנכים ישירות מהרווח או מהדיבידנד ומעבירים לרשויות. בנקים וברוקרים ישראליים מנכים מס על רווחי הון. ברוקר בחו״ל בדרך כלל לא מנכה מס ישראלי, ואז הדיווח והתשלום באחריות המשקיע.',
     related: ['capital-gains-tax', 'form-867', 'annual-tax-return'],
+    module: 'taxes-israel',
   },
   {
     id: 'loss-offset',
@@ -1407,6 +1410,7 @@ export const MORE_TERMS = [
     definition:
       'הפסד הון ממכירת ניירות ערך אפשר לקזז מול רווחי הון באותה שנה, ובתנאים מסוימים גם מול דיבידנד וריבית מניירות ערך. הפסד שלא קוזז עובר לשנים הבאות, ושם אפשר לקזז אותו רק מול רווחי הון.',
     related: ['capital-gains-tax', 'annual-tax-return'],
+    module: 'taxes-israel',
   },
   {
     id: 'w-8ben',
@@ -1444,6 +1448,7 @@ export const MORE_TERMS = [
     aliases: ['אישור ניכוי מס'],
     definition: 'אישור שנתי שבנק או ברוקר ישראלי שולח ללקוח, ובו סיכום ההכנסות מניירות ערך והמס שנוכה במהלך השנה. משמש בהגשת דוח שנתי.',
     related: ['withholding-tax', 'annual-tax-return'],
+    module: 'taxes-israel',
   },
   {
     id: 'annual-tax-return',
@@ -1454,6 +1459,7 @@ export const MORE_TERMS = [
     definition:
       'הדוח שבו יחיד מדווח לרשות המסים על ההכנסות שלו בשנה. מי שהשקיע דרך ברוקר בחו״ל, או שהיו לו הפסדים שהוא רוצה לקזז, צריך בדרך כלל להגיש אותו.',
     related: ['withholding-tax', 'loss-offset', 'tax-authority'],
+    module: 'taxes-israel',
   },
   {
     id: 'surtax',
@@ -1489,6 +1495,7 @@ export const MORE_TERMS = [
     category: 'tax',
     definition: 'בישראל שנת המס היא השנה הקלנדרית, מינואר עד דצמבר. רווחים והפסדים מחושבים לפיה.',
     related: ['annual-tax-return', 'loss-offset'],
+    module: 'taxes-israel',
   },
 
   // ---------------------------------------------------------------- פסיכולוגיה של משקיעים
@@ -1499,6 +1506,7 @@ export const MORE_TERMS = [
     category: 'behavior',
     definition: 'הנטייה להרגיש הפסד חזק יותר מרווח באותו גודל. גורמת להחזיק מניות מפסידות יותר מדי זמן, כדי לא ״לממש״ את ההפסד.',
     related: ['disposition-effect', 'stop-order'],
+    module: 'trading-psychology',
   },
   {
     id: 'disposition-effect',
@@ -1508,6 +1516,7 @@ export const MORE_TERMS = [
     aliases: ['אפקט הנטייה'],
     definition: 'הנטייה למכור מהר מניות שעלו ולהחזיק מניות שירדו. התוצאה היא ״לגזום את הפרחים ולהשקות את העשבים״.',
     related: ['loss-aversion'],
+    module: 'trading-psychology',
   },
   {
     id: 'fomo',
@@ -1517,6 +1526,18 @@ export const MORE_TERMS = [
     aliases: ['Fear of Missing Out', 'פומו'],
     definition: 'הדחף לקנות משהו רק כי הוא עלה הרבה וכולם מדברים עליו. מוביל לא פעם לקנייה קרוב לשיא.',
     related: ['herd-behavior', 'recency-bias'],
+    module: 'trading-psychology',
+  },
+  {
+    id: 'revenge-trading',
+    he: 'מסחר נקמה',
+    en: 'Revenge Trading',
+    category: 'behavior',
+    definition:
+      'עסקה שנפתחת מיד אחרי הפסד כדי ״להחזיר״ אותו, בדרך כלל בגודל גדול מהרגיל ובלי הבדיקה הרגילה. מגדילה את הסיכון בדיוק כשהשיפוט חלש יותר.',
+    example: 'סוחר הפסיד 3% מהתיק בבוקר, ופותח בצהריים עסקה בגודל כפול כדי לסגור את היום באפס.',
+    related: ['overconfidence', 'loss-aversion'],
+    module: 'trading-psychology',
   },
   {
     id: 'herd-behavior',
@@ -1525,6 +1546,7 @@ export const MORE_TERMS = [
     category: 'behavior',
     definition: 'לפעול כמו כולם, כי כולם פועלים כך, ולא לפי ניתוח עצמאי. מגביר בועות וקריסות.',
     related: ['fomo'],
+    module: 'trading-psychology',
   },
   {
     id: 'confirmation-bias',
@@ -1542,6 +1564,7 @@ export const MORE_TERMS = [
     aliases: ['אפקט העוגן'],
     definition: 'היצמדות למספר מסוים, כמו המחיר שבו קניתם או שיא העבר, כנקודת ייחוס, גם כשאין לו קשר לשווי של היום.',
     related: ['loss-aversion'],
+    module: 'trading-psychology',
   },
   {
     id: 'overconfidence',
@@ -1550,6 +1573,7 @@ export const MORE_TERMS = [
     category: 'behavior',
     definition: 'הערכת יתר של הידע או של היכולת לחזות את השוק. קשורה למסחר תכוף מדי ולפוזיציות גדולות מדי.',
     related: ['position-sizing'],
+    module: 'trading-psychology',
   },
   {
     id: 'hindsight-bias',
@@ -1567,6 +1591,7 @@ export const MORE_TERMS = [
     category: 'behavior',
     definition: 'מתן משקל גדול מדי למה שקרה לאחרונה, והנחה שזה ימשיך. אחרי שנה טובה השוק נראה בטוח, ואחרי ירידה הוא נראה מסוכן מדי.',
     related: ['fomo'],
+    module: 'trading-psychology',
   },
   {
     id: 'survivorship-bias',

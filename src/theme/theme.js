@@ -8,9 +8,9 @@ export function applyStoredTheme() {
 
 function setThemeAttribute(theme) {
   const root = document.documentElement
-  if (theme === 'dark') root.dataset.theme = 'dark'
+  if (theme === 'light') root.dataset.theme = 'light'
   else delete root.dataset.theme
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0b1428' : '#0f1e3d')
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#eef2f7' : '#131b2c')
 }
 
 export function setTheme(theme) {
@@ -19,10 +19,11 @@ export function setTheme(theme) {
 }
 
 export function useTheme() {
-  const [theme, setState] = useState(() => (document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'))
+  // ברירת המחדל כהה; הבחירה היחידה שנשמרת היא ״בהיר״
+  const [theme, setState] = useState(() => (document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'))
   const toggle = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next === 'dark' ? 'dark' : null)
+    const next = theme === 'light' ? 'dark' : 'light'
+    setTheme(next === 'light' ? 'light' : null)
     setState(next)
   }
   return { theme, toggle }

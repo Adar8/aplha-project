@@ -35,12 +35,14 @@
 }
 
 .simulator__price {
+  font-family: var(--font-mono);
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--color-heading);
 }
 
 .simulator__change {
+  font-family: var(--font-mono);
   font-size: 0.95rem;
 }
 
@@ -58,7 +60,7 @@
 
 .candle-chart__grid text {
   fill: var(--chart-axis);
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
@@ -92,7 +94,7 @@
 
 .candle-chart__last text {
   fill: var(--color-cta-text);
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -151,6 +153,7 @@
 }
 
 .pressure__value {
+  font-family: var(--font-mono);
   font-size: 1.1rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -194,12 +197,14 @@
 }
 
 .simulator__quote dd {
+  font-family: var(--font-mono);
   font-size: 1.05rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
 .simulator__ohlc {
+  font-family: var(--font-mono);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-2);

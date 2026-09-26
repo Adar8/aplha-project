@@ -1,13 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ProgressContext } from './ProgressContext.js'
-import { loadProgress, saveProgress } from './storage.js'
+import { loadProgress, loadStarted, saveProgress, saveStarted } from './storage.js'
 
 export default function ProgressProvider({ children }) {
   const [progress, setProgress] = useState(loadProgress)
+  const [started, setStarted] = useState(loadStarted)
 
   useEffect(() => {
     saveProgress(progress)
   }, [progress])
+
+  useEffect(() => {
+    saveStarted(started)
+  }, [started])
+
+  // נקרא כשנכנסים למודול. משמש רק להצגת ״בתהליך״ בלוח הבקרה
+  const markStarted = useCallback((id) => {
+    setStarted((prev) => (prev[id] ? prev : { ...prev, [id]: { startedAt: new Date().toISOString() } }))
+  }, [])
 
   const markComplete = useCallback((id) => {
     setProgress((prev) => ({ ...prev, [id]: { completedAt: new Date().toISOString() } }))
@@ -21,11 +31,14 @@ export default function ProgressProvider({ children }) {
     })
   }, [])
 
-  const resetProgress = useCallback(() => setProgress({}), [])
+  const resetProgress = useCallback(() => {
+    setProgress({})
+    setStarted({})
+  }, [])
 
   const value = useMemo(
-    () => ({ progress, markComplete, markIncomplete, resetProgress }),
-    [progress, markComplete, markIncomplete, resetProgress],
+    () => ({ progress, started, markStarted, markComplete, markIncomplete, resetProgress }),
+    [progress, started, markStarted, markComplete, markIncomplete, resetProgress],
   )
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>
