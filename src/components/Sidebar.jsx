@@ -159,9 +159,9 @@ export default function Sidebar() {
               </button>
             ))}
           </div>
-          <button type="button" className="sidebar__theme" aria-pressed={theme === 'dark'} onClick={toggle}>
-            <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
-            מצב כהה
+          <button type="button" className="sidebar__theme" aria-pressed={theme === 'light'} onClick={toggle}>
+            <Icon name="sun" />
+            מצב בהיר
           </button>
         </div>
       </div>

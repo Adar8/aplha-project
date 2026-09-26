@@ -3,6 +3,7 @@
 const PROGRESS_KEY = 'alphatrader-learn:progress:v1'
 const PROFILE_KEY = 'alphatrader-learn:profile:v1'
 const PORTFOLIO_KEY = 'alphatrader-learn:portfolio:v1'
+const STARTED_KEY = 'alphatrader-learn:started:v1'
 
 function loadObject(key) {
   try {
@@ -34,6 +35,15 @@ export function saveProgress(progress) {
   saveObject(PROGRESS_KEY, progress && Object.keys(progress).length ? progress : null)
 }
 
+/** מודולים שנפתחו (כדי להציג ״בתהליך״ בלוח הבקרה). @returns {Record<string, { startedAt: string }>} */
+export function loadStarted() {
+  return loadObject(STARTED_KEY) ?? {}
+}
+
+export function saveStarted(started) {
+  saveObject(STARTED_KEY, started && Object.keys(started).length ? started : null)
+}
+
 /** פרופיל הלמידה (תשובות השאלון, רמה לכל מודול). null = עוד לא מילאו שאלון */
 export function loadProfile() {
   return loadObject(PROFILE_KEY)
@@ -55,10 +65,10 @@ export function savePortfolio(portfolio) {
 
 const THEME_KEY = 'alphatrader-learn:theme:v1'
 
-/** מצב התצוגה שהמשתמש בחר ('dark'). null = ברירת המחדל הבהירה */
+/** מצב התצוגה שהמשתמש בחר ('light'). null = ברירת המחדל הכהה */
 export function loadTheme() {
   try {
-    return window.localStorage.getItem(THEME_KEY) === 'dark' ? 'dark' : null
+    return window.localStorage.getItem(THEME_KEY) === 'light' ? 'light' : null
   } catch {
     return null
   }
@@ -66,7 +76,7 @@ export function loadTheme() {
 
 export function saveTheme(theme) {
   try {
-    if (theme === 'dark') window.localStorage.setItem(THEME_KEY, 'dark')
+    if (theme === 'light') window.localStorage.setItem(THEME_KEY, 'light')
     else window.localStorage.removeItem(THEME_KEY)
   } catch {
     // אחסון לא זמין — הבחירה תקפה עד רענון הדף

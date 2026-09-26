@@ -391,3 +391,162 @@
     transition: none;
   }
 }
+
+/* ---------- 50 עסקאות ---------- */
+.trade-run__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.run-slider label {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-weight: 600;
+}
+
+.run-slider output {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.run-slider input {
+  inline-size: 100%;
+  margin-top: var(--space-1);
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.trade-run__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  margin-bottom: var(--space-3);
+}
+
+.trade-run__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.trade-run__key {
+  display: inline-block;
+  inline-size: 18px;
+  block-size: 0;
+  border-top: 3px solid var(--color-accent);
+  margin-inline-start: var(--space-2);
+}
+
+.trade-run__key--safe {
+  border-top: 2px dashed var(--color-text-muted);
+}
+
+.trade-run__key--half {
+  border-top: 2px dashed var(--color-down);
+}
+
+.trade-run__chart {
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+}
+
+.run-chart {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  direction: ltr;
+}
+
+.run-chart__grid line {
+  stroke: var(--chart-grid);
+}
+
+.run-chart__grid.is-start line {
+  stroke: var(--color-border-strong);
+}
+
+.run-chart__grid.is-half line {
+  stroke: var(--color-down);
+  stroke-dasharray: 5 4;
+}
+
+.run-chart__grid text,
+.run-chart__axis {
+  fill: var(--chart-axis);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.run-chart__axis {
+  font-family: var(--font-body);
+}
+
+.run-chart__line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.run-chart__line.is-up {
+  stroke: var(--color-accent);
+}
+
+.run-chart__line.is-down {
+  stroke: var(--color-down);
+}
+
+.run-chart__line--safe {
+  stroke: var(--color-text-muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.run-chart__dot.is-up {
+  fill: var(--color-accent);
+}
+
+.run-chart__dot.is-down {
+  fill: var(--color-down);
+}
+
+.trade-run__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.trade-run__stats > div {
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-deep);
+}
+
+.trade-run__stats dt {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.trade-run__stats dd {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.trade-run__verdict {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-inline-start: 3px solid var(--color-accent);
+  background: var(--color-surface-raised);
+}
+
+.trade-run__verdict.is-bad {
+  border-inline-start-color: var(--color-down);
+}

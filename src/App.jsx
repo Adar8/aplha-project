@@ -10,6 +10,8 @@ import ChartReading from './modules/chart-reading/ChartReading.jsx'
 import RiskManagement from './modules/risk-management/RiskManagement.jsx'
 import Fundamentals from './modules/fundamentals/Fundamentals.jsx'
 import StockResearch from './modules/stock-research/StockResearch.jsx'
+import TradingPsychology from './modules/trading-psychology/TradingPsychology.jsx'
+import TaxesIsrael from './modules/taxes-israel/TaxesIsrael.jsx'
 import GlossaryPage from './glossary/GlossaryPage.jsx'
 import OnboardingPage from './onboarding/OnboardingPage.jsx'
 import PortfolioPage from './portfolio/PortfolioPage.jsx'
@@ -53,6 +55,8 @@ export default function App() {
               <Route path="/modules/risk-management" element={<RiskManagement />} />
               <Route path="/modules/fundamentals" element={<Fundamentals />} />
               <Route path="/modules/stock-research" element={<StockResearch />} />
+              <Route path="/modules/trading-psychology" element={<TradingPsychology />} />
+              <Route path="/modules/taxes-israel" element={<TaxesIsrael />} />
               <Route path="/glossary" element={<GlossaryPage />} />
               <Route path="/start" element={<OnboardingPage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />

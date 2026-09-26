@@ -25,12 +25,13 @@ const tileTone = (number) => `var(--tone-${((number - 1) % 6) + 1})`
 /** לוח הבקרה: מה הבא, כמה נשאר, כל המודולים, הישגים והתיק */
 export default function HomePage() {
   useDocumentTitle(null)
-  const { progress } = useProgress()
+  const { progress, started } = useProgress()
   const { profile, answers } = useProfile()
   const { transactions } = usePortfolio()
   const plan = buildPlan(modules, profile, progress)
   const lessons = answers ? plan.order : modules.filter((m) => m.kind === 'module')
   const done = lessons.filter((m) => progress[m.id]).length
+  const inProgressCount = lessons.filter((m) => !progress[m.id] && started[m.id]).length
   const { next } = plan
   const nextLevel = next ? levelFor(profile, next.id) : null
   const nextMinutes = next ? moduleMinutes(next, nextLevel) : null
@@ -88,8 +89,13 @@ export default function HomePage() {
             התקדמות
           </p>
           <p className="dash-hero__big">
-            <span>{done}</span> מתוך {lessons.length} מודולים
+            <span>{done}</span> מתוך {lessons.length} מודולים הושלמו
           </p>
+          {inProgressCount > 0 && (
+            <p className="dash-hero__meta">
+              {inProgressCount === 1 ? 'מודול אחד בתהליך' : `${inProgressCount} מודולים בתהליך`}
+            </p>
+          )}
           <div
             className="dash-steps"
             role="progressbar"
@@ -102,7 +108,7 @@ export default function HomePage() {
             {lessons.map((m, i) => (
               <span
                 key={m.id}
-                className={`dash-steps__step${progress[m.id] ? ' is-done' : ''}${next?.id === m.id ? ' is-next' : ''}`}
+                className={`dash-steps__step${progress[m.id] ? ' is-done' : started[m.id] ? ' is-started' : ''}${next?.id === m.id ? ' is-next' : ''}`}
                 style={{ '--i': i }}
               />
             ))}
@@ -204,16 +210,23 @@ function CandlePattern() {
 }
 
 function ModuleCard({ module, index, isNext, isKnown }) {
-  const { progress } = useProgress()
+  const { progress, started } = useProgress()
   const { profile } = useProfile()
   const completion = progress[module.id]
+  const inProgress = !completion && started[module.id]
+  const locked = module.status !== 'available'
   const minutes = moduleMinutes(module, levelFor(profile, module.id))
 
-  let status = <span className="dash-card__status">עוד לא הושלם</span>
+  // מצב אחד לכל כרטיס: הושלם / בתהליך / נעול (מודול שעוד לא פורסם) / הבא / אפשר לדלג / עוד לא התחלתם
+  let status = <span className="dash-card__status">עוד לא התחלתם</span>
   if (completion) {
     status = (
       <span className="dash-card__status dash-card__status--done">הושלם {formatDate(completion.completedAt)}</span>
     )
+  } else if (locked) {
+    status = <span className="dash-card__status dash-card__status--locked">נעול, בקרוב</span>
+  } else if (inProgress) {
+    status = <span className="dash-card__status dash-card__status--progress">בתהליך</span>
   } else if (isNext) {
     status = <span className="dash-card__status dash-card__status--next">הבא בתור</span>
   } else if (isKnown) {
@@ -222,7 +235,7 @@ function ModuleCard({ module, index, isNext, isKnown }) {
 
   return (
     <li
-      className={`dash-card${isNext ? ' dash-card--next' : ''}${completion ? ' dash-card--done' : ''}`}
+      className={`dash-card${isNext ? ' dash-card--next' : ''}${completion ? ' dash-card--done' : ''}${locked ? ' dash-card--locked' : ''}`}
       style={{ '--tile': tileTone(module.number), '--i': index }}
     >
       <div className="dash-card__top">
@@ -231,10 +244,14 @@ function ModuleCard({ module, index, isNext, isKnown }) {
         </span>
         {status}
       </div>
-      <Link to={module.path} className="dash-card__title">
-        <span className="visually-hidden">מודול {module.number}: </span>
-        {module.title}
-      </Link>
+      {locked ? (
+        <p className="dash-card__title">{module.title}</p>
+      ) : (
+        <Link to={module.path} className="dash-card__title">
+          <span className="visually-hidden">מודול {module.number}: </span>
+          {module.title}
+        </Link>
+      )}
       <p className="dash-card__summary">{module.summary}</p>
       {minutes && <p className="dash-card__time">{minutes} דקות</p>}
     </li>

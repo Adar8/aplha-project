@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router'
 import { modules } from '../data/modules.js'
 import { useProfile, LevelContext } from '../profile/ProfileContext.js'
@@ -5,6 +6,7 @@ import { LEVELS, levelFor, moduleMinutes } from '../profile/profile.js'
 import Callout from './Callout.jsx'
 import CompleteButton from './CompleteButton.jsx'
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
+import { useProgress } from '../progress/ProgressContext.js'
 import './ModuleLayout.css'
 
 // ״ברמה בסיסית״: שם התואר מתאים ל״רמה״ (נקבה)
@@ -16,6 +18,8 @@ export default function ModuleLayout({ module, intro, children }) {
   const next = lessons.find((m) => m.number === number + 1)
   const { profile, answers, setModuleLevel } = useProfile()
   useDocumentTitle(title)
+  const { markStarted } = useProgress()
+  useEffect(() => markStarted(id), [id, markStarted])
   const level = levelFor(profile, id)
   const minutes = moduleMinutes(module, level)
   const goalWhy = answers?.goal && why?.[answers.goal]

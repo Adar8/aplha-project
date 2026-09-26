@@ -11,6 +11,7 @@
 }
 
 .ownership__label output {
+  font-family: var(--font-mono);
   color: var(--color-accent);
   font-variant-numeric: tabular-nums;
 }
@@ -56,6 +57,7 @@
 }
 
 .ownership__results dd {
+  font-family: var(--font-mono);
   font-size: 1.25rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -140,6 +142,7 @@
 }
 
 .book {
+  font-family: var(--font-mono);
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
@@ -148,6 +151,14 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   overflow: hidden;
+}
+
+/* כותרת הטבלה, כותרות העמודות ועמודת הצד בעברית: בגופן הטקסט ולא בגופן המספרים */
+.book caption,
+.book th,
+.book td:nth-child(3),
+.book__spread td {
+  font-family: var(--font-body);
 }
 
 .book caption {
