@@ -1,7 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "test": "node tests/verify-math.mjs && node tests/validate-content.mjs && node tests/validate-content.test.mjs",
+    "test": "node tests/verify-math.mjs && node tests/validate-content.mjs && node tests/validate-content.test.mjs && node --test tests/unit/*.test.mjs",
+    "test:e2e": "node tests/e2e.cjs",
+    "test:all": "npm test && npm run test:e2e",
     "validate": "node tests/validate-content.mjs"
   }
 }

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "note": "מפת מיומנויות. topic מקשר לנושא במפת הנושאים (curriculum.js), וממנו נגזרים השאלונים ורמת הוודאות. foundations = ידע מקדים שאינו נושא בחינה בפני עצמו.",
+  "areas": [
+    { "id": "foundations", "name": "ידע מקדים" },
+    { "id": "sequences", "name": "סדרות ואינדוקציה" },
+    { "id": "probability", "name": "הסתברות" },
+    { "id": "geometry", "name": "גאומטריה וטריגונומטריה במישור" },
+    { "id": "calculus", "name": "חדו\"א" },
+    { "id": "explog", "name": "מעריכיות, לוגריתמים, גדילה ודעיכה" },
+    { "id": "analytic", "name": "גאומטריה אנליטית" },
+    { "id": "vectors", "name": "וקטורים וטריגונומטריה במרחב" },
+    { "id": "complex", "name": "מספרים מרוכבים" }
+  ],
+  "skills": [
+    { "id": "f-fractions", "name": "שברים ופעולות חשבון", "area": "foundations", "topic": "foundations", "prereqs": [] },
+    { "id": "f-linear-eq", "name": "משוואה ממעלה ראשונה", "area": "foundations", "topic": "foundations", "prereqs": ["f-fractions"] },
+    { "id": "f-factoring", "name": "פירוק לגורמים וכפל מקוצר", "area": "foundations", "topic": "foundations", "prereqs": [] },
+    { "id": "f-quadratic-eq", "name": "משוואה ריבועית", "area": "foundations", "topic": "foundations", "prereqs": ["f-factoring"] },
+    { "id": "f-algebraic-fractions", "name": "שברים אלגבריים", "area": "foundations", "topic": "foundations", "prereqs": ["f-factoring", "f-fractions"] },
+    { "id": "f-inequalities", "name": "אי-שוויונות", "area": "foundations", "topic": "foundations", "prereqs": ["f-linear-eq"] },
+    { "id": "f-systems", "name": "מערכת משוואות", "area": "foundations", "topic": "foundations", "prereqs": ["f-linear-eq"] },
+    { "id": "f-powers", "name": "חוקי חזקות ושורשים", "area": "foundations", "topic": "foundations", "prereqs": ["f-fractions"] },
+    { "id": "f-function-concept", "name": "פונקציה, הצבה וגרף", "area": "foundations", "topic": "foundations", "prereqs": [] },
+    { "id": "f-line-eq", "name": "ישר: שיפוע ומשוואה", "area": "foundations", "topic": "foundations", "prereqs": ["f-function-concept"] },
+    { "id": "f-parabola", "name": "פרבולה וקודקוד", "area": "foundations", "topic": "foundations", "prereqs": ["f-quadratic-eq", "f-function-concept"] },
+    { "id": "f-trig-basics", "name": "טריגונומטריה במשולש ישר-זווית", "area": "foundations", "topic": "foundations", "prereqs": ["f-fractions"] },
+
+    { "id": "s-arith", "name": "סדרה חשבונית", "area": "sequences", "topic": "sequences", "prereqs": ["f-linear-eq"], "lessons": ["arithmetic-sequence"] },
+    { "id": "s-geom", "name": "סדרה הנדסית", "area": "sequences", "topic": "sequences", "prereqs": ["f-powers"] },
+    { "id": "s-geom-inf", "name": "סכום סדרה הנדסית אינסופית", "area": "sequences", "topic": "sequences", "prereqs": ["s-geom"] },
+    { "id": "s-recursive", "name": "נוסחת נסיגה", "area": "sequences", "topic": "sequences", "prereqs": ["s-arith"] },
+    { "id": "s-induction", "name": "אינדוקציה מתמטית", "area": "sequences", "topic": "induction", "prereqs": ["s-arith", "f-factoring"] },
+
+    { "id": "p-basic", "name": "הסתברות בסיסית", "area": "probability", "topic": "probability", "prereqs": ["f-fractions"] },
+    { "id": "p-tree", "name": "דיאגרמת עץ והסתברות מותנית", "area": "probability", "topic": "probability", "prereqs": ["p-basic"] },
+    { "id": "p-binomial", "name": "התפלגות בינומית (ברנולי)", "area": "probability", "topic": "probability", "prereqs": ["p-tree", "f-powers"] },
+
+    { "id": "g-triangles", "name": "משולשים וחפיפה", "area": "geometry", "topic": "plane-geometry", "prereqs": [] },
+    { "id": "g-similarity", "name": "דמיון משולשים", "area": "geometry", "topic": "plane-geometry", "prereqs": ["g-triangles"] },
+    { "id": "g-circle", "name": "משפטים במעגל", "area": "geometry", "topic": "plane-geometry", "prereqs": ["g-triangles"] },
+    { "id": "g-sine-cos", "name": "משפט הסינוסים והקוסינוסים", "area": "geometry", "topic": "plane-trig", "prereqs": ["f-trig-basics", "f-quadratic-eq"], "lessons": ["sine-cosine-law"] },
+    { "id": "g-trig-identities", "name": "זהויות טריגונומטריות", "area": "geometry", "topic": "plane-trig", "prereqs": ["f-trig-basics"] },
+
+    { "id": "c-derivative-rules", "name": "כללי גזירה", "area": "calculus", "topic": "calc-poly", "prereqs": ["f-powers", "f-function-concept"], "lessons": ["derivative-extrema"] },
+    { "id": "c-tangent", "name": "משוואת משיק", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-derivative-rules", "f-line-eq"], "lessons": ["derivative-extrema"] },
+    { "id": "c-extrema", "name": "נקודות קיצון, עלייה וירידה", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-derivative-rules", "f-quadratic-eq"], "lessons": ["derivative-extrema"] },
+    { "id": "c-investigation", "name": "חקירת פולינום מלאה", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-extrema", "c-tangent"] },
+    { "id": "c-product-quotient", "name": "נגזרת מכפלה, מנה ופונקציה מורכבת", "area": "calculus", "topic": "calc-rational-root", "prereqs": ["c-derivative-rules", "f-algebraic-fractions"] },
+    { "id": "c-rational", "name": "חקירת פונקציה רציונלית", "area": "calculus", "topic": "calc-rational-root", "prereqs": ["c-product-quotient", "f-inequalities"] },
+    { "id": "c-root", "name": "חקירת פונקציית שורש", "area": "calculus", "topic": "calc-rational-root", "prereqs": ["c-product-quotient", "f-powers", "f-inequalities"] },
+    { "id": "c-trig-deriv", "name": "חדו\"א של פונקציות טריגונומטריות", "area": "calculus", "topic": "calc-trig", "prereqs": ["c-product-quotient", "g-trig-identities"] },
+    { "id": "c-optimization", "name": "בעיות קיצון", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-extrema"] },
+    { "id": "c-transform", "name": "תכונות גרפיות וטרנספורמציות", "area": "calculus", "topic": "pre-analysis", "prereqs": ["f-function-concept", "f-parabola"] },
+    { "id": "c-integral-basic", "name": "פונקציה קדומה ואינטגרל מסוים", "area": "calculus", "topic": "integrals", "prereqs": ["c-derivative-rules"] },
+    { "id": "c-area", "name": "שטחים בעזרת אינטגרל", "area": "calculus", "topic": "integrals", "prereqs": ["c-integral-basic", "f-quadratic-eq"] },
+    { "id": "c-accum", "name": "האינטגרל כפונקציה צוברת שטח", "area": "calculus", "topic": "accum-integral", "prereqs": ["c-area"] },
+
+    { "id": "e-exp-laws", "name": "פונקציה מעריכית ומשוואות מעריכיות", "area": "explog", "topic": "exp-log", "prereqs": ["f-powers"] },
+    { "id": "e-log", "name": "לוגריתמים וחוקיהם", "area": "explog", "topic": "exp-log", "prereqs": ["e-exp-laws"] },
+    { "id": "e-exp-log-eq", "name": "משוואות לוגריתמיות", "area": "explog", "topic": "exp-log", "prereqs": ["e-log", "f-quadratic-eq"] },
+    { "id": "e-exp-deriv", "name": "חקירת פונקציות מעריכיות", "area": "explog", "topic": "exp-log", "prereqs": ["e-exp-laws", "c-product-quotient"] },
+    { "id": "e-log-deriv", "name": "חקירת פונקציות לוגריתמיות", "area": "explog", "topic": "exp-log", "prereqs": ["e-log", "c-product-quotient"] },
+    { "id": "e-growth", "name": "גדילה ודעיכה", "area": "explog", "topic": "growth", "prereqs": ["e-exp-laws"] },
+    { "id": "e-power-func", "name": "פונקציות חזקה עם מעריך רציונלי", "area": "explog", "topic": "power-func", "prereqs": ["f-powers", "c-derivative-rules"] },
+
+    { "id": "a-line", "name": "ישרים במישור: מרחק, אמצע, ניצבות", "area": "analytic", "topic": "analytic", "prereqs": ["f-line-eq", "f-systems"] },
+    { "id": "a-circle", "name": "מעגל: משוואה ומשיק", "area": "analytic", "topic": "analytic", "prereqs": ["a-line", "f-factoring"] },
+    { "id": "a-locus", "name": "מקומות גאומטריים", "area": "analytic", "topic": "analytic", "prereqs": ["a-circle"] },
+    { "id": "a-conics", "name": "פרבולה ואליפסה", "area": "analytic", "topic": "conics", "prereqs": ["a-circle"] },
+    { "id": "a-hyperbola", "name": "היפרבולה", "area": "analytic", "topic": "hyperbola", "prereqs": ["a-conics"] },
+
+    { "id": "v-basic", "name": "וקטורים: פעולות ואורך", "area": "vectors", "topic": "vectors", "prereqs": ["f-powers"] },
+    { "id": "v-dot", "name": "מכפלה סקלרית וזווית", "area": "vectors", "topic": "vectors", "prereqs": ["v-basic", "f-trig-basics"] },
+    { "id": "v-line", "name": "ישר במרחב", "area": "vectors", "topic": "vectors", "prereqs": ["v-basic", "f-systems"] },
+    { "id": "v-plane", "name": "מישור במרחב", "area": "vectors", "topic": "vectors", "prereqs": ["v-dot", "v-line"] },
+    { "id": "v-space-trig", "name": "טריגונומטריה במרחב", "area": "vectors", "topic": "space-trig", "prereqs": ["v-dot", "g-sine-cos"] },
+
+    { "id": "z-basic", "name": "מספרים מרוכבים: פעולות וערך מוחלט", "area": "complex", "topic": "complex", "prereqs": ["f-quadratic-eq"] },
+    { "id": "z-polar", "name": "הצגה קוטבית ודה-מואבר", "area": "complex", "topic": "complex", "prereqs": ["z-basic", "f-trig-basics"] }
+  ]
+}

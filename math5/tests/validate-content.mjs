@@ -224,10 +224,62 @@ export function validateLesson(L, { topics = null, knownLessons = null } = {}) {
   return { errors, warnings };
 }
 
+// ---- מבחן אבחון: כל פריט נבדק בדיוק כמו שאלת מבחן בשיעור (בלי רמזים, עם check) ----
+export function validateDiagnostic(D, { skills }) {
+  const errors = [], warnings = [];
+  if (D.schemaVersion !== 1) errors.push('schemaVersion: חייב להיות 1');
+  const items = Array.isArray(D.items) ? D.items : [];
+  if (!items.length) errors.push('items: אין שאלות');
+  const dummyQ = { id: 'zz-dummy', type: 'numeric', source: { type: 'original' }, prompt: 'x', answer: { value: 1, tolerance: 0 }, check: '1', hints: ['x'], solution: { steps: ['x'], final: 'x' } };
+  const shell = {
+    schemaVersion: 1, id: 'diagnostic', title: 'אבחון', topic: 'sequences', papers: { old: ['035581'], new: [] }, topicStatus: 'common', estimatedMinutes: 45,
+    summary: 'x', review: { status: 'draft' }, explanations: [{ id: 'x', title: 'x', blocks: [{ type: 'text', text: 'x' }] }], formulas: [],
+    video: { status: 'pending', links: [] }, examples: [{ id: 'x', title: 'x', problem: 'x', steps: ['x'], answer: 'x', checks: [{ expr: '1', equals: 1 }] }],
+    guidedPractice: [{ ...dummyQ, id: 'zz-g' }], independentPractice: [{ ...dummyQ, id: 'zz-p' }],
+    bagrutQuestions: [{ id: 'x', title: 'x', source: { type: 'original' }, context: 'x', parts: [{ ...dummyQ, id: 'zz-b', label: 'א' }] }],
+    quiz: items.map(({ skill, ...q }) => q).concat(items.length < 3 ? [{ ...dummyQ, id: 'zz-q1', hints: undefined }, { ...dummyQ, id: 'zz-q2', hints: undefined }] : []),
+    commonMistakes: [{ id: 'zz', label: 'x', advice: 'x', reviewSection: 'quiz' }], next: null,
+  };
+  const r = validateLesson(shell, {});
+  r.errors.filter(e => e.startsWith('quiz[')).forEach(e => errors.push(e.replace(/^quiz\[/, 'items[')));
+  const covered = new Set();
+  items.forEach((it, i) => {
+    if (!skills.has(it.skill)) errors.push(`items[${i}].skill: מיומנות לא קיימת במפת הידע: ${it.skill}`);
+    covered.add(it.skill);
+  });
+  (D.probes || []).forEach(p => { if (!covered.has(p)) errors.push(`probes: אין שאלה למיומנות ${p}`); });
+  if (!Number.isInteger(D.maxQuestions) || D.maxQuestions < (D.probes || []).length) errors.push('maxQuestions: חייב להיות שלם ולא קטן ממספר ה-probes');
+  return { errors, warnings };
+}
+
+// ---- מפת ידע: מזהים, תחומים, נושאים, שיעורים, ידע מקדים בלי מעגלים ----
+export function validateKnowledgeMap(K, { topics = null, lessons = null } = {}) {
+  const errors = [];
+  const areas = new Set((K.areas || []).map(a => a.id));
+  const ids = new Set();
+  (K.skills || []).forEach((s, i) => {
+    const p = `skills[${i}]`;
+    if (!ID_RE.test(s.id || '')) errors.push(`${p}.id: מזהה לא תקין`);
+    else if (ids.has(s.id)) errors.push(`${p}.id: כפול ${s.id}`); else ids.add(s.id);
+    if (!areas.has(s.area)) errors.push(`${p}.area: תחום לא קיים ${s.area}`);
+    if (s.topic !== 'foundations' && topics && !topics.has(s.topic)) errors.push(`${p}.topic: נושא לא קיים ${s.topic}`);
+    (s.lessons || []).forEach(l => { if (lessons && !lessons.has(l)) errors.push(`${p}.lessons: שיעור לא קיים ${l}`); });
+  });
+  const byId = Object.fromEntries((K.skills || []).map(s => [s.id, s]));
+  (K.skills || []).forEach(s => (s.prereqs || []).forEach(q => { if (!byId[q]) errors.push(`${s.id}: ידע מקדים לא קיים ${q}`); }));
+  const state = {};
+  const visit = (id, path) => {
+    if (state[id] === 2 || !byId[id]) return;
+    if (state[id] === 1) { errors.push(`מעגל בידע המקדים: ${[...path, id].join(' ← ')}`); return; }
+    state[id] = 1; (byId[id].prereqs || []).forEach(q => visit(q, [...path, id])); state[id] = 2;
+  };
+  Object.keys(byId).forEach(id => visit(id, []));
+  return { errors, skills: ids };
+}
+
 // ---- הרצה משורת הפקודה ----
 async function main() {
   const { TOPICS } = await import(resolve(ROOT, 'js/data/curriculum.js'));
-  const { LESSONS } = await import(resolve(ROOT, 'js/data/lessons/index.js'));
   const topics = new Set(TOPICS.map(t => t.id));
   let files = process.argv.slice(2).map(f => resolve(f));
   const manifestPath = resolve(CONTENT, 'index.json');
@@ -243,7 +295,7 @@ async function main() {
     try { lessons.push([f, JSON.parse(readFileSync(f, 'utf8'))]); }
     catch (e) { console.error(`✗ ${relative(ROOT, f)}: JSON לא תקין – ${e.message}`); manifestErr++; }
   }
-  const known = new Set([...LESSONS.map(l => l.id), ...lessons.map(([, l]) => l.id)]);
+  const known = new Set(lessons.map(([, l]) => l.id));
   const seen = new Set();
   let fail = manifestErr;
   for (const [f, L] of lessons) {
@@ -254,7 +306,16 @@ async function main() {
     else console.log(`✓ ${name}`);
     warnings.forEach(w => console.log('   ⚠ ' + w));
   }
-  console.log(fail ? `\n${fail} שגיאות` : `\nכל ${lessons.length} קובצי התוכן תקינים`);
+  // מפת ידע ומבחן אבחון
+  const K = JSON.parse(readFileSync(resolve(CONTENT, 'knowledge-map.json'), 'utf8'));
+  const km = validateKnowledgeMap(K, { topics, lessons: known });
+  if (km.errors.length) { fail += km.errors.length; console.error(`✗ learning-content/knowledge-map.json – ${km.errors.length} שגיאות`); km.errors.forEach(e => console.error('   • ' + e)); }
+  else console.log(`✓ learning-content/knowledge-map.json (${km.skills.size} מיומנויות)`);
+  const D = JSON.parse(readFileSync(resolve(CONTENT, 'diagnostic.json'), 'utf8'));
+  const dg = validateDiagnostic(D, { skills: km.skills });
+  if (dg.errors.length) { fail += dg.errors.length; console.error(`✗ learning-content/diagnostic.json – ${dg.errors.length} שגיאות`); dg.errors.forEach(e => console.error('   • ' + e)); }
+  else console.log(`✓ learning-content/diagnostic.json (${D.items.length} שאלות)`);
+  console.log(fail ? `\n${fail} שגיאות` : `\nכל קובצי התוכן תקינים (${lessons.length} שיעורים, מפת ידע, אבחון)`);
   process.exit(fail ? 1 : 0);
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

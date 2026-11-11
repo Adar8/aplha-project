@@ -1,72 +1,11 @@
-import { store, mastery, LEVELS, practiceQuestions } from './store.js';
-import { TOPICS, STATUS, CONFIDENCE, SOURCES, EXAMS } from './data/curriculum.js';
-import { LESSONS, LESSON_BY_ID } from './data/lessons/index.js';
+import { store, mastery, LEVELS, practiceQuestions, onExternalChange } from './store.js';
+import { TOPICS, STATUS, CONFIDENCE, SOURCES, EXAMS, VERIFIED_ON } from './data/curriculum.js';
+import { LESSONS, LESSON_BY_ID, loadLessons, LOAD_ERRORS } from './data/lessons/index.js';
+import { checkAnswer } from './core/answers.js';
+import { SECTIONS, SOURCE_LABEL, renderMath, fmtTime, weekSeconds, todaySeconds, meter, lessonState, recommend, ring, ICON, esc } from './ui.js';
+import * as extra from './views/extra.js';
 
 const app = document.getElementById('app');
-const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-
-const SECTIONS = [
-  { id: 'explain', label: 'הסבר' },
-  { id: 'video', label: 'סרטון' },
-  { id: 'examples', label: 'דוגמאות פתורות' },
-  { id: 'guided', label: 'תרגול מודרך' },
-  { id: 'practice', label: 'תרגול עצמאי' },
-  { id: 'bagrut', label: 'ברמת בגרות' },
-  { id: 'quiz', label: 'מבחן קצר' },
-  { id: 'review', label: 'ניתוח והמשך' },
-];
-
-const SOURCE_LABEL = {
-  official: 'שאלה רשמית מבגרות',
-  adapted: 'עובד משאלה רשמית',
-  original: 'שאלה מקורית לתרגול',
-};
-
-// ---------- עזרים ----------
-function renderMath(el) {
-  if (window.renderMathInElement) {
-    window.renderMathInElement(el, {
-      delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
-      throwOnError: false,
-    });
-  }
-}
-
-function fmtTime(sec) {
-  if (!sec) return '0 דק׳';
-  const h = Math.floor(sec / 3600), mnt = Math.round((sec % 3600) / 60);
-  return h ? `${h} שע׳ ${mnt} דק׳` : `${mnt} דק׳`;
-}
-
-function weekSeconds() {
-  const d = store.get().daily; let s = 0;
-  for (let i = 0; i < 7; i++) {
-    const k = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10);
-    s += d[k] || 0;
-  }
-  return s;
-}
-
-function meter(score, level) {
-  return `<div class="meter lvl-${level}" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${score}" aria-label="רמת שליטה">
-    <span style="inline-size:${score}%"></span></div>`;
-}
-
-function lessonState(lesson) {
-  const L = store.get().lessons[lesson.id];
-  const done = L ? SECTIONS.filter(s => L.sections[s.id]).length : 0;
-  return { done, total: SECTIONS.length, ...mastery(lesson) };
-}
-
-function recommend() {
-  // השיעור עם השליטה הנמוכה ביותר שכבר התחלת, ואם אין – השיעור הבא שלא התחלת.
-  const rows = LESSONS.map(l => ({ l, ...lessonState(l) }));
-  const started = rows.filter(r => r.done > 0 && r.score < 85).sort((a, b) => a.score - b.score);
-  if (started.length) return { lesson: started[0].l, why: `רמת השליטה כאן ${started[0].score} מתוך 100. כדאי לחזק לפני שממשיכים.` };
-  const fresh = rows.find(r => r.done === 0);
-  if (fresh) return { lesson: fresh.l, why: 'השיעור הבא בתוכנית. נושא משותף לשתי המתכונות.' };
-  return { lesson: rows.sort((a, b) => a.score - b.score)[0].l, why: 'סיימת את כל השיעורים הקיימים. כדאי לחזור על החלש מביניהם עד ששיעורים נוספים יעלו.' };
-}
 
 // ---------- מסך הבית ----------
 const TOPIC_GLYPH = {
@@ -82,15 +21,6 @@ const TOPIC_SHORT = { sequences: 'סדרות', probability: 'הסתברות', 'p
   'space-trig': 'טריגונומטריה במרחב', complex: 'מספרים מרוכבים', growth: 'גדילה ודעיכה', 'power-func': 'פונקציות חזקה', solids: 'גופים' };
 const TOPIC_HUE = { sequences: 'teal', probability: 'violet', 'plane-geometry': 'blue', 'plane-trig': 'teal', 'calc-poly': 'violet',
   integrals: 'blue', analytic: 'teal', vectors: 'violet', 'exp-log': 'blue' };
-
-function ring(pct, size = 132, label = '') {
-  const r = (size - 14) / 2, c = 2 * Math.PI * r, off = c * (1 - pct / 100);
-  return `<svg class="ring" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" role="img" aria-label="${label} ${pct}%">
-    <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--teal)"/><stop offset="1" stop-color="var(--blue)"/></linearGradient></defs>
-    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="ring-bg"/>
-    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="ring-fg" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 ${size / 2} ${size / 2})"/>
-  </svg>`;
-}
 
 function topicCard(t) {
   const lessons = (t.lessons || []).map(id => LESSON_BY_ID[id]).filter(Boolean);
@@ -113,8 +43,10 @@ function topicCard(t) {
 let homeTrack = null;
 function viewDashboard() {
   const st = store.get();
-  const g = st.grades;
-  const current = 0.6 * g.q81 + 0.4 * g.q82;
+  const P = st.profile, g = P.grades, T = P.targetGrade;
+  const current = 0.6 * g.q1 + 0.4 * g.q2;
+  const wk = extra.weekSummary();
+  const recs = extra.currentRecommendations().slice(0, 3);
   const rec = recommend();
   const last = st.lastLesson && LESSON_BY_ID[st.lastLesson];
   const cont = last || rec.lesson;
@@ -124,8 +56,6 @@ function viewDashboard() {
   const allDone = LESSONS.reduce((a, l) => a + lessonState(l).done, 0);
   const allTotal = LESSONS.length * SECTIONS.length;
   const overall = Math.round(100 * allDone / allTotal);
-  const today = st.daily[new Date().toISOString().slice(0, 10)] || 0;
-  const DAILY = 20 * 60, dailyPct = Math.min(100, Math.round(100 * today / DAILY));
   const track = homeTrack || st.track || 'common';
   const topics = TOPICS.filter(t => t.id !== 'short-questions' && (track === 'common' ? t.status === 'common'
     : track === 'old' ? (t.old && t.status !== 'new') : (t.new && t.status !== 'old')));
@@ -141,7 +71,7 @@ function viewDashboard() {
       ${st.name ? `<h1>שלום, ${esc(st.name)}</h1>` : `<h1>שלום</h1>
         <form class="name-form" id="nameForm"><label for="nm" class="sr-only">איך לקרוא לך?</label>
           <input id="nm" placeholder="איך לקרוא לך?" maxlength="20" autocomplete="given-name"><button class="btn small-btn">שמירה</button></form>`}
-      <p class="lead">ממשיכים בדרך ל-75 בבגרות במתמטיקה 5 יחידות.</p>
+      <p class="lead">ממשיכים בדרך ל-${T} בבגרות במתמטיקה 5 יחידות.</p>
       <a class="btn primary xl" href="#/lesson/${cont.id}/${nextSec.id}">${ICON.play}<span>${cs.done ? 'המשך לימוד' : 'להתחלת הלימוד'}</span></a>
     </div>
     <div class="hh-stats">
@@ -149,8 +79,8 @@ function viewDashboard() {
       <div class="glass stat-grade">
         <span class="sg-label">ציון משוקלל נוכחי</span>
         <span class="sg-val num">${current.toFixed(0)}</span>
-        <span class="sg-sub">יעד: <b class="num">75</b> · חסרות <b class="num">${Math.max(0, 75 - current).toFixed(0)}</b> נק׳</span>
-        <span class="bar hue-violet"><span style="inline-size:${Math.min(100, current / 75 * 100)}%"></span></span>
+        <span class="sg-sub">יעד: <b class="num">${T}</b> · חסרות <b class="num">${Math.max(0, T - current).toFixed(0)}</b> נק׳</span>
+        <span class="bar hue-violet"><span style="inline-size:${Math.min(100, current / T * 100)}%"></span></span>
       </div>
     </div>
   </section>
@@ -165,24 +95,28 @@ function viewDashboard() {
     </div>
 
     <div class="glass daily">
-      <div class="card-title">${ICON.target}<h2>משימה יומית</h2></div>
+      <div class="card-title">${ICON.calendar}<h2>השבוע</h2></div>
       <div class="daily-row">
-        <div class="mini-ring">${ring(dailyPct, 72, 'משימה יומית')}<span class="num">${dailyPct}%</span></div>
-        <div><b>20 דקות למידה</b><p class="muted small">היום: ${fmtTime(today)}. הזמן נמדד רק כששיעור פתוח ואתה פעיל.</p></div>
+        <div class="mini-ring">${ring(Math.min(100, wk.pct), 72, 'ביצוע שבועי')}<span class="num">${wk.pct}%</span></div>
+        <div><b><span class="num">${wk.actualMin}</span> מתוך <span class="num">${wk.plannedMin}</span> דקות</b><p class="muted small">היום: ${fmtTime(todaySeconds())}. נמדד בשיעורים, בחזרות ובאבחון.</p></div>
       </div>
+      <a class="btn" href="#/week">לתוכנית השבועית</a>
     </div>
 
     <div class="glass goal">
       <div class="card-title">${ICON.flag}<h2>מחשבון יעד</h2></div>
       <div class="calc-row">
         <label for="g81">ציון יעד בשאלון הראשון (581/571, 60%)</label>
-        <input id="g81" type="range" min="40" max="100" step="1" value="${Math.max(g.q81, 75)}">
+        <input id="g81" type="range" min="40" max="100" step="1" value="${Math.max(g.q1, T)}">
         <output id="o81" class="num"></output>
       </div>
       <div class="calc-result" id="calcOut" aria-live="polite"></div>
-      <p class="fine">המשקל 60/40 אומת למתכונת הישנה. בחדשה הוא ממתין לאימות.</p>
+      <p class="fine">משקל 60/40 – רשמי בשתי המתכונות (שאלוני הבגרות והאתר הפדגוגי).</p>
     </div>
   </section>
+
+  ${recs.length ? `<section class="glass next-steps"><div class="card-title">${ICON.compass}<h2>מה עכשיו</h2></div>
+    <ul class="rec-list">${recs.map(r => `<li class="rec-${r.kind}">${r.href ? `<a href="${r.href}">${esc(r.text)}</a>` : esc(r.text)}</li>`).join('')}</ul></section>` : ''}
 
   <section class="home-main">
     <div class="topics">
@@ -215,10 +149,11 @@ function bindDashboard() {
   if (r) {
     const upd = () => {
       const x = +r.value; document.getElementById('o81').textContent = x;
-      const need = (75 - 0.6 * x) / 0.4;
+      const T = store.get().profile.targetGrade;
+      const need = (T - 0.6 * x) / 0.4;
       const out = document.getElementById('calcOut');
       if (need > 100) out.innerHTML = `עם <b class="num">${x}</b> צריך <b class="num">${need.toFixed(1)}</b> בשאלון השני. זה בלתי אפשרי, ולכן צריך לשפר גם את הראשון.`;
-      else if (need <= 0) out.innerHTML = `עם <b class="num">${x}</b> עוברים את 75 גם בלי השאלון השני.`;
+      else if (need <= 0) out.innerHTML = `עם <b class="num">${x}</b> עוברים את ${T} גם בלי השאלון השני.`;
       else out.innerHTML = `עם <b class="num">${x}</b> בראשון צריך לפחות <b class="num big">${Math.ceil(need)}</b> בשני.`;
     };
     r.addEventListener('input', upd); upd();
@@ -236,7 +171,9 @@ function bindDashboard() {
 // ---------- תרגול ומבחנים (מרכזים) ----------
 function viewPractice() {
   const st = store.get();
+  const dueN = extra.currentRecommendations().find(r => r.kind === 'review');
   return `<h1>תרגול</h1><p class="lead">כל התרגולים לפי שיעור. שאלות שכבר פתרת מסומנות.</p>
+  <a class="glass link-card" href="#/review"><span class="card-title">${ICON.repeat}<b>חזרות מרווחות</b></span><span class="muted small">${dueN ? esc(dueN.text) : 'אין חזרות להיום'}</span></a>
   <ul class="hub-list">${LESSONS.map(l => {
     const A = (st.lessons[l.id] || {}).answers || {};
     const cnt = arr => `${arr.filter(q => A[q.id] && A[q.id].correct).length}/${arr.length}`;
@@ -263,19 +200,6 @@ function viewExams() {
   </ul>`;
 }
 
-const ICON = {
-  play: '<svg viewBox="0 0 24 24" class="i"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/></svg>',
-  lock: '<svg viewBox="0 0 24 24" class="i"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
-  check: '<svg viewBox="0 0 24 24" class="i"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
-  resume: '<svg viewBox="0 0 24 24" class="i"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg>',
-  target: '<svg viewBox="0 0 24 24" class="i"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></svg>',
-  flag: '<svg viewBox="0 0 24 24" class="i"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>',
-  layers: '<svg viewBox="0 0 24 24" class="i"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></svg>',
-  user: '<svg viewBox="0 0 24 24" class="i"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
-  mic: '<svg viewBox="0 0 24 24" class="i"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
-  wave: '<svg viewBox="0 0 24 24" class="i"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg>',
-};
-
 // ---------- תוכנית לימודים ----------
 let planFilter = null;
 function viewPlan() {
@@ -293,11 +217,17 @@ function viewPlan() {
   return `
   <h1>תוכנית הלימודים</h1>
   <p class="lead">מיפוי הנושאים בשתי המתכונות. בשלב הראשון לומדים את הנושאים המשותפים.</p>
-  <div class="warn card"><b>מה עוד לא מאומת.</b> הסיווג מבוסס על כותרות הפרקים בשאלונים רשמיים ועל אתרי הוראה פרטיים. מסמך תוכנית הלימודים הרשמי עדיין לא נבדק סעיף אחר סעיף. כל נושא שמסומן "מקור משני" או "דורש בדיקה" צריך אימות.</div>
+  <div class="grid-2 plan-links">
+    <a class="glass link-card" href="#/map"><span class="card-title">${ICON.map}<b>מפת ידע</b></span><span class="muted small">57 מיומנויות וידע מקדים</span></a>
+    <a class="glass link-card" href="#/diagnostic"><span class="card-title">${ICON.compass}<b>מבחן אבחון</b></span><span class="muted small">${store.get().diagnostic?.finishedAt ? 'לתוצאות' : 'מאיפה להתחיל'}</span></a>
+  </div>
+  <div class="warn card"><b>מה אומת ומה לא (${VERIFIED_ON}).</b> מבנה השאלונים, המשקלות וכותרות הפרקים נבדקו ישירות בשאלוני בגרות רשמיים ובאתר הפדגוגי של משרד החינוך. תוכניות הלימודים המפורטות ודף "מיקוד הלמידה" עוד לא נקראו סעיף אחר סעיף. כל נושא שמסומן "מקור משני" או "דורש בדיקה" לא אומת.
+    <ul class="open-q">${EXAMS.openQuestions.map(q => `<li>${esc(q)}</li>`).join('')}</ul></div>
 
   <div class="exam-cards grid-2">
     ${['old', 'new'].map(k => `<div class="card"><h3>${EXAMS[k].name}</h3>${EXAMS[k].papers.map(p => `
-      <div class="paper"><div><b class="num">${p.code}</b> <span class="badge ghost">${p.weight}%</span> <span class="conf conf-${p.confidence}">${CONFIDENCE[p.confidence]}</span></div><p>${esc(p.structure)}</p></div>`).join('')}</div>`).join('')}
+      <div class="paper"><div><b class="num">${p.code}</b> <span class="badge ghost">${p.weight}%</span> <span class="conf conf-${p.confidence}">${CONFIDENCE[p.confidence]}</span></div><p>${esc(p.structure)}</p>
+      ${p.versions ? `<div class="versions">${p.versions.map(v => `<div class="ver"><b>${esc(v.label)}</b> <a href="${SOURCES[v.src].url}" target="_blank" rel="noopener">מקור</a><p>${esc(v.text)}</p></div>`).join('')}</div>` : `<a class="small" href="${SOURCES[p.src[0]].url}" target="_blank" rel="noopener">מקור</a>`}</div>`).join('')}</div>`).join('')}
   </div>
 
   <div class="tabs" role="tablist" aria-label="סינון לפי מתכונת">
@@ -329,16 +259,6 @@ function bindPlan() {
 }
 
 // ---------- שאלות ----------
-function checkNum(q, raw) {
-  const v = parseFloat(String(raw).replace(',', '.').replace('−', '-').trim());
-  if (Number.isNaN(v)) return { valid: false };
-  const tol = q.tol ?? 0.005;
-  const ok = Math.abs(v - q.answer) <= tol + 1e-9;
-  let tag = null;
-  if (!ok && q.wrong) { const w = q.wrong.find(w => Math.abs(v - w.v) <= Math.max(tol, 0.01)); if (w) tag = w.tag; }
-  return { valid: true, ok, tag: tag || 'general', v };
-}
-
 function qHTML(q, lessonId, mode, idx) {
   const L = store.get().lessons[lessonId];
   const prev = mode === 'practice' && L && L.answers[q.id];
@@ -347,7 +267,7 @@ function qHTML(q, lessonId, mode, idx) {
   const input = q.type === 'mc'
     ? `<div class="options" role="radiogroup">${q.options.map((o, i) => `
         <label class="opt"><input type="radio" name="${q.id}" value="${i}" ${solved && o.ok ? 'checked' : ''}><span>${o.t}</span></label>`).join('')}</div>`
-    : `<div class="num-input"><input type="text" inputmode="decimal" dir="ltr" aria-label="תשובה" autocomplete="off" ${solved ? `value="${q.answer}"` : ''}></div>`;
+    : `<div class="num-input"><input type="text" inputmode="decimal" dir="ltr" aria-label="תשובה" autocomplete="off" ${solved ? `value="${q.answer}"` : ''}>${q.rounding ? `<span class="muted small">עיגול: ${esc(q.rounding)}</span>` : ''}</div>`;
   return `
   <div class="q card ${solved ? 'solved' : ''}" data-q="${q.id}" data-mode="${mode}" data-hints="0">
     <div class="q-head"><span class="q-num">${label}</span>${solved ? '<span class="ok-mark">✓ נפתר</span>' : ''}</div>
@@ -386,29 +306,28 @@ function bindPractice(container, lesson) {
       }
       return;
     }
+    const already = !!store.get().lessons[lesson.id]?.answers[q.id]?.correct;  // שאלה שכבר נפתרה לא נספרת שוב
     if (btn.dataset.act === 'reveal') {
-      store.recordAnswer(lesson.id, q.id, false, hintsUsed, true);
+      if (!already) store.recordAttempt(lesson.id, q.id, { ok: false, hints: hintsUsed, revealed: true, ctx: 'practice' });
       fb.className = 'feedback show-sol';
       fb.innerHTML = `<b>הפתרון:</b> ${q.solution}`; renderMath(fb);
       return;
     }
     // check
-    let res;
-    if (q.type === 'mc') {
-      const sel = card.querySelector('input[type=radio]:checked');
-      if (!sel) { fb.className = 'feedback info'; fb.textContent = 'צריך לבחור תשובה.'; return; }
-      const o = q.options[+sel.value]; res = { valid: true, ok: !!o.ok, tag: o.tag || 'general' };
-    } else {
-      res = checkNum(q, card.querySelector('.num-input input').value);
-      if (!res.valid) { fb.className = 'feedback info'; fb.textContent = 'צריך לכתוב מספר. אפשר מספר עשרוני, למשל 9.8 או ‎-21.'; return; }
+    const raw = q.type === 'mc' ? card.querySelector('input[type=radio]:checked')?.value : card.querySelector('.num-input input').value;
+    const res = checkAnswer(q, raw);
+    if (!res.valid) {
+      fb.className = 'feedback info';
+      fb.textContent = q.type === 'mc' ? 'צריך לבחור תשובה.' : 'צריך לכתוב מספר. אפשר מספר עשרוני (9.8), שבר (3/4) או מספר שלילי (‎-21).';
+      return;
     }
-    store.recordAnswer(lesson.id, q.id, res.ok, hintsUsed);
+    if (!already) store.recordAttempt(lesson.id, q.id, { ok: res.ok, hints: hintsUsed, ctx: 'practice' });
     if (res.ok) {
       card.classList.add('solved');
       fb.className = 'feedback ok';
       fb.innerHTML = `<b>נכון.</b> ${q.solution}`;
     } else {
-      store.recordMistake(lesson.id, q.id, res.tag);
+      if (!already) store.recordMistake(lesson.id, q.id, res.tag);
       const t = lesson.tags[res.tag];
       fb.className = 'feedback bad';
       fb.innerHTML = t ? `<b>לא בדיוק.</b> נראה שזו טעות של ${t.label}. ${t.advice}` : '<b>לא בדיוק.</b> כדאי לבדוק שוב את החישוב, או לבקש רמז.';
@@ -494,14 +413,10 @@ function bindQuiz(lesson) {
     let correct = 0; const wrongTags = [];
     lesson.quiz.forEach(q => {
       const card = form.querySelector(`[data-q="${q.id}"]`); const fb = card.querySelector('.feedback');
-      let res;
-      if (q.type === 'mc') {
-        const sel = card.querySelector('input:checked');
-        res = sel ? { ok: !!q.options[+sel.value].ok, tag: q.options[+sel.value].tag || 'general' } : { ok: false, tag: 'general' };
-      } else {
-        res = checkNum(q, card.querySelector('.num-input input').value);
-        if (!res.valid) res = { ok: false, tag: 'general' };
-      }
+      const raw = q.type === 'mc' ? card.querySelector('input:checked')?.value : card.querySelector('.num-input input').value;
+      let res = checkAnswer(q, raw);
+      if (!res.valid) res = { ok: false, tag: 'general' };
+      store.recordAttempt(lesson.id, q.id, { ok: res.ok, ctx: 'quiz' });
       if (res.ok) { correct++; fb.className = 'feedback ok'; fb.innerHTML = `<b>נכון.</b> ${q.solution}`; }
       else {
         wrongTags.push(res.tag); store.recordMistake(lesson.id, q.id, res.tag);
@@ -529,19 +444,25 @@ function reviewHTML(lesson) {
   const top = Object.entries(counts).filter(([t]) => lesson.tags[t]).sort((a, b) => b[1] - a[1]);
   const general = counts.general || 0;
   const quizBest = L ? L.quiz.best : null;
+  const quizLast = ms.lastQuiz;
   const next = lesson.next && LESSON_BY_ID[lesson.next];
+  const rev = st.reviews[lesson.id];
 
   let advice;
-  if (quizBest === null) advice = `<p>עוד לא עשית את המבחן הקצר. הוא מה שקובע את רוב רמת השליטה.</p><a class="btn primary" href="#/lesson/${lesson.id}/quiz">למבחן</a>`;
-  else if (quizBest >= 80 && ms.score >= 65) advice = `<p>שולט בנושא ברמה טובה. ${next ? 'אפשר להמשיך לשיעור הבא.' : 'זה השיעור האחרון שקיים כרגע. כדאי לחזור על השיעור החלש ביותר.'}</p>${next ? `<a class="btn primary" href="#/lesson/${next.id}">לשיעור הבא: ${esc(next.title)}</a>` : '<a class="btn primary" href="#/">ללוח הבקרה</a>'}`;
+  if (quizLast === null) advice = `<p>עוד לא עשית את המבחן הקצר. הוא מה שקובע את רוב רמת השליטה.</p><a class="btn primary" href="#/lesson/${lesson.id}/quiz">למבחן</a>`;
+  else if (quizLast >= 80 && ms.score >= 65) advice = `<p>שולט בנושא ברמה טובה. ${next ? 'אפשר להמשיך לשיעור הבא.' : 'זה השיעור האחרון שקיים כרגע. כדאי לחזור על השיעור החלש ביותר.'}</p>${next ? `<a class="btn primary" href="#/lesson/${next.id}">לשיעור הבא: ${esc(next.title)}</a>` : '<a class="btn primary" href="#/">ללוח הבקרה</a>'}`;
   else if (top.length) { const t = lesson.tags[top[0][0]]; advice = `<p>הטעות שחוזרת הכי הרבה: <b>${t.label}</b>. ${t.advice}</p><a class="btn primary" href="#/lesson/${lesson.id}/${t.section}">לחזרה על ${SECTIONS.find(s => s.id === t.section).label}</a>`; }
   else advice = `<p>כדאי לעשות שוב את התרגול העצמאי ואז את המבחן.</p><a class="btn primary" href="#/lesson/${lesson.id}/practice">לתרגול העצמאי</a>`;
 
   return `
   <div class="card"><h2>רמת שליטה: ${LEVELS[ms.level]}</h2>${meter(ms.score, ms.level)}
     <div class="stats"><div><span class="num big">${ms.score}</span><span class="muted">מתוך 100</span></div>
-    <div><span class="num big">${quizBest ?? '—'}</span><span class="muted">ציון מבחן הכי טוב</span></div>
-    <div><span class="num big">${fmtTime(L ? L.timeSec : 0)}</span><span class="muted">זמן בשיעור</span></div></div></div>
+    <div><span class="num big">${quizLast ?? '—'}</span><span class="muted">מבחן אחרון</span></div>
+    <div><span class="num big">${ms.distinct}</span><span class="muted">תרגילים שונים בלי עזרה</span></div>
+    <div><span class="num big">${fmtTime(L ? L.timeSec : 0)}</span><span class="muted">זמן בשיעור</span></div></div>
+    ${ms.missing.length ? `<h3 class="sub-h">מה חסר לרמת "שליטה"</h3><ul class="check-list">${ms.missing.map(m => `<li>${esc(m)}</li>`).join('')}</ul>` : '<p class="ok-line">עמדת בכל התנאים לרמת "שליטה".</p>'}
+    ${rev ? `<p class="muted small">חזרה הבאה: ${extra.fmtDue(rev.due)} · שלב חזרה ${rev.box + 1} מתוך 5.</p>` : ''}
+    <details class="how"><summary>איך מחושבת רמת השליטה?</summary>${extra.MASTERY_EXPLAINER}</details></div>
   <div class="card"><h2>ניתוח טעויות</h2>
     ${top.length || general ? `<ul class="mistakes">${top.map(([t, c]) => `<li><span class="num count">${c}</span><div><b>${lesson.tags[t].label}</b><p class="muted">${lesson.tags[t].advice}</p></div></li>`).join('')}
       ${general ? `<li><span class="num count">${general}</span><div><b>טעויות אחרות</b><p class="muted">טעויות חישוב או טעויות שהמערכת לא זיהתה את הסוג שלהן.</p></div></li>` : ''}</ul>`
@@ -629,16 +550,17 @@ function viewProgress() {
     <div><span class="num big">${st.mistakes.length}</span><span class="muted">טעויות רשומות</span></div>
   </div></div>
   <div class="card table-wrap"><table>
-    <thead><tr><th>שיעור</th><th>שליטה</th><th>מבחן הכי טוב</th><th>שלבים</th><th>זמן</th></tr></thead>
+    <thead><tr><th>שיעור</th><th>שליטה</th><th>מבחן אחרון</th><th>שלבים</th><th>זמן</th></tr></thead>
     <tbody>${LESSONS.map(l => { const s = lessonState(l); const L = st.lessons[l.id]; return `<tr>
       <td><a href="#/lesson/${l.id}">${esc(l.title)}</a></td><td>${LEVELS[s.level]} <span class="num muted">(${s.score})</span></td>
-      <td class="num">${L && L.quiz.best !== null ? L.quiz.best : '—'}</td><td class="num">${s.done}/${s.total}</td><td>${fmtTime(L ? L.timeSec : 0)}</td></tr>`; }).join('')}</tbody>
+      <td class="num">${s.lastQuiz ?? '—'}</td><td class="num">${s.done}/${s.total}</td><td>${fmtTime(L ? L.timeSec : 0)}</td></tr>`; }).join('')}</tbody>
   </table></div>
+  ${extra.settingsHTML()}
   <div class="card"><h2>גיבוי</h2>
     <p>ההתקדמות נשמרת בדפדפן הזה בלבד. כדי להעביר אותה לטלפון או למחשב אחר, מורידים קובץ גיבוי וטוענים אותו שם.</p>
     <div class="q-actions"><button class="btn primary" id="exp">הורדת קובץ גיבוי</button>
       <label class="btn">טעינת קובץ גיבוי<input type="file" id="imp" accept="application/json" hidden></label>
-      <button class="btn ghost danger" id="rst">איפוס ההתקדמות</button></div>
+      <button class="btn ghost danger" id="rst" data-armed="0">איפוס ההתקדמות</button></div>
     <p id="ioMsg" class="muted" aria-live="polite"></p></div>
   <a class="glass link-card" href="#/sources">מקורות וסימון תוכן <span class="dir">‹</span></a>`;
 }
@@ -656,9 +578,14 @@ function bindProgress() {
     try { store.importJSON(await f.text()); msg.textContent = 'ההתקדמות נטענה.'; setTimeout(route, 600); }
     catch { msg.textContent = 'הקובץ לא נראה כמו גיבוי של האפליקציה. כדאי לבדוק שבחרת את הקובץ הנכון.'; }
   };
-  document.getElementById('rst').onclick = () => {
-    if (confirm('למחוק את כל ההתקדמות? אי אפשר לבטל את זה.')) { store.reset(); route(); }
+  const rst = document.getElementById('rst');
+  rst.onclick = () => {   // אישור בתוך הדף (חלונות confirm חסומים בחלק מהסביבות)
+    if (rst.dataset.armed === '1') { store.reset(); route(); return; }
+    rst.dataset.armed = '1'; rst.textContent = 'לחיצה נוספת תמחק הכול';
+    msg.textContent = 'המחיקה סופית. כדאי להוריד קובץ גיבוי לפני כן.';
+    setTimeout(() => { if (rst.isConnected) { rst.dataset.armed = '0'; rst.textContent = 'איפוס ההתקדמות'; } }, 5000);
   };
+  extra.bindSettings(route);
 }
 
 // ---------- מקורות ----------
@@ -681,8 +608,8 @@ function setActiveNav(name) {
 }
 
 function route() {
-  const parts = (location.hash || '#/').slice(2).split('/');
-  currentLesson = null;
+  const parts = (location.hash || '#/').slice(2).split('#')[0].split('/');
+  currentLesson = null; currentActivity = null;
   let html, bind = () => {}, nav = parts[0] || 'home';
   if (parts[0] === 'lesson') { html = viewLesson(parts[1], parts[2]); bind = () => bindLesson(parts[1]); nav = 'plan'; }
   else if (parts[0] === 'plan') { html = viewPlan(); bind = bindPlan; }
@@ -690,6 +617,10 @@ function route() {
   else if (parts[0] === 'sources') { html = viewSources(); nav = 'progress'; }
   else if (parts[0] === 'practice') { html = viewPractice(); }
   else if (parts[0] === 'exams') { html = viewExams(); }
+  else if (parts[0] === 'review') { const v = extra.reviewRoute(parts[1]); html = v.html; bind = v.bind; nav = 'practice'; currentActivity = 'review'; }
+  else if (parts[0] === 'diagnostic') { const v = extra.diagnosticRoute(); html = v.html; bind = v.bind; nav = 'plan'; currentActivity = 'diagnostic'; }
+  else if (parts[0] === 'map') { html = extra.viewMap(); nav = 'plan'; }
+  else if (parts[0] === 'week') { html = extra.viewWeek(); nav = 'progress'; }
   else { html = viewDashboard(); bind = bindDashboard; nav = 'home'; }
   app.innerHTML = html;
   app.classList.remove('enter'); void app.offsetWidth; app.classList.add('enter');
@@ -701,11 +632,25 @@ function route() {
 }
 
 // ---------- מעקב זמן ----------
+// נמדד רק כשפתוח שיעור, חזרה או אבחון, הלשונית גלויה, והייתה פעולה בשתי הדקות האחרונות.
+let currentActivity = null;
 let lastActivity = Date.now();
 ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev => addEventListener(ev, () => { lastActivity = Date.now(); }, { passive: true }));
 setInterval(() => {
-  if (currentLesson && document.visibilityState === 'visible' && Date.now() - lastActivity < 120000) store.addTime(currentLesson, 10);
+  if ((currentLesson || currentActivity) && document.visibilityState === 'visible' && Date.now() - lastActivity < 120000) store.addTime(currentLesson, 10);
 }, 10000);
 
-addEventListener('hashchange', route);
-route();
+// ---------- אתחול ----------
+async function boot() {
+  try {
+    await Promise.all([loadLessons(), extra.loadExtraData()]);
+  } catch (e) {
+    app.innerHTML = `<div class="card"><h1>התוכן לא נטען</h1><p>לא הצלחתי לטעון את קובצי השיעורים. אם האפליקציה נפתחה ישירות מקובץ, צריך להפעיל אותה דרך שרת (ראו README).</p><p class="muted small">${esc(e.message)}</p></div>`;
+    return;
+  }
+  if (LOAD_ERRORS.length) console.warn('שיעורים שלא נטענו:', LOAD_ERRORS);
+  addEventListener('hashchange', route);
+  onExternalChange(() => { if (!document.querySelector('#quiz, #reviewForm, #diagForm')) route(); });
+  route();
+}
+boot();

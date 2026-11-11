@@ -1,6 +1,8 @@
 {
   "schemaVersion": 1,
   "lessons": [
-    "lessons/arithmetic-sequence.json"
+    "lessons/arithmetic-sequence.json",
+    "lessons/derivative-extrema.json",
+    "lessons/sine-cosine-law.json"
   ]
 }

@@ -1,6 +1,6 @@
 # MATH 5 – אפליקציה אישית לבגרות במתמטיקה 5 יח"ל
 
-יעד: ציון משוקלל 75 לפחות (היום 52: 581=58, 582=43) – דרישת הקבלה להנדסת חשמל ב-HIT.
+יעד: ציון משוקלל 80 לפחות (היום 52: 581=58, 582=43) – דרישת הקבלה להנדסת חשמל ב-HIT.
 
 ## הפעלה
 
@@ -9,7 +9,8 @@
 ```bash
 cd math5
 python3 -m http.server 8000     # ואז לפתוח http://localhost:8000
-node tests/verify-math.mjs      # בדיקת נכונות לכל התשובות המספריות
+npm test                        # מתמטיקה, תקינות תוכן, בדיקות יחידה
+npm run test:e2e                # בדיקות דפדפן (Playwright)
 ```
 
 אי אפשר לפתוח את `index.html` ישירות מהקובץ (`file://`), כי מודולי JavaScript דורשים שרת. לטלפון: GitHub Pages על התיקייה `math5/`, או קישור Artifact.
@@ -31,13 +32,17 @@ node tests/verify-math.mjs      # בדיקת נכונות לכל התשובות 
 math5/
 ├── index.html              מעטפת, ניווט, טעינת KaTeX
 ├── styles.css              עיצוב (מחברת משבצות; מצב בהיר וכהה; RTL מלא)
+├── learning-content/       כל התוכן כ-JSON: שיעורים, מפת ידע, מבחן אבחון (ראו README שם)
 ├── js/
-│   ├── app.js              ניתוב (#/...), מסכים, רכיב שאלה, מבחן, ניתוח טעויות, מעקב זמן
-│   ├── store.js            שמירת התקדמות, חישוב רמת שליטה
+│   ├── app.js              ניתוב (#/...), מסכי בית/שיעור/תרגול/מבחנים/התקדמות, מעקב זמן
+│   ├── ui.js               רכיבי ממשק משותפים
+│   ├── store.js            שמירה (גרסה 2), מעבר מגרסה 1, יומן ניסיונות, סנכרון לשוניות
+│   ├── views/extra.js      חזרות, אבחון, מפת ידע, תוכנית שבועית, הגדרות
+│   ├── core/               לוגיקה טהורה ונבדקת: answers, mastery, schedule, diagnostic, plan, adapter, text
 │   └── data/
-│       ├── curriculum.js   מפת נושאים לשתי המתכונות + מקורות + מבנה שאלונים
-│       └── lessons/        שיעור = קובץ אחד; index.js רושם אותם
-├── tests/verify-math.mjs   חישוב בלתי תלוי של כל תשובה
+│       ├── curriculum.js   מפת נושאים ומבנה שאלונים (מאומת מול משרד החינוך, עם רמות ודאות)
+│       └── lessons/index.js טוען את השיעורים מ-learning-content
+├── tests/                  verify-math, validate-content (+test), unit/, e2e.cjs
 └── vendor/katex/
 ```
 

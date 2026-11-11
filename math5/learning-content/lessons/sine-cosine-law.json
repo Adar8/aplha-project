@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "id": "sine-cosine-law",
+  "title": "משפט הסינוסים ומשפט הקוסינוסים",
+  "topic": "plane-trig",
+  "papers": {
+    "old": [
+      "035581"
+    ],
+    "new": [
+      "035571"
+    ]
+  },
+  "topicStatus": "common",
+  "estimatedMinutes": 60,
+  "summary": "פתרון משולש כללי, רדיוס המעגל החוסם ושטח משולש.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "הומר מהשיעור הקיים באפליקציה."
+  },
+  "explanations": [
+    {
+      "id": "e1",
+      "title": "למה צריך את המשפטים האלה?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "במשולש ישר-זווית מספיקים סינוס, קוסינוס ופיתגורס. אבל רוב המשולשים בבגרות אינם ישרי-זווית. שני המשפטים האלה עובדים **בכל משולש**."
+        },
+        {
+          "type": "text",
+          "text": "סימון קבוע: הצלע $a$ נמצאת מול הזווית $\\alpha$, הצלע $b$ מול $\\beta$, והצלע $c$ מול $\\gamma$."
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "title": "משפט הסינוסים",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "\\frac{a}{\\sin\\alpha} = \\frac{b}{\\sin\\beta} = \\frac{c}{\\sin\\gamma} = 2R"
+        },
+        {
+          "type": "text",
+          "text": "$R$ הוא רדיוס המעגל החוסם את המשולש. משתמשים במשפט כשיודעים **זוג**: צלע והזווית שמולה."
+        },
+        {
+          "type": "warning",
+          "text": "כשמחפשים זווית בעזרת משפט הסינוסים, יש שתי זוויות עם אותו סינוס: $\\sin x = \\sin(180^\\circ - x)$. צריך לבדוק אם שתיהן אפשריות במשולש."
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "title": "משפט הקוסינוסים",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "c^2 = a^2 + b^2 - 2ab\\cos\\gamma"
+        },
+        {
+          "type": "text",
+          "text": "זה \"פיתגורס עם תיקון\". כש-$\\gamma = 90^\\circ$, $\\cos\\gamma = 0$ ומקבלים בדיוק את פיתגורס."
+        },
+        {
+          "type": "text",
+          "text": "משתמשים בו כשיודעים **שלוש צלעות**, או **שתי צלעות והזווית שביניהן**."
+        },
+        {
+          "type": "text",
+          "text": "הזווית הגדולה ביותר במשולש נמצאת מול הצלע הגדולה ביותר. אם $\\cos\\gamma<0$, הזווית קהה."
+        }
+      ]
+    },
+    {
+      "id": "e4",
+      "title": "שטח משולש",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "S = \\tfrac12\\,a\\,b\\,\\sin\\gamma"
+        },
+        {
+          "type": "text",
+          "text": "חצי מכפלת שתי צלעות בסינוס הזווית **שביניהן**."
+        }
+      ]
+    }
+  ],
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "עדיין לא נבחר סרטון ספציפי ולא נבדק שהוא מתאים. בינתיים יש קישורי חיפוש.",
+    "links": [
+      {
+        "label": "חיפוש ביוטיוב: משפט הסינוסים והקוסינוסים",
+        "url": "https://www.youtube.com/results?search_query=%D7%9E%D7%A9%D7%A4%D7%98+%D7%94%D7%A1%D7%99%D7%A0%D7%95%D7%A1%D7%99%D7%9D+%D7%95%D7%94%D7%A7%D7%95%D7%A1%D7%99%D7%A0%D7%95%D7%A1%D7%99%D7%9D",
+        "kind": "search",
+        "verified": false
+      },
+      {
+        "label": "קמפוס IL – קורסים חינמיים (חיפוש קורס מתמטיקה)",
+        "url": "https://campus.gov.il/",
+        "kind": "course",
+        "verified": false
+      }
+    ]
+  },
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "שתי צלעות והזווית שביניהן",
+      "problem": "במשולש $b = 8$, $c = 5$ והזווית ביניהן $\\alpha = 60^\\circ$. מצא את $a$.",
+      "steps": [
+        "יודעים שתי צלעות והזווית שביניהן: משפט הקוסינוסים.",
+        "$a^2 = b^2 + c^2 - 2bc\\cos\\alpha = 64 + 25 - 2\\cdot 8\\cdot 5\\cdot\\cos 60^\\circ$.",
+        "$\\cos 60^\\circ = \\tfrac12$, ולכן $a^2 = 89 - 40 = 49$.",
+        "$a = 7$."
+      ],
+      "answer": "$a = 7$",
+      "checks": [
+        {
+          "label": "a",
+          "expr": "sqrt(64+25-2*8*5*cos(60))",
+          "equals": 7
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "צלע ושתי זוויות",
+      "problem": "במשולש $a = 10$, $\\alpha = 30^\\circ$, $\\beta = 45^\\circ$. מצא את $b$ ואת רדיוס המעגל החוסם.",
+      "steps": [
+        "יש זוג צלע-זווית ($a$, $\\alpha$): משפט הסינוסים.",
+        "$\\frac{b}{\\sin 45^\\circ} = \\frac{10}{\\sin 30^\\circ} \\Rightarrow b = \\frac{10\\cdot\\sin45^\\circ}{\\sin30^\\circ} = \\frac{10\\cdot 0.7071}{0.5}$.",
+        "$b \\approx 14.14$ (בדיוק: $10\\sqrt2$).",
+        "$2R = \\frac{a}{\\sin\\alpha} = \\frac{10}{0.5} = 20 \\Rightarrow R = 10$."
+      ],
+      "answer": "$b = 10\\sqrt2 \\approx 14.14$, $R = 10$",
+      "checks": [
+        {
+          "label": "b",
+          "expr": "10*sin(45)/sin(30)",
+          "equals": 14.142,
+          "tolerance": 0.001
+        },
+        {
+          "label": "R",
+          "expr": "10/(2*sin(30))",
+          "equals": 10
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "שלוש צלעות",
+      "problem": "במשולש הצלעות 5, 7 ו-8. מצא את הזווית שמול הצלע 7 ואת שטח המשולש.",
+      "steps": [
+        "יודעים שלוש צלעות: משפט הקוסינוסים, ומבודדים את הקוסינוס.",
+        "$7^2 = 5^2 + 8^2 - 2\\cdot 5\\cdot 8\\cos\\gamma \\Rightarrow 49 = 89 - 80\\cos\\gamma$.",
+        "$\\cos\\gamma = \\frac{40}{80} = \\frac12 \\Rightarrow \\gamma = 60^\\circ$.",
+        "השטח, עם שתי הצלעות שסביב הזווית: $S = \\tfrac12\\cdot5\\cdot8\\cdot\\sin60^\\circ = 20\\cdot\\frac{\\sqrt3}{2} = 10\\sqrt3 \\approx 17.32$."
+      ],
+      "answer": "$\\gamma = 60^\\circ$, $S = 10\\sqrt3 \\approx 17.32$",
+      "checks": [
+        {
+          "label": "gamma",
+          "expr": "acos((25+64-49)/(2*5*8))",
+          "equals": 60
+        },
+        {
+          "label": "S",
+          "expr": "0.5*5*8*sin(60)",
+          "equals": 17.3205,
+          "tolerance": 0.0001
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש $a = 3$, $b = 5$ והזווית ביניהן $\\gamma = 120^\\circ$. מהו $c$?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0.01,
+        "rounding": "שתי ספרות אחרי הנקודה"
+      },
+      "check": "sqrt(3^2+5^2-2*3*5*cos(120))",
+      "commonWrongAnswers": [
+        {
+          "value": 4.36,
+          "mistake": "cos-sign"
+        }
+      ],
+      "hints": [
+        "שתי צלעות והזווית שביניהן – משפט הקוסינוסים.",
+        "$\\cos 120^\\circ = -\\tfrac12$. שים לב לסימן.",
+        "$c^2 = 9 + 25 - 2\\cdot3\\cdot5\\cdot(-\\tfrac12) = 34 + 15$."
+      ],
+      "solution": {
+        "steps": [
+          "$c^2 = 34 + 15 = 49 \\Rightarrow c = 7$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש $a = 6$ ו-$\\alpha = 30^\\circ$. מהו רדיוס המעגל החוסם $R$?",
+      "answer": {
+        "value": 6,
+        "tolerance": 0
+      },
+      "check": "6/(2*sin(30))",
+      "commonWrongAnswers": [
+        {
+          "value": 12,
+          "mistake": "two-r"
+        }
+      ],
+      "hints": [
+        "$\\frac{a}{\\sin\\alpha} = 2R$.",
+        "$\\frac{6}{0.5} = 12 = 2R$."
+      ],
+      "solution": {
+        "steps": [
+          "$2R = 12 \\Rightarrow R = 6$."
+        ],
+        "final": "$6$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש הצלעות 3, 5 ו-7. מהי הזווית הגדולה ביותר (במעלות)?",
+      "answer": {
+        "value": 120,
+        "tolerance": 0
+      },
+      "check": "acos((3^2+5^2-7^2)/(2*3*5))",
+      "commonWrongAnswers": [
+        {
+          "value": 60,
+          "mistake": "cos-sign"
+        }
+      ],
+      "hints": [
+        "הזווית הגדולה נמצאת מול הצלע הגדולה, 7.",
+        "$\\cos\\gamma = \\frac{3^2 + 5^2 - 7^2}{2\\cdot3\\cdot5}$.",
+        "$\\cos\\gamma = \\frac{-15}{30} = -\\frac12$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\cos\\gamma = -\\tfrac12 \\Rightarrow \\gamma = 120^\\circ$."
+        ],
+        "final": "$120$"
+      }
+    }
+  ],
+  "independentPractice": [
+    {
+      "id": "p1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש שתי צלעות באורך 6 ו-10, והזווית ביניהן $30^\\circ$. מהו שטח המשולש?",
+      "answer": {
+        "value": 15,
+        "tolerance": 0
+      },
+      "check": "0.5*6*10*sin(30)",
+      "commonWrongAnswers": [
+        {
+          "value": 30,
+          "mistake": "area-half"
+        }
+      ],
+      "hints": [
+        "$S = \\tfrac12 ab\\sin\\gamma$."
+      ],
+      "solution": {
+        "steps": [
+          "$S = \\tfrac12\\cdot6\\cdot10\\cdot\\tfrac12 = 15$."
+        ],
+        "final": "$15$"
+      }
+    },
+    {
+      "id": "p2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש $a = 12$, $\\alpha = 60^\\circ$, $\\beta = 45^\\circ$. מהו $b$? (עגל לשתי ספרות אחרי הנקודה)",
+      "answer": {
+        "value": 9.8,
+        "tolerance": 0.02,
+        "rounding": "שתי ספרות אחרי הנקודה"
+      },
+      "check": "12*sin(45)/sin(60)",
+      "commonWrongAnswers": [
+        {
+          "value": 14.7,
+          "mistake": "sine-ratio"
+        }
+      ],
+      "hints": [
+        "$b = \\frac{a\\sin\\beta}{\\sin\\alpha}$.",
+        "$\\frac{12\\cdot 0.7071}{0.8660}$."
+      ],
+      "solution": {
+        "steps": [
+          "$b = \\frac{12\\sin45^\\circ}{\\sin60^\\circ} = 4\\sqrt6 \\approx 9.80$."
+        ],
+        "final": "$9.8$"
+      }
+    },
+    {
+      "id": "p3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש הצלעות 4, 5 ו-6. מהי הזווית שמול הצלע 6, במעלות? (עגל לספרה אחת אחרי הנקודה)",
+      "answer": {
+        "value": 82.8,
+        "tolerance": 0.1,
+        "rounding": "ספרה אחת אחרי הנקודה"
+      },
+      "check": "acos((16+25-36)/40)",
+      "hints": [
+        "$\\cos\\gamma = \\frac{16 + 25 - 36}{2\\cdot4\\cdot5}$.",
+        "$\\cos\\gamma = \\frac{5}{40} = 0.125$. השתמש ב-$\\cos^{-1}$ במחשבון (במצב מעלות)."
+      ],
+      "solution": {
+        "steps": [
+          "$\\cos\\gamma = 0.125 \\Rightarrow \\gamma \\approx 82.8^\\circ$."
+        ],
+        "final": "$82.8$"
+      }
+    },
+    {
+      "id": "p4",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מצאת בעזרת משפט הסינוסים ש-$\\sin\\beta = 0.5$. מה צריך לבדוק?",
+      "choices": [
+        {
+          "text": "אם גם $\\beta = 150^\\circ$ אפשרית במשולש",
+          "correct": true
+        },
+        {
+          "text": "שום דבר, β = 30°",
+          "mistake": "ambiguous"
+        },
+        {
+          "text": "אם הצלעות מקיימות את משפט פיתגורס",
+          "mistake": "ambiguous"
+        },
+        {
+          "text": "אם $\\cos\\beta = 0.5$",
+          "mistake": "ambiguous"
+        }
+      ],
+      "hints": [
+        "$\\sin 30^\\circ = \\sin 150^\\circ$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\sin 30^\\circ = \\sin 150^\\circ = 0.5$. צריך לבדוק אם סכום הזוויות עם $150^\\circ$ עדיין קטן מ-$180^\\circ$, ואם $\\beta$ מול צלע גדולה מספיק."
+        ],
+        "final": "אם גם $\\beta = 150^\\circ$ אפשרית במשולש"
+      }
+    }
+  ],
+  "bagrutQuestions": [
+    {
+      "id": "b1",
+      "title": "שאלה ברמת בגרות",
+      "difficulty": 3,
+      "source": {
+        "type": "original"
+      },
+      "context": "במשולש $ABC$ נתון: $AB = 10$, $AC = 6$, $\\angle BAC = 120^\\circ$.",
+      "parts": [
+        {
+          "id": "b1a",
+          "type": "numeric",
+          "label": "א",
+          "prompt": "מצא את אורך הצלע $BC$.",
+          "answer": {
+            "value": 14,
+            "tolerance": 0.01,
+            "rounding": "שתי ספרות אחרי הנקודה"
+          },
+          "check": "sqrt(100+36-2*10*6*cos(120))",
+          "commonWrongAnswers": [
+            {
+              "value": 8.72,
+              "mistake": "cos-sign"
+            }
+          ],
+          "hints": [
+            "שתי צלעות והזווית שביניהן.",
+            "$BC^2 = 100 + 36 - 2\\cdot10\\cdot6\\cos120^\\circ$, ו-$\\cos120^\\circ = -\\tfrac12$."
+          ],
+          "solution": {
+            "steps": [
+              "$BC^2 = 136 + 60 = 196 \\Rightarrow BC = 14$."
+            ],
+            "final": "$14$"
+          }
+        },
+        {
+          "id": "b1b",
+          "type": "numeric",
+          "label": "ב",
+          "prompt": "מצא את רדיוס המעגל החוסם את המשולש. (עגל לשתי ספרות)",
+          "answer": {
+            "value": 8.08,
+            "tolerance": 0.02,
+            "rounding": "שתי ספרות אחרי הנקודה"
+          },
+          "check": "14/(2*sin(120))",
+          "commonWrongAnswers": [
+            {
+              "value": 16.17,
+              "mistake": "two-r"
+            }
+          ],
+          "hints": [
+            "$2R = \\frac{BC}{\\sin\\angle A}$.",
+            "$\\sin120^\\circ = \\frac{\\sqrt3}{2} \\approx 0.866$."
+          ],
+          "solution": {
+            "steps": [
+              "$2R = \\frac{14}{\\sin120^\\circ} = \\frac{28}{\\sqrt3} \\Rightarrow R = \\frac{14}{\\sqrt3} \\approx 8.08$."
+            ],
+            "final": "$8.08$"
+          }
+        },
+        {
+          "id": "b1c",
+          "type": "numeric",
+          "label": "ג",
+          "prompt": "מצא את שטח המשולש. (עגל לשתי ספרות)",
+          "answer": {
+            "value": 25.98,
+            "tolerance": 0.02,
+            "rounding": "שתי ספרות אחרי הנקודה"
+          },
+          "check": "0.5*10*6*sin(120)",
+          "commonWrongAnswers": [
+            {
+              "value": 51.96,
+              "mistake": "area-half"
+            }
+          ],
+          "hints": [
+            "$S = \\tfrac12\\cdot AB\\cdot AC\\cdot\\sin120^\\circ$."
+          ],
+          "solution": {
+            "steps": [
+              "$S = \\tfrac12\\cdot10\\cdot6\\cdot\\frac{\\sqrt3}{2} = 15\\sqrt3 \\approx 25.98$."
+            ],
+            "final": "$25.98$"
+          }
+        },
+        {
+          "id": "b1d",
+          "type": "numeric",
+          "label": "ד",
+          "prompt": "מצא את אורך הגובה מהקודקוד $A$ לצלע $BC$. (עגל לשתי ספרות)",
+          "answer": {
+            "value": 3.71,
+            "tolerance": 0.02,
+            "rounding": "שתי ספרות אחרי הנקודה"
+          },
+          "check": "2*(0.5*10*6*sin(120))/14",
+          "hints": [
+            "השטח הוא גם $\\tfrac12\\cdot BC\\cdot h$.",
+            "$h = \\frac{2S}{BC} = \\frac{2\\cdot 15\\sqrt3}{14}$."
+          ],
+          "solution": {
+            "steps": [
+              "$h = \\frac{30\\sqrt3}{14} = \\frac{15\\sqrt3}{7} \\approx 3.71$."
+            ],
+            "final": "$3.71$"
+          }
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש $a = 5$, $b = 7$, $\\gamma = 60^\\circ$. מהו $c$? (עגל לשתי ספרות)",
+      "answer": {
+        "value": 6.24,
+        "tolerance": 0.02,
+        "rounding": "שתי ספרות אחרי הנקודה"
+      },
+      "check": "sqrt(25+49-2*5*7*cos(60))",
+      "commonWrongAnswers": [
+        {
+          "value": 10.44,
+          "mistake": "cos-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$c^2 = 25 + 49 - 35 = 39 \\Rightarrow c = \\sqrt{39} \\approx 6.24$."
+        ],
+        "final": "$6.24$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש $a = 8$ ו-$\\alpha = 30^\\circ$. מהו $R$?",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "8/(2*sin(30))",
+      "commonWrongAnswers": [
+        {
+          "value": 16,
+          "mistake": "two-r"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2R = \\frac{8}{0.5} = 16 \\Rightarrow R = 8$."
+        ],
+        "final": "$8$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש ישר-זווית הניצבים 4 ו-9. מהו השטח, לפי $\\tfrac12 ab\\sin\\gamma$?",
+      "answer": {
+        "value": 18,
+        "tolerance": 0
+      },
+      "check": "0.5*4*9*sin(90)",
+      "commonWrongAnswers": [
+        {
+          "value": 36,
+          "mistake": "area-half"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\tfrac12\\cdot4\\cdot9\\cdot\\sin90^\\circ = 18$."
+        ],
+        "final": "$18$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "במשולש הצלעות 7, 8 ו-13. מהי הזווית שמול הצלע 13, במעלות?",
+      "answer": {
+        "value": 120,
+        "tolerance": 0
+      },
+      "check": "acos((49+64-169)/(2*7*8))",
+      "commonWrongAnswers": [
+        {
+          "value": 60,
+          "mistake": "cos-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\cos\\gamma = \\frac{49 + 64 - 169}{112} = -\\tfrac12 \\Rightarrow \\gamma = 120^\\circ$."
+        ],
+        "final": "$120$"
+      }
+    },
+    {
+      "id": "q5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "נתונות שלוש הצלעות של משולש. באיזה משפט כדאי להשתמש כדי למצוא זווית?",
+      "choices": [
+        {
+          "text": "משפט הקוסינוסים",
+          "correct": true
+        },
+        {
+          "text": "משפט הסינוסים",
+          "mistake": "choose-law"
+        },
+        {
+          "text": "משפט פיתגורס",
+          "mistake": "choose-law"
+        },
+        {
+          "text": "נוסחת השטח",
+          "mistake": "choose-law"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "עם שלוש צלעות אין לנו זוג צלע-זווית, ולכן משתמשים במשפט הקוסינוסים."
+        ],
+        "final": "משפט הקוסינוסים"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "cos-sign",
+      "label": "סימן הקוסינוס בזווית קהה",
+      "advice": "בזווית קהה (מעל 90°) הקוסינוס שלילי, ולכן −2ab·cosγ נהיה חיבור. cos120° = −½.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "two-r",
+      "label": "בלבול בין R ל-2R",
+      "advice": "היחס a/sinα שווה ל-2R, לא ל-R. בסוף מחלקים ב-2.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "area-half",
+      "label": "שכחת חצי בנוסחת השטח",
+      "advice": "S = ½·a·b·sinγ.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "sine-ratio",
+      "label": "הפיכת היחס במשפט הסינוסים",
+      "advice": "כל צלע מחולקת בסינוס הזווית שמולה: b = a·sinβ / sinα.",
+      "reviewSection": "examples"
+    },
+    {
+      "id": "ambiguous",
+      "label": "שני פתרונות לזווית",
+      "advice": "sin x = sin(180° − x). כשמוצאים זווית ממשפט הסינוסים, בודקים את שתי האפשרויות.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "choose-law",
+      "label": "בחירת המשפט המתאים",
+      "advice": "זוג צלע-זווית: סינוסים. שלוש צלעות, או שתיים והזווית שביניהן: קוסינוסים.",
+      "reviewSection": "explanations"
+    }
+  ],
+  "next": null
+}

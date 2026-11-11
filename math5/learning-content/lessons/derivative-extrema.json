@@ -1,0 +1,717 @@
+{
+  "schemaVersion": 1,
+  "id": "derivative-extrema",
+  "title": "נגזרת, משיק ונקודות קיצון של פולינום",
+  "topic": "calc-poly",
+  "papers": {
+    "old": [
+      "035581"
+    ],
+    "new": [
+      "035571"
+    ]
+  },
+  "topicStatus": "common",
+  "estimatedMinutes": 75,
+  "summary": "גוזרים פולינום, מוצאים משיק, ובונים טבלת עלייה וירידה.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "הומר מהשיעור הקיים באפליקציה."
+  },
+  "explanations": [
+    {
+      "id": "e1",
+      "title": "מה הנגזרת אומרת?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "דמיין שאתה נוסע על הגרף משמאל לימין. בכל נקודה אפשר לשאול: כמה תלול כאן, והאם אני עולה או יורד? **הנגזרת** $f'(x)$ עונה בדיוק על זה: היא השיפוע של המשיק לגרף בנקודה $x$."
+        },
+        {
+          "type": "list",
+          "items": [
+            "$f'(x) > 0$ – הפונקציה עולה.",
+            "$f'(x) < 0$ – הפונקציה יורדת.",
+            "$f'(x) = 0$ – המשיק אופקי. כאן יכולה להיות נקודת קיצון."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "title": "כללי גזירה של פולינום",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "\\left(x^n\\right)' = n\\,x^{n-1} \\qquad (c)' = 0 \\qquad \\big(c\\cdot f(x)\\big)' = c\\cdot f'(x)"
+        },
+        {
+          "type": "text",
+          "text": "וגוזרים איבר-איבר: $(f+g)' = f' + g'$. לדוגמה:"
+        },
+        {
+          "type": "formula",
+          "latex": "\\left(4x^3 - 5x^2 + x - 7\\right)' = 12x^2 - 10x + 1"
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "title": "משוואת המשיק",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "משיק לגרף בנקודה $x_0$ הוא ישר שעובר בנקודה $\\big(x_0, f(x_0)\\big)$ ושיפועו $m = f'(x_0)$:"
+        },
+        {
+          "type": "formula",
+          "latex": "y - f(x_0) = f'(x_0)\\,(x - x_0)"
+        },
+        {
+          "type": "warning",
+          "text": "שני דברים שונים: $f(x_0)$ הוא **גובה** הנקודה, ו-$f'(x_0)$ הוא **השיפוע**. בלבול ביניהם הוא הטעות הנפוצה ביותר בשאלות משיק."
+        }
+      ]
+    },
+    {
+      "id": "e4",
+      "title": "מציאת נקודות קיצון – שלוש פעולות",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "גוזרים ומשווים לאפס: $f'(x)=0$.",
+            "בונים טבלה: בודקים את הסימן של $f'$ בין הנקודות שמצאנו.",
+            "מסיקים: אם $f'$ עובר מ-$+$ ל-$-$ זו נקודת **מקסימום**. אם מ-$-$ ל-$+$ זו נקודת **מינימום**. אם הסימן לא מתחלף, זו לא נקודת קיצון."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "בסוף מציבים את ה-$x$ בפונקציה המקורית $f$ (לא בנגזרת!) כדי לקבל את ה-$y$ של הנקודה."
+        }
+      ]
+    }
+  ],
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "עדיין לא נבחר סרטון ספציפי ולא נבדק שהוא מתאים. בינתיים יש קישורי חיפוש.",
+    "links": [
+      {
+        "label": "חיפוש ביוטיוב: חקירת פולינום נקודות קיצון",
+        "url": "https://www.youtube.com/results?search_query=%D7%97%D7%A7%D7%99%D7%A8%D7%AA+%D7%A4%D7%95%D7%9C%D7%99%D7%A0%D7%95%D7%9D+%D7%A0%D7%A7%D7%95%D7%93%D7%95%D7%AA+%D7%A7%D7%99%D7%A6%D7%95%D7%9F",
+        "kind": "search",
+        "verified": false
+      },
+      {
+        "label": "קמפוס IL – קורסים חינמיים (חיפוש קורס מתמטיקה)",
+        "url": "https://campus.gov.il/",
+        "kind": "course",
+        "verified": false
+      }
+    ]
+  },
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "חקירה מלאה של פולינום ממעלה 3",
+      "problem": "מצא את נקודות הקיצון ואת תחומי העלייה והירידה של $f(x) = x^3 - 3x^2 - 9x + 5$.",
+      "steps": [
+        "גוזרים: $f'(x) = 3x^2 - 6x - 9$.",
+        "משווים לאפס: $3x^2 - 6x - 9 = 0 \\Rightarrow x^2 - 2x - 3 = 0 \\Rightarrow (x-3)(x+1) = 0$.",
+        "נקודות חשודות: $x=-1$ ו-$x=3$.",
+        "טבלת סימנים: ב-$x=-2$: $f'(-2) = 12+12-9 = 15 > 0$. ב-$x=0$: $f'(0) = -9 0$.",
+        "ב-$x=-1$ הנגזרת עוברת מ-$+$ ל-$-$: מקסימום. $f(-1) = -1 - 3 + 9 + 5 = 10$.",
+        "ב-$x=3$ הנגזרת עוברת מ-$-$ ל-$+$: מינימום. $f(3) = 27 - 27 - 27 + 5 = -22$."
+      ],
+      "answer": "מקסימום $(-1, 10)$, מינימום $(3, -22)$. עולה כאשר $x3$, יורדת כאשר $-1<x<3$.",
+      "checks": [
+        {
+          "label": "f(-1)",
+          "expr": "(-1)^3-3*(-1)^2-9*(-1)+5",
+          "equals": 10
+        },
+        {
+          "label": "f(3)",
+          "expr": "27-27-27+5",
+          "equals": -22
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "משוואת משיק",
+      "problem": "מצא את משוואת המשיק לגרף $f(x) = x^2 - 4x + 1$ בנקודה שבה $x = 3$.",
+      "steps": [
+        "גובה הנקודה: $f(3) = 9 - 12 + 1 = -2$. הנקודה היא $(3, -2)$.",
+        "שיפוע: $f'(x) = 2x - 4$, ולכן $m = f'(3) = 2$.",
+        "$y - (-2) = 2(x - 3) \\Rightarrow y = 2x - 8$.",
+        "בדיקה: $2\\cdot 3 - 8 = -2$. ✓"
+      ],
+      "answer": "$y = 2x - 8$",
+      "checks": [
+        {
+          "label": "f(3)",
+          "expr": "9-12+1",
+          "equals": -2
+        },
+        {
+          "label": "f'(3)",
+          "expr": "2*3-4",
+          "equals": 2
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "פרמטר",
+      "problem": "לפונקציה $f(x) = x^3 + ax^2 + 3$ יש נקודת קיצון ב-$x = 2$. מצא את $a$ וקבע את סוג הנקודה.",
+      "steps": [
+        "$f'(x) = 3x^2 + 2ax$. בנקודת קיצון $f'(2) = 0$.",
+        "$12 + 4a = 0 \\Rightarrow a = -3$.",
+        "עכשיו $f'(x) = 3x^2 - 6x = 3x(x-2)$. ב-$x=1$: $f'(1) = -3 0$.",
+        "הסימן עובר מ-$-$ ל-$+$: מינימום. $f(2) = 8 - 12 + 3 = -1$."
+      ],
+      "answer": "$a=-3$, ו-$(2,-1)$ היא נקודת מינימום.",
+      "checks": [
+        {
+          "label": "a",
+          "expr": "-12/4",
+          "equals": -3
+        },
+        {
+          "label": "f(2)",
+          "expr": "8-12+3",
+          "equals": -1
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "ל-$f(x) = 2x^3 - 6x$ יש נקודת מקסימום. מהו שיעור ה-$x$ שלה?",
+      "answer": {
+        "value": -1,
+        "tolerance": 0
+      },
+      "check": "-sqrt(6/(3*2))",
+      "commonWrongAnswers": [
+        {
+          "value": 1,
+          "mistake": "max-min"
+        },
+        {
+          "value": 4,
+          "mistake": "x-vs-y"
+        }
+      ],
+      "hints": [
+        "גזור: $f'(x) = 6x^2 - 6$.",
+        "$f'(x)=0$ כאשר $x = \\pm 1$. עכשיו בדוק סימנים.",
+        "ב-$x=-2$ הנגזרת חיובית, ב-$x=0$ שלילית."
+      ],
+      "solution": {
+        "steps": [
+          "$f'$ עוברת מ-$+$ ל-$-$ ב-$x=-1$, לכן זו נקודת המקסימום: $(-1, 4)$."
+        ],
+        "final": "$-1$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו שיפוע המשיק לגרף $f(x) = x^3$ בנקודה $x = 2$?",
+      "answer": {
+        "value": 12,
+        "tolerance": 0
+      },
+      "check": "3*2^2",
+      "commonWrongAnswers": [
+        {
+          "value": 8,
+          "mistake": "slope-vs-value"
+        },
+        {
+          "value": 6,
+          "mistake": "power-rule"
+        }
+      ],
+      "hints": [
+        "השיפוע הוא $f'(2)$.",
+        "$f'(x) = 3x^2$."
+      ],
+      "solution": {
+        "steps": [
+          "$f'(2) = 3\\cdot 4 = 12$."
+        ],
+        "final": "$12$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הערך המינימלי של $f(x) = x^2 - 6x + 11$?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "3^2-6*3+11",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "x-vs-y"
+        },
+        {
+          "value": 0,
+          "mistake": "plug-derivative"
+        }
+      ],
+      "hints": [
+        "$f'(x) = 2x - 6 = 0$.",
+        "$x = 3$. עכשיו הצב בפונקציה $f$ עצמה."
+      ],
+      "solution": {
+        "steps": [
+          "$x=3$, $f(3) = 9 - 18 + 11 = 2$."
+        ],
+        "final": "$2$"
+      }
+    }
+  ],
+  "independentPractice": [
+    {
+      "id": "p1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$f(x) = 4x^3 - 5x^2 + x - 7$. מהו $f'(1)$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "12*1^2-10*1+1",
+      "commonWrongAnswers": [
+        {
+          "value": -7,
+          "mistake": "slope-vs-value"
+        }
+      ],
+      "hints": [
+        "$f'(x) = 12x^2 - 10x + 1$."
+      ],
+      "solution": {
+        "steps": [
+          "$f'(1) = 12 - 10 + 1 = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "p2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$f(x) = x^3 - 12x + 1$. מהו שיעור ה-$y$ של נקודת המינימום המקומי?",
+      "answer": {
+        "value": -15,
+        "tolerance": 0
+      },
+      "check": "2^3-12*2+1",
+      "commonWrongAnswers": [
+        {
+          "value": 17,
+          "mistake": "max-min"
+        },
+        {
+          "value": 2,
+          "mistake": "x-vs-y"
+        }
+      ],
+      "hints": [
+        "$f'(x) = 3x^2 - 12 = 0 \\Rightarrow x = \\pm 2$.",
+        "איזו מהן מינימום? בדוק את הסימן של $f'$ משני הצדדים."
+      ],
+      "solution": {
+        "steps": [
+          "המינימום ב-$x=2$: $f(2) = 8 - 24 + 1 = -15$. (ב-$x=-2$ יש מקסימום, $f(-2)=17$.)"
+        ],
+        "final": "$-15$"
+      }
+    },
+    {
+      "id": "p3",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "ידוע ש-$f'(x) > 0$ לכל $x$ בקטע $(1, 5)$. מה אפשר להסיק?",
+      "choices": [
+        {
+          "text": "הפונקציה עולה בקטע",
+          "correct": true
+        },
+        {
+          "text": "הפונקציה חיובית בקטע",
+          "mistake": "sign-f-vs-fprime"
+        },
+        {
+          "text": "יש לפונקציה מקסימום בקטע",
+          "mistake": "max-min"
+        },
+        {
+          "text": "אי אפשר להסיק דבר",
+          "mistake": "sign-f-vs-fprime"
+        }
+      ],
+      "hints": [
+        "הנגזרת מתארת את השיפוע, לא את הגובה."
+      ],
+      "solution": {
+        "steps": [
+          "נגזרת חיובית פירושה שהפונקציה עולה. היא יכולה להיות שלילית כל הקטע ועדיין לעלות."
+        ],
+        "final": "הפונקציה עולה בקטע"
+      }
+    },
+    {
+      "id": "p4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מצא את משוואת המשיק לגרף $f(x) = x^2 + 2x$ ב-$x=1$, בצורה $y = mx + b$. מהו $b$?",
+      "answer": {
+        "value": -1,
+        "tolerance": 0
+      },
+      "check": "(1^2+2*1)-(2*1+2)*1",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "slope-vs-value"
+        }
+      ],
+      "hints": [
+        "$f(1) = 3$, ו-$f'(x) = 2x + 2$.",
+        "$m = f'(1) = 4$. הצב $(1, 3)$ ב-$y = 4x + b$."
+      ],
+      "solution": {
+        "steps": [
+          "$y - 3 = 4(x - 1) \\Rightarrow y = 4x - 1$, לכן $b = -1$."
+        ],
+        "final": "$-1$"
+      }
+    }
+  ],
+  "bagrutQuestions": [
+    {
+      "id": "b1",
+      "title": "שאלה ברמת בגרות",
+      "difficulty": 3,
+      "source": {
+        "type": "original"
+      },
+      "context": "נתונה הפונקציה $f(x) = x^3 - 6x^2 + 9x$.",
+      "parts": [
+        {
+          "id": "b1a",
+          "type": "numeric",
+          "label": "א",
+          "prompt": "בכמה נקודות שונות הגרף חותך או משיק לציר ה-$x$?",
+          "answer": {
+            "value": 2,
+            "tolerance": 0
+          },
+          "check": "2",
+          "hints": [
+            "הוצא $x$ כגורם משותף.",
+            "$x(x^2 - 6x + 9) = x(x-3)^2$."
+          ],
+          "solution": {
+            "steps": [
+              "$x(x-3)^2 = 0 \\Rightarrow x = 0$ או $x = 3$. שתי נקודות: $(0,0)$ ו-$(3,0)$. ב-$(3,0)$ הגרף משיק לציר."
+            ],
+            "final": "$2$"
+          }
+        },
+        {
+          "id": "b1b",
+          "type": "numeric",
+          "label": "ב",
+          "prompt": "מצא את נקודות הקיצון. מהו שיעור ה-$y$ של נקודת המקסימום?",
+          "answer": {
+            "value": 4,
+            "tolerance": 0
+          },
+          "check": "1^3-6*1^2+9*1",
+          "commonWrongAnswers": [
+            {
+              "value": 1,
+              "mistake": "x-vs-y"
+            }
+          ],
+          "hints": [
+            "$f'(x) = 3x^2 - 12x + 9 = 3(x-1)(x-3)$.",
+            "בדוק סימנים: ב-$x=0$, ב-$x=2$ וב-$x=4$."
+          ],
+          "solution": {
+            "steps": [
+              "$f'$ עוברת מ-$+$ ל-$-$ ב-$x=1$: מקסימום $(1, 4)$. ב-$x=3$ עוברת מ-$-$ ל-$+$: מינימום $(3, 0)$."
+            ],
+            "final": "$4$"
+          }
+        },
+        {
+          "id": "b1c",
+          "type": "numeric",
+          "label": "ג",
+          "prompt": "העבירו משיק לגרף בראשית הצירים. מהו שיפועו?",
+          "answer": {
+            "value": 9,
+            "tolerance": 0
+          },
+          "check": "3*0^2-12*0+9",
+          "hints": [
+            "השיפוע הוא $f'(0)$."
+          ],
+          "solution": {
+            "steps": [
+              "$f'(0) = 9$, והמשיק הוא $y = 9x$."
+            ],
+            "final": "$9$"
+          }
+        },
+        {
+          "id": "b1d",
+          "type": "numeric",
+          "label": "ד",
+          "prompt": "המשיק מסעיף ג חותך את הגרף בנקודה נוספת. מהו שיעור ה-$x$ שלה?",
+          "answer": {
+            "value": 6,
+            "tolerance": 0
+          },
+          "check": "(6^3-6*6^2+9*6)/9",
+          "hints": [
+            "השווה: $x^3 - 6x^2 + 9x = 9x$.",
+            "$x^3 - 6x^2 = 0 \\Rightarrow x^2(x - 6) = 0$."
+          ],
+          "solution": {
+            "steps": [
+              "$x^2(x-6) = 0$. $x=0$ היא נקודת ההשקה, והנקודה הנוספת היא $x = 6$. בדיקה: $f(6) = 216 - 216 + 54 = 54 = 9\\cdot 6$. ✓"
+            ],
+            "final": "$6$"
+          }
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$f(x) = x^4$. מהו $f'(1)$?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "4*1^3",
+      "commonWrongAnswers": [
+        {
+          "value": 1,
+          "mistake": "slope-vs-value"
+        },
+        {
+          "value": 3,
+          "mistake": "power-rule"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$f'(x) = 4x^3$, $f'(1) = 4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$f(x) = x^2 - 8x$. מהו שיעור ה-$x$ של נקודת המינימום?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "8/2",
+      "commonWrongAnswers": [
+        {
+          "value": -16,
+          "mistake": "x-vs-y"
+        },
+        {
+          "value": -4,
+          "mistake": "sign-solve"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2x - 8 = 0 \\Rightarrow x = 4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$f(x) = x^3 - 3x$. מהו שיעור ה-$y$ של נקודת המקסימום המקומי?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "(-1)^3-3*(-1)",
+      "commonWrongAnswers": [
+        {
+          "value": -2,
+          "mistake": "max-min"
+        },
+        {
+          "value": -1,
+          "mistake": "x-vs-y"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$f'(x) = 3x^2 - 3 = 0 \\Rightarrow x = \\pm 1$. המקסימום ב-$x=-1$: $f(-1) = -1 + 3 = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו שיפוע המשיק לגרף $f(x) = 3x^2 + 1$ בנקודה $x = -1$?",
+      "answer": {
+        "value": -6,
+        "tolerance": 0
+      },
+      "check": "6*(-1)",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "slope-vs-value"
+        },
+        {
+          "value": 6,
+          "mistake": "sign-solve"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$f'(x) = 6x$, $f'(-1) = -6$."
+        ],
+        "final": "$-6$"
+      }
+    },
+    {
+      "id": "q5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$f'(a) = 0$, ו-$f'$ עוברת בנקודה $a$ מסימן $+$ לסימן $-$. מה יש ב-$x = a$?",
+      "choices": [
+        {
+          "text": "נקודת מקסימום",
+          "correct": true
+        },
+        {
+          "text": "נקודת מינימום",
+          "mistake": "max-min"
+        },
+        {
+          "text": "נקודת חיתוך עם ציר ה-x",
+          "mistake": "sign-f-vs-fprime"
+        },
+        {
+          "text": "אין נקודת קיצון",
+          "mistake": "max-min"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "עולה ואחר כך יורדת – זו פסגה, כלומר מקסימום."
+        ],
+        "final": "נקודת מקסימום"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "x-vs-y",
+      "label": "בלבול בין שיעור x לשיעור y",
+      "advice": "קודם מוצאים x מהנגזרת, ואז מציבים אותו ב-f המקורית כדי לקבל y. כדאי לקרוא היטב מה השאלה מבקשת.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "max-min",
+      "label": "זיהוי מקסימום ומינימום",
+      "advice": "מ-+ ל-− זה מקסימום (פסגה). מ-− ל-+ זה מינימום (עמק). כדאי לחזור לדוגמה הראשונה.",
+      "reviewSection": "examples"
+    },
+    {
+      "id": "slope-vs-value",
+      "label": "בלבול בין f(x) ל-f'(x)",
+      "advice": "f(x₀) הוא הגובה, f'(x₀) הוא השיפוע. בשאלת משיק צריך את שניהם.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "power-rule",
+      "label": "כלל הגזירה של חזקה",
+      "advice": "(xⁿ)' = n·xⁿ⁻¹: המעריך יורד להיות מקדם, והחזקה קטנה ב-1.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "plug-derivative",
+      "label": "הצבה בנגזרת במקום בפונקציה",
+      "advice": "את ה-y של נקודת הקיצון מקבלים מהצבה ב-f, לא ב-f'.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "sign-f-vs-fprime",
+      "label": "מה הנגזרת אומרת",
+      "advice": "הסימן של f' אומר אם הפונקציה עולה או יורדת, לא אם היא חיובית.",
+      "reviewSection": "explanations"
+    },
+    {
+      "id": "sign-solve",
+      "label": "טעות סימן בפתרון",
+      "advice": "כדאי להציב בחזרה ולבדוק את התשובה.",
+      "reviewSection": "examples"
+    }
+  ],
+  "next": "sine-cosine-law"
+}

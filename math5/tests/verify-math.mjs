@@ -1,5 +1,7 @@
 // בדיקת נכונות: מחשב מחדש כל תשובה מספרית באופן בלתי תלוי ומשווה לתשובה שבשיעור.
-import { LESSONS } from '../js/data/lessons/index.js';
+import { readFileSync } from 'fs';
+import { LESSONS, loadLessons } from '../js/data/lessons/index.js';
+await loadLessons(async f => JSON.parse(readFileSync(new URL('../' + f, import.meta.url), 'utf8')));
 import { TOPICS } from '../js/data/curriculum.js';
 
 const R = Math.PI / 180, sin = d => Math.sin(d * R), cos = d => Math.cos(d * R), acos = x => Math.acos(x) / R;
@@ -66,7 +68,7 @@ for (const L of LESSONS) {
     count++;
     const exp = expected[L.id]?.[q.id];
     if (exp === undefined) { console.error(`✗ ${L.id}/${q.id}: אין חישוב בלתי תלוי`); fail++; continue; }
-    const tol = q.tol ?? 0.005;
+    const tol = Math.max(q.tol ?? 0, 1e-9);
     if (Math.abs(exp - q.answer) > tol) { console.error(`✗ ${L.id}/${q.id}: בשיעור ${q.answer}, בחישוב ${exp}`); fail++; }
     for (const w of q.wrong || []) {
       if (Math.abs(w.v - q.answer) <= tol) { console.error(`✗ ${L.id}/${q.id}: מסיח ${w.v} נחשב נכון`); fail++; }

@@ -1,0 +1,186 @@
+// בדיקות דפדפן מקצה לקצה (Playwright): ניווט, תרגול, מבחן, שמירת התקדמות, אבחון, חזרות, הגדרות, טלפון, מעבר גרסה.
+// הרצה: node tests/e2e.cjs   (מפעיל שרת מקומי בעצמו)
+const { chromium } = require('playwright');
+const { spawn } = require('child_process');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..');
+const PORT = 8800 + Math.floor(Math.random() * 100);
+const BASE = `http://localhost:${PORT}/`;
+const KEY = 'math5.progress.v1';
+let failures = 0, passed = 0;
+
+async function step(name, fn) {
+  try { await fn(); passed++; console.log(`✓ ${name}`); }
+  catch (e) { failures++; console.error(`✗ ${name}\n   ${String(e.message).split('\n').slice(0, 4).join('\n   ')}`); }
+}
+const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
+
+(async () => {
+  const server = spawn('python3', ['-m', 'http.server', String(PORT)], { cwd: ROOT, stdio: 'ignore' });
+  await new Promise(r => setTimeout(r, 800));
+  const browser = await chromium.launch();
+  const errors = [];
+  const newPage = async (opts = {}) => {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce', ...opts });
+    const page = await ctx.newPage();
+    page.on('pageerror', e => errors.push(e.message));
+    page.on('console', m => { if (m.type() === 'error' && !/ERR_TUNNEL|fonts\.g/.test(m.text())) errors.push(m.text()); });
+    return page;
+  };
+  const go = async (page, hash) => { await page.goto(BASE + hash); await page.waitForSelector('main h1', { timeout: 5000 }); };
+  const storeOf = page => page.evaluate(k => JSON.parse(localStorage.getItem(k) || 'null'), KEY);
+
+  try {
+    const page = await newPage();
+
+    await step('ניווט: כל המסכים נטענים עם כותרת, בלי שגיאות', async () => {
+      const routes = { '#/': 'שלום', '#/plan': 'תוכנית הלימודים', '#/map': 'מפת ידע', '#/diagnostic': 'מבחן אבחון', '#/week': 'תוכנית שבועית',
+        '#/review': 'חזרות', '#/practice': 'תרגול', '#/exams': 'מבחנים', '#/progress': 'ההתקדמות שלי', '#/sources': 'מקורות',
+        '#/lesson/arithmetic-sequence/explain': 'סדרה חשבונית', '#/lesson/nope': 'השיעור לא נמצא' };
+      for (const [h, title] of Object.entries(routes)) {
+        await go(page, h);
+        const t = (await page.locator('main h1').first().textContent()).trim();
+        expect(t.includes(title), `${h}: כותרת "${t}"`);
+      }
+      expect(!errors.length, 'שגיאות: ' + errors.join(' | '));
+    });
+
+    await step('ניווט: סרגל הניווט מסמן את המסך הפעיל', async () => {
+      await go(page, '#/exams');
+      expect(await page.locator('[data-nav="exams"][aria-current]').count() === 1, 'מבחנים לא מסומן');
+      await page.click('[data-nav="practice"]'); await page.waitForTimeout(200);
+      expect((await page.locator('main h1').textContent()).includes('תרגול'), 'לא עבר לתרגול');
+    });
+
+    await step('שיעור: 8 שלבים, ומעבר לשלב הבא שומר שהשלב הושלם', async () => {
+      await go(page, '#/lesson/derivative-extrema/explain');
+      expect(await page.locator('#stepper li').count() === 8, 'לא 8 שלבים');
+      await page.click('[data-done="explain"]'); await page.waitForTimeout(200);
+      expect(page.url().endsWith('/video'), 'לא עבר לסרטון');
+      const s = await storeOf(page);
+      expect(s.lessons['derivative-extrema'].sections.explain === true, 'שלב ההסבר לא נשמר');
+    });
+
+    await step('תרגול: תשובה שגויה מזהה סוג טעות, נכונה מסומנת ונשמרת אחרי טעינה מחדש', async () => {
+      await go(page, '#/lesson/derivative-extrema/guided');
+      const card = page.locator('.q[data-q="g1"]');
+      await card.locator('input').fill('1'); await card.locator('[data-act=check]').click();
+      expect((await card.locator('.feedback').textContent()).includes('מקסימום'), 'לא זוהתה טעות מקסימום/מינימום');
+      await card.locator('[data-act=hint]').click();
+      expect(await card.locator('.hints li').count() === 1, 'רמז לא הוצג');
+      await card.locator('input').fill('-1'); await card.locator('[data-act=check]').click();
+      expect(await card.evaluate(el => el.classList.contains('solved')), 'לא סומן כנפתר');
+      await page.reload(); await page.waitForSelector('.q[data-q="g1"]');
+      expect(await page.locator('.q[data-q="g1"].solved').count() === 1, 'הפתרון לא נשמר אחרי טעינה מחדש');
+      const s = await storeOf(page);
+      const atts = s.attempts.filter(a => a.qid === 'g1' && a.lessonId === 'derivative-extrema');
+      expect(atts.length === 2 && !atts[0].ok && atts[1].ok && atts[1].hints === 1, 'יומן הניסיונות שגוי: ' + JSON.stringify(atts));
+      // ניסיון נוסף על שאלה שכבר נפתרה לא נרשם שוב
+      await page.locator('.q[data-q="g1"] [data-act=check]').click();
+      expect((await storeOf(page)).attempts.filter(a => a.qid === 'g1').length === 2, 'שאלה שנפתרה נספרה שוב');
+    });
+
+    await step('מבחן: ציון מחושב נכון, נרשם לכל שאלה, ונכנס ללוח החזרות', async () => {
+      await go(page, '#/lesson/arithmetic-sequence/quiz');
+      const answers = { q1: '47', q2: '136', q3: '4.5', q5: '13' };   // q3 שגוי, q4 בלי תשובה
+      for (const [id, v] of Object.entries(answers)) await page.locator(`.q[data-q="${id}"] input`).fill(v);
+      await page.click('#quiz [type=submit]'); await page.waitForSelector('#quizResult .huge');
+      expect((await page.locator('#quizResult .huge').textContent()).trim() === '60', 'ציון שגוי');
+      const s = await storeOf(page);
+      expect(s.lessons['arithmetic-sequence'].quiz.last === 60, 'ציון המבחן לא נשמר');
+      expect(s.attempts.filter(a => a.ctx === 'quiz').length === 5, 'לא נרשם ניסיון לכל שאלה');
+      expect(s.reviews['arithmetic-sequence'] && s.reviews['arithmetic-sequence'].box === 0, 'לא נכנס ללוח החזרות');
+      await go(page, '#/lesson/arithmetic-sequence/review');
+      expect((await page.locator('.check-list').textContent()).includes('60'), 'ניתוח השליטה לא מציג את המבחן האחרון');
+    });
+
+    await step('חזרות: חזרה שהגיע זמנה מופיעה, וביצוע שלה מקדם את לוח החזרות', async () => {
+      await page.evaluate(k => { const s = JSON.parse(localStorage.getItem(k)); s.reviews['arithmetic-sequence'].due = Date.now() - 86400000; localStorage.setItem(k, JSON.stringify(s)); }, KEY);
+      await page.reload();   // הנתונים שונו מבחוץ – טוענים מחדש
+      await go(page, '#/review');
+      expect(await page.locator('a[href="#/review/arithmetic-sequence"]').count() === 1, 'החזרה לא מופיעה');
+      await go(page, '#/review/arithmetic-sequence');
+      const n = await page.locator('#reviewForm .q').count();
+      expect(n === 4, `מספר שאלות בחזרה: ${n}`);
+      await page.click('#reviewForm [type=submit]'); await page.waitForSelector('#reviewResult .huge');
+      const s = await storeOf(page);
+      const r = s.reviews['arithmetic-sequence'];
+      expect(r.history.length === 1 && r.box === 0 && r.due > Date.now(), 'לוח החזרות לא עודכן: ' + JSON.stringify(r));
+      expect(s.attempts.filter(a => a.ctx === 'review').length === 4, 'ניסיונות החזרה לא נרשמו');
+    });
+
+    await step('אבחון: טעות מורידה לידע מקדים, אפשר לעצור ולהמשיך, ובסוף מוצגת תוכנית התחלה', async () => {
+      await go(page, '#/diagnostic');
+      await page.click('#diagStart'); await page.waitForSelector('#diagForm');
+      const first = (await page.locator('#diagForm .q-num').textContent()).trim();
+      expect(first.includes('קיצון'), 'שאלת הבדיקה הראשונה: ' + first);
+      await page.locator('#diagForm input').first().fill('999');
+      await page.click('#diagForm [type=submit]'); await page.waitForTimeout(200);
+      const second = (await page.locator('#diagForm .q-num').textContent()).trim();
+      expect(['כללי גזירה', 'משוואה ריבועית'].some(t => second.includes(t)), 'לא ירד לידע מקדים: ' + second);
+      await page.reload(); await page.waitForSelector('#diagForm');
+      expect((await page.locator('#diagForm .q-num').textContent()).trim() === second, 'ההתקדמות באבחון לא נשמרה');
+      for (let i = 0; i < 60 && await page.locator('#diagSkip').count(); i++) { await page.click('#diagSkip'); await page.waitForTimeout(60); }
+      await page.waitForSelector('.start-list');
+      expect((await page.locator('main h1').textContent()).includes('תוצאות'), 'לא הגיע לתוצאות');
+      expect(await page.locator('.start-list li').count() > 0, 'אין המלצת התחלה');
+      const s = await storeOf(page);
+      expect(s.diagnostic.finishedAt && s.diagnostic.state.asked.length <= 35, 'האבחון לא נשמר כמסתיים');
+      await go(page, '#/map');
+      expect(await page.locator('.skill.st-missing').count() > 0, 'מפת הידע לא מציגה פערים');
+    });
+
+    await step('הגדרות: שינוי שעות ויעד משפיע על התוכנית השבועית ועל מסך הבית', async () => {
+      await go(page, '#/progress');
+      await page.fill('#s-hours', '8'); await page.fill('#s-target', '85');
+      await page.click('#settingsForm [type=submit]'); await page.waitForTimeout(150);
+      await go(page, '#/week');
+      expect((await page.locator('.lead').first().textContent()).includes('8 שעות'), 'התוכנית לא התעדכנה');
+      await go(page, '#/');
+      expect((await page.locator('.home-hero .lead').textContent()).includes('85'), 'היעד במסך הבית לא התעדכן');
+    });
+
+    await step('איפוס: דורש לחיצה שנייה, ואז מוחק', async () => {
+      await go(page, '#/progress');
+      await page.click('#rst');
+      expect((await storeOf(page)).attempts.length > 0, 'נמחק כבר בלחיצה הראשונה');
+      await page.click('#rst'); await page.waitForTimeout(200);
+      expect((await storeOf(page)).attempts.length === 0, 'לא נמחק בלחיצה השנייה');
+    });
+
+    await step('מעבר גרסה: נתונים שמורים מגרסה 1 נטענים בלי לאבד התקדמות', async () => {
+      const p2 = await newPage();
+      await p2.goto(BASE);
+      await p2.evaluate(k => localStorage.setItem(k, JSON.stringify({ version: 1, track: 'common', grades: { q81: 58, q82: 43 }, name: 'אדר',
+        lessons: { 'sine-cosine-law': { sections: { explain: true }, answers: { g1: { tries: 1, correct: true, firstTry: true, hints: 0, revealed: false } }, quiz: { best: null, last: null, history: [] }, timeSec: 300, lastVisit: Date.now() } },
+        mistakes: [], daily: {}, lastLesson: 'sine-cosine-law' })), KEY);
+      await p2.reload();
+      await go(p2, '#/lesson/sine-cosine-law/guided');
+      expect(await p2.locator('.q[data-q="g1"].solved').count() === 1, 'התשובה הישנה אבדה');
+      await go(p2, '#/');
+      expect((await p2.locator('.home-hero h1').textContent()).includes('אדר'), 'השם אבד');
+      expect((await p2.locator('.sg-val').textContent()).trim() === '52', 'הציון המשוקלל שגוי');
+      await p2.context().close();
+    });
+
+    await step('טלפון: ניווט תחתון, בלי גלילה אופקית', async () => {
+      const m = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+      for (const h of ['#/', '#/week', '#/map', '#/lesson/sine-cosine-law/bagrut', '#/progress']) {
+        await go(m, h);
+        const over = await m.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+        expect(over <= 1, `${h}: גלילה אופקית של ${over}px`);
+      }
+      const nav = await m.locator('.mainnav').boundingBox();
+      expect(nav && nav.y > 700, 'הניווט לא בתחתית');
+      await m.context().close();
+    });
+
+    await step('בלי שגיאות JavaScript בכל הריצה', async () => { expect(!errors.length, errors.join(' | ')); });
+  } finally {
+    await browser.close();
+    server.kill();
+  }
+  console.log(failures ? `\n${failures} נכשלו, ${passed} עברו` : `\n✓ כל ${passed} בדיקות הדפדפן עברו`);
+  process.exit(failures ? 1 : 0);
+})();
