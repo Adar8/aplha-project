@@ -1,1 +1,7 @@
-{"type":"module"}
+{
+  "type": "module",
+  "scripts": {
+    "test": "node tests/verify-math.mjs && node tests/validate-content.mjs && node tests/validate-content.test.mjs",
+    "validate": "node tests/validate-content.mjs"
+  }
+}

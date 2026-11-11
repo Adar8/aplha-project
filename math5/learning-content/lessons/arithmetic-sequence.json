@@ -1,0 +1,758 @@
+{
+  "schemaVersion": 1,
+  "id": "arithmetic-sequence",
+  "title": "סדרה חשבונית",
+  "topic": "sequences",
+  "papers": {
+    "old": [
+      "035581"
+    ],
+    "new": [
+      "035571"
+    ]
+  },
+  "topicStatus": "common",
+  "estimatedMinutes": 60,
+  "summary": "איבר כללי, סכום, ומציאת הסדרה משני נתונים.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "הומר מהשיעור הקיים באפליקציה. ממתין לאישור ChatGPT."
+  },
+  "explanations": [
+    {
+      "id": "what",
+      "title": "מה זו סדרה חשבונית?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "נניח שאתה חוסך: בשבוע הראשון שמת בקופה 5 ₪, ובכל שבוע אתה מוסיף 3 ₪ יותר מבשבוע הקודם: 5, 8, 11, 14…"
+        },
+        {
+          "type": "text",
+          "text": "זו **סדרה חשבונית**: סדרה שבה ההפרש בין כל איבר לאיבר שלפניו קבוע. ההפרש הזה נקרא **הפרש הסדרה** ומסמנים אותו $d$."
+        },
+        {
+          "type": "formula",
+          "latex": "a_{n+1} - a_n = d"
+        },
+        {
+          "type": "text",
+          "text": "אם $d>0$ הסדרה עולה, אם $d<0$ היא יורדת, ואם $d=0$ היא קבועה."
+        }
+      ]
+    },
+    {
+      "id": "general-term",
+      "title": "האיבר הכללי",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "כדי להגיע מהאיבר הראשון לאיבר ה-$n$ עושים $n-1$ \"קפיצות\" בגודל $d$. לכן:"
+        },
+        {
+          "type": "formula",
+          "latex": "a_n = a_1 + (n-1)d",
+          "formulaRef": "general-term"
+        },
+        {
+          "type": "warning",
+          "text": "טעות נפוצה: לכתוב $a_1 + n\\cdot d$. מהאיבר הראשון לאיבר העשירי יש 9 קפיצות, לא 10."
+        }
+      ]
+    },
+    {
+      "id": "sum",
+      "title": "סכום של n איברים ראשונים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "הרעיון של גאוס: מחברים את הסדרה עם עצמה בסדר הפוך. כל זוג נותן אותו סכום, $a_1+a_n$, ויש $n$ זוגות כאלה. כך כל איבר נספר פעמיים, ולכן מחלקים ב-2."
+        },
+        {
+          "type": "formula",
+          "latex": "S_n = \\frac{n\\,(a_1+a_n)}{2}",
+          "formulaRef": "sum-last"
+        },
+        {
+          "type": "formula",
+          "latex": "S_n = \\frac{n\\,\\big(2a_1+(n-1)d\\big)}{2}",
+          "formulaRef": "sum-d"
+        },
+        {
+          "type": "text",
+          "text": "הנוסחה הראשונה נוחה כשיודעים את האיבר האחרון. השנייה – כשיודעים רק את $a_1$ ואת $d$."
+        }
+      ]
+    },
+    {
+      "id": "two-terms",
+      "title": "איך מוצאים סדרה משני נתונים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "ברוב השאלות נותנים שני נתונים (למשל $a_4$ ו-$a_9$) ומבקשים למצוא את $a_1$ ואת $d$. כותבים כל נתון בעזרת הנוסחה של האיבר הכללי ומקבלים שתי משוואות בשני נעלמים."
+        },
+        {
+          "type": "list",
+          "items": [
+            "קיצור דרך: $a_m - a_k = (m-k)\\,d$.",
+            "בין $a_4$ ל-$a_9$ יש 5 קפיצות."
+          ]
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "id": "general-term",
+      "name": "האיבר הכללי",
+      "latex": "a_n = a_1 + (n-1)d",
+      "inFormulaSheet": "unknown"
+    },
+    {
+      "id": "sum-last",
+      "name": "סכום (כשיודעים את האיבר האחרון)",
+      "latex": "S_n = \\frac{n(a_1+a_n)}{2}",
+      "inFormulaSheet": "unknown"
+    },
+    {
+      "id": "sum-d",
+      "name": "סכום (כשיודעים את d)",
+      "latex": "S_n = \\frac{n\\big(2a_1+(n-1)d\\big)}{2}",
+      "inFormulaSheet": "unknown"
+    }
+  ],
+  "video": {
+    "status": "pending",
+    "note": "עדיין לא נבחר סרטון ספציפי.",
+    "links": [
+      {
+        "label": "חיפוש ביוטיוב: סדרה חשבונית 5 יחידות",
+        "url": "https://www.youtube.com/results?search_query=%D7%A1%D7%93%D7%A8%D7%94+%D7%97%D7%A9%D7%91%D7%95%D7%A0%D7%99%D7%AA+5+%D7%99%D7%97%D7%99%D7%93%D7%95%D7%AA",
+        "kind": "search",
+        "verified": false
+      },
+      {
+        "label": "קמפוס IL – קורסים חינמיים",
+        "url": "https://campus.gov.il/",
+        "kind": "course",
+        "verified": false
+      }
+    ]
+  },
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "איבר וסכום",
+      "problem": "בסדרה חשבונית $a_1=5$ ו-$d=3$. מצא את $a_{20}$ ואת $S_{20}$.",
+      "steps": [
+        "האיבר הכללי: $a_{20} = a_1 + 19d$.",
+        "$a_{20} = 5 + 19\\cdot 3 = 5 + 57 = 62$.",
+        "עכשיו יודעים את האיבר האחרון, לכן נוח להשתמש ב-$S_n = \\frac{n(a_1+a_n)}{2}$.",
+        "$S_{20} = \\frac{20\\,(5+62)}{2} = 10\\cdot 67 = 670$."
+      ],
+      "answer": "$a_{20}=62,\\ S_{20}=670$",
+      "checks": [
+        {
+          "label": "a20",
+          "expr": "5 + 19*3",
+          "equals": 62
+        },
+        {
+          "label": "S20",
+          "expr": "20*(5+62)/2",
+          "equals": 670
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "סדרה משני נתונים",
+      "problem": "בסדרה חשבונית $a_4=11$ ו-$a_9=26$. מצא את $a_1$, את $d$, ואת מקומו של האיבר $95$.",
+      "steps": [
+        "בין $a_4$ ל-$a_9$ יש 5 קפיצות: $a_9 - a_4 = 5d$.",
+        "$26-11 = 15 = 5d \\Rightarrow d = 3$.",
+        "$a_4 = a_1 + 3d \\Rightarrow 11 = a_1 + 9 \\Rightarrow a_1 = 2$.",
+        "האיבר הכללי: $a_n = 2 + (n-1)\\cdot 3 = 3n-1$.",
+        "$3n - 1 = 95 \\Rightarrow 3n = 96 \\Rightarrow n = 32$. מספר שלם וחיובי, לכן 95 הוא אכן איבר בסדרה."
+      ],
+      "answer": "$a_1=2,\\ d=3$, ו-95 הוא האיבר ה-32.",
+      "checks": [
+        {
+          "label": "d",
+          "expr": "(26-11)/5",
+          "equals": 3
+        },
+        {
+          "label": "a1",
+          "expr": "11-3*3",
+          "equals": 2
+        },
+        {
+          "label": "n",
+          "expr": "(95+1)/3",
+          "equals": 32
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "כמה איברים צריך?",
+      "problem": "בסדרה $2, 5, 8, \\dots$ כמה איברים ראשונים צריך לחבר כדי לקבל סכום $610$?",
+      "steps": [
+        "$a_1=2,\\ d=3$. לא יודעים את האיבר האחרון, לכן משתמשים ב-$S_n=\\frac{n(2a_1+(n-1)d)}{2}$.",
+        "$\\frac{n\\,(4 + 3(n-1))}{2} = \\frac{n(3n+1)}{2} = 610$.",
+        "$3n^2 + n - 1220 = 0$.",
+        "$n = \\frac{-1 \\pm \\sqrt{1 + 14640}}{6} = \\frac{-1 \\pm 121}{6}$.",
+        "$n = 20$ (הפתרון השלילי נפסל, כי $n$ הוא מספר איברים)."
+      ],
+      "answer": "20 איברים.",
+      "checks": [
+        {
+          "label": "n",
+          "expr": "(-1+sqrt(1+4*3*1220))/6",
+          "equals": 20
+        },
+        {
+          "label": "S20",
+          "expr": "20*(2*2+19*3)/2",
+          "equals": 610
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "g1",
+      "difficulty": 1,
+      "prompt": "בסדרה חשבונית $a_1 = 7$ ו-$d = -2$. מהו $a_{15}$?",
+      "answer": {
+        "value": -21,
+        "tolerance": 0
+      },
+      "check": "7 + 14*(-2)",
+      "hints": [
+        "השתמש ב-$a_n = a_1 + (n-1)d$ עם $n=15$.",
+        "כמה קפיצות יש מהאיבר הראשון לאיבר ה-15? 14.",
+        "$7 + 14\\cdot(-2) = ?$"
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": -23,
+          "mistake": "n-vs-n-1"
+        },
+        {
+          "value": 35,
+          "mistake": "sign-d"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$a_{15} = a_1 + 14d$",
+          "$= 7 + 14\\cdot(-2) = 7 - 28$"
+        ],
+        "final": "$a_{15} = -21$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "g2",
+      "difficulty": 2,
+      "prompt": "בסדרה חשבונית $a_3 = 10$ ו-$a_7 = 22$. מהו $S_{10}$?",
+      "answer": {
+        "value": 175,
+        "tolerance": 0
+      },
+      "check": "10*(2*4+9*3)/2",
+      "hints": [
+        "קודם מצא את $d$: בין $a_3$ ל-$a_7$ יש 4 קפיצות.",
+        "$d=3$. עכשיו $a_1 = a_3 - 2d$.",
+        "$a_1=4$. הצב ב-$S_{10} = \\frac{10(2a_1+9d)}{2}$."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 350,
+          "mistake": "sum-half"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$4d = 22-10 = 12 \\Rightarrow d=3$",
+          "$a_1 = 10 - 2\\cdot3 = 4$",
+          "$S_{10} = 5\\,(8 + 27)$"
+        ],
+        "final": "$S_{10} = 175$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "g3",
+      "difficulty": 1,
+      "prompt": "מהו האיבר ה-50 בסדרה $4, 9, 14, \\dots$?",
+      "answer": {
+        "value": 249,
+        "tolerance": 0
+      },
+      "check": "4 + 49*5",
+      "hints": [
+        "מה ההפרש בין איברים סמוכים?",
+        "$d=5$, ו-$a_{50} = a_1 + 49d$."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 254,
+          "mistake": "n-vs-n-1"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$d = 9-4 = 5$",
+          "$a_{50} = 4 + 49\\cdot 5$"
+        ],
+        "final": "$a_{50} = 249$"
+      }
+    }
+  ],
+  "independentPractice": [
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "p1",
+      "difficulty": 1,
+      "prompt": "בסדרה חשבונית $a_1=-3$ ו-$d=4$. מהו $S_{12}$?",
+      "answer": {
+        "value": 228,
+        "tolerance": 0
+      },
+      "check": "12*(2*(-3)+11*4)/2",
+      "hints": [
+        "$S_{12} = \\frac{12(2a_1 + 11d)}{2}$."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 456,
+          "mistake": "sum-half"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$S_{12} = 6\\,(-6 + 44)$"
+        ],
+        "final": "$S_{12} = 228$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "p2",
+      "difficulty": 2,
+      "prompt": "בסדרה חשבונית $a_1 = 100$ ו-$d=-7$. מה מקומו של האיבר השלילי הראשון בסדרה?",
+      "answer": {
+        "value": 16,
+        "tolerance": 0
+      },
+      "check": "floor(100/7) + 2",
+      "hints": [
+        "פתור את אי-השוויון $100 - 7(n-1) < 0$.",
+        "$n - 1 > 14.28\\ldots$, ו-$n$ חייב להיות שלם."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 15,
+          "mistake": "n-vs-n-1"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$100 - 7(n-1) < 0 \\Rightarrow n-1 > \\frac{100}{7} \\approx 14.29$",
+          "בדיקה: $a_{15}=2$, $a_{16}=-5$."
+        ],
+        "final": "$n = 16$"
+      }
+    },
+    {
+      "id": "p3",
+      "type": "multipleChoice",
+      "difficulty": 1,
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מוסיפים 5 לכל איבר בסדרה חשבונית. מה קורה להפרש הסדרה?",
+      "choices": [
+        {
+          "text": "ההפרש לא משתנה",
+          "correct": true
+        },
+        {
+          "text": "ההפרש גדל ב-5",
+          "mistake": "concept-d"
+        },
+        {
+          "text": "ההפרש גדל פי 5",
+          "mistake": "concept-d"
+        },
+        {
+          "text": "הסדרה כבר לא חשבונית",
+          "mistake": "concept-d"
+        }
+      ],
+      "hints": [
+        "חשב $(a_{n+1}+5) - (a_n + 5)$."
+      ],
+      "solution": {
+        "steps": [
+          "$(a_{n+1}+5)-(a_n+5) = a_{n+1}-a_n = d$"
+        ],
+        "final": "ההפרש לא משתנה."
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "p4",
+      "difficulty": 2,
+      "prompt": "מהו סכום כל המספרים הדו-ספרתיים שמתחלקים ב-3?",
+      "answer": {
+        "value": 1665,
+        "tolerance": 0
+      },
+      "check": "30*(12+99)/2",
+      "hints": [
+        "המספר הדו-ספרתי הראשון שמתחלק ב-3 הוא 12, והאחרון הוא 99.",
+        "כמה איברים יש? פתור $12 + 3(n-1) = 99$.",
+        "$n = 30$. עכשיו $S_{30} = \\frac{30(12+99)}{2}$."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 1683,
+          "mistake": "count-terms"
+        },
+        {
+          "value": 3330,
+          "mistake": "sum-half"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$12 + 3(n-1) = 99 \\Rightarrow n = 30$",
+          "$S_{30} = 15\\cdot 111$"
+        ],
+        "final": "$1665$"
+      }
+    }
+  ],
+  "bagrutQuestions": [
+    {
+      "id": "b1",
+      "title": "סכומי איברים זוגיים ואי-זוגיים",
+      "difficulty": 3,
+      "source": {
+        "type": "original"
+      },
+      "context": "בסדרה חשבונית יש $2n$ איברים. האיבר הראשון הוא $a_1 = 3$. סכום האיברים שנמצאים במקומות האי-זוגיים ($a_1, a_3, a_5, \\dots$) הוא 210, וסכום האיברים שנמצאים במקומות הזוגיים ($a_2, a_4, \\dots$) הוא 230.",
+      "parts": [
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1a",
+          "label": "א",
+          "prompt": "מהו $n\\cdot d$?",
+          "answer": {
+            "value": 20,
+            "tolerance": 0
+          },
+          "check": "230-210",
+          "hints": [
+            "חבר זוגות: $a_2 - a_1 = d$, $a_4 - a_3 = d$, … כמה זוגות כאלה יש?",
+            "יש $n$ זוגות, ולכן ההפרש בין הסכומים הוא $n\\cdot d$."
+          ],
+          "solution": {
+            "steps": [
+              "כל איבר זוגי גדול ב-$d$ מהאיבר האי-זוגי שלפניו, ויש $n$ זוגות.",
+              "$230 - 210 = nd$"
+            ],
+            "final": "$nd = 20$"
+          }
+        },
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1b",
+          "label": "ב",
+          "prompt": "מצא את $n$.",
+          "answer": {
+            "value": 10,
+            "tolerance": 0
+          },
+          "check": "(210+20)/(3+20)",
+          "hints": [
+            "האיברים האי-זוגיים הם סדרה חשבונית עם $n$ איברים, איבר ראשון 3 והפרש $2d$.",
+            "$S_{odd} = 3n + (n-1)\\,nd$.",
+            "הצב $nd = 20$: $3n + 20(n-1) = 210$."
+          ],
+          "solution": {
+            "steps": [
+              "$3n + 20(n-1) = 210$",
+              "$23n = 230$"
+            ],
+            "final": "$n = 10$"
+          }
+        },
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1c",
+          "label": "ג",
+          "prompt": "מצא את הפרש הסדרה $d$.",
+          "answer": {
+            "value": 2,
+            "tolerance": 0
+          },
+          "check": "20/10",
+          "hints": [
+            "$nd = 20$ ו-$n = 10$."
+          ],
+          "solution": {
+            "steps": [
+              "$d = \\frac{20}{10}$"
+            ],
+            "final": "$d = 2$"
+          }
+        },
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1d",
+          "label": "ד",
+          "prompt": "מצא את האיבר האחרון בסדרה.",
+          "answer": {
+            "value": 41,
+            "tolerance": 0
+          },
+          "check": "3 + 19*2",
+          "hints": [
+            "בסדרה יש $2n = 20$ איברים. חשב את $a_{20}$."
+          ],
+          "commonWrongAnswers": [
+            {
+              "value": 43,
+              "mistake": "n-vs-n-1"
+            }
+          ],
+          "solution": {
+            "steps": [
+              "$a_{20} = 3 + 19\\cdot 2 = 41$",
+              "בדיקה: $S_{20} = \\frac{20(3+41)}{2} = 440 = 210 + 230$"
+            ],
+            "final": "$41$"
+          }
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q1",
+      "prompt": "$a_1 = 2$, $d = 5$. מהו $a_{10}$?",
+      "answer": {
+        "value": 47,
+        "tolerance": 0
+      },
+      "check": "2+9*5",
+      "commonWrongAnswers": [
+        {
+          "value": 52,
+          "mistake": "n-vs-n-1"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2 + 9\\cdot 5$"
+        ],
+        "final": "47"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q2",
+      "prompt": "מהו סכום 8 האיברים הראשונים בסדרה $3, 7, 11, \\dots$?",
+      "answer": {
+        "value": 136,
+        "tolerance": 0
+      },
+      "check": "8*(2*3+7*4)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 272,
+          "mistake": "sum-half"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$S_8 = 4\\,(6 + 7\\cdot 4)$"
+        ],
+        "final": "136"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q3",
+      "prompt": "$a_5 = 20$, $a_{10} = 45$. מהו $d$?",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "(45-20)/5",
+      "commonWrongAnswers": [
+        {
+          "value": 4.5,
+          "mistake": "two-terms"
+        },
+        {
+          "value": 25,
+          "mistake": "two-terms"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$5d = 25$"
+        ],
+        "final": "$d = 5$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "איזו נוסחה נותנת את סכום $n$ האיברים הראשונים?",
+      "choices": [
+        {
+          "text": "$\\frac{n(a_1+a_n)}{2}$",
+          "correct": true
+        },
+        {
+          "text": "$n(a_1+a_n)$",
+          "mistake": "sum-half"
+        },
+        {
+          "text": "$\\frac{(n-1)(a_1+a_n)}{2}$",
+          "mistake": "n-vs-n-1"
+        },
+        {
+          "text": "$a_1 + (n-1)d$",
+          "mistake": "concept-d"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "האפשרות האחרונה היא האיבר הכללי, לא הסכום."
+        ],
+        "final": "$S_n = \\frac{n(a_1+a_n)}{2}$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q5",
+      "prompt": "$a_1 = 50$, $d = -4$. מה מקומו של האיבר ששווה ל-2?",
+      "answer": {
+        "value": 13,
+        "tolerance": 0
+      },
+      "check": "(2-50)/(-4)+1",
+      "commonWrongAnswers": [
+        {
+          "value": 12,
+          "mistake": "n-vs-n-1"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$50 - 4(n-1) = 2 \\Rightarrow n - 1 = 12$"
+        ],
+        "final": "$n = 13$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "n-vs-n-1",
+      "label": "בלבול בין $n$ ל-$n-1$",
+      "advice": "מהאיבר הראשון לאיבר ה-n יש n−1 קפיצות.",
+      "reviewSection": "explanations",
+      "reviewRef": "general-term"
+    },
+    {
+      "id": "sum-half",
+      "label": "שכחת לחלק ב-2 בנוסחת הסכום",
+      "advice": "בנוסחה של גאוס כל איבר נספר פעמיים, ולכן מחלקים ב-2.",
+      "reviewSection": "explanations",
+      "reviewRef": "sum"
+    },
+    {
+      "id": "sign-d",
+      "label": "טעות בסימן של d",
+      "advice": "כשהסדרה יורדת, d שלילי. כדאי להציב בסוגריים: 7 + 14·(−2).",
+      "reviewSection": "examples"
+    },
+    {
+      "id": "concept-d",
+      "label": "הבנת המושג הפרש",
+      "advice": "ההפרש הוא a(n+1) − a(n).",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    },
+    {
+      "id": "count-terms",
+      "label": "ספירת מספר האיברים",
+      "advice": "כדי לדעת כמה איברים יש, פותרים a(n) = האיבר האחרון.",
+      "reviewSection": "examples"
+    },
+    {
+      "id": "two-terms",
+      "label": "מציאת d משני איברים",
+      "advice": "a(m) − a(k) = (m−k)·d. בין a5 ל-a10 יש 5 קפיצות.",
+      "reviewSection": "examples"
+    }
+  ],
+  "next": "derivative-extrema"
+}
