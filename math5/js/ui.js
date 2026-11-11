@@ -5,14 +5,14 @@ import { weekStart, dateKey } from './core/plan.js';
 export { esc, fmt } from './core/text.js';
 
 export const SECTIONS = [
-  { id: 'explain', label: 'הסבר' },
-  { id: 'video', label: 'סרטון' },
-  { id: 'examples', label: 'דוגמאות פתורות' },
-  { id: 'guided', label: 'תרגול מודרך' },
-  { id: 'practice', label: 'תרגול עצמאי' },
-  { id: 'bagrut', label: 'ברמת בגרות' },
-  { id: 'quiz', label: 'מבחן קצר' },
-  { id: 'review', label: 'ניתוח והמשך' },
+  { id: 'explain', label: 'הסבר', desc: 'המושגים והנוסחאות, עם דוגמה מהחיים.' },
+  { id: 'video', label: 'סרטון', desc: 'הסבר נוסף בווידאו, כשיש סרטון מתאים.' },
+  { id: 'examples', label: 'דוגמאות פתורות', desc: 'פתרון צעד אחר צעד. כדאי לנסות לחשוב על הצעד הבא לפני שחושפים אותו.' },
+  { id: 'guided', label: 'תרגול מודרך', desc: 'יש רמזים. כדאי לנסות לבד קודם, ולבקש רמז רק כשנתקעים.' },
+  { id: 'practice', label: 'תרגול עצמאי', desc: 'אותו נושא, יותר עצמאות. רמת השליטה נמדדת לפי תשובות נכונות בניסיון ראשון ובלי רמזים.' },
+  { id: 'bagrut', label: 'ברמת בגרות', desc: 'שאלה עם כמה סעיפים, כמו בבחינה.' },
+  { id: 'quiz', label: 'מבחן קצר', desc: 'בלי רמזים. מגישים הכול יחד ומקבלים ציון וניתוח טעויות.' },
+  { id: 'review', label: 'ניתוח והמשך', desc: 'רמת השליטה, הטעויות שחזרו, ומה כדאי לעשות עכשיו.' },
 ];
 
 export const SOURCE_LABEL = {
@@ -94,4 +94,9 @@ export const ICON = {
   repeat: '<svg viewBox="0 0 24 24" class="i"><path d="M4 11V9a3 3 0 0 1 3-3h12M16 3l3 3-3 3M20 13v2a3 3 0 0 1-3 3H5M8 21l-3-3 3-3"/></svg>',
   map: '<svg viewBox="0 0 24 24" class="i"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="18" r="2.5"/><path d="M8.3 7.2l7.3 1M7 8.4l1.5 7.2M16.4 10l-5.7 6.3"/></svg>',
   settings: '<svg viewBox="0 0 24 24" class="i"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>',
+  chevStart: '<svg viewBox="0 0 24 24" class="i"><path d="M9 6l6 6-6 6"/></svg>',
+  chevEnd: '<svg viewBox="0 0 24 24" class="i"><path d="M15 6l-6 6 6 6"/></svg>',
+  book: '<svg viewBox="0 0 24 24" class="i"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z"/></svg>',
+  exam: '<svg viewBox="0 0 24 24" class="i"><path d="M6 3h9l4 4v14H6zM9 12l2 2 4-4M9 17h6"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" class="i"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
 };

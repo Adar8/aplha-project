@@ -138,7 +138,7 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(page, '#/week');
       expect((await page.locator('.lead').first().textContent()).includes('8 שעות'), 'התוכנית לא התעדכנה');
       await go(page, '#/');
-      expect((await page.locator('.home-hero .lead').textContent()).includes('85'), 'היעד במסך הבית לא התעדכן');
+      expect((await page.locator('.goal-chip').textContent()).includes('85'), 'היעד במסך הבית לא התעדכן');
     });
 
     await step('איפוס: דורש לחיצה שנייה, ואז מוחק', async () => {
@@ -159,8 +159,8 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(p2, '#/lesson/sine-cosine-law/guided');
       expect(await p2.locator('.q[data-q="g1"].solved').count() === 1, 'התשובה הישנה אבדה');
       await go(p2, '#/');
-      expect((await p2.locator('.home-hero h1').textContent()).includes('אדר'), 'השם אבד');
-      expect((await p2.locator('.sg-val').textContent()).trim() === '52', 'הציון המשוקלל שגוי');
+      expect((await p2.locator('.home-head h1').textContent()).includes('אדר'), 'השם אבד');
+      expect((await p2.locator('.metric-value').first().textContent()).trim().startsWith('52'), 'הציון המשוקלל שגוי');
       await p2.context().close();
     });
 

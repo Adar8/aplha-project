@@ -348,3 +348,18 @@ export function bindSettings(rerender) {
   });
   if (location.hash.endsWith('#settings')) document.getElementById('settings').scrollIntoView();
 }
+
+// ---------- עזרים למסך הבית ----------
+export function weeksLeft(now = Date.now()) { return weeksUntil(store.get().profile.examDate, now); }
+
+// משימות השבוע: אבחון (פעם אחת), חזרות שהגיע זמנן, השיעור הבא, ותרגול.
+export function weekTodo(now = Date.now()) {
+  const st = store.get();
+  const items = [];
+  if (!st.diagnostic?.finishedAt) items.push({ text: 'מבחן אבחון', href: '#/diagnostic', min: 'כ-45 דק׳' });
+  for (const r of dueReviews(st.reviews, now).filter(r => LESSON_BY_ID[r.lessonId])) items.push({ text: `חזרה: ${LESSON_BY_ID[r.lessonId].title}`, href: `#/review/${r.lessonId}`, min: 'כ-15 דק׳' });
+  const next = nextLessonToStudy();
+  if (next) items.push({ text: `שיעור: ${next.title}`, href: `#/lesson/${next.id}`, min: `כ-${next.minutes} דק׳` });
+  items.push({ text: 'תרגול ושאלות ברמת בגרות', href: '#/practice', min: 'שאר הזמן' });
+  return items;
+}
