@@ -3,6 +3,7 @@ const KEY = 'math5.progress.v1';
 
 const empty = () => ({
   version: 1,
+  name: '',
   track: 'common',          // common | old | new
   lessons: {},              // lessonId -> { sections:{}, answers:{}, quiz:{best,last,history[]}, timeSec, lastVisit }
   mistakes: [],             // { lessonId, qid, tag, at }
