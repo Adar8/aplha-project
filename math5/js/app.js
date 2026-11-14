@@ -57,7 +57,7 @@ function viewDashboard() {
       <div class="seg-progress" role="img" aria-label="${doneSet.size} מתוך ${SECTIONS.length} שלבים הושלמו">${SECTIONS.map(s => `<span class="${doneSet.has(s.id) ? 'done' : s.id === nextSec.id ? 'now' : ''}"></span>`).join('')}</div>
       <p class="cc-step">השלב הבא: <b>${nextSec.label}</b> · שלב ${nextIdx + 1} מתוך ${SECTIONS.length}</p>
       <div class="cc-actions">
-        <a class="btn primary lg" href="#/lesson/${cont.id}/${nextSec.id}">${ICON.play}<span>${doneSet.size ? 'המשך ללמוד' : 'להתחלת השיעור'}</span></a>
+        <a class="btn primary lg" href="#/lesson/${cont.id}/${nextSec.id}"><span>${doneSet.size ? 'המשך ללמוד' : 'להתחלת השיעור'}</span>${ICON.chevEnd}</a>
         <a class="btn tertiary" href="#/plan">כל השיעורים</a>
       </div>
     </div>

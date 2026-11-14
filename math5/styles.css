@@ -68,61 +68,83 @@ main.enter > * { animation: rise .26s var(--ease) both; }
   .mainnav a { flex: 1; flex-direction: column; justify-content: center; gap: 2px; min-block-size: 56px; padding: 0 2px; font-size: 11.5px; border-radius: var(--r-sm); }
   .mainnav a:hover { background: transparent; }
   .mainnav a[aria-current] { background: transparent; color: var(--primary-text); }
+  .mainnav a[aria-current] svg.ico { background: var(--primary-soft); border-radius: 10px; padding: 3px; inline-size: 30px; block-size: 30px; }
   .mainnav svg.ico { inline-size: 22px; block-size: 22px; }
   body { padding-block-end: calc(68px + env(safe-area-inset-bottom, 0px)); }
   main { padding: var(--sp-5) var(--sp-4) var(--sp-10); }
 }
 
-/* ============ כפתורים ============ */
+/* ============ כפתורים ============
+   כפתורים "פיזיים": לכל כפתור יש קצה תחתון כהה (עומק), הדגשה עדינה בחלק העליון,
+   והוא שוקע כשלוחצים עליו. אותם צבעים של מערכת העיצוב, בלי זוהר ובלי גרדיאנט צבעוני. */
 .btn {
-  --b-bg: var(--raised); --b-fg: var(--text); --b-bd: var(--border);
-  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
-  min-block-size: var(--btn-h); padding: 0 var(--sp-5); border-radius: var(--r-md);
+  --b-bg: var(--raised); --b-fg: var(--text); --b-bd: var(--border); --b-edge: #0A101C; --b-depth: 3px;
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-block-size: var(--btn-h); padding: 0 var(--sp-5); border-radius: 14px;
   border: 1px solid var(--b-bd); background: var(--b-bg); color: var(--b-fg);
-  font: 600 var(--fs-md)/1 var(--font-body); text-decoration: none; white-space: nowrap; cursor: pointer; user-select: none;
-  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease), transform 80ms var(--ease);
+  font: 600 var(--fs-md)/1 var(--font-body); letter-spacing: .005em; text-decoration: none; white-space: nowrap; cursor: pointer; user-select: none;
+  box-shadow: 0 var(--b-depth) 0 var(--b-edge), inset 0 1px 0 rgba(255, 255, 255, .07);
+  transform: translateY(0);
+  transition: transform 90ms var(--ease), box-shadow 90ms var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  -webkit-tap-highlight-color: transparent;
 }
-.btn:hover { --b-bg: var(--raised-hover); --b-bd: var(--border-strong); color: var(--b-fg); }
-.btn:active { transform: translateY(1px); }
-.btn:focus-visible { box-shadow: var(--focus-ring); border-radius: var(--r-md); }
-.btn .i { inline-size: 18px; block-size: 18px; }
+.btn:hover { --b-bg: var(--raised-hover); --b-bd: var(--border-strong); color: var(--b-fg); transform: translateY(-1px); box-shadow: 0 calc(var(--b-depth) + 1px) 0 var(--b-edge), inset 0 1px 0 rgba(255, 255, 255, .09); }
+.btn:active { transform: translateY(var(--b-depth)); box-shadow: 0 0 0 var(--b-edge), inset 0 1px 0 rgba(255, 255, 255, .04); }
+.btn:focus-visible { box-shadow: 0 var(--b-depth) 0 var(--b-edge), 0 0 0 2px var(--bg), 0 0 0 4px var(--primary-text); border-radius: 14px; }
+.btn .i { inline-size: 18px; block-size: 18px; flex: none; }
+.btn .i:last-child:not(:first-child) { margin-inline-end: -4px; }
 
-/* ראשי – אחד בכל אזור פעולה */
-.btn.primary { --b-bg: var(--primary); --b-fg: var(--primary-ink); --b-bd: var(--primary); min-block-size: var(--btn-h-lg); padding: 0 var(--sp-6); border-radius: var(--r-md); }
-.btn.primary:hover { --b-bg: var(--primary-hover); --b-bd: var(--primary-hover); }
-.btn.primary:active { --b-bg: var(--primary-active); --b-bd: var(--primary-active); }
-/* משני – ברירת המחדל של .btn */
+/* ראשי: כחול מלא, קצה כחול כהה, הדגשה בהירה למעלה. אחד בכל אזור פעולה. */
+.btn.primary {
+  --b-bg: var(--primary); --b-fg: var(--primary-ink); --b-bd: #7A9DFF; --b-edge: #3557C9; --b-depth: 4px;
+  min-block-size: var(--btn-h-lg); padding: 0 var(--sp-6); font-weight: 700; font-size: 17px;
+  box-shadow: 0 var(--b-depth) 0 var(--b-edge), inset 0 1px 0 rgba(255, 255, 255, .45), inset 0 -1px 0 rgba(0, 0, 0, .12);
+}
+.btn.primary:hover { --b-bg: var(--primary-hover); --b-bd: #93B0FF; box-shadow: 0 calc(var(--b-depth) + 1px) 0 var(--b-edge), inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .12); }
+.btn.primary:active { --b-bg: var(--primary-active); transform: translateY(var(--b-depth)); box-shadow: 0 0 0 var(--b-edge), inset 0 2px 3px rgba(0, 0, 0, .18); }
+.btn.primary:focus-visible { box-shadow: 0 var(--b-depth) 0 var(--b-edge), 0 0 0 2px var(--bg), 0 0 0 4px #C8D6FF; }
+/* חץ בתוך עיגול בכפתור הראשי הגדול – מסמן "קדימה" */
+.btn.primary .i { inline-size: 22px; block-size: 22px; padding: 3px; border-radius: 50%; background: rgba(10, 18, 41, .14); }
+
+/* משני */
 .btn.secondary { --b-bg: var(--raised); }
-/* שלישוני – טקסט בלבד */
-.btn.tertiary, .btn.ghost { --b-bg: transparent; --b-bd: transparent; --b-fg: var(--primary-text); padding: 0 var(--sp-3); }
-.btn.tertiary:hover, .btn.ghost:hover { --b-bg: var(--primary-soft); --b-bd: transparent; }
+/* שלישוני: טקסט בלבד, בלי עומק */
+.btn.tertiary, .btn.ghost { --b-bg: transparent; --b-bd: transparent; --b-fg: var(--primary-text); box-shadow: none; padding: 0 var(--sp-3); border-radius: var(--r-sm); }
+.btn.tertiary:hover, .btn.ghost:hover { --b-bg: var(--primary-soft); --b-bd: transparent; transform: none; box-shadow: none; }
+.btn.tertiary:active, .btn.ghost:active { transform: none; box-shadow: none; --b-bg: rgba(99, 139, 255, .2); }
 /* הרסני */
-.btn.destructive, .btn.danger { --b-bg: transparent; --b-bd: var(--danger-line); --b-fg: var(--danger); }
+.btn.destructive, .btn.danger { --b-bg: rgba(255, 125, 141, .06); --b-bd: var(--danger-line); --b-fg: var(--danger); --b-edge: #4A1F2A; }
 .btn.destructive:hover, .btn.danger:hover { --b-bg: var(--danger-soft); --b-bd: var(--danger); }
 /* גדלים */
-.btn.lg, .btn.xl { min-block-size: var(--btn-h-lg); padding: 0 var(--sp-8); font-size: 17px; }
-.btn.sm, .small-btn { min-block-size: 40px; padding: 0 var(--sp-4); font-size: var(--fs-sm); }
+.btn.lg, .btn.xl { min-block-size: 56px; padding: 0 var(--sp-8); font-size: 18px; border-radius: 16px; }
+.btn.sm, .small-btn { min-block-size: 40px; padding: 0 var(--sp-4); font-size: var(--fs-sm); --b-depth: 2px; border-radius: 12px; }
 .btn.tertiary.sm { padding: 0 var(--sp-3); }
 .btn.block { inline-size: 100%; }
 /* כפתור אייקון */
 .btn-icon {
   display: inline-grid; place-items: center; inline-size: var(--tap); block-size: var(--tap); flex: none;
-  border-radius: var(--r-md); border: 1px solid var(--border); background: var(--raised); color: var(--text); text-decoration: none; cursor: pointer;
-  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  border-radius: 14px; border: 1px solid var(--border); background: var(--raised); color: var(--text); text-decoration: none; cursor: pointer;
+  box-shadow: 0 3px 0 #0A101C, inset 0 1px 0 rgba(255, 255, 255, .07);
+  transition: transform 90ms var(--ease), box-shadow 90ms var(--ease), background var(--dur) var(--ease);
 }
-.btn-icon:hover { background: var(--raised-hover); border-color: var(--border-strong); color: var(--text); }
+.btn-icon:hover { background: var(--raised-hover); border-color: var(--border-strong); color: var(--text); transform: translateY(-1px); box-shadow: 0 4px 0 #0A101C, inset 0 1px 0 rgba(255, 255, 255, .09); }
+.btn-icon:active { transform: translateY(3px); box-shadow: 0 0 0 #0A101C; }
 .btn-icon .i { inline-size: 20px; block-size: 20px; }
 /* מצבים */
-.btn:disabled, .btn[aria-disabled="true"] { --b-bg: var(--raised); --b-bd: var(--border); --b-fg: var(--text-3); cursor: not-allowed; transform: none; }
+.btn:disabled, .btn[aria-disabled="true"] { --b-bg: var(--surface); --b-bd: var(--border); --b-fg: var(--text-3); --b-edge: transparent; cursor: not-allowed; transform: none; box-shadow: none; }
 .btn.tertiary:disabled { --b-bg: transparent; --b-bd: transparent; }
 .btn.is-loading { color: transparent !important; pointer-events: none; }
 .btn.is-loading::after {
-  content: ''; position: absolute; inset: 0; margin: auto; inline-size: 18px; block-size: 18px; border-radius: 50%;
-  border: 2px solid var(--b-fg); border-inline-end-color: transparent; animation: spin .7s linear infinite;
+  content: ''; position: absolute; inset: 0; margin: auto; inline-size: 20px; block-size: 20px; border-radius: 50%;
+  border: 2.5px solid var(--b-fg); border-inline-end-color: transparent; animation: spin .7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.btn.is-success { --b-bg: var(--success); --b-bd: var(--success); --b-fg: #062A1D; pointer-events: none; }
+.btn.is-success { --b-bg: var(--success); --b-bd: #6FE5B8; --b-fg: #062A1D; --b-edge: #23946A; pointer-events: none; animation: pop .28s var(--ease); }
+@keyframes pop { 40% { transform: scale(1.04); } }
 .dir { font-size: 20px; line-height: 1; }
+
+/* בוררים (לשוניות): הנבחר "בולט" כמו כפתור, האחרים שקועים */
+.tabs button[aria-selected=true], .seg button[aria-selected=true] { box-shadow: 0 2px 0 #0A101C, inset 0 1px 0 rgba(255, 255, 255, .07); }
 
 /* ============ משטחים ============ */
 .card, .glass {
@@ -465,7 +487,7 @@ details summary:hover { color: var(--text); }
 .tabs, .seg { display: flex; gap: var(--sp-1); padding: var(--sp-1); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); overflow-x: auto; margin-block-end: var(--sp-3); }
 .tabs button, .seg button { flex: 1; min-block-size: var(--tap); border: 0; background: transparent; border-radius: var(--r-sm); font: 500 15px var(--font-body); color: var(--text-2); cursor: pointer; white-space: nowrap; padding: 0 var(--sp-3); }
 .tabs button:hover, .seg button:hover { color: var(--text); }
-.tabs button[aria-selected=true], .seg button[aria-selected=true] { background: var(--raised); color: var(--text); }
+.tabs button[aria-selected=true], .seg button[aria-selected=true] { background: var(--raised); color: var(--text); box-shadow: 0 2px 0 #0A101C, inset 0 1px 0 rgba(255, 255, 255, .07); }
 .legend { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-block-end: var(--sp-4); }
 .topic { padding: var(--sp-4) var(--sp-5); margin-block-end: var(--sp-2); }
 .topic-head { display: flex; justify-content: space-between; gap: var(--sp-3); align-items: flex-start; }
