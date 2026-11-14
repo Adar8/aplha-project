@@ -44,7 +44,7 @@ export function adaptQuestion(q, inherited) {
 
 export function adaptLesson(J) {
   return {
-    id: J.id, title: J.title, topic: J.topic, topicStatus: J.topicStatus,
+    id: J.id, kind: J.kind || 'lesson', title: J.title, topic: J.topic, topicStatus: J.topicStatus,
     papers: { old: (J.papers.old || []).join(' / ') || '—', new: (J.papers.new || []).join(' / ') || '—' },
     paperList: [...(J.papers.old || []), ...(J.papers.new || [])],
     minutes: J.estimatedMinutes, summary: J.summary, reviewStatus: J.review?.status,

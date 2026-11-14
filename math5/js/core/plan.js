@@ -64,3 +64,27 @@ export function firstActivity(state) {
   for (const k of Object.keys(state.daily || {})) { const [y, m, d] = k.split('-').map(Number); ts.push(new Date(y, m - 1, d).getTime()); }
   return ts.length ? Math.min(...ts) : null;
 }
+
+// ---------- רצף ימי לימוד ----------
+// יום נחשב "יום לימוד" אם נמדדה לפחות דקה אחת של למידה, או שנענתה לפחות שאלה אחת.
+// הרצף הנוכחי נספר אחורה מהיום. אם היום עוד לא למדת – הרצף עדיין "חי" ונספר מאתמול.
+export const STREAK_MIN_SEC = 60;
+export function activeDays(state) {
+  const days = new Set(Object.entries(state.daily || {}).filter(([, s]) => s >= STREAK_MIN_SEC).map(([k]) => k));
+  for (const a of state.attempts || []) if (!a.migrated && a.ts) days.add(dateKey(a.ts));
+  return days;
+}
+const prevDay = key => { const [y, m, d] = key.split('-').map(Number); return dateKey(new Date(y, m - 1, d - 1).getTime()); };
+export function streakInfo(state, now = Date.now()) {
+  const days = activeDays(state);
+  const today = dateKey(now);
+  const doneToday = days.has(today);
+  let cur = 0, k = doneToday ? today : prevDay(today);
+  while (days.has(k)) { cur++; k = prevDay(k); }
+  let best = 0, run = 0, last = null;
+  for (const key of [...days].sort()) {
+    run = last && prevDay(key) === last ? run + 1 : 1;
+    best = Math.max(best, run); last = key;
+  }
+  return { current: cur, best: Math.max(best, cur), doneToday };
+}

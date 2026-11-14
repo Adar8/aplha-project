@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-axes",
+  "title": "מערכת הצירים ומיקום נקודות",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "ציר x וציר y, שיעורי נקודה, רביעים ומרחק על קו ישר.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "explanations": [
+    {
+      "id": "axes",
+      "title": "שני צירים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "מערכת הצירים בנויה משני קווי מספרים: **ציר ה-$x$** אופקי (משמאל לימין) ו**ציר ה-$y$** אנכי (מלמטה למעלה). הם נפגשים ב**ראשית הצירים** $(0,0)$."
+        },
+        {
+          "type": "tip",
+          "text": "גם באפליקציה בעברית, הצירים נקראים כמו בכל ספר מתמטיקה: ציר x גדל משמאל לימין."
+        }
+      ]
+    },
+    {
+      "id": "point",
+      "title": "שיעורי נקודה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "כל נקודה מתוארת בשני מספרים בסוגריים: $(x, y)$. **קודם $x$ ואחר כך $y$** – קודם \"כמה ימינה או שמאלה\", ואחר כך \"כמה למעלה או למטה\"."
+        },
+        {
+          "type": "formula",
+          "latex": "(3,\\,-2):\\quad 3 \\text{ ימינה},\\; 2 \\text{ למטה}"
+        },
+        {
+          "type": "list",
+          "items": [
+            "נקודה על ציר ה-$x$: ה-$y$ שלה הוא 0, למשל $(5, 0)$.",
+            "נקודה על ציר ה-$y$: ה-$x$ שלה הוא 0, למשל $(0, -6)$."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quad",
+      "title": "ארבעה רביעים",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "רביע ראשון: $x>0$ ו-$y>0$ (ימין למעלה).",
+            "רביע שני: $x<0$ ו-$y>0$ (שמאל למעלה).",
+            "רביע שלישי: $x<0$ ו-$y<0$ (שמאל למטה).",
+            "רביע רביעי: $x>0$ ו-$y<0$ (ימין למטה)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "title": "מרחק על קו אופקי או אנכי",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "אם לשתי נקודות אותו $y$, המרחק ביניהן הוא ההפרש בין ה-$x$-ים: בין $(-2, 3)$ ל-$(4, 3)$ המרחק הוא $4 - (-2) = 6$."
+        },
+        {
+          "type": "warning",
+          "text": "מרחק הוא תמיד חיובי. מחסרים את הקטן מהגדול – והזהרו ממינוס כפול."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "איפה הנקודה?",
+      "problem": "תאר את מיקום הנקודה $(3, -2)$.",
+      "steps": [
+        "$x = 3$: שלוש יחידות ימינה מהראשית.",
+        "$y = -2$: שתי יחידות למטה.",
+        "$x$ חיובי ו-$y$ שלילי – רביע רביעי."
+      ],
+      "answer": "רביע רביעי",
+      "checks": []
+    },
+    {
+      "id": "ex2",
+      "title": "נקודה על ציר",
+      "problem": "הנקודה $(k - 2,\\, 5)$ נמצאת על ציר ה-$y$. מהו $k$?",
+      "steps": [
+        "על ציר ה-$y$ שיעור ה-$x$ הוא 0.",
+        "$k - 2 = 0 \\Rightarrow k = 2$."
+      ],
+      "answer": "$k = 2$",
+      "checks": [
+        {
+          "expr": "0+2",
+          "equals": 2
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "מרחק בין נקודות",
+      "problem": "מהו המרחק בין $(-2, 3)$ ל-$(4, 3)$?",
+      "steps": [
+        "לשתיהן $y = 3$ – הן על אותו קו אופקי.",
+        "המרחק: $4 - (-2) = 6$."
+      ],
+      "answer": "$6$",
+      "checks": [
+        {
+          "expr": "4-(-2)",
+          "equals": 6
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "באיזה רביע נמצאת הנקודה $(-4, 2)$?",
+      "choices": [
+        {
+          "text": "רביע שני",
+          "correct": true
+        },
+        {
+          "text": "רביע ראשון",
+          "mistake": "quadrant"
+        },
+        {
+          "text": "רביע שלישי",
+          "mistake": "quadrant"
+        },
+        {
+          "text": "רביע רביעי",
+          "mistake": "quadrant"
+        }
+      ],
+      "hints": [
+        "$x$ שלילי (שמאלה), $y$ חיובי (למעלה)."
+      ],
+      "solution": {
+        "steps": [
+          "שמאלה ולמעלה – רביע שני."
+        ],
+        "final": "רביע שני"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו שיעור ה-$y$ של הנקודה $(7, -3)$?",
+      "answer": {
+        "value": -3,
+        "tolerance": 0
+      },
+      "check": "-3",
+      "commonWrongAnswers": [
+        {
+          "value": 7,
+          "mistake": "order-xy"
+        }
+      ],
+      "hints": [
+        "בסוגריים: קודם $x$, אחר כך $y$."
+      ],
+      "solution": {
+        "steps": [
+          "השיעור השני הוא $y = -3$."
+        ],
+        "final": "$-3$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הנקודה $(k - 2,\\, 5)$ נמצאת על ציר ה-$y$. מהו $k$?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "0+2",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "axis-point"
+        }
+      ],
+      "hints": [
+        "על ציר ה-$y$, שיעור ה-$x$ הוא 0.",
+        "$k - 2 = 0$."
+      ],
+      "solution": {
+        "steps": [
+          "$k = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המרחק בין $(-3, 1)$ ל-$(5, 1)$?",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "5-(-3)",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "neg-distance"
+        }
+      ],
+      "hints": [
+        "לשתיהן אותו $y$, לכן מחסרים את ה-$x$-ים.",
+        "$5 - (-3) = ?$"
+      ],
+      "solution": {
+        "steps": [
+          "$5 + 3 = 8$."
+        ],
+        "final": "$8$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "היכן נמצאת הנקודה $(0, -6)$?",
+      "choices": [
+        {
+          "text": "על ציר ה-y",
+          "correct": true
+        },
+        {
+          "text": "על ציר ה-x",
+          "mistake": "axis-point"
+        },
+        {
+          "text": "ברביע השלישי",
+          "mistake": "axis-point"
+        },
+        {
+          "text": "ברביע הרביעי",
+          "mistake": "axis-point"
+        }
+      ],
+      "hints": [
+        "שיעור ה-$x$ שלה הוא 0."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 0$ – הנקודה על ציר ה-$y$, 6 יחידות מתחת לראשית."
+        ],
+        "final": "על ציר ה-y"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "באיזה רביע נמצאת הנקודה $(3, -5)$?",
+      "choices": [
+        {
+          "text": "רביע רביעי",
+          "correct": true
+        },
+        {
+          "text": "רביע ראשון",
+          "mistake": "quadrant"
+        },
+        {
+          "text": "רביע שני",
+          "mistake": "quadrant"
+        },
+        {
+          "text": "רביע שלישי",
+          "mistake": "quadrant"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$x$ חיובי, $y$ שלילי – ימין למטה."
+        ],
+        "final": "רביע רביעי"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו שיעור ה-$x$ של הנקודה $(-6, 2)$?",
+      "answer": {
+        "value": -6,
+        "tolerance": 0
+      },
+      "check": "-6",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "order-xy"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "השיעור הראשון: $x = -6$."
+        ],
+        "final": "$-6$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המרחק בין $(2, -1)$ ל-$(2, 6)$?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "6-(-1)",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "neg-distance"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "אותו $x$ – מחסרים את ה-$y$-ים: $6 - (-1) = 7$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הנקודה $(4,\\, m + 3)$ נמצאת על ציר ה-$x$. מהו $m$?",
+      "answer": {
+        "value": -3,
+        "tolerance": 0
+      },
+      "check": "0-3",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "axis-point"
+        },
+        {
+          "value": 1,
+          "mistake": "axis-point"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "על ציר ה-$x$, $y = 0$: $m + 3 = 0 \\Rightarrow m = -3$."
+        ],
+        "final": "$-3$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "order-xy",
+      "label": "סדר השיעורים (x, y)",
+      "advice": "בנקודה (x, y) – הראשון הוא x (ימינה/שמאלה), השני הוא y (למעלה/למטה).",
+      "reviewSection": "explanations",
+      "reviewRef": "point"
+    },
+    {
+      "id": "quadrant",
+      "label": "זיהוי רביע",
+      "advice": "רביע ראשון ימין־למעלה, ומשם נגד כיוון השעון: שני שמאל־למעלה, שלישי שמאל־למטה, רביעי ימין־למטה.",
+      "reviewSection": "explanations",
+      "reviewRef": "quad"
+    },
+    {
+      "id": "neg-distance",
+      "label": "מרחק עם מספר שלילי",
+      "advice": "מחסרים את הקטן מהגדול: 5 − (−3) = 8. מינוס ומינוס הופכים לפלוס.",
+      "reviewSection": "explanations",
+      "reviewRef": "dist"
+    },
+    {
+      "id": "axis-point",
+      "label": "נקודה על ציר",
+      "advice": "על ציר ה-x שיעור ה-y הוא 0. על ציר ה-y שיעור ה-x הוא 0.",
+      "reviewSection": "explanations",
+      "reviewRef": "point"
+    }
+  ],
+  "next": null
+}

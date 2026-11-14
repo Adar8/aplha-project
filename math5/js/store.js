@@ -26,6 +26,9 @@ export const empty = () => ({
   mistakes: [],     // { lessonId, qid, tag, at }
   daily: {},        // 'YYYY-MM-DD' (שעון מקומי) -> שניות
   diagnostic: null, // { state, results, finishedAt }
+  baseCheck: null,  // בדיקת בסיס של ארגז הכלים: { state, results, finishedAt }
+  returnTo: null,   // לאן לחזור אחרי חיזוק בארגז הכלים: { hash, title, at }
+  welcomeDismissed: false,
   lastLesson: null,
 });
 

@@ -285,3 +285,49 @@ test('migrate: נתוני גרסה 2 נשמרים כמו שהם, ופרופיל 
   assert.equal(s.profile.targetGrade, 80);
   assert.equal(migrate(null).version, 2);
 });
+
+// ---------- רצף ימים ----------
+import { streakInfo } from '../../js/core/plan.js';
+test('רצף: בלי פעילות – 0', () => {
+  assert.deepEqual(streakInfo({ daily: {}, attempts: [] }, NOW), { current: 0, best: 0, doneToday: false });
+});
+test('רצף: שלושה ימים רצופים כולל היום', () => {
+  const daily = { [dateKey(NOW)]: 600, [dateKey(NOW - DAY)]: 120, [dateKey(NOW - 2 * DAY)]: 90 };
+  const s = streakInfo({ daily, attempts: [] }, NOW);
+  assert.equal(s.current, 3); assert.equal(s.doneToday, true);
+});
+test('רצף: אם היום עוד לא למדו, הרצף מאתמול עדיין חי', () => {
+  const daily = { [dateKey(NOW - DAY)]: 120, [dateKey(NOW - 2 * DAY)]: 120 };
+  const s = streakInfo({ daily, attempts: [] }, NOW);
+  assert.equal(s.current, 2); assert.equal(s.doneToday, false);
+});
+test('רצף: יום חסר שובר את הרצף, והשיא נשמר', () => {
+  const daily = { [dateKey(NOW)]: 100, [dateKey(NOW - 2 * DAY)]: 100, [dateKey(NOW - 3 * DAY)]: 100, [dateKey(NOW - 4 * DAY)]: 100 };
+  const s = streakInfo({ daily, attempts: [] }, NOW);
+  assert.equal(s.current, 1); assert.equal(s.best, 3);
+});
+test('רצף: פחות מדקה לא נחשב, אבל תשובה לשאלה כן', () => {
+  assert.equal(streakInfo({ daily: { [dateKey(NOW)]: 30 }, attempts: [] }, NOW).current, 0);
+  assert.equal(streakInfo({ daily: {}, attempts: [{ ts: NOW, ok: false }] }, NOW).current, 1);
+  assert.equal(streakInfo({ daily: {}, attempts: [{ ts: NOW, ok: true, migrated: true }] }, NOW).current, 0);
+});
+
+// ---------- מחשבון ----------
+import { evaluate, normalize, formatResult } from '../../js/core/calc.js';
+test('מחשבון: פעולות, חזקות, טריגונומטריה במעלות וברדיאנים', () => {
+  assert.equal(evaluate('2^3 + 4*5'), 28);
+  assert.equal(formatResult(evaluate('sin(30)')), '0.5');
+  assert.equal(formatResult(evaluate('cos(pi)', { deg: false })), '-1');
+  assert.equal(formatResult(evaluate('0.1+0.2')), '0.3');
+});
+test('מחשבון: קלט "אנושי" – ×, ÷, −, √, π, פסיק עשרוני וכפל משתמע', () => {
+  assert.equal(evaluate('3×4÷2−1'), 5);
+  assert.equal(evaluate('√(16)'), 4);
+  assert.equal(evaluate('2(3+1)'), 8);
+  assert.equal(formatResult(evaluate('2π', { deg: false })), formatResult(2 * Math.PI));
+  assert.equal(evaluate('2,5*2'), 5);
+  assert.equal(normalize('2**3'), '2^3');
+});
+test('מחשבון: דוחה קוד וביטויים לא תקינים', () => {
+  for (const bad of ['alert(1)', 'process.exit()', '2+*', '', '1/0', 'x+1']) assert.throws(() => evaluate(bad));
+});

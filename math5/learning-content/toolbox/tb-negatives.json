@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-negatives",
+  "title": "מספרים שליליים וחיוביים",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "חיבור, חיסור, כפל וחילוק עם מספרים שליליים.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "explanations": [
+    {
+      "id": "line",
+      "title": "ציר המספרים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "דמיין מדחום: מעל האפס חם, מתחת לאפס קר. מספרים שליליים הם המספרים \"מתחת לאפס\"."
+        },
+        {
+          "type": "text",
+          "text": "על ציר המספרים, כמו בכל ספר מתמטיקה, המספרים גדלים משמאל לימין: $-3 < -1 < 0 < 2$. לכן $-5$ קטן מ-$-2$, למרות ש-5 \"גדול\" מ-2."
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "title": "חיבור וחיסור",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "חיבור מספר שלילי זה כמו חיסור: $7 + (-3) = 7 - 3 = 4$."
+        },
+        {
+          "type": "text",
+          "text": "**חיסור מספר שלילי זה חיבור**: $5 - (-3) = 5 + 3 = 8$. שני מינוסים צמודים הופכים לפלוס."
+        },
+        {
+          "type": "tip",
+          "text": "כשמחברים שני מספרים עם סימנים שונים, כמו $-7 + 4$: מחסרים את הקטן מהגדול ($7 - 4 = 3$), ולוקחים את הסימן של המספר שהערך שלו גדול יותר. התוצאה: $-3$."
+        }
+      ]
+    },
+    {
+      "id": "mult",
+      "title": "כפל וחילוק",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "סימנים **זהים** נותנים תוצאה **חיובית**: $(-3)\\cdot(-4) = 12$.",
+            "סימנים **שונים** נותנים תוצאה **שלילית**: $(-3)\\cdot 4 = -12$.",
+            "אותו כלל בחילוק: $(-12) : (-3) = 4$, ו-$12 : (-3) = -4$."
+          ]
+        },
+        {
+          "type": "warning",
+          "text": "$(-3)^2 = 9$, אבל $-3^2 = -9$. בלי סוגריים, החזקה חלה רק על ה-3, והמינוס נשאר בחוץ."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "חיבור עם סימנים שונים",
+      "problem": "חשב: $-7 + 4$",
+      "steps": [
+        "לסימנים יש סימנים שונים, לכן מחסרים: $7 - 4 = 3$.",
+        "למספר $-7$ ערך מוחלט גדול יותר, לכן התוצאה שלילית."
+      ],
+      "answer": "$-3$",
+      "checks": [
+        {
+          "expr": "-7+4",
+          "equals": -3
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "חיסור של מספר שלילי",
+      "problem": "חשב: $6 - (-2)$",
+      "steps": [
+        "מינוס ומינוס צמודים הופכים לפלוס: $6 - (-2) = 6 + 2$.",
+        "$6 + 2 = 8$."
+      ],
+      "answer": "$8$",
+      "checks": [
+        {
+          "expr": "6-(-2)",
+          "equals": 8
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "כפל וחילוק",
+      "problem": "חשב: $(-3)\\cdot(-4)$ ואת $(-12) : 3$",
+      "steps": [
+        "$(-3)\\cdot(-4)$: סימנים זהים, לכן חיובי: $12$.",
+        "$(-12) : 3$: סימנים שונים, לכן שלילי: $-4$."
+      ],
+      "answer": "$12$ ו-$-4$",
+      "checks": [
+        {
+          "expr": "(-3)*(-4)",
+          "equals": 12
+        },
+        {
+          "expr": "(-12)/3",
+          "equals": -4
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $-5 + 9$",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "-5+9",
+      "commonWrongAnswers": [
+        {
+          "value": -14,
+          "mistake": "sign-add"
+        },
+        {
+          "value": -4,
+          "mistake": "sign-add"
+        }
+      ],
+      "hints": [
+        "הסימנים שונים, לכן מחסרים: $9 - 5$.",
+        "למי ערך מוחלט גדול יותר – ל-9 או ל-5?"
+      ],
+      "solution": {
+        "steps": [
+          "$9 - 5 = 4$, ול-9 ערך מוחלט גדול יותר, לכן התוצאה חיובית."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $3 - 10$",
+      "answer": {
+        "value": -7,
+        "tolerance": 0
+      },
+      "check": "3-10",
+      "commonWrongAnswers": [
+        {
+          "value": 7,
+          "mistake": "sign-add"
+        }
+      ],
+      "hints": [
+        "מורידים 10 מ-3: עוברים את האפס.",
+        "זה כמו $-10 + 3$."
+      ],
+      "solution": {
+        "steps": [
+          "$3 - 10 = -7$."
+        ],
+        "final": "$-7$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $-4 - (-6)$",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "-4-(-6)",
+      "commonWrongAnswers": [
+        {
+          "value": -10,
+          "mistake": "minus-minus"
+        }
+      ],
+      "hints": [
+        "מינוס ומינוס צמודים הופכים לפלוס.",
+        "$-4 + 6 = ?$"
+      ],
+      "solution": {
+        "steps": [
+          "$-4 - (-6) = -4 + 6 = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $(-6)\\cdot 3$",
+      "answer": {
+        "value": -18,
+        "tolerance": 0
+      },
+      "check": "(-6)*3",
+      "commonWrongAnswers": [
+        {
+          "value": 18,
+          "mistake": "mult-sign"
+        }
+      ],
+      "hints": [
+        "סימנים שונים – התוצאה שלילית."
+      ],
+      "solution": {
+        "steps": [
+          "$6 \\cdot 3 = 18$, והסימנים שונים: $-18$."
+        ],
+        "final": "$-18$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $(-20) : (-5)$",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "(-20)/(-5)",
+      "commonWrongAnswers": [
+        {
+          "value": -4,
+          "mistake": "mult-sign"
+        }
+      ],
+      "hints": [
+        "סימנים זהים – התוצאה חיובית."
+      ],
+      "solution": {
+        "steps": [
+          "$20 : 5 = 4$, והסימנים זהים: $4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הערך של $(-2)^2$?",
+      "choices": [
+        {
+          "text": "$4$",
+          "correct": true
+        },
+        {
+          "text": "$-4$",
+          "mistake": "power-sign"
+        },
+        {
+          "text": "$-2$",
+          "mistake": "power-sign"
+        },
+        {
+          "text": "$2$",
+          "mistake": "power-sign"
+        }
+      ],
+      "hints": [
+        "$(-2)^2 = (-2)\\cdot(-2)$."
+      ],
+      "solution": {
+        "steps": [
+          "$(-2)\\cdot(-2) = 4$ – סימנים זהים."
+        ],
+        "final": "$4$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $-8 + 3$",
+      "answer": {
+        "value": -5,
+        "tolerance": 0
+      },
+      "check": "-8+3",
+      "commonWrongAnswers": [
+        {
+          "value": -11,
+          "mistake": "sign-add"
+        },
+        {
+          "value": 5,
+          "mistake": "sign-add"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$8 - 3 = 5$, ול-8 ערך מוחלט גדול יותר: $-5$."
+        ],
+        "final": "$-5$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $2 - (-7)$",
+      "answer": {
+        "value": 9,
+        "tolerance": 0
+      },
+      "check": "2-(-7)",
+      "commonWrongAnswers": [
+        {
+          "value": -5,
+          "mistake": "minus-minus"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2 + 7 = 9$."
+        ],
+        "final": "$9$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $(-5)\\cdot(-4)$",
+      "answer": {
+        "value": 20,
+        "tolerance": 0
+      },
+      "check": "(-5)*(-4)",
+      "commonWrongAnswers": [
+        {
+          "value": -20,
+          "mistake": "mult-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "סימנים זהים: $20$."
+        ],
+        "final": "$20$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב: $-3^2$",
+      "answer": {
+        "value": -9,
+        "tolerance": 0
+      },
+      "check": "-(3^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 9,
+          "mistake": "power-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "החזקה חלה רק על 3: $-(3^2) = -9$."
+        ],
+        "final": "$-9$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "sign-add",
+      "label": "סימן בחיבור עם סימנים שונים",
+      "advice": "מחסרים את הקטן מהגדול, ולוקחים את הסימן של המספר שהערך המוחלט שלו גדול יותר.",
+      "reviewSection": "explanations",
+      "reviewRef": "add"
+    },
+    {
+      "id": "minus-minus",
+      "label": "חיסור של מספר שלילי",
+      "advice": "שני מינוסים צמודים הופכים לפלוס: a − (−b) = a + b.",
+      "reviewSection": "explanations",
+      "reviewRef": "add"
+    },
+    {
+      "id": "mult-sign",
+      "label": "סימן בכפל ובחילוק",
+      "advice": "סימנים זהים – חיובי. סימנים שונים – שלילי.",
+      "reviewSection": "explanations",
+      "reviewRef": "mult"
+    },
+    {
+      "id": "power-sign",
+      "label": "חזקה של מספר שלילי",
+      "advice": "(−3)² = 9, אבל −3² = −9. הסוגריים קובעים על מה חלה החזקה.",
+      "reviewSection": "explanations",
+      "reviewRef": "mult"
+    }
+  ],
+  "next": null
+}

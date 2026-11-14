@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-substitution",
+  "title": "הצבה בביטוי ובידוד משתנה",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "מציבים מספר במקום משתנה, ומבודדים משתנה מנוסחה.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "explanations": [
+    {
+      "id": "sub",
+      "title": "מה זו הצבה?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "ביטוי כמו $3x - 5$ הוא \"מכונה\": מכניסים מספר במקום $x$ ומקבלים תוצאה. אם $x = 4$: $3\\cdot 4 - 5 = 7$."
+        },
+        {
+          "type": "warning",
+          "text": "כשמציבים מספר **שלילי**, שמים אותו בסוגריים. אם $x = -3$, אז $x^2 = (-3)^2 = 9$, ולא $-3^2$."
+        }
+      ]
+    },
+    {
+      "id": "order",
+      "title": "סדר פעולות",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "קודם סוגריים.",
+            "אחר כך חזקות.",
+            "אחר כך כפל וחילוק.",
+            "בסוף חיבור וחיסור."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "למשל: $x^2 - 2x$ כש-$x = -3$: $(-3)^2 - 2\\cdot(-3) = 9 + 6 = 15$."
+        }
+      ]
+    },
+    {
+      "id": "isolate",
+      "title": "בידוד משתנה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "לפעמים יודעים את התוצאה ומחפשים את המשתנה. אם $y = 2x + 1$ ו-$y = 7$: מציבים ופותרים משוואה: $7 = 2x + 1 \\Rightarrow x = 3$."
+        },
+        {
+          "type": "text",
+          "text": "אותו רעיון בנוסחה: מ-$v = \\frac{s}{t}$ מקבלים $s = v\\cdot t$ (כופלים את שני האגפים ב-$t$)."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "הצבה פשוטה",
+      "problem": "חשב את $3x - 5$ כאשר $x = 4$",
+      "steps": [
+        "מציבים: $3\\cdot 4 - 5$.",
+        "$12 - 5 = 7$."
+      ],
+      "answer": "$7$",
+      "checks": [
+        {
+          "expr": "3*4-5",
+          "equals": 7
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "הצבה של מספר שלילי",
+      "problem": "חשב את $x^2 - 2x$ כאשר $x = -3$",
+      "steps": [
+        "מציבים עם סוגריים: $(-3)^2 - 2\\cdot(-3)$.",
+        "$(-3)^2 = 9$, ו-$-2\\cdot(-3) = +6$.",
+        "$9 + 6 = 15$."
+      ],
+      "answer": "$15$",
+      "checks": [
+        {
+          "expr": "(-3)^2-2*(-3)",
+          "equals": 15
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "מציאת x מתוך y",
+      "problem": "נתון $y = 2x + 1$. מהו $x$ כאשר $y = 7$?",
+      "steps": [
+        "מציבים $y = 7$: $7 = 2x + 1$.",
+        "$6 = 2x \\Rightarrow x = 3$."
+      ],
+      "answer": "$x = 3$",
+      "checks": [
+        {
+          "expr": "(7-1)/2",
+          "equals": 3
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב את $2x + 3$ כאשר $x = 5$",
+      "answer": {
+        "value": 13,
+        "tolerance": 0
+      },
+      "check": "2*5+3",
+      "commonWrongAnswers": [
+        {
+          "value": 28,
+          "mistake": "order-ops"
+        }
+      ],
+      "hints": [
+        "מציבים 5 במקום $x$: $2\\cdot 5 + 3$."
+      ],
+      "solution": {
+        "steps": [
+          "$10 + 3 = 13$."
+        ],
+        "final": "$13$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב את $x^2$ כאשר $x = -4$",
+      "answer": {
+        "value": 16,
+        "tolerance": 0
+      },
+      "check": "(-4)^2",
+      "commonWrongAnswers": [
+        {
+          "value": -16,
+          "mistake": "power-sign"
+        }
+      ],
+      "hints": [
+        "מציבים עם סוגריים: $(-4)^2$."
+      ],
+      "solution": {
+        "steps": [
+          "$(-4)\\cdot(-4) = 16$."
+        ],
+        "final": "$16$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב את $5 - x$ כאשר $x = -2$",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "5-(-2)",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "sub-neg"
+        }
+      ],
+      "hints": [
+        "מציבים עם סוגריים: $5 - (-2)$.",
+        "מינוס ומינוס הופכים לפלוס."
+      ],
+      "solution": {
+        "steps": [
+          "$5 + 2 = 7$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב את $ab - c$ כאשר $a = 2$, $b = -3$, $c = 4$",
+      "answer": {
+        "value": -10,
+        "tolerance": 0
+      },
+      "check": "2*(-3)-4",
+      "commonWrongAnswers": [
+        {
+          "value": -2,
+          "mistake": "sub-neg"
+        },
+        {
+          "value": 2,
+          "mistake": "sub-neg"
+        }
+      ],
+      "hints": [
+        "$ab$ פירושו $a \\cdot b$.",
+        "$2\\cdot(-3) - 4 = ?$"
+      ],
+      "solution": {
+        "steps": [
+          "$-6 - 4 = -10$."
+        ],
+        "final": "$-10$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "נתון $y = 3x - 2$. מהו $x$ כאשר $y = 10$?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "(10+2)/3",
+      "commonWrongAnswers": [
+        {
+          "value": 28,
+          "mistake": "order-ops"
+        }
+      ],
+      "hints": [
+        "מציבים: $10 = 3x - 2$.",
+        "$12 = 3x$."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "בנוסחה $s = v\\cdot t$: מהו $s$ כאשר $v = 60$ ו-$t = 2.5$?",
+      "answer": {
+        "value": 150,
+        "tolerance": 0
+      },
+      "check": "60*2.5",
+      "hints": [
+        "מציבים: $s = 60 \\cdot 2.5$."
+      ],
+      "solution": {
+        "steps": [
+          "$60\\cdot 2.5 = 150$."
+        ],
+        "final": "$150$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב את $x^2 + x$ כאשר $x = -2$",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "(-2)^2+(-2)",
+      "commonWrongAnswers": [
+        {
+          "value": -6,
+          "mistake": "power-sign"
+        },
+        {
+          "value": 6,
+          "mistake": "sub-neg"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$4 - 2 = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב את $4 - 2x$ כאשר $x = -3$",
+      "answer": {
+        "value": 10,
+        "tolerance": 0
+      },
+      "check": "4-2*(-3)",
+      "commonWrongAnswers": [
+        {
+          "value": -2,
+          "mistake": "sub-neg"
+        },
+        {
+          "value": 6,
+          "mistake": "order-ops"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$4 - 2\\cdot(-3) = 4 + 6 = 10$."
+        ],
+        "final": "$10$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשב את $-2x + 6$ כאשר $x = 1.5$",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "-2*1.5+6",
+      "commonWrongAnswers": [
+        {
+          "value": 9,
+          "mistake": "sub-neg"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$-3 + 6 = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "נתון $y = 4x - 8$. מהו $x$ כאשר $y = 0$?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "8/4",
+      "commonWrongAnswers": [
+        {
+          "value": -2,
+          "mistake": "order-ops"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$0 = 4x - 8 \\Rightarrow 4x = 8 \\Rightarrow x = 2$."
+        ],
+        "final": "$2$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "sub-neg",
+      "label": "הצבה של מספר שלילי בלי סוגריים",
+      "advice": "מציבים מספר שלילי תמיד בתוך סוגריים: 5 − (−2) = 7.",
+      "reviewSection": "explanations",
+      "reviewRef": "sub"
+    },
+    {
+      "id": "power-sign",
+      "label": "חזקה של מספר שלילי",
+      "advice": "(−4)² = 16. בלי סוגריים מקבלים −16, וזו טעות.",
+      "reviewSection": "explanations",
+      "reviewRef": "sub"
+    },
+    {
+      "id": "order-ops",
+      "label": "סדר פעולות",
+      "advice": "קודם חזקות, אחר כך כפל וחילוק, ובסוף חיבור וחיסור.",
+      "reviewSection": "explanations",
+      "reviewRef": "order"
+    }
+  ],
+  "next": null
+}

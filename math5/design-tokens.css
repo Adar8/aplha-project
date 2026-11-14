@@ -1,88 +1,56 @@
-/* MATH 5 – משתני עיצוב (Premium Dark EdTech).
-   מקור הערכים: הנחיות העיצוב של ChatGPT (11.11.2026). קובץ ה-tokens המקורי לא צורף, ולכן הערכים הוקלדו מההנחיות.
-   כל צבע, גודל ורדיוס באפליקציה נלקח מכאן. styles.css לא מכיל ערכי hex משלו (חוץ מגווני ריחוף מחושבים). */
+/* MATH 5 – משתני עיצוב. כיוון: Brilliant (צעד אחד בכל מסך, אריחי נושא, טיפוגרפיה גדולה)
+   + Duolingo (כפתורים פיזיים, פסי התקדמות עבים, מגירת משוב). הצבעים נשארו של האפליקציה. */
 :root {
   /* משטחים */
   --bg: #080D18;
-  --surface: #111A2B;          /* כרטיסים */
-  --raised: #19243A;           /* משטחים מוגבהים, שדות, כפתור משני */
-  --raised-hover: #1F2C46;
-  --border: #293750;
-  --border-strong: #3A4B6B;
+  --surface: #121B2D;
+  --raised: #1A2540;
+  --raised-hover: #212E4D;
+  --line: #26334F;              /* קווי מסגרת – 2px בכרטיסים ובכפתורים */
+  --line-strong: #34446A;
+  --track: #1E2A44;             /* רקע פסי התקדמות */
+  --edge: #0A0F1C;              /* קצה תחתון של כפתור משני */
 
-  /* טקסט – ניגודיות על --surface: ראשי 16.0:1, משני 8.2:1, שלישוני 5.6:1 (על --raised: 5.0:1) */
+  /* טקסט – ניגודיות על --surface: 15.9:1 / 8.1:1 / 5.4:1 */
   --text: #F1F5FF;
   --text-2: #A5B2CD;
   --text-3: #8392B0;
 
-  /* צבעי מותג ומשמעות */
-  --primary: #638BFF;
-  --primary-hover: #7C9EFF;
-  --primary-active: #5078F0;
-  --primary-ink: #0A1229;      /* טקסט על כפתור ראשי: 5.9:1 (לבן היה 3.2:1 – לא עומד ב-AA) */
-  --primary-text: #8FAAFF;     /* קישורים וכפתור שלישוני: 8.7:1 על הרקע, 6.9:1 על --raised */
-  --primary-soft: rgba(99, 139, 255, 0.12);
-  --primary-line: rgba(99, 139, 255, 0.45);
-  --teal: #45D6C3;
-  --teal-soft: rgba(69, 214, 195, 0.12);
-  --success: #45D6A0;
-  --success-soft: rgba(69, 214, 160, 0.12);
-  --success-line: rgba(69, 214, 160, 0.45);
-  --danger: #FF7D8D;
-  --danger-soft: rgba(255, 125, 141, 0.12);
-  --danger-line: rgba(255, 125, 141, 0.45);
-  --warning: #F4C36B;
-  --warning-soft: rgba(244, 195, 107, 0.12);
+  /* צבעים עם "קצה" כהה לכפתורים פיזיים */
+  --primary: #638BFF;  --primary-edge: #3557C9;  --primary-hover: #7598FF;
+  --primary-ink: #0A1229;       /* טקסט על כחול: 5.9:1 */
+  --primary-text: #8FAAFF;      /* קישורים: 8.7:1 */
+  --primary-soft: rgba(99, 139, 255, .14);
+  --teal: #45D6C3;     --teal-edge: #1F9C8B;    --teal-soft: rgba(69, 214, 195, .14);
+  --success: #45D6A0;  --success-edge: #1F9A6C; --success-soft: rgba(69, 214, 160, .14); --success-ink: #06291C; --success-deep: #0F3326;
+  --danger: #FF7D8D;   --danger-edge: #C2475A;  --danger-soft: rgba(255, 125, 141, .14);  --danger-ink: #2B0911;  --danger-deep: #3A1520;
+  --violet: #A88BFF;   --violet-edge: #7656E0;  --violet-soft: rgba(168, 139, 255, .16);
+  --amber: #FFC25C;    --amber-edge: #C98A22;   --amber-soft: rgba(255, 194, 92, .14);
+  --warning: #FFC25C;  --warning-soft: rgba(255, 194, 92, .14);
 
   /* גופנים */
-  --font-head: 'Secular One', 'Rubik', 'Heebo', system-ui, sans-serif;
+  --font-head: 'Fredoka', 'Heebo', system-ui, sans-serif;
   --font-body: 'Heebo', system-ui, sans-serif;
-  --font-num: 'Secular One', 'Rubik', system-ui, sans-serif;
+  --font-num: 'Fredoka', 'Heebo', system-ui, sans-serif;
 
-  /* סולם טיפוגרפי */
-  --fs-xs: 13px;
-  --fs-sm: 14px;
-  --fs-md: 16px;
-  --fs-body: 17px;
-  --fs-lead: 19px;
-  --fs-h3: 18px;
-  --fs-h2: 22px;
-  --fs-h1: 32px;
-  --fs-display: 40px;
+  /* טיפוגרפיה */
+  --fs-xs: 13px; --fs-sm: 14px; --fs-md: 16px; --fs-body: 17px; --fs-lead: 19px;
+  --fs-h3: 19px; --fs-h2: 24px; --fs-h1: 32px; --fs-display: 40px;
 
-  /* ריווח (כפולות של 4) */
+  /* ריווח */
   --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
 
   /* רדיוסים */
-  --r-sm: 8px;
-  --r-md: 14px;
-  --r-lg: 22px;
-  --r-xl: 28px;
-  --r-full: 999px;
+  --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-xl: 28px; --r-full: 999px;
 
-  /* צללים – עדינים, בלי זוהר */
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.30);
-  --shadow-2: 0 10px 30px -12px rgba(0, 0, 0, 0.55);
-  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--primary);
+  /* כפתורים */
+  --btn-h: 50px; --btn-h-lg: 56px; --depth: 4px; --tap: 44px;
 
   /* תנועה */
-  --ease: cubic-bezier(.2, .7, .2, 1);
-  --dur: 160ms;
+  --ease: cubic-bezier(.2, .8, .2, 1); --dur: 160ms;
 
   /* פריסה */
-  --content-max: 1120px;
-  --reading-max: 760px;
-  --tap: 44px;
-  --btn-h: 44px;
-  --btn-h-lg: 52px;
-
-  /* סגנון v3: צל רך במקום קווי מסגרת, זוהר לכפתור הראשי */
-  --card-shadow: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 18px 40px -24px rgba(0, 0, 0, .75);
-  --primary-grad: linear-gradient(135deg, #82A3FF 0%, #5A80F6 55%, #4569E6 100%);
-  --primary-glow: 0 10px 26px -8px rgba(99, 139, 255, .7);
-  --violet: #A88BFF;
-  --violet-soft: rgba(168, 139, 255, .14);
-  --side-w: 248px;
+  --content-max: 1080px; --reading-max: 720px; --side-w: 240px;
 
   color-scheme: dark;
 }

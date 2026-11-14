@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 1,
+  "note": "ארגז הכלים: חומרי יסוד שאינם נושאי בחינה בפני עצמם. topics.skills מקשר למפת הידע (ממנה מגיעות תוצאות האבחון). lesson = שיעור יסוד קיים.",
+  "tools": [
+    {
+      "id": "arith",
+      "num": 1,
+      "name": "יסודות החשבון",
+      "glyph": "±",
+      "hue": "amber",
+      "topics": [
+        {
+          "id": "t-four-ops",
+          "name": "ארבע פעולות החשבון",
+          "skills": [
+            "f-fractions"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-order-ops",
+          "name": "סדר פעולות חשבון",
+          "skills": [
+            "f-fractions"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-negatives",
+          "name": "מספרים שליליים וחיוביים",
+          "skills": [
+            "f-linear-eq"
+          ],
+          "lesson": "tb-negatives"
+        },
+        {
+          "id": "t-fractions",
+          "name": "שברים ומספרים עשרוניים",
+          "skills": [
+            "f-fractions"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-percent",
+          "name": "אחוזים ויחסים",
+          "skills": [],
+          "lesson": null
+        },
+        {
+          "id": "t-powers",
+          "name": "חזקות ושורשים",
+          "skills": [
+            "f-powers"
+          ],
+          "lesson": null
+        }
+      ]
+    },
+    {
+      "id": "algebra",
+      "num": 2,
+      "name": "יסודות האלגברה",
+      "glyph": "x",
+      "hue": "blue",
+      "topics": [
+        {
+          "id": "t-expressions",
+          "name": "משתנים וביטויים אלגבריים",
+          "skills": [
+            "f-function-concept"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-brackets",
+          "name": "פתיחת סוגריים",
+          "skills": [
+            "f-linear-eq"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-like-terms",
+          "name": "כינוס איברים דומים",
+          "skills": [
+            "f-linear-eq"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-distributive",
+          "name": "חוק הפילוג",
+          "skills": [
+            "f-linear-eq"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-short-mult",
+          "name": "נוסחאות הכפל המקוצר",
+          "skills": [
+            "f-factoring"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-factoring",
+          "name": "פירוק לגורמים",
+          "skills": [
+            "f-factoring"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-alg-fractions",
+          "name": "שברים אלגבריים",
+          "skills": [
+            "f-algebraic-fractions"
+          ],
+          "lesson": null
+        }
+      ]
+    },
+    {
+      "id": "equations",
+      "num": 3,
+      "name": "פתרון משוואות",
+      "glyph": "=",
+      "hue": "teal",
+      "topics": [
+        {
+          "id": "t-linear-eq",
+          "name": "משוואות ממעלה ראשונה",
+          "skills": [
+            "f-linear-eq"
+          ],
+          "lesson": "tb-linear-eq"
+        },
+        {
+          "id": "t-eq-fractions",
+          "name": "משוואות עם שברים",
+          "skills": [
+            "f-linear-eq",
+            "f-fractions"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-quadratic",
+          "name": "משוואות ריבועיות",
+          "skills": [
+            "f-quadratic-eq"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-inequalities",
+          "name": "אי־שוויונות",
+          "skills": [
+            "f-inequalities"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-systems",
+          "name": "מערכות משוואות",
+          "skills": [
+            "f-systems"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-substitution",
+          "name": "הצבה ובידוד משתנים",
+          "skills": [
+            "f-function-concept"
+          ],
+          "lesson": "tb-substitution"
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "num": 4,
+      "name": "מערכת הצירים וגרפים",
+      "glyph": "y",
+      "hue": "violet",
+      "topics": [
+        {
+          "id": "t-axes",
+          "name": "ציר X וציר Y",
+          "skills": [
+            "f-function-concept"
+          ],
+          "lesson": "tb-axes"
+        },
+        {
+          "id": "t-points",
+          "name": "מיקום נקודות",
+          "skills": [
+            "f-function-concept"
+          ],
+          "lesson": "tb-axes"
+        },
+        {
+          "id": "t-read-graph",
+          "name": "קריאת גרפים",
+          "skills": [
+            "f-function-concept"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-slope",
+          "name": "משמעות השיפוע",
+          "skills": [
+            "f-line-eq"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-intercepts",
+          "name": "חיתוך עם הצירים",
+          "skills": [
+            "f-line-eq"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-eq-graph",
+          "name": "הקשר בין משוואה לגרף",
+          "skills": [
+            "f-line-eq",
+            "f-parabola"
+          ],
+          "lesson": null
+        }
+      ]
+    },
+    {
+      "id": "geometry",
+      "num": 5,
+      "name": "יסודות הגאומטריה",
+      "glyph": "△",
+      "hue": "green",
+      "topics": [
+        {
+          "id": "t-angles",
+          "name": "זוויות וישרים",
+          "skills": [
+            "g-triangles"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-triangles",
+          "name": "משולשים",
+          "skills": [
+            "g-triangles"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-pythagoras",
+          "name": "משפט פיתגורס",
+          "skills": [
+            "f-trig-basics"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-similarity",
+          "name": "דמיון וחפיפה",
+          "skills": [
+            "g-similarity"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-area",
+          "name": "שטחים והיקפים",
+          "skills": [
+            "g-triangles"
+          ],
+          "lesson": null
+        },
+        {
+          "id": "t-circles",
+          "name": "מעגלים",
+          "skills": [
+            "g-circle"
+          ],
+          "lesson": null
+        }
+      ]
+    },
+    {
+      "id": "skills",
+      "num": 6,
+      "name": "מיומנויות מתמטיות",
+      "glyph": "✓",
+      "hue": "red",
+      "topics": [
+        {
+          "id": "t-approach",
+          "name": "איך ניגשים לשאלה",
+          "skills": [],
+          "lesson": null
+        },
+        {
+          "id": "t-givens",
+          "name": "איך מזהים נתונים ונעלמים",
+          "skills": [],
+          "lesson": null
+        },
+        {
+          "id": "t-formula",
+          "name": "איך בוחרים נוסחה",
+          "skills": [],
+          "lesson": null
+        },
+        {
+          "id": "t-writeup",
+          "name": "איך מציגים פתרון מסודר",
+          "skills": [],
+          "lesson": null
+        },
+        {
+          "id": "t-check",
+          "name": "איך בודקים תשובה",
+          "skills": [],
+          "lesson": null
+        },
+        {
+          "id": "t-calculator",
+          "name": "איך משתמשים נכון במחשבון מדעי",
+          "skills": [],
+          "lesson": null
+        }
+      ]
+    }
+  ],
+  "lessonPrereqs": {
+    "straight-line": [
+      "t-negatives",
+      "t-linear-eq",
+      "t-substitution",
+      "t-axes"
+    ],
+    "arithmetic-sequence": [
+      "t-negatives",
+      "t-linear-eq",
+      "t-substitution"
+    ],
+    "derivative-extrema": [
+      "t-powers",
+      "t-substitution",
+      "t-quadratic",
+      "t-slope"
+    ],
+    "sine-cosine-law": [
+      "t-pythagoras",
+      "t-quadratic",
+      "t-powers"
+    ]
+  },
+  "plannedLessons": {
+    "straight-line": "הקו הישר"
+  },
+  "lessons": [
+    "toolbox/tb-negatives.json",
+    "toolbox/tb-linear-eq.json",
+    "toolbox/tb-substitution.json",
+    "toolbox/tb-axes.json"
+  ],
+  "aids": [
+    {
+      "id": "calculator",
+      "name": "מחשבון מדעי",
+      "desc": "מעלות ורדיאנים, היסטוריה",
+      "status": "ready"
+    },
+    {
+      "id": "notebook",
+      "name": "מחברת טעויות",
+      "desc": "הטעויות שלך, עם הסבר וקישור לחיזוק",
+      "status": "ready"
+    },
+    {
+      "id": "fractions",
+      "name": "מחשבון שברים",
+      "desc": "בהכנה",
+      "status": "soon"
+    },
+    {
+      "id": "formulas",
+      "name": "דף נוסחאות לפי נושא",
+      "desc": "בהכנה",
+      "status": "soon"
+    },
+    {
+      "id": "graph",
+      "name": "גרף אינטראקטיבי",
+      "desc": "בהכנה",
+      "status": "soon"
+    },
+    {
+      "id": "glossary",
+      "name": "מילון מושגים",
+      "desc": "בהכנה",
+      "status": "soon"
+    },
+    {
+      "id": "tutor",
+      "name": "לשאול את המורה הווירטואלי",
+      "desc": "דורש שירות AI – בתכנון",
+      "status": "soon"
+    }
+  ],
+  "baseCheck": {
+    "probes": [
+      "f-fractions",
+      "f-linear-eq",
+      "f-powers",
+      "f-function-concept",
+      "f-line-eq",
+      "f-factoring",
+      "f-quadratic-eq",
+      "f-algebraic-fractions",
+      "f-inequalities",
+      "f-systems",
+      "f-parabola",
+      "f-trig-basics"
+    ],
+    "maxQuestions": 12
+  }
+}

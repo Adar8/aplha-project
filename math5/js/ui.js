@@ -15,6 +15,12 @@ export const SECTIONS = [
   { id: 'review', label: 'ניתוח והמשך', desc: 'רמת השליטה, הטעויות שחזרו, ומה כדאי לעשות עכשיו.' },
 ];
 
+// שלבי השיעור לפי סוג: שיעור יסוד בארגז הכלים קצר יותר (בלי סרטון, תרגול עצמאי ושאלת בגרות)
+const TOOL_STEPS = ['explain', 'examples', 'guided', 'quiz', 'review'];
+export function lessonSections(lesson) {
+  return lesson && lesson.kind === 'toolbox' ? SECTIONS.filter(s => TOOL_STEPS.includes(s.id)) : SECTIONS;
+}
+
 export const SOURCE_LABEL = {
   official: 'שאלה רשמית מבגרות',
   adapted: 'עובד משאלה רשמית',
@@ -53,8 +59,9 @@ export function meter(score, level) {
 
 export function lessonState(lesson) {
   const L = store.get().lessons[lesson.id];
-  const done = L ? SECTIONS.filter(s => L.sections[s.id]).length : 0;
-  return { done, total: SECTIONS.length, ...mastery(lesson) };
+  const secs = lessonSections(lesson);
+  const done = L ? secs.filter(s => L.sections[s.id]).length : 0;
+  return { done, total: secs.length, ...mastery(lesson) };
 }
 
 export function recommend() {

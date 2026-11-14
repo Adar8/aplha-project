@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-linear-eq",
+  "title": "משוואה ממעלה ראשונה",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 30,
+  "summary": "פותרים משוואה כמו מאזניים: אותה פעולה בשני האגפים.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "explanations": [
+    {
+      "id": "balance",
+      "title": "משוואה היא מאזניים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "משוואה כמו $2x + 5 = 13$ היא מאזניים בשיווי משקל. מותר לעשות כל פעולה – **בתנאי שעושים אותה בשני האגפים**. המטרה: להשאיר את $x$ לבד בצד אחד."
+        },
+        {
+          "type": "formula",
+          "latex": "2x + 5 = 13 \\;\\Rightarrow\\; 2x = 8 \\;\\Rightarrow\\; x = 4"
+        }
+      ]
+    },
+    {
+      "id": "steps",
+      "title": "סדר הפעולות בפתרון",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "פותחים סוגריים (אם יש).",
+            "מעבירים את כל האיברים עם $x$ לאגף אחד, ואת המספרים לאגף השני.",
+            "מכנסים: מחברים איברים דומים.",
+            "מחלקים במקדם של $x$."
+          ]
+        },
+        {
+          "type": "warning",
+          "text": "כשמעבירים איבר לאגף השני, **הסימן שלו מתהפך**: $x + 7 = 12 \\Rightarrow x = 12 - 7$."
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "title": "בודקים את התשובה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "תמיד אפשר לבדוק: מציבים את הפתרון במשוואה המקורית. אם $x = 4$, אז $2\\cdot 4 + 5 = 13$ – נכון."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "שני צעדים",
+      "problem": "פתור: $2x + 5 = 13$",
+      "steps": [
+        "מעבירים את 5 לאגף ימין (והסימן מתהפך): $2x = 13 - 5 = 8$.",
+        "מחלקים ב-2: $x = 4$.",
+        "בדיקה: $2\\cdot 4 + 5 = 13$ ✓"
+      ],
+      "answer": "$x = 4$",
+      "checks": [
+        {
+          "expr": "(13-5)/2",
+          "equals": 4
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "עם סוגריים, x בשני האגפים",
+      "problem": "פתור: $3(x - 2) = x + 8$",
+      "steps": [
+        "פותחים סוגריים: $3x - 6 = x + 8$.",
+        "מעבירים את $x$ שמאלה ואת $-6$ ימינה: $3x - x = 8 + 6$.",
+        "$2x = 14 \\Rightarrow x = 7$.",
+        "בדיקה: $3(7-2) = 15$, ו-$7 + 8 = 15$ ✓"
+      ],
+      "answer": "$x = 7$",
+      "checks": [
+        {
+          "expr": "(8+6)/(3-1)",
+          "equals": 7
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "מקדם שלילי",
+      "problem": "פתור: $5 - 2x = 11$",
+      "steps": [
+        "מעבירים את 5: $-2x = 11 - 5 = 6$.",
+        "מחלקים ב-$(-2)$: $x = -3$."
+      ],
+      "answer": "$x = -3$",
+      "checks": [
+        {
+          "expr": "(11-5)/(-2)",
+          "equals": -3
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $x + 7 = 12$. מהו $x$?",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "12-7",
+      "commonWrongAnswers": [
+        {
+          "value": 19,
+          "mistake": "sign-move"
+        }
+      ],
+      "hints": [
+        "מעבירים את 7 לאגף השני, והסימן מתהפך."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 12 - 7 = 5$."
+        ],
+        "final": "$5$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $4x = -20$. מהו $x$?",
+      "answer": {
+        "value": -5,
+        "tolerance": 0
+      },
+      "check": "-20/4",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "divide-wrong"
+        },
+        {
+          "value": -80,
+          "mistake": "divide-wrong"
+        }
+      ],
+      "hints": [
+        "מחלקים את שני האגפים ב-4."
+      ],
+      "solution": {
+        "steps": [
+          "$x = -20 : 4 = -5$."
+        ],
+        "final": "$-5$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $2x - 3 = 9$. מהו $x$?",
+      "answer": {
+        "value": 6,
+        "tolerance": 0
+      },
+      "check": "(9+3)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "sign-move"
+        }
+      ],
+      "hints": [
+        "קודם מעבירים את $-3$: $2x = 9 + 3$.",
+        "$2x = 12$. עכשיו מחלקים ב-2."
+      ],
+      "solution": {
+        "steps": [
+          "$2x = 12 \\Rightarrow x = 6$."
+        ],
+        "final": "$6$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $5x + 2 = 3x + 10$. מהו $x$?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "(10-2)/(5-3)",
+      "commonWrongAnswers": [
+        {
+          "value": 1.5,
+          "mistake": "sign-move"
+        }
+      ],
+      "hints": [
+        "מעבירים את $3x$ שמאלה ואת 2 ימינה.",
+        "$5x - 3x = 10 - 2$."
+      ],
+      "solution": {
+        "steps": [
+          "$2x = 8 \\Rightarrow x = 4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $2(x + 1) = 10$. מהו $x$?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "(10-2)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 4.5,
+          "mistake": "bracket-open"
+        }
+      ],
+      "hints": [
+        "פותחים סוגריים: $2x + 2 = 10$."
+      ],
+      "solution": {
+        "steps": [
+          "$2x = 8 \\Rightarrow x = 4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $7 - x = 10$. מהו $x$?",
+      "answer": {
+        "value": -3,
+        "tolerance": 0
+      },
+      "check": "-(10-7)",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "sign-move"
+        },
+        {
+          "value": 17,
+          "mistake": "sign-move"
+        }
+      ],
+      "hints": [
+        "מעבירים את 7: $-x = 3$.",
+        "אם $-x = 3$, אז $x = -3$."
+      ],
+      "solution": {
+        "steps": [
+          "$-x = 3 \\Rightarrow x = -3$."
+        ],
+        "final": "$-3$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $3x + 4 = 19$",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "(19-4)/3",
+      "commonWrongAnswers": [
+        {
+          "value": 7.666666666666667,
+          "mistake": "sign-move"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$3x = 15 \\Rightarrow x = 5$."
+        ],
+        "final": "$5$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $6x - 5 = 2x + 7$",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(7+5)/(6-2)",
+      "commonWrongAnswers": [
+        {
+          "value": 0.5,
+          "mistake": "sign-move"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$4x = 12 \\Rightarrow x = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $4(x - 1) = 2x$",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "4/(4-2)",
+      "commonWrongAnswers": [
+        {
+          "value": 0.5,
+          "mistake": "bracket-open"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$4x - 4 = 2x \\Rightarrow 2x = 4 \\Rightarrow x = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתור: $-x + 8 = 3$",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "-(3-8)",
+      "commonWrongAnswers": [
+        {
+          "value": -5,
+          "mistake": "sign-move"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$-x = -5 \\Rightarrow x = 5$."
+        ],
+        "final": "$5$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "sign-move",
+      "label": "העברת אגף בלי להפוך סימן",
+      "advice": "כשמעבירים איבר לאגף השני, הסימן שלו מתהפך: פלוס הופך למינוס ולהפך.",
+      "reviewSection": "explanations",
+      "reviewRef": "steps"
+    },
+    {
+      "id": "divide-wrong",
+      "label": "חילוק במקדם",
+      "advice": "בסוף מחלקים את שני האגפים במקדם של x – כולל הסימן שלו.",
+      "reviewSection": "examples"
+    },
+    {
+      "id": "bracket-open",
+      "label": "פתיחת סוגריים",
+      "advice": "המספר שלפני הסוגריים כופל כל איבר בתוכם: 2(x+1) = 2x + 2.",
+      "reviewSection": "examples"
+    }
+  ],
+  "next": null
+}

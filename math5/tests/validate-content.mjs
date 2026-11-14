@@ -18,20 +18,15 @@ const katex = (() => {
   return sandbox.module.exports.default || sandbox.module.exports;
 })();
 
-// ---- מחשבון בטוח לשדה check ----
-const FN = {
-  sqrt: Math.sqrt, abs: Math.abs, floor: Math.floor, ceil: Math.ceil, round: Math.round, exp: Math.exp,
-  ln: Math.log, log: Math.log10, pi: Math.PI, e: Math.E,
-  sin: d => Math.sin(d * Math.PI / 180), cos: d => Math.cos(d * Math.PI / 180), tan: d => Math.tan(d * Math.PI / 180),
-  asin: x => Math.asin(x) * 180 / Math.PI, acos: x => Math.acos(x) * 180 / Math.PI, atan: x => Math.atan(x) * 180 / Math.PI,
-};
+// ---- מחשבון בטוח לשדה check (אותו מנוע כמו המחשבון באפליקציה; טריגונומטריה במעלות) ----
+import { evaluate } from '../js/core/calc.js';
 export function evalExpr(expr) {
-  if (typeof expr !== 'string' || !/^[0-9a-z+\-*/^().,\s]+$/i.test(expr)) throw new Error('תווים לא מותרים');
-  for (const id of expr.match(/[a-z]+/gi) || []) if (!(id in FN)) throw new Error(`פונקציה לא מוכרת: ${id}`);
-  const names = Object.keys(FN);
-  const v = new Function(...names, `"use strict"; return (${expr.replace(/\^/g, '**')});`)(...names.map(n => FN[n]));
-  if (typeof v !== 'number' || !Number.isFinite(v)) throw new Error('התוצאה אינה מספר');
-  return v;
+  if (typeof expr !== 'string') throw new Error('תווים לא מותרים');
+  try { return evaluate(expr, { deg: true }); }
+  catch (e) {
+    const m = String(e.message);
+    throw new Error(m === 'chars' ? 'תווים לא מותרים' : m.startsWith('fn:') ? `פונקציה לא מוכרת: ${m.slice(3)}` : m === 'nan' ? 'התוצאה אינה מספר' : 'ביטוי לא תקין');
+  }
 }
 
 // ---- עזרים ----
@@ -65,17 +60,19 @@ export function validateLesson(L, { topics = null, knownLessons = null } = {}) {
   };
 
   // ---- שדות ראשיים ----
+  const tb = L.kind === 'toolbox';   // שיעור יסוד בארגז הכלים: בלי שאלוני בחינה ובלי שאלות בגרות
+  if (L.kind !== undefined && !['lesson', 'toolbox'].includes(L.kind)) err('kind', 'lesson / toolbox');
   if (L.schemaVersion !== 1) err('schemaVersion', 'חייב להיות 1');
   if (!isStr(L.id) || !ID_RE.test(L.id)) err('id', 'מזהה באותיות קטנות באנגלית, ספרות ומקפים');
   text(L.title, 'title');
   if (!isStr(L.topic)) err('topic', 'חסר');
-  else if (topics && !topics.has(L.topic)) err('topic', `הנושא "${L.topic}" לא קיים במפת הנושאים (curriculum.js)`);
+  else if (topics && !topics.has(L.topic) && !(tb && L.topic === 'foundations')) err('topic', `הנושא "${L.topic}" לא קיים במפת הנושאים (curriculum.js)`);
   if (!L.papers || typeof L.papers !== 'object') err('papers', 'חסר');
   else {
     for (const k of ['old', 'new']) for (const p of arr(L.papers[k], `papers.${k}`)) if (!PAPERS[k].includes(p)) err(`papers.${k}`, `שאלון לא מוכר: ${p}`);
-    if (!(L.papers.old || []).length && !(L.papers.new || []).length) err('papers', 'צריך לפחות שאלון אחד');
+    if (!tb && !(L.papers.old || []).length && !(L.papers.new || []).length) err('papers', 'צריך לפחות שאלון אחד');
   }
-  if (!['common', 'old', 'new', 'check'].includes(L.topicStatus)) err('topicStatus', 'common / old / new / check');
+  if (!['common', 'old', 'new', 'check', ...(tb ? ['foundation'] : [])].includes(L.topicStatus)) err('topicStatus', 'common / old / new / check' + (tb ? ' / foundation' : ''));
   if (!(Number.isInteger(L.estimatedMinutes) && L.estimatedMinutes > 0)) err('estimatedMinutes', 'מספר דקות שלם וחיובי');
   text(L.summary, 'summary');
   if (!L.review || !['draft', 'reviewed', 'approved'].includes(L.review.status)) err('review.status', 'draft / reviewed / approved');
@@ -202,8 +199,8 @@ export function validateLesson(L, { topics = null, knownLessons = null } = {}) {
   };
 
   arr(L.guidedPractice, 'guidedPractice', 1).forEach((q, i) => question(q, `guidedPractice[${i}]`));
-  arr(L.independentPractice, 'independentPractice', 1).forEach((q, i) => question(q, `independentPractice[${i}]`));
-  arr(L.bagrutQuestions, 'bagrutQuestions', 1).forEach((b, i) => {
+  arr(L.independentPractice, 'independentPractice', tb ? 0 : 1).forEach((q, i) => question(q, `independentPractice[${i}]`));
+  arr(L.bagrutQuestions, 'bagrutQuestions', tb ? 0 : 1).forEach((b, i) => {
     const p = `bagrutQuestions[${i}]`;
     if (!isStr(b.id)) err(`${p}.id`, 'חסר');
     text(b.title, `${p}.title`); text(b.context, `${p}.context`); source(b.source, p);
@@ -315,7 +312,35 @@ async function main() {
   const dg = validateDiagnostic(D, { skills: km.skills });
   if (dg.errors.length) { fail += dg.errors.length; console.error(`✗ learning-content/diagnostic.json – ${dg.errors.length} שגיאות`); dg.errors.forEach(e => console.error('   • ' + e)); }
   else console.log(`✓ learning-content/diagnostic.json (${D.items.length} שאלות)`);
-  console.log(fail ? `\n${fail} שגיאות` : `\nכל קובצי התוכן תקינים (${lessons.length} שיעורים, מפת ידע, אבחון)`);
+  // ארגז הכלים: מפה, שיעורי יסוד, דרישות קדם
+  const TB = JSON.parse(readFileSync(resolve(CONTENT, 'toolbox.json'), 'utf8'));
+  const tbErr = [];
+  const topicIds = new Set();
+  const tbLessons = [];
+  for (const f of TB.lessons || []) {
+    const fp = resolve(CONTENT, f);
+    if (!existsSync(fp)) { tbErr.push(`${f}: הקובץ לא קיים`); continue; }
+    const TL = JSON.parse(readFileSync(fp, 'utf8'));
+    if (TL.kind !== 'toolbox') tbErr.push(`${f}: kind חייב להיות toolbox`);
+    const r = validateLesson(TL, { topics });
+    r.errors.forEach(e => tbErr.push(`${f}: ${e}`));
+    tbLessons.push(TL.id);
+    if (!r.errors.length) console.log(`✓ learning-content/${f}`);
+  }
+  for (const t of TB.tools || []) for (const tp of t.topics || []) {
+    if (topicIds.has(tp.id)) tbErr.push(`toolbox: נושא כפול ${tp.id}`); topicIds.add(tp.id);
+    (tp.skills || []).forEach(sk => { if (!km.skills.has(sk)) tbErr.push(`toolbox ${tp.id}: מיומנות לא קיימת ${sk}`); });
+    if (tp.lesson && !tbLessons.includes(tp.lesson)) tbErr.push(`toolbox ${tp.id}: שיעור לא קיים ${tp.lesson}`);
+  }
+  for (const [lid, pre] of Object.entries(TB.lessonPrereqs || {})) {
+    if (!known.has(lid) && !(TB.plannedLessons || {})[lid]) tbErr.push(`lessonPrereqs: שיעור לא קיים ${lid}`);
+    pre.forEach(t => { if (!topicIds.has(t)) tbErr.push(`lessonPrereqs ${lid}: נושא לא קיים ${t}`); });
+  }
+  for (const lid of known) if (!(TB.lessonPrereqs || {})[lid]) tbErr.push(`lessonPrereqs: חסרות דרישות קדם לשיעור ${lid}`);
+  (TB.baseCheck?.probes || []).forEach(p => { if (!D.items.some(i => i.skill === p)) tbErr.push(`baseCheck: אין שאלה למיומנות ${p}`); });
+  if (tbErr.length) { fail += tbErr.length; console.error(`✗ learning-content/toolbox.json – ${tbErr.length} שגיאות`); tbErr.forEach(e => console.error('   • ' + e)); }
+  else console.log(`✓ learning-content/toolbox.json (${topicIds.size} נושאים, ${tbLessons.length} שיעורי יסוד)`);
+  console.log(fail ? `\n${fail} שגיאות` : `\nכל קובצי התוכן תקינים (${lessons.length} שיעורים, ${tbLessons.length} שיעורי יסוד, מפת ידע, אבחון)`);
   process.exit(fail ? 1 : 0);
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

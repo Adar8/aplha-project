@@ -37,7 +37,8 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
     await step('ניווט: כל המסכים נטענים עם כותרת, בלי שגיאות', async () => {
       const routes = { '#/': 'שלום', '#/plan': 'תוכנית הלימודים', '#/map': 'מפת ידע', '#/diagnostic': 'מבחן אבחון', '#/week': 'תוכנית שבועית',
         '#/review': 'חזרות', '#/practice': 'תרגול', '#/exams': 'מבחנים', '#/progress': 'ההתקדמות שלי', '#/sources': 'מקורות',
-        '#/lesson/arithmetic-sequence/explain': 'סדרה חשבונית', '#/lesson/nope': 'השיעור לא נמצא' };
+        '#/lesson/arithmetic-sequence/explain': 'סדרה חשבונית', '#/lesson/nope': 'השיעור לא נמצא',
+        '#/toolbox': 'ארגז הכלים שלי', '#/tool/calculator': 'מחשבון מדעי', '#/tool/notebook': 'מחברת הטעויות שלי', '#/lesson/tb-axes/explain': 'מערכת הצירים' };
       for (const [h, title] of Object.entries(routes)) {
         await go(page, h);
         const t = (await page.locator('main h1').first().textContent()).trim();
@@ -71,8 +72,12 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       expect(await card.locator('.hints li').count() === 1, 'רמז לא הוצג');
       await card.locator('input').fill('-1'); await card.locator('[data-act=check]').click();
       expect(await card.evaluate(el => el.classList.contains('solved')), 'לא סומן כנפתר');
-      await page.reload(); await page.waitForSelector('.q[data-q="g1"]');
+      await page.reload(); await page.waitForSelector('.q[data-q="g1"]', { state: 'attached' });
       expect(await page.locator('.q[data-q="g1"].solved').count() === 1, 'הפתרון לא נשמר אחרי טעינה מחדש');
+      // שאלה אחת בכל פעם: אחרי טעינה מוצגת השאלה הבאה שלא נפתרה, ואפשר לחזור דרך הנקודות
+      expect(await page.locator('.q[data-q="g2"]').isVisible(), 'לא עבר לשאלה הבאה שלא נפתרה');
+      await page.click('.qdot[data-goto="0"]');
+      expect(await page.locator('.q[data-q="g1"]').isVisible(), 'הנקודות לא מחזירות לשאלה הראשונה');
       const s = await storeOf(page);
       const atts = s.attempts.filter(a => a.qid === 'g1' && a.lessonId === 'derivative-extrema');
       expect(atts.length === 2 && !atts[0].ok && atts[1].ok && atts[1].hints === 1, 'יומן הניסיונות שגוי: ' + JSON.stringify(atts));
@@ -138,7 +143,7 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(page, '#/week');
       expect((await page.locator('.lead').first().textContent()).includes('8 שעות'), 'התוכנית לא התעדכנה');
       await go(page, '#/');
-      expect((await page.locator('.goal-chip').textContent()).includes('85'), 'היעד במסך הבית לא התעדכן');
+      expect((await page.locator('.stat-pill.goal').textContent()).includes('85'), 'היעד במסך הבית לא התעדכן');
     });
 
     await step('איפוס: דורש לחיצה שנייה, ואז מוחק', async () => {
@@ -159,9 +164,79 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(p2, '#/lesson/sine-cosine-law/guided');
       expect(await p2.locator('.q[data-q="g1"].solved').count() === 1, 'התשובה הישנה אבדה');
       await go(p2, '#/');
-      expect((await p2.locator('.home-head h1').textContent()).includes('אדר'), 'השם אבד');
-      expect((await p2.locator('.metric-value').first().textContent()).trim().startsWith('52'), 'הציון המשוקלל שגוי');
+      expect((await p2.locator('.home-greet h1').textContent()).includes('אדר'), 'השם אבד');
+      const s2 = await storeOf(p2);
+      expect(s2.profile.grades.q1 === 58 && s2.profile.grades.q2 === 43, 'ציוני העבר לא עברו לפרופיל');
       await p2.context().close();
+    });
+
+    await step('ארגז כלים: בדיקת בסיס מזהה פערים וממליצה על שיעור יסוד', async () => {
+      const t = await newPage();
+      await go(t, '#/');
+      expect(await t.locator('#skipWelcome').count() === 1, 'אין הצעה לבדיקת בסיס בכניסה הראשונה');
+      await go(t, '#/basecheck'); await t.click('#bcStart'); await t.waitForSelector('#bcForm');
+      for (let i = 0; i < 20 && await t.locator('#bcSkip').count(); i++) { await t.click('#bcSkip'); await t.waitForTimeout(40); }
+      await t.waitForSelector('.found-path, .tb-head');
+      expect((await t.locator('main h1').first().textContent()).includes('תוצאות'), 'לא הגיע לתוצאות');
+      const s = await storeOf(t);
+      expect(s.baseCheck.finishedAt && Object.values(s.baseCheck.results).includes('missing'), 'הבדיקה לא שמרה פערים');
+      await go(t, '#/toolbox');
+      expect(await t.locator('.topic-row.st-gap').count() > 0, 'עמוד ארגז הכלים לא מסמן נושאים לחיזוק');
+      await t.context().close();
+    });
+
+    await step('דרישות קדם: כפתור חיזוק בשיעור, ואחרי החיזוק חזרה בדיוק לאותו מקום', async () => {
+      const t = await newPage();
+      await go(t, '#/basecheck'); await t.click('#bcStart'); await t.waitForSelector('#bcForm');
+      for (let i = 0; i < 20 && await t.locator('#bcSkip').count(); i++) { await t.click('#bcSkip'); await t.waitForTimeout(40); }
+      await go(t, '#/lesson/arithmetic-sequence/guided');
+      const btn = t.locator('.prereq a.btn');
+      expect(await btn.count() === 1, 'אין כפתור "צריך חיזוק"');
+      const href = await btn.getAttribute('href');
+      expect(href.startsWith('#/lesson/tb-'), 'הכפתור לא מוביל לשיעור יסוד: ' + href);
+      await btn.click(); await t.waitForTimeout(300);
+      expect((await t.locator('.return-bar').count()) === 1, 'אין פס "חזרה לשיעור" בשיעור היסוד');
+      await t.click('.return-bar [data-go-back]'); await t.waitForTimeout(300);
+      expect(t.url().endsWith('#/lesson/arithmetic-sequence/guided'), 'לא חזר בדיוק לאותו מקום: ' + t.url());
+      expect((await storeOf(t)).returnTo === null, 'נקודת החזרה לא נוקתה');
+      await t.context().close();
+    });
+
+    await step('שיעור יסוד: 5 שלבים, תרגול עם משוב, ומבחן קצר', async () => {
+      const t = await newPage();
+      await go(t, '#/lesson/tb-negatives/guided');
+      expect(await t.locator('#stepper li').count() === 5, 'שיעור יסוד צריך 5 שלבים');
+      const c = t.locator('.q[data-q="g1"]');
+      await c.locator('input').fill('-14'); await c.locator('[data-act=check]').click();
+      expect((await c.locator('.feedback').textContent()).includes('סימן'), 'לא זוהתה טעות סימן');
+      await c.locator('input').fill('4'); await c.locator('[data-act=check]').click(); await t.waitForTimeout(200);
+      expect(await t.locator('#fbSheet.ok').count() === 1, 'מגירת "נכון" לא נפתחה');
+      await t.click('#fbSheet [data-sheet="0"]'); await t.waitForTimeout(150);
+      expect(await t.locator('.q[data-q="g2"]').isVisible(), '"המשך" לא עבר לשאלה הבאה');
+      await go(t, '#/lesson/tb-negatives/quiz');
+      for (const [id, v] of [['q1', '-5'], ['q2', '9'], ['q3', '20'], ['q4', '-9']]) await t.locator(`.q[data-q="${id}"] input`).fill(v);
+      await t.click('#quiz [type=submit]'); await t.waitForSelector('#quizResult .huge');
+      expect((await t.locator('#quizResult .huge').textContent()).trim() === '100', 'ציון מבחן היסוד שגוי');
+      await go(t, '#/toolbox');
+      expect(await t.locator('a.topic-row.st-done[href="#/lesson/tb-negatives"]').count() >= 1, 'הנושא לא סומן כהושלם בארגז הכלים');
+      await t.context().close();
+    });
+
+    await step('מחשבון ומחברת טעויות עובדים', async () => {
+      const t = await newPage();
+      await go(t, '#/tool/calculator');
+      await t.fill('#calcIn', '2^3 + sin(30)'); await t.press('#calcIn', 'Enter');
+      expect((await t.locator('#calcOut').textContent()).includes('8.5'), 'חישוב שגוי במחשבון');
+      await t.click('[data-deg="0"]');
+      await t.fill('#calcIn', 'cos(pi)'); await t.press('#calcIn', 'Enter');
+      expect((await t.locator('#calcOut').textContent()).includes('-1'), 'רדיאנים לא עובדים');
+      await t.fill('#calcIn', '2+*'); await t.press('#calcIn', 'Enter');
+      expect(await t.locator('#calcOut.err').count() === 1, 'אין הודעת שגיאה לביטוי שגוי');
+      await go(t, '#/lesson/tb-axes/guided');
+      await t.locator('.q[data-q="g1"] input[value="1"]').check(); await t.locator('.q[data-q="g1"] [data-act=check]').click();
+      await go(t, '#/tool/notebook');
+      expect((await t.locator('.nb-item').first().textContent()).includes('רביע'), 'הטעות לא הופיעה במחברת');
+      await t.context().close();
     });
 
     await step('טלפון: ניווט תחתון, בלי גלילה אופקית', async () => {

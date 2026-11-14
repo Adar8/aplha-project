@@ -1,21 +1,32 @@
 import { store, mastery, LEVELS, practiceQuestions, onExternalChange } from './store.js';
 import { TOPICS, STATUS, CONFIDENCE, SOURCES, EXAMS, VERIFIED_ON } from './data/curriculum.js';
-import { LESSONS, LESSON_BY_ID, loadLessons, LOAD_ERRORS } from './data/lessons/index.js';
+import { LESSONS, LESSON_BY_ID, loadLessons, loadToolbox, LOAD_ERRORS } from './data/lessons/index.js';
+import * as tbx from './views/toolbox.js';
 import { checkAnswer } from './core/answers.js';
-import { SECTIONS, SOURCE_LABEL, renderMath, fmtTime, weekSeconds, todaySeconds, meter, lessonState, recommend, ring, ICON, esc } from './ui.js';
+import { streakInfo } from './core/plan.js';
+import { SECTIONS, lessonSections, SOURCE_LABEL, renderMath, fmtTime, weekSeconds, todaySeconds, meter, lessonState, recommend, ring, ICON, esc } from './ui.js';
 import * as extra from './views/extra.js';
 
 const app = document.getElementById('app');
 
 // ---------- מסך הבית ----------
-const REC_ICON = { diagnostic: 'compass', review: 'repeat', reduce: 'clock', good: 'check', lesson: 'book', content: 'layers' };
+// יחידות לימוד – קיבוץ נושאי הבחינה לפי משפחות, עם סמל וצבע קבועים (הזהות הוויזואלית של MATH 5)
+const UNITS = [
+  { id: 'seq', name: 'סדרות', glyph: 'Σ', hue: 'teal', topics: ['sequences', 'induction'] },
+  { id: 'calc', name: 'חדו"א', glyph: 'f′', hue: 'blue', topics: ['calc-poly', 'calc-rational-root', 'calc-trig', 'integrals', 'accum-integral', 'pre-analysis'] },
+  { id: 'trig', name: 'גאומטריה וטריגו', glyph: 'θ', hue: 'violet', topics: ['plane-trig', 'plane-geometry'] },
+  { id: 'prob', name: 'הסתברות', glyph: 'P', hue: 'amber', topics: ['probability'] },
+  { id: 'exp', name: 'מעריכיות ולוגים', glyph: 'eˣ', hue: 'blue', topics: ['exp-log', 'growth', 'power-func'] },
+  { id: 'ana', name: 'אנליטית ווקטורים', glyph: '→', hue: 'teal', topics: ['analytic', 'vectors', 'space-trig', 'complex', 'conics'] },
+];
+const unitOf = topic => UNITS.find(u => u.topics.includes(topic)) || UNITS[0];
+const art = (u, size = '') => `<span class="art hue-${u.hue} ${size}" aria-hidden="true"><b dir="ltr">${u.glyph}</b></span>`;
 
 function viewDashboard() {
   const st = store.get();
-  const P = st.profile, g = P.grades, T = P.targetGrade;
-  const current = 0.6 * g.q1 + 0.4 * g.q2;
+  const P = st.profile, T = P.targetGrade;
   const wk = extra.weekSummary();
-  const recs = extra.currentRecommendations().filter(r => r.kind !== 'lesson').slice(0, 3);
+  const streak = streakInfo(st);
   const rec = recommend();
   const last = st.lastLesson && LESSON_BY_ID[st.lastLesson];
   const next = extra.nextLessonToStudy();
@@ -24,100 +35,100 @@ function viewDashboard() {
   const doneSet = new Set(SECTIONS.filter(s => L && L.sections[s.id]).map(s => s.id));
   const nextSec = SECTIONS.find(s => !doneSet.has(s.id)) || SECTIONS[SECTIONS.length - 1];
   const nextIdx = SECTIONS.indexOf(nextSec);
-  const minutesLeft = Math.max(5, Math.round(cont.minutes * (SECTIONS.length - doneSet.size) / SECTIONS.length));
-  const states = LESSONS.map(l => lessonState(l));
-  const strong = states.filter(s => s.level >= 3).length;
-  const avg = states.length ? Math.round(states.reduce((a, s) => a + s.score, 0) / states.length) : 0;
+  const pct = Math.round(100 * doneSet.size / SECTIONS.length);
   const weeksLeft = extra.weeksLeft();
   const hour = new Date().getHours();
   const hello = hour < 5 ? 'לילה טוב' : hour < 12 ? 'בוקר טוב' : hour < 18 ? 'צהריים טובים' : 'ערב טוב';
-  const board = cont.explain.map(b => (b.body.match(/\$\$[\s\S]*?\$\$/) || [])[0]).find(Boolean) || '';
-  const today = new Date().getDay();
-  const maxMin = Math.max(30, ...wk.days.map(d => Math.max(d.plannedMin, d.actualMin)));
-  const todo = extra.weekTodo().slice(0, 3);
+  const recs = extra.currentRecommendations().filter(r => r.kind !== 'lesson' && r.kind !== 'diagnostic').slice(0, 2);
+  const due = extra.currentRecommendations().find(r => r.kind === 'review');
+  const cu = unitOf(cont.topic);
+
+  // מסלול: אבחון, השיעורים הקיימים, ושני נושאים שבהכנה
+  const diagDone = !!st.diagnostic?.finishedAt;
+  const nodes = [{ glyph: diagDone ? '✓' : '?', title: 'מבחן אבחון', sub: diagDone ? 'הושלם' : 'מומלץ להתחיל כאן', state: diagDone ? 'done' : 'open', href: '#/diagnostic' }];
+  for (const l of LESSONS) {
+    const s = lessonState(l);
+    const state = l.id === cont.id ? 'now' : s.level >= 3 || s.done === SECTIONS.length ? 'done' : 'open';
+    nodes.push({ glyph: state === 'done' ? '✓' : unitOf(l.topic).glyph, title: l.title, sub: state === 'now' ? 'אתה כאן' : state === 'done' ? `רמה: ${LEVELS[s.level]}` : `${s.done}/${SECTIONS.length} שלבים`, state, href: `#/lesson/${l.id}` });
+  }
+  const soon = TOPICS.filter(t => t.status === 'common' && !(t.lessons || []).length).slice(0, 2);
+  for (const t of soon) nodes.push({ glyph: unitOf(t.id).glyph, title: t.name.split(':')[0], sub: 'שיעור בהכנה', state: 'lock' });
 
   return `
-  <section class="home-head">
+  <section class="home-greet">
     <div>
       <p class="eyebrow">${hello}</p>
       <h1>${st.name ? `שלום, ${esc(st.name)}` : 'שלום'}</h1>
+      <p class="greet-sub">${weeksLeft !== null ? `עוד ${weeksLeft} שבועות לבחינה. ` : ''}${streak.doneToday ? 'למדת היום – כל הכבוד.' : 'שלב אחד היום מספיק כדי לשמור על הרצף.'}</p>
       ${st.name ? '' : `<form class="name-form" id="nameForm"><label for="nm" class="sr-only">איך לקרוא לך?</label>
         <input id="nm" placeholder="איך לקרוא לך?" maxlength="20" autocomplete="given-name"><button class="btn sm">שמירה</button></form>`}
     </div>
-    <div class="goal-chip" aria-label="יעד ציון ${T} ומעלה">
-      <span>יעד</span><b class="num"><bdi dir="ltr">${T}+</bdi></b>${weeksLeft !== null ? `<span class="sep" aria-hidden="true"></span><span>עוד ${weeksLeft} שבועות לבחינה</span>` : ''}
+    <div class="stat-pills">
+      <span class="stat-pill streak ${streak.doneToday ? 'lit' : ''}" title="רצף ימי לימוד. שיא: ${streak.best}"><span aria-hidden="true">🔥</span><b class="num">${streak.current}</b><span class="sr-only">ימים ברצף</span></span>
+      <span class="stat-pill goal" title="יעד ציון">יעד <b class="num"><bdi dir="ltr">${T}+</bdi></b></span>
     </div>
   </section>
 
-  <section class="continue-card" aria-labelledby="cc-title">
-    <div>
-      <span class="cc-kicker">${last ? 'להמשיך מאיפה שעצרת' : 'השיעור הבא שלך'}</span>
-      <h2 class="cc-title" id="cc-title">${esc(cont.title)}</h2>
-      <div class="cc-meta"><span class="badge b-common">משותף לשתי המתכונות</span><span class="num">${cont.papers.old} · ${cont.papers.new}</span><span>כ-${minutesLeft} דקות נשארו</span></div>
-      <div class="seg-progress" role="img" aria-label="${doneSet.size} מתוך ${SECTIONS.length} שלבים הושלמו">${SECTIONS.map(s => `<span class="${doneSet.has(s.id) ? 'done' : s.id === nextSec.id ? 'now' : ''}"></span>`).join('')}</div>
-      <p class="cc-step">השלב הבא: <b>${nextSec.label}</b> · שלב ${nextIdx + 1} מתוך ${SECTIONS.length}</p>
-      <div class="cc-actions">
-        <a class="btn primary lg" href="#/lesson/${cont.id}/${nextSec.id}"><span>${doneSet.size ? 'המשך ללמוד' : 'להתחלת השיעור'}</span>${ICON.chevEnd}</a>
-        <a class="btn tertiary" href="#/plan">כל השיעורים</a>
-      </div>
-    </div>
-    ${board ? `<div class="cc-board" aria-hidden="true"><span class="cc-board-label">הנוסחה המרכזית</span><div class="cc-board-math">${board}</div></div>` : ''}
-  </section>
+  ${!st.baseCheck && !st.diagnostic && !st.welcomeDismissed && !st.attempts.length ? `
+  <section class="tb-check" aria-labelledby="welcome-h">
+    <span class="art hue-teal sm" aria-hidden="true"><b>✓</b></span>
+    <div class="tb-check-txt"><h2 id="welcome-h">ברוך הבא! נתחיל מבדיקת בסיס קצרה?</h2>
+      <p>12 שאלות קלות, בערך 10 דקות – לא בגרות ובלי ציון. נראה מה כבר יושב ומה כדאי לחזק בארגז הכלים. אפשר גם לדלג ולהתחיל ללמוד.</p></div>
+    <div class="tb-check-actions"><a class="btn primary" href="#/basecheck">לבדיקת הבסיס</a><button class="btn" type="button" id="skipWelcome">לדלג, להתחיל ללמוד</button></div>
+  </section>` : ''}
 
-  <section class="metrics" aria-label="מדדי התקדמות">
-    <div class="metric">
-      <span class="metric-label"><span class="ico-tile t-teal">${ICON.flag}</span>ציון משוקלל</span>
-      <span class="metric-value num">${current.toFixed(0)}<small>/ יעד ${T}</small></span>
-      <span class="metric-sub">לפי הציונים הקודמים שלך (60% שאלון ראשון, 40% שני). חסרות ${Math.max(0, T - current).toFixed(0)} נקודות.</span>
-      <span class="bar hue-teal"><span style="inline-size:${Math.min(100, current / T * 100)}%"></span></span>
-    </div>
-    <div class="metric">
-      <span class="metric-label"><span class="ico-tile">${ICON.target}</span>שליטה בשיעורים</span>
-      <span class="metric-value num">${strong}<small>/ ${LESSONS.length}</small></span>
-      <span class="metric-sub">ברמת "טוב" ומעלה · ממוצע ${avg}</span>
-      <span class="bar"><span style="inline-size:${LESSONS.length ? 100 * strong / LESSONS.length : 0}%"></span></span>
-    </div>
-    <div class="metric">
-      <span class="metric-label"><span class="ico-tile t-violet">${ICON.clock}</span>זמן השבוע</span>
-      <span class="metric-value num">${wk.actualMin}<small>/ ${wk.plannedMin} דק׳</small></span>
-      <span class="metric-sub">היום: ${fmtTime(todaySeconds())}</span>
-      <span class="bar hue-violet"><span style="inline-size:${Math.min(100, wk.pct)}%"></span></span>
-    </div>
-  </section>
+  <div class="home-layout">
+    <div class="home-main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-top">
+          ${art(cu)}
+          <div class="hero-txt">
+            <p class="hero-kick">${last ? 'להמשיך מאיפה שעצרת' : 'השיעור הבא שלך'}</p>
+            <h2 id="hero-title">${esc(cont.title)}</h2>
+            <p class="hero-meta">${esc(cu.name)} · <span class="num">${cont.papers.old} / ${cont.papers.new}</span></p>
+          </div>
+        </div>
+        <p class="hero-row"><span>שלב ${nextIdx + 1} מתוך ${SECTIONS.length} · ${nextSec.label}</span><b class="num">${pct}%</b></p>
+        <div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" aria-label="התקדמות בשיעור"><span style="inline-size:${Math.max(pct, 4)}%"></span></div>
+        <a class="btn primary block" href="#/lesson/${cont.id}/${nextSec.id}">${doneSet.size ? 'המשך' : 'להתחלת השיעור'}</a>
+      </section>
 
-  <section class="home-two">
-    <div class="card">
-      <div class="card-head"><h2>תוכנית השבוע</h2><a href="#/week">לתוכנית המלאה</a></div>
-      <div class="mini-week" role="img" aria-label="דקות למידה בכל יום השבוע מול התוכנית">
-        ${wk.days.map(d => `<div class="mw-day ${d.day === today ? 'today' : ''}">
-          <div class="mw-col ${d.plannedMin ? '' : 'off'}"><span class="mw-fill" style="block-size:${Math.min(100, 100 * d.actualMin / (d.plannedMin || maxMin))}%"></span></div>
-          <span class="mw-name">${d.name.slice(0, 1)}׳</span></div>`).join('')}
-      </div>
-      <p class="week-sum">ימי לימוד מסומנים בעמודה מלאה. למדת <b>${wk.actualMin}</b> מתוך <b>${wk.plannedMin}</b> דקות (${wk.pct}%).</p>
-      <ul class="todo">${todo.map(t => `<li><a href="${t.href}"><span class="t-dot" aria-hidden="true"></span><span>${esc(t.text)}</span><span class="t-min">${esc(t.min)}</span></a></li>`).join('')}</ul>
-    </div>
-    <div class="card">
-      <div class="card-head"><h2>המלצות</h2></div>
-      ${recs.length ? `<ul class="rec-rows">${recs.map(r => {
-        const inner = `<span class="rec-ico">${ICON[REC_ICON[r.kind]] || ICON.compass}</span><span>${esc(r.text)}</span>${r.href ? `<span class="rec-chev" aria-hidden="true">‹</span>` : ''}`;
-        return `<li>${r.href ? `<a class="rec-row k-${r.kind}" href="${r.href}">${inner}</a>` : `<div class="rec-row k-${r.kind}">${inner}</div>`}</li>`;
-      }).join('')}</ul>` : '<p class="empty-line">אין המלצות מיוחדות כרגע. ממשיכים לפי תוכנית השבוע.</p>'}
-    </div>
-  </section>
+      ${due ? `<a class="review-banner" href="#/review">${art({ glyph: '↻', hue: 'violet' }, 'sm')}<span><b>חזרה להיום</b><span>${esc(due.text)}</span></span><span class="chev" aria-hidden="true">‹</span></a>` : ''}
 
-  <section aria-labelledby="quick-h">
-    <h2 class="section-title" id="quick-h">עוד במערכת</h2>
-    <div class="quick-grid">
-      <a class="quick-tile" href="#/diagnostic">${ICON.compass}<b>מבחן אבחון</b><span>${st.diagnostic?.finishedAt ? 'לתוצאות ולנקודת ההתחלה' : 'מאיפה כדאי להתחיל'}</span></a>
-      <a class="quick-tile" href="#/map">${ICON.map}<b>מפת ידע</b><span>57 מיומנויות וידע מקדים</span></a>
-      <a class="quick-tile" href="#/review">${ICON.repeat}<b>חזרות</b><span>חזרה קצרה אחרי יום, 3 ימים, שבוע</span></a>
-      <a class="quick-tile" href="#/exams">${ICON.exam}<b>מבחנים</b><span>מבחן קצר בסוף כל שיעור</span></a>
-      <a class="quick-tile" href="#/plan">${ICON.book}<b>תוכנית לימודים</b><span>הנושאים בשתי המתכונות</span></a>
+      <section aria-labelledby="path-h">
+        <div class="sec-title"><h2 id="path-h">המסלול שלך</h2><a href="#/plan">כל השיעורים</a></div>
+        <ol class="path">
+          ${nodes.map((n, i) => `<li class="path-row s-${n.state}" style="--i:${i}">
+            ${n.href ? `<a class="node" href="${n.href}" aria-label="${esc(n.title)}">` : '<span class="node" aria-hidden="true">'}<b dir="ltr">${n.glyph}</b>${n.href ? '</a>' : '</span>'}
+            <span class="node-lab"><b>${esc(n.title)}</b><span>${esc(n.sub)}</span></span></li>`).join('')}
+        </ol>
+      </section>
     </div>
-  </section>`;
+
+    <aside class="home-rail">
+      <section class="card week-card">
+        <div class="week-head">${art({ glyph: '⏱', hue: 'amber' }, 'sm')}<div><h2>יעד שבועי</h2><p><span class="num">${wk.actualMin}</span> מתוך <span class="num">${wk.plannedMin}</span> דקות</p></div></div>
+        <div class="prog blue" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100, wk.pct)}" aria-label="ביצוע שבועי"><span style="inline-size:${Math.max(Math.min(100, wk.pct), 3)}%"></span></div>
+        <a class="link-more" href="#/week">לתוכנית השבועית</a>
+      </section>
+
+      <section aria-labelledby="units-h">
+        <div class="sec-title"><h2 id="units-h">יחידות</h2></div>
+        <div class="units">${UNITS.map(u => {
+          const ls = LESSONS.filter(l => u.topics.includes(l.topic));
+          const done = ls.filter(l => lessonState(l).level >= 3).length;
+          return `<a class="unit" href="#/plan">${art(u, 'sm')}<b>${esc(u.name)}</b><span>${ls.length ? `${done} מתוך ${ls.length} שיעורים` : 'בהכנה'}</span></a>`;
+        }).join('')}</div>
+      </section>
+
+      ${recs.length ? `<section class="card recs-card"><h2>המלצות</h2><ul class="rec-rows">${recs.map(r => `<li>${r.href ? `<a class="rec-row" href="${r.href}">${esc(r.text)}</a>` : `<div class="rec-row">${esc(r.text)}</div>`}</li>`).join('')}</ul></section>` : ''}
+    </aside>
+  </div>`;
 }
 
 function bindDashboard() {
+  const sk = document.getElementById('skipWelcome');
+  if (sk) sk.onclick = () => { store.set(s => { s.welcomeDismissed = true; }); route(); };
   const nf = document.getElementById('nameForm');
   if (nf) nf.addEventListener('submit', e => {
     e.preventDefault(); const v = nf.querySelector('input').value.trim();
@@ -246,38 +257,41 @@ function qHTML(q, lessonId, mode, idx) {
   const L = store.get().lessons[lessonId];
   const prev = mode === 'practice' && L && L.answers[q.id];
   const solved = prev && prev.correct;
-  const label = q.label ? `<span class="part-label">${esc(q.label)}</span> סעיף ${esc(q.label)}` : `שאלה ${idx + 1}`;
-  const check = mode === 'practice' ? `<button class="btn primary" data-act="check">בדיקה</button>` : '';
+  const label = q.label ? `סעיף ${esc(q.label)}` : `שאלה ${idx + 1}`;
   const answer = q.type === 'mc'
-    ? `<div class="answer-row col"><div class="options" role="radiogroup" aria-label="אפשרויות">${q.options.map((o, i) => `
-        <label class="opt"><input type="radio" name="${q.id}" value="${i}" ${solved && o.ok ? 'checked' : ''}><span>${o.t}</span></label>`).join('')}</div>
-        ${check ? `<div>${check}</div>` : ''}</div>`
-    : `<div class="answer-row"><div class="num-input">
-        <input type="text" inputmode="decimal" dir="ltr" aria-label="תשובה" placeholder="תשובה" autocomplete="off" ${solved ? `value="${q.answer}" class="is-correct"` : ''}>
-        ${q.rounding ? `<span class="hint-line">עיגול: ${esc(q.rounding)}</span>` : ''}</div>${check}</div>`;
+    ? `<div class="options" role="radiogroup" aria-label="אפשרויות">${q.options.map((o, i) => `
+        <label class="opt"><input type="radio" name="${q.id}" value="${i}" ${solved && o.ok ? 'checked' : ''}><span>${o.t}</span></label>`).join('')}</div>`
+    : `<div class="num-input">
+        <label class="ans-label" for="in-${q.id}">התשובה שלך</label>
+        <input id="in-${q.id}" type="text" inputmode="decimal" dir="ltr" placeholder="?" autocomplete="off" ${solved ? `value="${q.answer}" class="is-correct"` : ''}>
+        ${q.rounding ? `<span class="hint-line">עיגול: ${esc(q.rounding)}</span>` : ''}</div>`;
   return `
   <div class="q card ${solved ? 'solved' : ''}" data-q="${q.id}" data-mode="${mode}" data-hints="0">
     <div class="q-head"><span class="q-num">${label}</span>${solved ? `<span class="q-status">${ICON.check} נפתר</span>` : ''}</div>
     <div class="q-prompt">${q.prompt}</div>
     ${answer}
-    <div class="feedback" aria-live="polite"></div>
+    <div class="feedback"></div>
     ${mode === 'practice' ? `
+      <div class="q-check"><button class="btn primary block" data-act="check" ${solved ? '' : 'disabled'}>בדיקה</button></div>
       <div class="q-tools">
-        ${q.hints && q.hints.length ? `<button class="btn tertiary sm" data-act="hint">רמז (${q.hints.length})</button>` : ''}
+        ${q.hints && q.hints.length ? `<button class="btn tertiary sm" data-act="hint"><span aria-hidden="true">💡</span> רמז (${q.hints.length})</button>` : ''}
         <button class="btn tertiary sm" data-act="reveal">הצגת פתרון</button>
       </div>
       <ol class="hints"></ol>` : ''}
   </div>`;
 }
 
-// משוב צמוד לתשובה: אייקון + טקסט, וסימון שדה התשובה
+// משוב צמוד לתשובה (טעות, מידע, פתרון) – אייקון + טקסט, וסימון שדה התשובה
 function showFeedback(card, kind, html) {
   const fb = card.querySelector('.feedback');
   const icon = { ok: '✓', bad: '✕', info: 'i', 'show-sol': '?' }[kind];
   fb.className = `feedback ${kind}`;
   fb.innerHTML = `<span class="fb-icon" aria-hidden="true">${icon}</span><div class="fb-body">${html}</div>`;
   const input = card.querySelector('.num-input input');
-  if (input) { input.classList.toggle('is-correct', kind === 'ok'); input.classList.toggle('is-wrong', kind === 'bad'); }
+  if (input) {
+    input.classList.toggle('is-correct', kind === 'ok'); input.classList.remove('is-wrong');
+    if (kind === 'bad') { void input.offsetWidth; input.classList.add('is-wrong'); }
+  }
   card.querySelectorAll('.opt').forEach(o => o.classList.remove('is-correct', 'is-wrong'));
   const sel = card.querySelector('.opt input:checked');
   if (sel && (kind === 'ok' || kind === 'bad')) sel.closest('.opt').classList.add(kind === 'ok' ? 'is-correct' : 'is-wrong');
@@ -288,11 +302,58 @@ function findQ(lesson, qid) {
   return practiceQuestions(lesson).concat(lesson.quiz).find(q => q.id === qid);
 }
 
+// ---- תרגול: שאלה אחת בכל פעם, נקודות מעבר, ומגירת "נכון" שעולה מלמטה ----
+const PRAISE = ['נכון!', 'מצוין!', 'יפה מאוד!', 'בדיוק ככה!'];
+function flowCards(sec) { return [...sec.querySelectorAll('.q[data-mode="practice"]')]; }
+function flowShow(sec, idx) {
+  const cards = flowCards(sec); if (!cards.length) return;
+  idx = Math.max(0, Math.min(idx, cards.length - 1));
+  cards.forEach((c, i) => { c.hidden = i !== idx; });
+  sec.dataset.idx = idx;
+  const dots = sec.querySelector('.qdots');
+  if (dots) dots.innerHTML = cards.map((c, i) => `<button type="button" class="qdot ${c.classList.contains('solved') ? 'ok' : ''} ${i === idx ? 'on' : ''}" data-goto="${i}" aria-label="שאלה ${i + 1}${c.classList.contains('solved') ? ' (נפתרה)' : ''}" ${i === idx ? 'aria-current="step"' : ''}></button>`).join('')
+    + `<span class="qdots-txt num">${idx + 1} / ${cards.length}</span>`;
+}
+function flowInit(sec) {
+  const cards = flowCards(sec); if (cards.length < 2) return;
+  const nav = document.createElement('div'); nav.className = 'qdots'; nav.setAttribute('aria-label', 'מעבר בין שאלות');
+  cards[0].before(nav);
+  const first = cards.findIndex(c => !c.classList.contains('solved'));
+  flowShow(sec, first < 0 ? 0 : first);
+  nav.addEventListener('click', e => { const b = e.target.closest('[data-goto]'); if (b) flowShow(sec, +b.dataset.goto); });
+}
+function openSheet(kind, title, html, actions) {
+  closeSheet();
+  const sh = document.createElement('div');
+  sh.className = `sheet ${kind}`; sh.id = 'fbSheet'; sh.setAttribute('role', 'status'); sh.setAttribute('aria-live', 'polite');
+  sh.innerHTML = `${kind === 'ok' && !matchMedia('(prefers-reduced-motion: reduce)').matches ? '<div class="confetti" aria-hidden="true">' + Array.from({ length: 22 }, (_, i) => `<i style="inset-inline-start:${(i * 4.6 + (i % 3) * 7) % 100}%;animation-delay:${(i % 5) * 0.05}s"></i>`).join('') + '</div>' : ''}
+    <div class="sheet-in">
+      <div class="sh-head"><span class="sh-ic" aria-hidden="true">${kind === 'ok' ? '✓' : '✕'}</span><span class="sh-title">${title}</span></div>
+      <div class="sh-text">${html}</div>
+      <div class="sh-actions">${actions.map((a, i) => `<button type="button" class="btn ${i === 0 ? 'primary block' : 'tertiary'} ${i === 0 && kind === 'ok' ? 'green' : ''}" data-sheet="${i}">${a.label}</button>`).join('')}</div>
+    </div>`;
+  document.body.appendChild(sh);
+  renderMath(sh);
+  requestAnimationFrame(() => sh.classList.add('open'));
+  sh.addEventListener('click', e => { const b = e.target.closest('[data-sheet]'); if (b) { closeSheet(); actions[+b.dataset.sheet].run(); } });
+  sh.querySelector('[data-sheet="0"]').focus({ preventScroll: true });
+}
+function closeSheet() { document.getElementById('fbSheet')?.remove(); }
+addEventListener('hashchange', closeSheet);
+
 function bindPractice(container, lesson) {
+  if (['guided', 'practice', 'bagrut'].includes(container.dataset.section)) flowInit(container);
+  // כפתור "בדיקה" פעיל רק כשיש תשובה
+  container.addEventListener('input', e => {
+    const card = e.target.closest('.q[data-mode="practice"]'); if (!card) return;
+    const btn = card.querySelector('[data-act="check"]'); if (!btn) return;
+    const has = e.target.type === 'radio' ? true : !!e.target.value.trim();
+    btn.disabled = !has;
+    if (e.target.classList.contains('is-wrong')) e.target.classList.remove('is-wrong');
+  });
   container.addEventListener('click', e => {
     const btn = e.target.closest('[data-act]'); if (!btn) return;
     const card = btn.closest('.q'); const q = findQ(lesson, card.dataset.q);
-    const fb = card.querySelector('.feedback');
     const hintsUsed = +card.dataset.hints;
 
     if (btn.dataset.act === 'hint') {
@@ -301,7 +362,7 @@ function bindPractice(container, lesson) {
         card.querySelector('.hints').appendChild(li); renderMath(li);
         card.dataset.hints = hintsUsed + 1;
         const left = q.hints.length - hintsUsed - 1;
-        btn.textContent = left ? `רמז נוסף (${left})` : 'אין עוד רמזים';
+        btn.textContent = left ? `💡 רמז נוסף (${left})` : 'אין עוד רמזים';
         if (!left) btn.disabled = true;
       }
       return;
@@ -310,9 +371,10 @@ function bindPractice(container, lesson) {
     if (btn.dataset.act === 'reveal') {
       if (!already) store.recordAttempt(lesson.id, q.id, { ok: false, hints: hintsUsed, revealed: true, ctx: 'practice' });
       showFeedback(card, 'show-sol', `<b>הפתרון:</b> ${q.solution}`);
+      maybeCompleteSection(lesson, card.closest('[data-section]'));
       return;
     }
-    // check
+    // בדיקה
     const raw = q.type === 'mc' ? card.querySelector('input[type=radio]:checked')?.value : card.querySelector('.num-input input').value;
     const res = checkAnswer(q, raw);
     if (!res.valid) {
@@ -320,18 +382,28 @@ function bindPractice(container, lesson) {
       return;
     }
     if (!already) store.recordAttempt(lesson.id, q.id, { ok: res.ok, hints: hintsUsed, ctx: 'practice' });
+    const sec = card.closest('[data-section]');
     if (res.ok) {
       card.classList.add('solved');
       showFeedback(card, 'ok', `<b>נכון.</b> ${q.solution}`);
-      btn.classList.add('is-success'); btn.textContent = 'נכון';
-      setTimeout(() => { if (btn.isConnected) { btn.classList.remove('is-success'); btn.textContent = 'בדיקה'; } }, 1600);
+      updateStepper(lesson);
+      maybeCompleteSection(lesson, sec);
+      if (!already) {
+        const cards = flowCards(sec);
+        const nextIdx = cards.findIndex(c => !c.classList.contains('solved'));
+        const nextLink = app.querySelector('.lesson-nav .btn.primary');
+        openSheet('ok', PRAISE[Math.floor(Math.random() * PRAISE.length)], q.solution, [
+          nextIdx >= 0 ? { label: 'המשך', run: () => { flowShow(sec, nextIdx); window.scrollTo({ top: 0 }); } }
+            : { label: nextLink ? 'לשלב הבא' : 'המשך', run: () => { if (nextLink) location.hash = nextLink.getAttribute('href'); } },
+        ]);
+        if (sec.querySelector('.qdots')) flowShow(sec, +sec.dataset.idx);
+      }
     } else {
       if (!already) store.recordMistake(lesson.id, q.id, res.tag);
       const t = lesson.tags[res.tag];
       showFeedback(card, 'bad', t ? `<b>לא בדיוק.</b> נראה שזו טעות של ${t.label}. ${t.advice}` : '<b>לא בדיוק.</b> כדאי לבדוק שוב את החישוב, או לבקש רמז.');
+      updateStepper(lesson);
     }
-    updateStepper(lesson);
-    maybeCompleteSection(lesson, card.closest('[data-section]'));
   });
 }
 
@@ -339,10 +411,11 @@ function maybeCompleteSection(lesson, sec) {
   if (!sec) return;
   const L = store.lesson(lesson.id);
   const ids = [...sec.querySelectorAll('.q')].map(c => c.dataset.q);
-  if (ids.every(id => L.answers[id] && (L.answers[id].correct || L.answers[id].revealed))) {
+  if (ids.length && ids.every(id => L.answers[id] && (L.answers[id].correct || L.answers[id].revealed))) {
     store.markSection(lesson.id, sec.dataset.section); updateStepper(lesson);
   }
 }
+
 
 // ---------- שיעור ----------
 function sectionBody(lesson, sid) {
@@ -362,7 +435,7 @@ function sectionBody(lesson, sid) {
           <div class="ex-problem">${ex.problem}</div>
           <ol class="steps">${ex.steps.map(s => `<li hidden>${s}</li>`).join('')}</ol>
           <div class="ex-answer" hidden><b>תשובה:</b> ${ex.answer}</div>
-          <div class="ex-actions"><button class="btn secondary" data-step>לצעד הראשון</button><button class="btn tertiary" data-all>הצגת כל הפתרון</button></div>
+          <div class="ex-actions"><button class="btn" data-step>לצעד הראשון</button><button class="btn tertiary" data-all>הצגת כל הפתרון</button></div>
         </article>`).join('');
     case 'guided':
       return srcNote() +
@@ -423,7 +496,9 @@ function bindQuiz(lesson) {
     const out = document.getElementById('quizResult');
     out.innerHTML = `<div class="card result ${score >= 80 ? 'good' : 'mid'}"><span class="num huge">${score}</span>
       <p>${correct} מתוך ${lesson.quiz.length} נכונות. ${score >= 80 ? 'מצוין, אפשר להתקדם.' : 'כדאי לעבור על ניתוח הטעויות לפני שממשיכים.'}</p>
-      <a class="btn primary" href="#/lesson/${lesson.id}/review">לניתוח הטעויות</a></div>`;
+      <div class="section-end" style="justify-content:center"><a class="btn ${lesson.kind === 'toolbox' && store.get().returnTo && score >= 80 ? '' : 'primary'}" href="#/lesson/${lesson.id}/review">לניתוח הטעויות</a>
+      ${lesson.kind === 'toolbox' && store.get().returnTo && score >= 80 ? `<a class="btn primary" href="${esc(store.get().returnTo.hash)}" data-go-back>לחזרה: ${esc(store.get().returnTo.title)}</a>` : ''}</div></div>`;
+    tbx.bindReturnBar(out);
     form.querySelector('[type=submit]').textContent = 'הגשה מחדש';
     updateStepper(lesson);
     out.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
@@ -470,41 +545,49 @@ function viewLesson(id, sid) {
   if (!lesson) return `<div class="card"><h1>השיעור לא נמצא</h1><p class="muted">ייתכן שהקישור ישן. כל השיעורים נמצאים במסך השיעורים.</p><a class="btn primary" href="#/plan">לשיעורים</a></div>`;
   currentLesson = id;
   store.set(s => { s.lastLesson = id; });
-  const active = SECTIONS.some(s => s.id === sid) ? sid : 'explain';
-  const i = SECTIONS.findIndex(s => s.id === active);
-  const cur = SECTIONS[i], nextS = SECTIONS[i + 1], prevS = SECTIONS[i - 1];
+  const secs = lessonSections(lesson);
+  const isTool = lesson.kind === 'toolbox';
+  const active = secs.some(s => s.id === sid) ? sid : 'explain';
+  const i = secs.findIndex(s => s.id === active);
+  const cur = secs[i], nextS = secs[i + 1], prevS = secs[i - 1];
   const readOnly = ['explain', 'video', 'examples'].includes(active);   // שלבי קריאה: "הבא" גם מסמן שהשלב הושלם
+  const tool = isTool ? tbx.toolOfLesson(lesson.id) : null;
+  const u = isTool ? { glyph: tool?.glyph || '🧰', hue: tool?.hue || 'amber' } : unitOf(lesson.topic);
+  const ret = store.get().returnTo;
+  const exitHref = isTool ? (ret ? ret.hash : '#/toolbox') : '#/plan';
   return `
   <header class="lesson-top">
-    <div class="lt-inner">
-      <div class="lt-row">
-        <a class="btn-icon" href="#/plan" aria-label="חזרה לשיעורים">${ICON.chevStart}</a>
-        <div class="lt-title"><span class="lt-kicker num">${lesson.papers.old} · ${lesson.papers.new} · כ-${lesson.minutes} דקות</span><h1>${esc(lesson.title)}</h1></div>
-      </div>
-      <ol class="stepper" id="stepper" aria-label="שלבי השיעור">${stepperItems(lesson, active)}</ol>
-      <p class="lt-step"><span>שלב <span class="num">${i + 1}</span> מתוך <span class="num">${SECTIONS.length}</span> · <b>${cur.label}</b></span><span id="lt-done" class="num">${stepDoneText(lesson)}</span></p>
+    <div class="lt-bar">
+      <a class="lt-x" href="${esc(exitHref)}" aria-label="יציאה מהשיעור">✕</a>
+      <ol class="stepper ${secs.length === 5 ? 'n5' : ''}" id="stepper" aria-label="שלבי השיעור">${stepperItems(lesson, active)}</ol>
+      <span class="lt-count num" aria-label="שלב ${i + 1} מתוך ${secs.length}">${i + 1}/${secs.length}</span>
     </div>
   </header>
   <div class="reading">
-    <div class="section-intro"><h2>${cur.label}</h2><p>${cur.desc}</p></div>
+    <div class="lesson-id"><span class="art hue-${u.hue} xs" aria-hidden="true"><b dir="ltr">${u.glyph}</b></span><h1>${esc(lesson.title)}</h1>${isTool ? '<span class="badge b-found">ארגז הכלים</span>' : ''}<span id="lt-done" class="lt-done num">${stepDoneText(lesson)}</span></div>
+    ${isTool ? tbx.returnBar() : tbx.prereqBanner(lesson, active === 'explain')}
+    <div class="section-intro"><span class="sec-kick">${cur.label}</span><p>${cur.desc}</p></div>
     <div class="section" data-section="${active}">${sectionBody(lesson, active)}</div>
   </div>
   <nav class="lesson-nav" aria-label="מעבר בין שלבים">
-    ${prevS ? `<a class="btn" href="#/lesson/${id}/${prevS.id}" aria-label="לשלב הקודם: ${prevS.label}">${ICON.chevStart}<span class="nav-label">${prevS.label}</span><span class="nav-short">הקודם</span></a>` : '<span></span>'}
-    ${nextS ? `<a class="btn primary" href="#/lesson/${id}/${nextS.id}" ${readOnly ? `data-done="${active}"` : ''}><span class="nav-label">${readOnly ? 'סיימתי, ל' : ''}${nextS.label}</span><span class="nav-short">${readOnly ? 'סיימתי, הבא' : 'לשלב הבא'}</span>${ICON.chevEnd}</a>`
-      : `<a class="btn primary" href="#/">לסיום השיעור${ICON.chevEnd}</a>`}
+    <div class="ln-in">
+      ${prevS ? `<a class="btn icon-only" href="#/lesson/${id}/${prevS.id}" aria-label="לשלב הקודם: ${prevS.label}" title="${prevS.label}">${ICON.chevStart}</a>` : ''}
+      ${nextS ? `<a class="btn primary block" href="#/lesson/${id}/${nextS.id}" ${readOnly ? `data-done="${active}"` : ''}><span class="nav-label">${readOnly ? 'המשך' : `ל${nextS.label}`}</span>${ICON.chevEnd}</a>`
+        : `<a class="btn primary block green" href="${isTool ? esc(ret ? ret.hash : '#/toolbox') : '#/'}" ${isTool && ret ? 'data-go-back' : ''}>${isTool && ret ? `לחזרה: ${esc(ret.title)}` : 'לסיום השיעור'}${ICON.chevEnd}</a>`}
+    </div>
   </nav>`;
 }
 
 function stepDoneText(lesson) {
   const L = store.get().lessons[lesson.id];
-  const n = L ? SECTIONS.filter(s => L.sections[s.id]).length : 0;
-  return `${n}/${SECTIONS.length} הושלמו`;
+  const secs = lessonSections(lesson);
+  const n = L ? secs.filter(s => L.sections[s.id]).length : 0;
+  return `${n}/${secs.length} הושלמו`;
 }
 
 function stepperItems(lesson, active) {
   const L = store.get().lessons[lesson.id];
-  return SECTIONS.map((s, i) => {
+  return lessonSections(lesson).map((s, i) => {
     const done = L && L.sections[s.id];
     return `<li class="${done ? 'done' : ''} ${s.id === active ? 'active' : ''}">
       <a href="#/lesson/${lesson.id}/${s.id}" ${s.id === active ? 'aria-current="step"' : ''} title="${s.label}"><span class="seg" aria-hidden="true"></span><span class="st-label">${i + 1}. ${s.label}${done ? ' (הושלם)' : ''}</span></a></li>`;
@@ -523,6 +606,7 @@ function bindLesson(id) {
   const sec = app.querySelector('.section');
   bindPractice(sec, lesson);
   bindQuiz(lesson);
+  tbx.bindReturnLinks(app); tbx.bindReturnBar(app);
   app.querySelector('.lesson-nav')?.addEventListener('click', e => {
     const d = e.target.closest('[data-done]');
     if (d) store.markSection(id, d.dataset.done);   // הקישור עצמו ממשיך לשלב הבא
@@ -623,7 +707,7 @@ function route() {
   const parts = (location.hash || '#/').slice(2).split('#')[0].split('/');
   currentLesson = null; currentActivity = null;
   let html, bind = () => {}, nav = parts[0] || 'home';
-  if (parts[0] === 'lesson') { html = viewLesson(parts[1], parts[2]); bind = () => bindLesson(parts[1]); nav = 'plan'; }
+  if (parts[0] === 'lesson') { html = viewLesson(parts[1], parts[2]); bind = () => bindLesson(parts[1]); nav = LESSON_BY_ID[parts[1]]?.kind === 'toolbox' ? 'toolbox' : 'plan'; }
   else if (parts[0] === 'plan') { html = viewPlan(); bind = bindPlan; }
   else if (parts[0] === 'progress') { html = viewProgress(); bind = bindProgress; }
   else if (parts[0] === 'sources') { html = viewSources(); nav = 'progress'; }
@@ -633,7 +717,12 @@ function route() {
   else if (parts[0] === 'diagnostic') { const v = extra.diagnosticRoute(); html = v.html; bind = v.bind; nav = 'plan'; currentActivity = 'diagnostic'; }
   else if (parts[0] === 'map') { html = extra.viewMap(); nav = 'plan'; }
   else if (parts[0] === 'week') { html = extra.viewWeek(); nav = 'progress'; }
+  else if (parts[0] === 'toolbox') { html = tbx.viewToolbox(); bind = () => { tbx.bindReturnBar(app); }; }
+  else if (parts[0] === 'basecheck') { const v = tbx.baseCheckRoute(); html = v.html; bind = v.bind; nav = 'toolbox'; currentActivity = 'diagnostic'; }
+  else if (parts[0] === 'tool' && parts[1] === 'calculator') { html = tbx.viewCalculator(); bind = tbx.bindCalculator; nav = 'toolbox'; }
+  else if (parts[0] === 'tool' && parts[1] === 'notebook') { html = tbx.viewNotebook(); nav = 'toolbox'; }
   else { html = viewDashboard(); bind = bindDashboard; nav = 'home'; }
+  document.body.dataset.route = parts[0] === 'lesson' ? 'lesson' : parts[0] === 'tool' || parts[0] === 'basecheck' ? 'tool' : (parts[0] || 'home');
   app.innerHTML = html;
   app.classList.remove('enter'); void app.offsetWidth; app.classList.add('enter');
   setActiveNav(nav);
@@ -655,7 +744,7 @@ setInterval(() => {
 // ---------- אתחול ----------
 async function boot() {
   try {
-    await Promise.all([loadLessons(), extra.loadExtraData()]);
+    await Promise.all([loadLessons().then(() => loadToolbox()), extra.loadExtraData()]);
   } catch (e) {
     app.innerHTML = `<div class="card"><h1>התוכן לא נטען</h1><p>לא הצלחתי לטעון את קובצי השיעורים. אם האפליקציה נפתחה ישירות מקובץ, צריך להפעיל אותה דרך שרת (ראו README).</p><p class="muted small">${esc(e.message)}</p></div>`;
     return;
