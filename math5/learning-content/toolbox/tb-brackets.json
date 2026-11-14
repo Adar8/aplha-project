@@ -1,0 +1,448 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-brackets",
+  "title": "פתיחת סוגריים וכינוס איברים",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "חוק הפילוג, מינוס לפני סוגריים, וכינוס איברים דומים.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "dist",
+      "title": "חוק הפילוג",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "המספר שלפני הסוגריים כופל **כל** איבר בתוכם:"
+        },
+        {
+          "type": "formula",
+          "latex": "a(b + c) = ab + ac \\qquad 3(x + 4) = 3x + 12"
+        },
+        {
+          "type": "warning",
+          "text": "$3(x + 4)$ הוא $3x + 12$, לא $3x + 4$. צריך לכפול גם את ה-4."
+        }
+      ]
+    },
+    {
+      "id": "minus",
+      "title": "מינוס לפני סוגריים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "מינוס לפני סוגריים הופך את הסימן של **כל** איבר בפנים: $-(x - 7) = -x + 7$, ו-$-2(x - 5) = -2x + 10$."
+        }
+      ]
+    },
+    {
+      "id": "like",
+      "title": "איברים דומים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "איברים **דומים** הם איברים עם אותו משתנה באותה חזקה. מחברים רק את המקדמים: $3x + 5x = 8x$. מספרים בלי משתנה מחברים לחוד."
+        },
+        {
+          "type": "text",
+          "text": "$x$ לבד הוא $1x$: $7x - 2x + x = 6x$. ו-$x^2$ ו-$x$ **אינם** דומים."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "פילוג",
+      "problem": "פתחו סוגריים: $3(x + 4)$",
+      "steps": [
+        "$3\\cdot x + 3\\cdot 4$.",
+        "$3x + 12$. בדיקה עם $x = 2$: $3\\cdot 6 = 18$, ו-$6 + 12 = 18$ ✓"
+      ],
+      "answer": "$3x + 12$",
+      "checks": [
+        {
+          "expr": "3*(2+4)",
+          "equals": 18
+        },
+        {
+          "expr": "3*2+12",
+          "equals": 18
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "מינוס לפני סוגריים",
+      "problem": "פתחו סוגריים: $-2(x - 5)$",
+      "steps": [
+        "$-2\\cdot x$ ו-$-2\\cdot(-5)$.",
+        "$-2x + 10$."
+      ],
+      "answer": "$-2x + 10$",
+      "checks": [
+        {
+          "expr": "-2*(1-5)",
+          "equals": 8
+        },
+        {
+          "expr": "-2*1+10",
+          "equals": 8
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "כינוס",
+      "problem": "פשטו: $4x + 3 - x + 7$",
+      "steps": [
+        "איברים עם $x$: $4x - x = 3x$.",
+        "מספרים: $3 + 7 = 10$.",
+        "$3x + 10$."
+      ],
+      "answer": "$3x + 10$",
+      "checks": [
+        {
+          "expr": "4*2+3-2+7",
+          "equals": 16
+        },
+        {
+          "expr": "3*2+10",
+          "equals": 16
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פותחים סוגריים: $5(x + 3) = ax + b$. מהו $b$?",
+      "answer": {
+        "value": 15,
+        "tolerance": 0
+      },
+      "check": "5*3",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "distrib-all"
+        }
+      ],
+      "hints": [
+        "ה-5 כופל גם את ה-3."
+      ],
+      "solution": {
+        "steps": [
+          "$5x + 15$, ולכן $b = 15$."
+        ],
+        "final": "$15$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פותחים סוגריים: $-3(x - 4) = ax + b$. מהו $b$?",
+      "answer": {
+        "value": 12,
+        "tolerance": 0
+      },
+      "check": "-3*(-4)",
+      "commonWrongAnswers": [
+        {
+          "value": -12,
+          "mistake": "minus-bracket"
+        }
+      ],
+      "hints": [
+        "מינוס כפול מינוס.",
+        "$-3\\cdot(-4) = ?$"
+      ],
+      "solution": {
+        "steps": [
+          "$-3x + 12$, ולכן $b = 12$."
+        ],
+        "final": "$12$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פשטו: $7x - 2x + x = ax$. מהו $a$?",
+      "answer": {
+        "value": 6,
+        "tolerance": 0
+      },
+      "check": "7-2+1",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "like-terms"
+        },
+        {
+          "value": 4,
+          "mistake": "like-terms"
+        }
+      ],
+      "hints": [
+        "$x$ לבד הוא $1x$."
+      ],
+      "solution": {
+        "steps": [
+          "$7 - 2 + 1 = 6$."
+        ],
+        "final": "$6$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פשטו: $2(x + 1) + 3(x - 2) = ax + b$. מהו $b$?",
+      "answer": {
+        "value": -4,
+        "tolerance": 0
+      },
+      "check": "2*1+3*(-2)",
+      "commonWrongAnswers": [
+        {
+          "value": -1,
+          "mistake": "distrib-all"
+        }
+      ],
+      "hints": [
+        "פותחים: $2x + 2 + 3x - 6$.",
+        "מכנסים את המספרים לחוד."
+      ],
+      "solution": {
+        "steps": [
+          "$5x - 4$, ולכן $b = -4$."
+        ],
+        "final": "$-4$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "איזה ביטוי שווה ל-$x(x + 2)$?",
+      "choices": [
+        {
+          "text": "$x^2 + 2x$",
+          "correct": true
+        },
+        {
+          "text": "$x^2 + 2$",
+          "mistake": "distrib-all"
+        },
+        {
+          "text": "$2x^2$",
+          "mistake": "like-terms"
+        },
+        {
+          "text": "$3x$",
+          "mistake": "like-terms"
+        }
+      ],
+      "hints": [
+        "$x$ כופל גם את $x$ וגם את 2."
+      ],
+      "solution": {
+        "steps": [
+          "$x\\cdot x + x\\cdot 2 = x^2 + 2x$."
+        ],
+        "final": "$x^2 + 2x$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פשטו את $4a + 3b - a + 5b$, וחשבו את ערכו כאשר $a = 2$, $b = 1$.",
+      "answer": {
+        "value": 14,
+        "tolerance": 0
+      },
+      "check": "4*2+3*1-2+5*1",
+      "commonWrongAnswers": [
+        {
+          "value": 17,
+          "mistake": "like-terms"
+        }
+      ],
+      "hints": [
+        "מכנסים: $3a + 8b$.",
+        "מציבים: $3\\cdot 2 + 8\\cdot 1$."
+      ],
+      "solution": {
+        "steps": [
+          "$6 + 8 = 14$."
+        ],
+        "final": "$14$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$-(x - 7) = ax + b$. מהו $b$?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "-(-7)",
+      "commonWrongAnswers": [
+        {
+          "value": -7,
+          "mistake": "minus-bracket"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$-x + 7$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פשטו: $3x + 4 - 5x + 2 = ax + b$. מהו $a$?",
+      "answer": {
+        "value": -2,
+        "tolerance": 0
+      },
+      "check": "3-5",
+      "commonWrongAnswers": [
+        {
+          "value": 8,
+          "mistake": "like-terms"
+        },
+        {
+          "value": 2,
+          "mistake": "like-terms"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$3x - 5x = -2x$."
+        ],
+        "final": "$-2$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$6(2x - 1) = ax + b$. מהו $a$?",
+      "answer": {
+        "value": 12,
+        "tolerance": 0
+      },
+      "check": "6*2",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "distrib-all"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$12x - 6$."
+        ],
+        "final": "$12$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$2(x + 3) - (x - 1) = ax + b$. מהו $b$?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "2*3-(-1)",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "minus-bracket"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2x + 6 - x + 1 = x + 7$."
+        ],
+        "final": "$7$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "distrib-all",
+      "label": "כפל של כל האיברים בסוגריים",
+      "advice": "המספר שלפני הסוגריים כופל כל איבר בתוכם, לא רק את הראשון.",
+      "reviewSection": "explanations",
+      "reviewRef": "dist"
+    },
+    {
+      "id": "minus-bracket",
+      "label": "מינוס לפני סוגריים",
+      "advice": "מינוס לפני סוגריים הופך את הסימן של כל איבר בפנים.",
+      "reviewSection": "explanations",
+      "reviewRef": "minus"
+    },
+    {
+      "id": "like-terms",
+      "label": "כינוס איברים דומים",
+      "advice": "מחברים רק איברים עם אותו משתנה באותה חזקה. $x$ לבד הוא $1x$.",
+      "reviewSection": "explanations",
+      "reviewRef": "like"
+    }
+  ]
+}

@@ -222,6 +222,21 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await t.context().close();
     });
 
+    await step('כל שיעורי היסוד נפתחים בכל השלבים, עם נוסחאות מרונדרות', async () => {
+      const t = await newPage();
+      const tb = JSON.parse(require('fs').readFileSync(path.join(ROOT, 'learning-content/toolbox.json'), 'utf8'));
+      const ids = tb.lessons.map(f => path.basename(f, '.json'));
+      expect(ids.length >= 11, 'פחות מ-11 שיעורי יסוד');
+      for (const id of ids) for (const sec of ['explain', 'examples', 'guided', 'quiz', 'review']) {
+        await go(t, `#/lesson/${id}/${sec}`);
+        expect(await t.locator('#stepper li').count() === 5, `${id}/${sec}: אין 5 שלבים`);
+        if (sec === 'explain' || sec === 'examples') expect(await t.locator('.section .katex').count() > 0, `${id}/${sec}: אין נוסחאות`);
+        if (sec === 'guided' || sec === 'quiz') expect(await t.locator('.section .q').count() >= 4, `${id}/${sec}: חסרות שאלות`);
+        expect(await t.locator('.katex-error').count() === 0, `${id}/${sec}: נוסחה שבורה`);
+      }
+      await t.context().close();
+    });
+
     await step('מחשבון ומחברת טעויות עובדים', async () => {
       const t = await newPage();
       await go(t, '#/tool/calculator');

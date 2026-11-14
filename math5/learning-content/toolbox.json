@@ -23,7 +23,7 @@
           "skills": [
             "f-fractions"
           ],
-          "lesson": null
+          "lesson": "tb-order-ops"
         },
         {
           "id": "t-negatives",
@@ -39,7 +39,7 @@
           "skills": [
             "f-fractions"
           ],
-          "lesson": null
+          "lesson": "tb-fractions"
         },
         {
           "id": "t-percent",
@@ -53,7 +53,7 @@
           "skills": [
             "f-powers"
           ],
-          "lesson": null
+          "lesson": "tb-powers"
         }
       ]
     },
@@ -78,7 +78,7 @@
           "skills": [
             "f-linear-eq"
           ],
-          "lesson": null
+          "lesson": "tb-brackets"
         },
         {
           "id": "t-like-terms",
@@ -86,7 +86,7 @@
           "skills": [
             "f-linear-eq"
           ],
-          "lesson": null
+          "lesson": "tb-brackets"
         },
         {
           "id": "t-distributive",
@@ -94,7 +94,7 @@
           "skills": [
             "f-linear-eq"
           ],
-          "lesson": null
+          "lesson": "tb-brackets"
         },
         {
           "id": "t-short-mult",
@@ -152,7 +152,7 @@
           "skills": [
             "f-quadratic-eq"
           ],
-          "lesson": null
+          "lesson": "tb-quadratic"
         },
         {
           "id": "t-inequalities",
@@ -217,7 +217,7 @@
           "skills": [
             "f-line-eq"
           ],
-          "lesson": null
+          "lesson": "tb-slope"
         },
         {
           "id": "t-intercepts",
@@ -267,7 +267,7 @@
           "skills": [
             "f-trig-basics"
           ],
-          "lesson": null
+          "lesson": "tb-pythagoras"
         },
         {
           "id": "t-similarity",
@@ -369,10 +369,17 @@
     "straight-line": "הקו הישר"
   },
   "lessons": [
+    "toolbox/tb-order-ops.json",
     "toolbox/tb-negatives.json",
+    "toolbox/tb-fractions.json",
+    "toolbox/tb-powers.json",
+    "toolbox/tb-brackets.json",
     "toolbox/tb-linear-eq.json",
+    "toolbox/tb-quadratic.json",
     "toolbox/tb-substitution.json",
-    "toolbox/tb-axes.json"
+    "toolbox/tb-axes.json",
+    "toolbox/tb-slope.json",
+    "toolbox/tb-pythagoras.json"
   ],
   "aids": [
     {

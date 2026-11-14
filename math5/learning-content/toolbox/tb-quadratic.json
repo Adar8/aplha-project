@@ -1,0 +1,449 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-quadratic",
+  "title": "משוואות ריבועיות",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 35,
+  "summary": "פירוק, נוסחת השורשים והדיסקרימיננטה.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "what",
+      "title": "משוואה ריבועית",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "משוואה מהצורה $ax^2 + bx + c = 0$ (עם $a \\ne 0$). יכולים להיות לה **שני פתרונות, פתרון אחד, או אף אחד**."
+        },
+        {
+          "type": "text",
+          "text": "מקרה פשוט: $x^2 = 49$ – יש **שני** פתרונות: $x = 7$ וגם $x = -7$."
+        },
+        {
+          "type": "warning",
+          "text": "הטעות הכי נפוצה: לשכוח את הפתרון השלילי."
+        }
+      ]
+    },
+    {
+      "id": "factor",
+      "title": "פתרון בפירוק",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "אם מכפלה שווה אפס, אחד הגורמים שווה אפס. למשל $x^2 - 5x + 6 = (x - 2)(x - 3) = 0$, ולכן $x = 2$ או $x = 3$."
+        },
+        {
+          "type": "tip",
+          "text": "כש-$a = 1$, מחפשים שני מספרים שמכפלתם $c$ וסכומם $b$. כאן: מכפלה 6, סכום $-5$ → $-2$ ו-$-3$."
+        }
+      ]
+    },
+    {
+      "id": "formula",
+      "title": "נוסחת השורשים",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "x_{1,2} = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+        },
+        {
+          "type": "text",
+          "text": "הביטוי שבתוך השורש, $\\Delta = b^2 - 4ac$, נקרא **דיסקרימיננטה**: אם $\\Delta > 0$ יש שני פתרונות, אם $\\Delta = 0$ פתרון אחד, ואם $\\Delta < 0$ אין פתרון."
+        },
+        {
+          "type": "warning",
+          "text": "שימו לב ל-$-b$: אם $b = -4$, אז $-b = 4$."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "פירוק",
+      "problem": "פתרו: $x^2 - 5x + 6 = 0$",
+      "steps": [
+        "מחפשים מכפלה 6 וסכום $-5$: $-2$ ו-$-3$.",
+        "$(x - 2)(x - 3) = 0$.",
+        "$x = 2$ או $x = 3$."
+      ],
+      "answer": "$x = 2,\\ 3$",
+      "checks": [
+        {
+          "expr": "2^2-5*2+6",
+          "equals": 0
+        },
+        {
+          "expr": "3^2-5*3+6",
+          "equals": 0
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "נוסחת השורשים",
+      "problem": "פתרו: $2x^2 + 3x - 2 = 0$",
+      "steps": [
+        "$a = 2,\\ b = 3,\\ c = -2$.",
+        "$\\Delta = 9 + 16 = 25$, ו-$\\sqrt{25} = 5$.",
+        "$x = \\frac{-3 \\pm 5}{4}$: $x = 0.5$ או $x = -2$."
+      ],
+      "answer": "$x = 0.5,\\ -2$",
+      "checks": [
+        {
+          "expr": "(-3+sqrt(3^2-4*2*(-2)))/(2*2)",
+          "equals": 0.5
+        },
+        {
+          "expr": "(-3-sqrt(3^2-4*2*(-2)))/(2*2)",
+          "equals": -2
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "שני פתרונות",
+      "problem": "פתרו: $x^2 = 49$",
+      "steps": [
+        "$x = \\sqrt{49}$ או $x = -\\sqrt{49}$.",
+        "$x = 7$ או $x = -7$."
+      ],
+      "answer": "$x = \\pm 7$",
+      "checks": [
+        {
+          "expr": "(-7)^2",
+          "equals": 49
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הפתרון **השלילי** של $x^2 - 9 = 0$?",
+      "answer": {
+        "value": -3,
+        "tolerance": 0
+      },
+      "check": "-sqrt(9)",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "forget-neg-root"
+        }
+      ],
+      "hints": [
+        "$x^2 = 9$.",
+        "יש שני פתרונות: חיובי ושלילי."
+      ],
+      "solution": {
+        "steps": [
+          "$x = \\pm 3$. השלילי: $-3$."
+        ],
+        "final": "$-3$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הפתרון הגדול של $x^2 + x - 12 = 0$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(-1+sqrt(1+48))/2",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "formula-sign"
+        }
+      ],
+      "hints": [
+        "מכפלה $-12$, סכום 1.",
+        "$4$ ו-$-3$: $(x + 4)(x - 3) = 0$."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 3$ או $x = -4$. הגדול: 3."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהי הדיסקרימיננטה $\\Delta$ של $x^2 - 4x + 5 = 0$?",
+      "answer": {
+        "value": -4,
+        "tolerance": 0
+      },
+      "check": "(-4)^2-4*1*5",
+      "commonWrongAnswers": [
+        {
+          "value": 36,
+          "mistake": "delta-calc"
+        },
+        {
+          "value": -36,
+          "mistake": "delta-calc"
+        }
+      ],
+      "hints": [
+        "$\\Delta = b^2 - 4ac$, עם $a = 1,\\ b = -4,\\ c = 5$."
+      ],
+      "solution": {
+        "steps": [
+          "$16 - 20 = -4$. אין פתרון."
+        ],
+        "final": "$-4$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הפתרון הקטן של $2x^2 - 8x + 6 = 0$?",
+      "answer": {
+        "value": 1,
+        "tolerance": 0
+      },
+      "check": "(8-sqrt(64-48))/4",
+      "commonWrongAnswers": [
+        {
+          "value": -3,
+          "mistake": "formula-sign"
+        }
+      ],
+      "hints": [
+        "אפשר לחלק ב-2: $x^2 - 4x + 3 = 0$.",
+        "$(x - 1)(x - 3) = 0$."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 1$ או $x = 3$. הקטן: 1."
+        ],
+        "final": "$1$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "כמה פתרונות יש ל-$x^2 + 2x + 1 = 0$?",
+      "choices": [
+        {
+          "text": "פתרון אחד",
+          "correct": true
+        },
+        {
+          "text": "שני פתרונות",
+          "mistake": "delta-calc"
+        },
+        {
+          "text": "אין פתרון",
+          "mistake": "delta-calc"
+        },
+        {
+          "text": "אינסוף פתרונות",
+          "mistake": "delta-calc"
+        }
+      ],
+      "hints": [
+        "חשבו את $\\Delta = 2^2 - 4\\cdot1\\cdot1$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\Delta = 0$ – פתרון אחד: $x = -1$. (זה $(x+1)^2$.)"
+        ],
+        "final": "פתרון אחד"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הפתרון הגדול של $3x^2 - 12x = 0$?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "12/3",
+      "commonWrongAnswers": [
+        {
+          "value": 0,
+          "mistake": "forget-neg-root"
+        }
+      ],
+      "hints": [
+        "מוציאים גורם משותף: $3x(x - 4) = 0$."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 0$ או $x = 4$. הגדול: 4."
+        ],
+        "final": "$4$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הפתרון הגדול של $x^2 - 7x + 10 = 0$?",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "(7+sqrt(49-40))/2",
+      "commonWrongAnswers": [
+        {
+          "value": -2,
+          "mistake": "formula-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$(x - 2)(x - 5) = 0$."
+        ],
+        "final": "$5$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הפתרון הקטן של $x^2 - 2x - 15 = 0$?",
+      "answer": {
+        "value": -3,
+        "tolerance": 0
+      },
+      "check": "(2-sqrt(4+60))/2",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "formula-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$(x - 5)(x + 3) = 0$."
+        ],
+        "final": "$-3$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהי $\\Delta$ של $2x^2 + x - 3 = 0$?",
+      "answer": {
+        "value": 25,
+        "tolerance": 0
+      },
+      "check": "1^2-4*2*(-3)",
+      "commonWrongAnswers": [
+        {
+          "value": -23,
+          "mistake": "delta-calc"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$1 + 24 = 25$."
+        ],
+        "final": "$25$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו הפתרון הקטן של $x^2 = 16$?",
+      "answer": {
+        "value": -4,
+        "tolerance": 0
+      },
+      "check": "-sqrt(16)",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "forget-neg-root"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$x = \\pm 4$."
+        ],
+        "final": "$-4$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "forget-neg-root",
+      "label": "שכחת הפתרון השני",
+      "advice": "אם $x^2 = k$ ו-$k$ חיובי, יש שני פתרונות: $\\pm\\sqrt k$. ובמכפלה – כל גורם יכול להיות אפס.",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    },
+    {
+      "id": "formula-sign",
+      "label": "סימן בנוסחת השורשים",
+      "advice": "בנוסחה מופיע $-b$. אם $b$ שלילי, $-b$ חיובי.",
+      "reviewSection": "explanations",
+      "reviewRef": "formula"
+    },
+    {
+      "id": "delta-calc",
+      "label": "חישוב הדיסקרימיננטה",
+      "advice": "$\\Delta = b^2 - 4ac$. הביטוי $b^2$ לא שלילי, ושימו לב לסימן של $c$.",
+      "reviewSection": "explanations",
+      "reviewRef": "formula"
+    }
+  ]
+}

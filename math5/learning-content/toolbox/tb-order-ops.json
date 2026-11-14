@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-order-ops",
+  "title": "סדר פעולות חשבון",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 20,
+  "summary": "סוגריים, חזקות, כפל וחילוק, חיבור וחיסור – ובאיזה סדר.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "rule",
+      "title": "למה צריך סדר?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "כמה זה $2 + 3\\cdot 4$? אם מחשבים משמאל לימין יוצא 20, אבל התשובה הנכונה היא **14**. כדי שכולם יקבלו אותה תשובה, יש סדר קבוע:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**סוגריים** – קודם מה שבתוכם.",
+            "**חזקות ושורשים.**",
+            "**כפל וחילוק** – משמאל לימין, לפי הסדר שבו הם מופיעים.",
+            "**חיבור וחיסור** – משמאל לימין."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lr",
+      "title": "כפל וחילוק באותה רמה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "כפל לא \"קודם\" לחילוק – הם באותה רמה, ומחשבים משמאל לימין: $12 : 3 \\cdot 2 = 4 \\cdot 2 = 8$."
+        },
+        {
+          "type": "warning",
+          "text": "$12 : 3 \\cdot 2$ הוא 8, לא 2. כדי לקבל 2 צריך סוגריים: $12 : (3 \\cdot 2)$."
+        }
+      ]
+    },
+    {
+      "id": "bar",
+      "title": "קו שבר הוא סוגריים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "בשבר, המונה והמכנה מחושבים כל אחד בנפרד, כאילו יש סביבם סוגריים: $\\frac{10+6}{5-1} = \\frac{16}{4} = 4$."
+        },
+        {
+          "type": "tip",
+          "text": "במחשבון מקלידים שבר כזה עם סוגריים: (10+6)/(5−1)."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "כפל לפני חיבור",
+      "problem": "חשבו: $2 + 3\\cdot 4$",
+      "steps": [
+        "קודם הכפל: $3\\cdot 4 = 12$.",
+        "אחר כך החיבור: $2 + 12 = 14$."
+      ],
+      "answer": "$14$",
+      "checks": [
+        {
+          "expr": "2+3*4",
+          "equals": 14
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "סוגריים וחזקה",
+      "problem": "חשבו: $(8-2)\\cdot 3 - 4^2$",
+      "steps": [
+        "סוגריים: $8 - 2 = 6$.",
+        "חזקה: $4^2 = 16$.",
+        "כפל: $6\\cdot 3 = 18$.",
+        "חיסור: $18 - 16 = 2$."
+      ],
+      "answer": "$2$",
+      "checks": [
+        {
+          "expr": "(8-2)*3-4^2",
+          "equals": 2
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "קו שבר",
+      "problem": "חשבו: $\\frac{10+6}{5-1}$",
+      "steps": [
+        "מונה: $10 + 6 = 16$. מכנה: $5 - 1 = 4$.",
+        "$16 : 4 = 4$."
+      ],
+      "answer": "$4$",
+      "checks": [
+        {
+          "expr": "(10+6)/(5-1)",
+          "equals": 4
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $5 + 2\\cdot 6$",
+      "answer": {
+        "value": 17,
+        "tolerance": 0
+      },
+      "check": "5+2*6",
+      "commonWrongAnswers": [
+        {
+          "value": 42,
+          "mistake": "mult-first"
+        }
+      ],
+      "hints": [
+        "מה קודם: חיבור או כפל?",
+        "$2\\cdot 6 = 12$."
+      ],
+      "solution": {
+        "steps": [
+          "$5 + 12 = 17$."
+        ],
+        "final": "$17$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $20 - 12 : 4$",
+      "answer": {
+        "value": 17,
+        "tolerance": 0
+      },
+      "check": "20-12/4",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "mult-first"
+        }
+      ],
+      "hints": [
+        "חילוק לפני חיסור.",
+        "$12 : 4 = 3$."
+      ],
+      "solution": {
+        "steps": [
+          "$20 - 3 = 17$."
+        ],
+        "final": "$17$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $3\\cdot(4+1)^2$",
+      "answer": {
+        "value": 75,
+        "tolerance": 0
+      },
+      "check": "3*(4+1)^2",
+      "commonWrongAnswers": [
+        {
+          "value": 225,
+          "mistake": "power-order"
+        }
+      ],
+      "hints": [
+        "קודם סוגריים, אחר כך חזקה, ורק אז כפל.",
+        "$(4+1)^2 = 5^2 = 25$."
+      ],
+      "solution": {
+        "steps": [
+          "$3 \\cdot 25 = 75$."
+        ],
+        "final": "$75$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $12 : 3 \\cdot 2$",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "12/3*2",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "left-right"
+        }
+      ],
+      "hints": [
+        "כפל וחילוק – משמאל לימין.",
+        "קודם $12 : 3$."
+      ],
+      "solution": {
+        "steps": [
+          "$12 : 3 = 4$, ו-$4 \\cdot 2 = 8$."
+        ],
+        "final": "$8$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{18-3}{2+3}$",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(18-3)/(2+3)",
+      "commonWrongAnswers": [
+        {
+          "value": 19.5,
+          "mistake": "fraction-bar"
+        }
+      ],
+      "hints": [
+        "המונה והמכנה – כל אחד בנפרד.",
+        "מונה 15, מכנה 5."
+      ],
+      "solution": {
+        "steps": [
+          "$15 : 5 = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $-2^2 + 10$",
+      "answer": {
+        "value": 6,
+        "tolerance": 0
+      },
+      "check": "-(2^2)+10",
+      "commonWrongAnswers": [
+        {
+          "value": 14,
+          "mistake": "power-sign"
+        }
+      ],
+      "hints": [
+        "החזקה חלה רק על 2, המינוס בחוץ.",
+        "$-2^2 = -4$."
+      ],
+      "solution": {
+        "steps": [
+          "$-4 + 10 = 6$."
+        ],
+        "final": "$6$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $7 + 3\\cdot 5$",
+      "answer": {
+        "value": 22,
+        "tolerance": 0
+      },
+      "check": "7+3*5",
+      "commonWrongAnswers": [
+        {
+          "value": 50,
+          "mistake": "mult-first"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$7 + 15 = 22$."
+        ],
+        "final": "$22$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $(7 + 3)\\cdot 5$",
+      "answer": {
+        "value": 50,
+        "tolerance": 0
+      },
+      "check": "(7+3)*5",
+      "commonWrongAnswers": [
+        {
+          "value": 22,
+          "mistake": "mult-first"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$10 \\cdot 5 = 50$."
+        ],
+        "final": "$50$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $2^3 - 6 : 2$",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "2^3-6/2",
+      "commonWrongAnswers": [
+        {
+          "value": 1,
+          "mistake": "mult-first"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$8 - 3 = 5$."
+        ],
+        "final": "$5$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $40 : (2\\cdot 5)$",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "40/(2*5)",
+      "commonWrongAnswers": [
+        {
+          "value": 100,
+          "mistake": "left-right"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$40 : 10 = 4$."
+        ],
+        "final": "$4$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "mult-first",
+      "label": "כפל וחילוק לפני חיבור וחיסור",
+      "advice": "קודם כפל וחילוק, אחר כך חיבור וחיסור – אלא אם יש סוגריים.",
+      "reviewSection": "explanations",
+      "reviewRef": "rule"
+    },
+    {
+      "id": "power-order",
+      "label": "חזקה לפני כפל",
+      "advice": "החזקה חלה רק על מה שצמוד אליה: $3\\cdot 5^2 = 3\\cdot 25$, לא $15^2$.",
+      "reviewSection": "explanations",
+      "reviewRef": "rule"
+    },
+    {
+      "id": "left-right",
+      "label": "כפל וחילוק משמאל לימין",
+      "advice": "כפל וחילוק באותה רמה – מחשבים לפי הסדר, משמאל לימין.",
+      "reviewSection": "explanations",
+      "reviewRef": "lr"
+    },
+    {
+      "id": "fraction-bar",
+      "label": "קו שבר",
+      "advice": "קו שבר הוא כמו סוגריים: מחשבים מונה ומכנה בנפרד.",
+      "reviewSection": "explanations",
+      "reviewRef": "bar"
+    },
+    {
+      "id": "power-sign",
+      "label": "מינוס לפני חזקה",
+      "advice": "$-2^2 = -4$. רק $(-2)^2 = 4$.",
+      "reviewSection": "explanations",
+      "reviewRef": "rule"
+    }
+  ]
+}

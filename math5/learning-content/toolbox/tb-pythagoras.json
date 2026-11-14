@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-pythagoras",
+  "title": "משפט פיתגורס",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "מציאת יתר וניצב במשולש ישר-זווית, והמשפט ההפוך.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "what",
+      "title": "המשפט",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "במשולש ישר-זווית, הצלע שמול הזווית הישרה נקראת **יתר** – היא הארוכה ביותר. שתי הצלעות האחרות הן **ניצבים**."
+        },
+        {
+          "type": "formula",
+          "latex": "a^2 + b^2 = c^2 \\qquad (c \\text{ – היתר})"
+        }
+      ]
+    },
+    {
+      "id": "leg",
+      "title": "מציאת ניצב",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "אם יודעים את היתר ואת אחד הניצבים, **מחסרים**: $b = \\sqrt{c^2 - a^2}$."
+        },
+        {
+          "type": "warning",
+          "text": "מחפשים ניצב – מחסרים. מחפשים יתר – מחברים. ואל תשכחו להוציא שורש בסוף."
+        }
+      ]
+    },
+    {
+      "id": "converse",
+      "title": "המשפט ההפוך",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "אם בצלעות משולש מתקיים $a^2 + b^2 = c^2$ (כש-$c$ הארוכה), המשולש ישר-זווית. שלשות מוכרות: $3,4,5$ ו-$5,12,13$ (וכל כפולה שלהן)."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "מציאת יתר",
+      "problem": "הניצבים במשולש ישר-זווית הם 6 ו-8. מהו היתר?",
+      "steps": [
+        "$c^2 = 6^2 + 8^2 = 36 + 64 = 100$.",
+        "$c = \\sqrt{100} = 10$."
+      ],
+      "answer": "$10$",
+      "checks": [
+        {
+          "expr": "sqrt(6^2+8^2)",
+          "equals": 10
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "מציאת ניצב",
+      "problem": "היתר 13 ואחד הניצבים 5. מהו הניצב השני?",
+      "steps": [
+        "$b^2 = 13^2 - 5^2 = 169 - 25 = 144$.",
+        "$b = 12$."
+      ],
+      "answer": "$12$",
+      "checks": [
+        {
+          "expr": "sqrt(13^2-5^2)",
+          "equals": 12
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "אלכסון של מלבן",
+      "problem": "מהו אורך האלכסון במלבן שמידותיו $9 \\times 12$?",
+      "steps": [
+        "האלכסון הוא יתר במשולש עם ניצבים 9 ו-12.",
+        "$\\sqrt{81 + 144} = \\sqrt{225} = 15$."
+      ],
+      "answer": "$15$",
+      "checks": [
+        {
+          "expr": "sqrt(9^2+12^2)",
+          "equals": 15
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הניצבים 3 ו-4. מהו היתר?",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "sqrt(3^2+4^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 7,
+          "mistake": "forget-root"
+        },
+        {
+          "value": 25,
+          "mistake": "forget-root"
+        }
+      ],
+      "hints": [
+        "$c^2 = 9 + 16$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{25} = 5$."
+        ],
+        "final": "$5$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הניצבים 5 ו-12. מהו היתר?",
+      "answer": {
+        "value": 13,
+        "tolerance": 0
+      },
+      "check": "sqrt(5^2+12^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 169,
+          "mistake": "forget-root"
+        }
+      ],
+      "hints": [
+        "$25 + 144 = 169$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{169} = 13$."
+        ],
+        "final": "$13$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "היתר 10 ואחד הניצבים 6. מהו הניצב השני?",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "sqrt(10^2-6^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 11.66,
+          "mistake": "leg-vs-hyp"
+        },
+        {
+          "value": 64,
+          "mistake": "forget-root"
+        }
+      ],
+      "hints": [
+        "מחפשים ניצב – מחסרים.",
+        "$100 - 36 = 64$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{64} = 8$."
+        ],
+        "final": "$8$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הניצבים 1 ו-1. מהו היתר? (עגלו לשתי ספרות)",
+      "answer": {
+        "value": 1.41,
+        "tolerance": 0.01,
+        "rounding": "שתי ספרות אחרי הנקודה"
+      },
+      "check": "sqrt(2)",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "forget-root"
+        }
+      ],
+      "hints": [
+        "$c^2 = 1 + 1 = 2$."
+      ],
+      "solution": {
+        "steps": [
+          "$c = \\sqrt2 \\approx 1.41$."
+        ],
+        "final": "$1.41$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "האם משולש שצלעותיו 7, 24, 25 הוא ישר-זווית?",
+      "choices": [
+        {
+          "text": "כן",
+          "correct": true
+        },
+        {
+          "text": "לא",
+          "mistake": "hyp-id"
+        },
+        {
+          "text": "רק אם הזווית הגדולה היא 60°",
+          "mistake": "hyp-id"
+        },
+        {
+          "text": "אי אפשר לדעת בלי זוויות",
+          "mistake": "hyp-id"
+        }
+      ],
+      "hints": [
+        "בדקו: האם $7^2 + 24^2 = 25^2$?"
+      ],
+      "solution": {
+        "steps": [
+          "$49 + 576 = 625 = 25^2$ – לפי המשפט ההפוך, כן."
+        ],
+        "final": "כן"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "סולם באורך 5 מ' נשען על קיר. בסיס הסולם 3 מ' מהקיר. לאיזה גובה הסולם מגיע?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "sqrt(5^2-3^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 5.83,
+          "mistake": "leg-vs-hyp"
+        }
+      ],
+      "hints": [
+        "הסולם הוא היתר.",
+        "$25 - 9 = 16$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{16} = 4$ מ'."
+        ],
+        "final": "$4$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הניצבים 9 ו-12. מהו היתר?",
+      "answer": {
+        "value": 15,
+        "tolerance": 0
+      },
+      "check": "sqrt(9^2+12^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 21,
+          "mistake": "forget-root"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{225} = 15$."
+        ],
+        "final": "$15$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "היתר 17 ואחד הניצבים 8. מהו הניצב השני?",
+      "answer": {
+        "value": 15,
+        "tolerance": 0
+      },
+      "check": "sqrt(17^2-8^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 18.79,
+          "mistake": "leg-vs-hyp"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{289 - 64} = \\sqrt{225} = 15$."
+        ],
+        "final": "$15$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הניצבים 2 ו-3. מהו היתר? (עגלו לשתי ספרות)",
+      "answer": {
+        "value": 3.61,
+        "tolerance": 0.01,
+        "rounding": "שתי ספרות אחרי הנקודה"
+      },
+      "check": "sqrt(2^2+3^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 13,
+          "mistake": "forget-root"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{13} \\approx 3.61$."
+        ],
+        "final": "$3.61$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו אורך האלכסון במלבן $5 \\times 12$?",
+      "answer": {
+        "value": 13,
+        "tolerance": 0
+      },
+      "check": "sqrt(5^2+12^2)",
+      "commonWrongAnswers": [
+        {
+          "value": 17,
+          "mistake": "forget-root"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{169} = 13$."
+        ],
+        "final": "$13$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "leg-vs-hyp",
+      "label": "חיבור במקום חיסור",
+      "advice": "מחפשים ניצב – מחסרים מהיתר בריבוע: $b^2 = c^2 - a^2$.",
+      "reviewSection": "explanations",
+      "reviewRef": "leg"
+    },
+    {
+      "id": "forget-root",
+      "label": "שכחת השורש",
+      "advice": "המשפט נותן את הריבוע של הצלע. בסוף מוציאים שורש.",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    },
+    {
+      "id": "hyp-id",
+      "label": "זיהוי היתר והמשפט ההפוך",
+      "advice": "היתר הוא הצלע הארוכה, מול הזווית הישרה. אם $a^2 + b^2 = c^2$ – המשולש ישר-זווית.",
+      "reviewSection": "explanations",
+      "reviewRef": "converse"
+    }
+  ]
+}

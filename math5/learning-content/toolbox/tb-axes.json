@@ -410,8 +410,8 @@
   "commonMistakes": [
     {
       "id": "order-xy",
-      "label": "סדר השיעורים (x, y)",
-      "advice": "בנקודה (x, y) – הראשון הוא x (ימינה/שמאלה), השני הוא y (למעלה/למטה).",
+      "label": "סדר השיעורים $(x, y)$",
+      "advice": "בנקודה $(x, y)$ – הראשון הוא $x$ (ימינה או שמאלה), השני הוא $y$ (למעלה או למטה).",
       "reviewSection": "explanations",
       "reviewRef": "point"
     },
@@ -425,14 +425,14 @@
     {
       "id": "neg-distance",
       "label": "מרחק עם מספר שלילי",
-      "advice": "מחסרים את הקטן מהגדול: 5 − (−3) = 8. מינוס ומינוס הופכים לפלוס.",
+      "advice": "מחסרים את הקטן מהגדול: $5 - (-3) = 8$. מינוס ומינוס הופכים לפלוס.",
       "reviewSection": "explanations",
       "reviewRef": "dist"
     },
     {
       "id": "axis-point",
       "label": "נקודה על ציר",
-      "advice": "על ציר ה-x שיעור ה-y הוא 0. על ציר ה-y שיעור ה-x הוא 0.",
+      "advice": "על ציר ה-$x$ שיעור ה-$y$ הוא 0. על ציר ה-$y$ שיעור ה-$x$ הוא 0.",
       "reviewSection": "explanations",
       "reviewRef": "point"
     }

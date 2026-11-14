@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-slope",
+  "title": "משמעות השיפוע",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "שיפוע בין שתי נקודות, סימן השיפוע, ו-m ו-b במשוואת הישר.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "what",
+      "title": "שיפוע = כמה עולים על כל צעד ימינה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "דמיינו עלייה בכביש: השיפוע אומר בכמה עולים על כל מטר שמתקדמים. בגרף: **השינוי ב-$y$ חלקי השינוי ב-$x$**."
+        },
+        {
+          "type": "formula",
+          "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1}"
+        },
+        {
+          "type": "warning",
+          "text": "למעלה – ההפרש ב-$y$, למטה – ההפרש ב-$x$. ושומרים על אותו סדר נקודות בשניהם."
+        }
+      ]
+    },
+    {
+      "id": "sign",
+      "title": "סימן השיפוע",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "$m > 0$: הישר **עולה** משמאל לימין.",
+            "$m < 0$: הישר **יורד**.",
+            "$m = 0$: ישר **אופקי**.",
+            "ישר אנכי: השיפוע לא מוגדר (מחלקים באפס)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eq",
+      "title": "m ו-b במשוואת הישר",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "y = mx + b"
+        },
+        {
+          "type": "text",
+          "text": "$m$ הוא השיפוע, ו-$b$ הוא נקודת החיתוך עם ציר ה-$y$: הנקודה $(0, b)$. למשל במחיר מונית $y = 8x + 12$: כל ק\"מ עולה 8 ₪ (השיפוע), ו-12 ₪ הם מחיר ההתחלה."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "שיפוע חיובי",
+      "problem": "מהו השיפוע בין $(1, 2)$ ל-$(4, 8)$?",
+      "steps": [
+        "הפרש ב-$y$: $8 - 2 = 6$. הפרש ב-$x$: $4 - 1 = 3$.",
+        "$m = \\frac{6}{3} = 2$. הישר עולה."
+      ],
+      "answer": "$m = 2$",
+      "checks": [
+        {
+          "expr": "(8-2)/(4-1)",
+          "equals": 2
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "שיפוע שלילי",
+      "problem": "מהו השיפוע בין $(-2, 5)$ ל-$(2, -3)$?",
+      "steps": [
+        "$y$: $-3 - 5 = -8$. $x$: $2 - (-2) = 4$.",
+        "$m = \\frac{-8}{4} = -2$. הישר יורד."
+      ],
+      "answer": "$m = -2$",
+      "checks": [
+        {
+          "expr": "(-3-5)/(2-(-2))",
+          "equals": -2
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "קריאה ממשוואה",
+      "problem": "מה השיפוע ומה נקודת החיתוך עם ציר ה-$y$ של $y = 3x - 4$?",
+      "steps": [
+        "$m$ הוא המקדם של $x$: $m = 3$.",
+        "$b = -4$, ולכן החיתוך עם ציר ה-$y$ הוא $(0, -4)$."
+      ],
+      "answer": "$m = 3$, $(0,-4)$",
+      "checks": [
+        {
+          "expr": "3*0-4",
+          "equals": -4
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו השיפוע בין $(0, 1)$ ל-$(2, 7)$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(7-1)/(2-0)",
+      "commonWrongAnswers": [
+        {
+          "value": 0.3333333333333333,
+          "mistake": "slope-flip"
+        }
+      ],
+      "hints": [
+        "$y$: $7 - 1$. $x$: $2 - 0$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{6}{2} = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו השיפוע בין $(-1, 4)$ ל-$(3, -4)$?",
+      "answer": {
+        "value": -2,
+        "tolerance": 0
+      },
+      "check": "(-4-4)/(3-(-1))",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "slope-sign"
+        },
+        {
+          "value": -0.5,
+          "mistake": "slope-flip"
+        }
+      ],
+      "hints": [
+        "$y$: $-4 - 4 = -8$.",
+        "$x$: $3 - (-1) = 4$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{-8}{4} = -2$."
+        ],
+        "final": "$-2$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו השיפוע של הישר $y = -5x + 2$?",
+      "answer": {
+        "value": -5,
+        "tolerance": 0
+      },
+      "check": "-5",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "m-vs-b"
+        }
+      ],
+      "hints": [
+        "השיפוע הוא המקדם של $x$."
+      ],
+      "solution": {
+        "steps": [
+          "$m = -5$."
+        ],
+        "final": "$-5$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הישר $y = 2x + 7$ חותך את ציר ה-$y$ בנקודה $(0, k)$. מהו $k$?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "2*0+7",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "m-vs-b"
+        }
+      ],
+      "hints": [
+        "על ציר ה-$y$, $x = 0$."
+      ],
+      "solution": {
+        "steps": [
+          "$y = 2\\cdot 0 + 7 = 7$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "ישר עולה משמאל לימין. מה אפשר לומר על השיפוע שלו?",
+      "choices": [
+        {
+          "text": "השיפוע חיובי",
+          "correct": true
+        },
+        {
+          "text": "השיפוע שלילי",
+          "mistake": "slope-sign"
+        },
+        {
+          "text": "השיפוע אפס",
+          "mistake": "slope-sign"
+        },
+        {
+          "text": "השיפוע לא מוגדר",
+          "mistake": "slope-sign"
+        }
+      ],
+      "hints": [
+        "עולה = $y$ גדל כש-$x$ גדל."
+      ],
+      "solution": {
+        "steps": [
+          "כש-$x$ גדל ו-$y$ גדל, המנה חיובית."
+        ],
+        "final": "השיפוע חיובי"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מחיר נסיעה במונית: $y = 8x + 12$ (בשקלים, כש-$x$ הוא מספר הק\"מ). כמה עולה כל ק\"מ נוסף?",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "(8*2+12)-(8*1+12)",
+      "commonWrongAnswers": [
+        {
+          "value": 12,
+          "mistake": "m-vs-b"
+        },
+        {
+          "value": 20,
+          "mistake": "m-vs-b"
+        }
+      ],
+      "hints": [
+        "מה משתנה כשמוסיפים ק\"מ אחד?",
+        "השיפוע $m$."
+      ],
+      "solution": {
+        "steps": [
+          "השיפוע הוא 8 – כל ק\"מ מוסיף 8 ₪."
+        ],
+        "final": "$8$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו השיפוע בין $(2, 3)$ ל-$(6, 11)$?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "(11-3)/(6-2)",
+      "commonWrongAnswers": [
+        {
+          "value": 0.5,
+          "mistake": "slope-flip"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{8}{4} = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו השיפוע בין $(1, 5)$ ל-$(4, -1)$?",
+      "answer": {
+        "value": -2,
+        "tolerance": 0
+      },
+      "check": "(-1-5)/(4-1)",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "slope-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{-6}{3} = -2$."
+        ],
+        "final": "$-2$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו השיפוע של $y = -x + 9$?",
+      "answer": {
+        "value": -1,
+        "tolerance": 0
+      },
+      "check": "-1",
+      "commonWrongAnswers": [
+        {
+          "value": 9,
+          "mistake": "m-vs-b"
+        },
+        {
+          "value": 1,
+          "mistake": "slope-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$-x$ הוא $-1\\cdot x$."
+        ],
+        "final": "$-1$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו השיפוע של ישר אופקי?",
+      "choices": [
+        {
+          "text": "0",
+          "correct": true
+        },
+        {
+          "text": "1",
+          "mistake": "slope-sign"
+        },
+        {
+          "text": "לא מוגדר",
+          "mistake": "slope-sign"
+        },
+        {
+          "text": "שלילי",
+          "mistake": "slope-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "ב-ישר אופקי $y$ לא משתנה, ולכן המונה 0."
+        ],
+        "final": "0"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "slope-flip",
+      "label": "הפיכת המנה",
+      "advice": "השיפוע הוא הפרש ה-$y$ חלקי הפרש ה-$x$ – לא להפך.",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    },
+    {
+      "id": "slope-sign",
+      "label": "סימן השיפוע",
+      "advice": "עולה – חיובי, יורד – שלילי. בהפרשים, שימו לב למינוס כפול.",
+      "reviewSection": "explanations",
+      "reviewRef": "sign"
+    },
+    {
+      "id": "m-vs-b",
+      "label": "בלבול בין m ל-b",
+      "advice": "ב-$y = mx + b$: השיפוע הוא $m$ (המקדם של $x$), ו-$b$ הוא החיתוך עם ציר ה-$y$.",
+      "reviewSection": "explanations",
+      "reviewRef": "eq"
+    }
+  ]
+}

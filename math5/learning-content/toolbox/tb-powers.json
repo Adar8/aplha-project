@@ -1,0 +1,448 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-powers",
+  "title": "חזקות ושורשים",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 30,
+  "summary": "חוקי החזקות, חזקה 0 ושלילית, ושורש ריבועי.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "what",
+      "title": "מה זו חזקה?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "$2^5$ פירושו כפל של 2 בעצמו 5 פעמים: $2\\cdot2\\cdot2\\cdot2\\cdot2 = 32$. ה-2 הוא **הבסיס**, ה-5 הוא **המעריך**."
+        },
+        {
+          "type": "warning",
+          "text": "$3^4$ הוא 81, לא $3\\cdot 4 = 12$."
+        }
+      ]
+    },
+    {
+      "id": "laws",
+      "title": "חוקי החזקות (אותו בסיס)",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "a^m\\cdot a^n = a^{m+n} \\qquad \\frac{a^m}{a^n} = a^{m-n} \\qquad \\left(a^m\\right)^n = a^{m\\cdot n}"
+        },
+        {
+          "type": "formula",
+          "latex": "a^0 = 1 \\qquad a^{-n} = \\frac{1}{a^n}"
+        },
+        {
+          "type": "text",
+          "text": "למשל: $2^3\\cdot 2^4 = 2^7 = 128$, ו-$5^{-2} = \\frac{1}{25}$."
+        }
+      ]
+    },
+    {
+      "id": "root",
+      "title": "שורש ריבועי",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "$\\sqrt{a}$ הוא המספר האי-שלילי שבריבוע נותן $a$: $\\sqrt{49} = 7$. וגם $a^{\\frac12} = \\sqrt{a}$."
+        },
+        {
+          "type": "formula",
+          "latex": "\\sqrt{a\\cdot b} = \\sqrt{a}\\cdot\\sqrt{b} \\qquad\\Rightarrow\\qquad \\sqrt{72} = \\sqrt{36}\\cdot\\sqrt{2} = 6\\sqrt{2}"
+        },
+        {
+          "type": "warning",
+          "text": "$\\sqrt{9+16} = \\sqrt{25} = 5$, ולא $\\sqrt9 + \\sqrt{16} = 7$. אין חוק כזה לחיבור."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "כפל חזקות",
+      "problem": "חשבו: $2^3\\cdot 2^4$",
+      "steps": [
+        "אותו בסיס – מחברים מעריכים: $2^{3+4} = 2^7$.",
+        "$2^7 = 128$."
+      ],
+      "answer": "$128$",
+      "checks": [
+        {
+          "expr": "2^3*2^4",
+          "equals": 128
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "מעריך שלילי",
+      "problem": "חשבו: $5^{-2}$",
+      "steps": [
+        "$5^{-2} = \\frac{1}{5^2}$.",
+        "$\\frac{1}{25} = 0.04$."
+      ],
+      "answer": "$0.04$",
+      "checks": [
+        {
+          "expr": "5^(-2)",
+          "equals": 0.04,
+          "tolerance": 1e-12
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "פירוק שורש",
+      "problem": "פשטו: $\\sqrt{72}$",
+      "steps": [
+        "$72 = 36\\cdot 2$, ו-36 הוא ריבוע.",
+        "$\\sqrt{72} = 6\\sqrt{2} \\approx 8.49$."
+      ],
+      "answer": "$6\\sqrt2$",
+      "checks": [
+        {
+          "expr": "sqrt(72)",
+          "equals": 8.485281374238571,
+          "tolerance": 1e-09
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $3^4$",
+      "answer": {
+        "value": 81,
+        "tolerance": 0
+      },
+      "check": "3^4",
+      "commonWrongAnswers": [
+        {
+          "value": 12,
+          "mistake": "pow-mult"
+        }
+      ],
+      "hints": [
+        "$3\\cdot3\\cdot3\\cdot3$."
+      ],
+      "solution": {
+        "steps": [
+          "$9 \\cdot 9 = 81$."
+        ],
+        "final": "$81$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $2^5\\cdot 2^3$",
+      "answer": {
+        "value": 256,
+        "tolerance": 0
+      },
+      "check": "2^5*2^3",
+      "commonWrongAnswers": [
+        {
+          "value": 32768,
+          "mistake": "pow-add"
+        }
+      ],
+      "hints": [
+        "אותו בסיס – מחברים את המעריכים.",
+        "$2^8$."
+      ],
+      "solution": {
+        "steps": [
+          "$2^8 = 256$."
+        ],
+        "final": "$256$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "כתבו את $\\left(10^2\\right)^3$ כחזקה של 10. מהו המעריך?",
+      "answer": {
+        "value": 6,
+        "tolerance": 0
+      },
+      "check": "2*3",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "pow-power"
+        }
+      ],
+      "hints": [
+        "חזקה של חזקה – כופלים מעריכים."
+      ],
+      "solution": {
+        "steps": [
+          "$10^{2\\cdot 3} = 10^6$."
+        ],
+        "final": "$6$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $4^0 + 4^{-1}$",
+      "answer": {
+        "value": 1.25,
+        "tolerance": 0
+      },
+      "check": "4^0+4^(-1)",
+      "commonWrongAnswers": [
+        {
+          "value": 0.25,
+          "mistake": "zero-pow"
+        },
+        {
+          "value": -3,
+          "mistake": "zero-pow"
+        }
+      ],
+      "hints": [
+        "$4^0 = 1$.",
+        "$4^{-1} = \\frac{1}{4}$."
+      ],
+      "solution": {
+        "steps": [
+          "$1 + 0.25 = 1.25$."
+        ],
+        "final": "$1.25$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\sqrt{144}$",
+      "answer": {
+        "value": 12,
+        "tolerance": 0
+      },
+      "check": "sqrt(144)",
+      "commonWrongAnswers": [
+        {
+          "value": 72,
+          "mistake": "pow-mult"
+        }
+      ],
+      "hints": [
+        "איזה מספר בריבוע נותן 144?"
+      ],
+      "solution": {
+        "steps": [
+          "$12^2 = 144$."
+        ],
+        "final": "$12$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "כמה זה $\\sqrt{9 + 16}$?",
+      "choices": [
+        {
+          "text": "$5$",
+          "correct": true
+        },
+        {
+          "text": "$7$",
+          "mistake": "sqrt-sum"
+        },
+        {
+          "text": "$25$",
+          "mistake": "sqrt-sum"
+        },
+        {
+          "text": "$12.5$",
+          "mistake": "sqrt-sum"
+        }
+      ],
+      "hints": [
+        "קודם מחשבים את מה שבתוך השורש."
+      ],
+      "solution": {
+        "steps": [
+          "$\\sqrt{25} = 5$."
+        ],
+        "final": "$5$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $5^3$",
+      "answer": {
+        "value": 125,
+        "tolerance": 0
+      },
+      "check": "5^3",
+      "commonWrongAnswers": [
+        {
+          "value": 15,
+          "mistake": "pow-mult"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$5\\cdot5\\cdot5 = 125$."
+        ],
+        "final": "$125$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{2^{10}}{2^7}$",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "2^10/2^7",
+      "solution": {
+        "steps": [
+          "$2^{10-7} = 2^3 = 8$."
+        ],
+        "final": "$8$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $9^{\\frac12}$",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "9^(1/2)",
+      "commonWrongAnswers": [
+        {
+          "value": 4.5,
+          "mistake": "pow-mult"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$9^{\\frac12} = \\sqrt9 = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\left(2^3\\right)^2$",
+      "answer": {
+        "value": 64,
+        "tolerance": 0
+      },
+      "check": "(2^3)^2",
+      "commonWrongAnswers": [
+        {
+          "value": 32,
+          "mistake": "pow-power"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2^{6} = 64$."
+        ],
+        "final": "$64$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "pow-mult",
+      "label": "חזקה ככפל במעריך",
+      "advice": "$a^n$ הוא כפל של $a$ בעצמו $n$ פעמים – לא $a$ כפול $n$.",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    },
+    {
+      "id": "pow-add",
+      "label": "כפל וחילוק חזקות",
+      "advice": "באותו בסיס: בכפל מחברים מעריכים, בחילוק מחסרים.",
+      "reviewSection": "explanations",
+      "reviewRef": "laws"
+    },
+    {
+      "id": "pow-power",
+      "label": "חזקה של חזקה",
+      "advice": "$(a^m)^n = a^{m\\cdot n}$: כופלים את המעריכים.",
+      "reviewSection": "explanations",
+      "reviewRef": "laws"
+    },
+    {
+      "id": "zero-pow",
+      "label": "חזקה 0 ושלילית",
+      "advice": "$a^0 = 1$ (לא 0), ו-$a^{-n} = \\frac{1}{a^n}$.",
+      "reviewSection": "explanations",
+      "reviewRef": "laws"
+    },
+    {
+      "id": "sqrt-sum",
+      "label": "שורש של סכום",
+      "advice": "$\\sqrt{a+b} \\ne \\sqrt a + \\sqrt b$. קודם מחשבים את מה שבתוך השורש.",
+      "reviewSection": "explanations",
+      "reviewRef": "root"
+    }
+  ]
+}

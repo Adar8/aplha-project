@@ -1,0 +1,421 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-fractions",
+  "title": "שברים ומספרים עשרוניים",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 30,
+  "summary": "צמצום, חיבור, כפל וחילוק של שברים, ומעבר לעשרוני.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "what",
+      "title": "שבר וצמצום",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "השבר $\\frac{3}{4}$ פירושו 3 חלקים מתוך 4. **צמצום**: מחלקים מונה ומכנה באותו מספר – הערך לא משתנה: $\\frac{6}{8} = \\frac{3}{4}$."
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "title": "חיבור וחיסור",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "מחברים רק שברים עם **אותו מכנה**. לכן קודם מביאים למכנה משותף:"
+        },
+        {
+          "type": "formula",
+          "latex": "\\frac{2}{3} + \\frac{1}{4} = \\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}"
+        },
+        {
+          "type": "warning",
+          "text": "לא מחברים מונה עם מונה ומכנה עם מכנה: $\\frac{1}{2} + \\frac{1}{3} \\ne \\frac{2}{5}$."
+        }
+      ]
+    },
+    {
+      "id": "mult",
+      "title": "כפל וחילוק",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**כפל**: מונה כפול מונה, מכנה כפול מכנה: $\\frac{3}{4}\\cdot\\frac{2}{9} = \\frac{6}{36} = \\frac{1}{6}$.",
+            "**חילוק**: כופלים בשבר ההפוך: $\\frac{5}{6} : \\frac{2}{3} = \\frac{5}{6}\\cdot\\frac{3}{2} = \\frac{15}{12} = \\frac{5}{4}$."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dec",
+      "title": "שבר ועשרוני",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "$0.25 = \\frac{25}{100} = \\frac{1}{4}$, ו-$\\frac{3}{4} = 3 : 4 = 0.75$. באפליקציה אפשר לענות בשבר (3/4) או בעשרוני (0.75)."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "חיבור עם מכנה משותף",
+      "problem": "חשבו: $\\frac{2}{3} + \\frac{1}{4}$",
+      "steps": [
+        "מכנה משותף 12: $\\frac{8}{12} + \\frac{3}{12}$.",
+        "$\\frac{11}{12} \\approx 0.92$."
+      ],
+      "answer": "$\\frac{11}{12}$",
+      "checks": [
+        {
+          "expr": "2/3+1/4",
+          "equals": 0.9166666666666666,
+          "tolerance": 1e-09
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "כפל וצמצום",
+      "problem": "חשבו: $\\frac{3}{4}\\cdot\\frac{2}{9}$",
+      "steps": [
+        "$\\frac{3\\cdot 2}{4\\cdot 9} = \\frac{6}{36}$.",
+        "מצמצמים ב-6: $\\frac{1}{6}$."
+      ],
+      "answer": "$\\frac{1}{6}$",
+      "checks": [
+        {
+          "expr": "(3/4)*(2/9)",
+          "equals": 0.16666666666666666,
+          "tolerance": 1e-09
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "חילוק",
+      "problem": "חשבו: $\\frac{5}{6} : \\frac{2}{3}$",
+      "steps": [
+        "כופלים בהפוך: $\\frac{5}{6}\\cdot\\frac{3}{2} = \\frac{15}{12}$.",
+        "מצמצמים: $\\frac{5}{4} = 1.25$."
+      ],
+      "answer": "$\\frac{5}{4} = 1.25$",
+      "checks": [
+        {
+          "expr": "(5/6)/(2/3)",
+          "equals": 1.25,
+          "tolerance": 1e-09
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{1}{2} + \\frac{1}{3}$",
+      "answer": {
+        "value": 0.8333,
+        "tolerance": 0.005,
+        "rounding": "אפשר שבר (למשל 5/6) או עשרוני עם שתי ספרות"
+      },
+      "check": "1/2+1/3",
+      "commonWrongAnswers": [
+        {
+          "value": 0.4,
+          "mistake": "add-tops"
+        }
+      ],
+      "hints": [
+        "צריך מכנה משותף. מה המכנה המשותף הקטן של 2 ו-3?",
+        "$\\frac{3}{6} + \\frac{2}{6}$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{5}{6} \\approx 0.83$."
+        ],
+        "final": "$0.8333$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{3}{5} - \\frac{1}{10}$",
+      "answer": {
+        "value": 0.5,
+        "tolerance": 0.005,
+        "rounding": "אפשר שבר (למשל 5/6) או עשרוני עם שתי ספרות"
+      },
+      "check": "3/5-1/10",
+      "commonWrongAnswers": [
+        {
+          "value": 0.4,
+          "mistake": "add-tops"
+        }
+      ],
+      "hints": [
+        "מכנה משותף 10: $\\frac{6}{10} - \\frac{1}{10}$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{5}{10} = \\frac{1}{2}$."
+        ],
+        "final": "$0.5$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{2}{3}\\cdot\\frac{3}{4}$",
+      "answer": {
+        "value": 0.5,
+        "tolerance": 0.005,
+        "rounding": "אפשר שבר (למשל 5/6) או עשרוני עם שתי ספרות"
+      },
+      "check": "(2/3)*(3/4)",
+      "hints": [
+        "מונה כפול מונה, מכנה כפול מכנה."
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{6}{12} = \\frac{1}{2}$."
+        ],
+        "final": "$0.5$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{3}{4} : \\frac{1}{2}$",
+      "answer": {
+        "value": 1.5,
+        "tolerance": 0.005,
+        "rounding": "אפשר שבר (למשל 5/6) או עשרוני עם שתי ספרות"
+      },
+      "check": "(3/4)/(1/2)",
+      "commonWrongAnswers": [
+        {
+          "value": 0.375,
+          "mistake": "divide-flip"
+        }
+      ],
+      "hints": [
+        "חילוק בשבר = כפל בשבר ההפוך.",
+        "$\\frac{3}{4}\\cdot\\frac{2}{1}$."
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{6}{4} = 1.5$."
+        ],
+        "final": "$1.5$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "כתבו את $0.35$ כשבר מצומצם. מהו המכנה?",
+      "answer": {
+        "value": 20,
+        "tolerance": 0
+      },
+      "check": "7/0.35",
+      "commonWrongAnswers": [
+        {
+          "value": 100,
+          "mistake": "simplify"
+        }
+      ],
+      "hints": [
+        "$0.35 = \\frac{35}{100}$.",
+        "מצמצמים ב-5."
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{35}{100} = \\frac{7}{20}$. המכנה 20."
+        ],
+        "final": "$20$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "כתבו את $\\frac{7}{8}$ כמספר עשרוני.",
+      "answer": {
+        "value": 0.875,
+        "tolerance": 0
+      },
+      "check": "7/8",
+      "hints": [
+        "מחלקים: $7 : 8$."
+      ],
+      "solution": {
+        "steps": [
+          "$7 : 8 = 0.875$."
+        ],
+        "final": "$0.875$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{1}{4} + \\frac{2}{3}$",
+      "answer": {
+        "value": 0.9167,
+        "tolerance": 0.005,
+        "rounding": "אפשר שבר (למשל 5/6) או עשרוני עם שתי ספרות"
+      },
+      "check": "1/4+2/3",
+      "commonWrongAnswers": [
+        {
+          "value": 0.42857142857142855,
+          "mistake": "add-tops"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{3}{12} + \\frac{8}{12} = \\frac{11}{12}$."
+        ],
+        "final": "$0.9167$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $\\frac{5}{6}\\cdot\\frac{3}{10}$",
+      "answer": {
+        "value": 0.25,
+        "tolerance": 0.005,
+        "rounding": "אפשר שבר (למשל 5/6) או עשרוני עם שתי ספרות"
+      },
+      "check": "(5/6)*(3/10)",
+      "solution": {
+        "steps": [
+          "$\\frac{15}{60} = \\frac{1}{4}$."
+        ],
+        "final": "$0.25$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו: $2 : \\frac{1}{3}$",
+      "answer": {
+        "value": 6,
+        "tolerance": 0.005,
+        "rounding": "אפשר שבר (למשל 5/6) או עשרוני עם שתי ספרות"
+      },
+      "check": "2/(1/3)",
+      "commonWrongAnswers": [
+        {
+          "value": 0.6666666666666666,
+          "mistake": "divide-flip"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2 \\cdot 3 = 6$."
+        ],
+        "final": "$6$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "כתבו את $0.6$ כשבר מצומצם. מהו המכנה?",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "3/0.6",
+      "commonWrongAnswers": [
+        {
+          "value": 10,
+          "mistake": "simplify"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{6}{10} = \\frac{3}{5}$."
+        ],
+        "final": "$5$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "add-tops",
+      "label": "חיבור מונים ומכנים",
+      "advice": "מחברים שברים רק אחרי שמביאים למכנה משותף. לא מחברים מכנים.",
+      "reviewSection": "explanations",
+      "reviewRef": "add"
+    },
+    {
+      "id": "divide-flip",
+      "label": "חילוק בשבר",
+      "advice": "מחלקים בשבר על ידי כפל בשבר ההפוך: $a : \\frac{b}{c} = a\\cdot\\frac{c}{b}$.",
+      "reviewSection": "explanations",
+      "reviewRef": "mult"
+    },
+    {
+      "id": "simplify",
+      "label": "צמצום",
+      "advice": "מחלקים מונה ומכנה במחלק המשותף הגדול ביותר.",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    }
+  ]
+}

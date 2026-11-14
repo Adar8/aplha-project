@@ -431,7 +431,7 @@
     {
       "id": "minus-minus",
       "label": "חיסור של מספר שלילי",
-      "advice": "שני מינוסים צמודים הופכים לפלוס: a − (−b) = a + b.",
+      "advice": "שני מינוסים צמודים הופכים לפלוס: $a - (-b) = a + b$.",
       "reviewSection": "explanations",
       "reviewRef": "add"
     },
@@ -445,7 +445,7 @@
     {
       "id": "power-sign",
       "label": "חזקה של מספר שלילי",
-      "advice": "(−3)² = 9, אבל −3² = −9. הסוגריים קובעים על מה חלה החזקה.",
+      "advice": "$(-3)^2 = 9$, אבל $-3^2 = -9$. הסוגריים קובעים על מה חלה החזקה.",
       "reviewSection": "explanations",
       "reviewRef": "mult"
     }
