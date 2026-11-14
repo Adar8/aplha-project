@@ -254,9 +254,36 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await t.context().close();
     });
 
+    await step('שאלון בגרות: נוסח רשמי, בדיקת תשובה, פתרון, הערכה עצמית ושמירה', async () => {
+      const t = await newPage();
+      await go(t, '#/exams');
+      expect(await t.locator('.x-hub').count() >= 1, 'אין שאלון בגרות ברשימת המבחנים');
+      await t.locator('.x-hub .btn').first().click(); await t.waitForSelector('.x-q');
+      expect((await t.locator('.x-stem').textContent()).includes('הבית של אורי'), 'נוסח שאלה 1 חסר');
+      expect(await t.locator('.x-stem .katex').count() > 0, 'אין נוסחאות מרונדרות');
+      const c = t.locator('.x-part[data-pid="a1"]');
+      await c.locator('input').fill('10'); await c.locator('[data-act=check]').click();
+      expect(await c.locator('.feedback.bad').count() === 1, 'תשובה שגויה לא סומנה');
+      await c.locator('input').fill('12'); await c.locator('[data-act=check]').click();
+      expect(await c.locator('.feedback.ok').count() === 1, 'תשובה נכונה לא סומנה');
+      await go(t, '#/exam/35581-2024-summer/2');
+      const a = t.locator('.x-part[data-pid="a"]');
+      expect(await a.locator('.x-sol').isHidden(), 'הפתרון גלוי מראש');
+      await a.locator('[data-act=solution]').click();
+      expect(await a.locator('.x-sol').isVisible(), 'הפתרון לא נפתח');
+      await a.locator('[data-act=self-ok]').click();
+      await go(t, '#/exam/35581-2024-summer/7');
+      expect(await t.locator('img[src$="35581-2024-q7d.png"]').evaluate(i => i.complete && i.naturalWidth > 0), 'איור שאלה 7 לא נטען');
+      await t.reload(); await t.waitForSelector('.x-q');
+      const st = await t.evaluate(() => JSON.parse(localStorage.getItem('math5.progress.v1')).exams['35581-2024-summer']);
+      expect(st.parts['1.a1'].status === 'ok' && st.parts['2.a'].status === 'self-ok', 'מצב הסעיפים לא נשמר');
+      expect(await t.locator('.x-chip.part, .x-chip.done').count() >= 2, 'הניווט לא מסמן שאלות שהתחלתי');
+      await t.context().close();
+    });
+
     await step('טלפון: ניווט תחתון, בלי גלילה אופקית', async () => {
       const m = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
-      for (const h of ['#/', '#/week', '#/map', '#/lesson/sine-cosine-law/bagrut', '#/progress']) {
+      for (const h of ['#/', '#/week', '#/map', '#/lesson/sine-cosine-law/bagrut', '#/progress', '#/exams', '#/exam/35581-2024-summer/4', '#/exam/35581-2024-summer/7']) {
         await go(m, h);
         const over = await m.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         expect(over <= 1, `${h}: גלילה אופקית של ${over}px`);

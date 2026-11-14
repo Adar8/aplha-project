@@ -275,6 +275,79 @@ export function validateKnowledgeMap(K, { topics = null, lessons = null } = {}) 
 }
 
 // ---- הרצה משורת הפקודה ----
+
+// ---- שאלון בגרות רשמי (learning-content/exams) ----
+// נוסח רשמי + פתרונות של MATH 5: כל תשובה מספרית מחושבת מחדש משדה check, כל LaTeX מתרנדר, כל איור קיים.
+export function validateExam(X, { examDir = resolve(CONTENT, 'exams') } = {}) {
+  const errors = [];
+  const err = (path, msg) => errors.push(`${path}: ${msg}`);
+  const isStr = v => typeof v === 'string' && v.trim().length > 0;
+  const text = (v, path) => {
+    if (!isStr(v)) return err(path, 'חייב להיות טקסט לא ריק');
+    if (/<\/?[a-z][^>]*>/i.test(v.replace(/\$[^$]*\$/g, ''))) err(path, 'אין להשתמש ב-HTML');
+    const s = v.replace(/\$\$[\s\S]+?\$\$/g, m => { tex(m.slice(2, -2), path, true); return ''; });
+    if ((s.match(/\$/g) || []).length % 2) return err(path, 'מספר אי-זוגי של סימני $');
+    for (const m of s.matchAll(/\$([^$]+?)\$/g)) tex(m[1], path, false);
+  };
+  const tex = (t, path, displayMode) => {
+    try { katex.renderToString(t, { throwOnError: true, displayMode, strict: 'ignore' }); }
+    catch (e) { err(path, `LaTeX לא תקין: ${t} (${String(e.message).split('\n')[0]})`); }
+  };
+  const fig = (f, path) => {
+    if (!f || !isStr(f.figure || f)) return err(path, 'איור חסר');
+    const file = f.figure || f;
+    if (!existsSync(resolve(examDir, file))) err(path, `קובץ איור לא קיים: ${file}`);
+    if (f.figure && !isStr(f.alt)) err(path, 'חסר תיאור חלופי (alt) לאיור');
+  };
+  if (X.schemaVersion !== 1) err('schemaVersion', 'חייב להיות 1');
+  if (X.kind !== 'exam') err('kind', 'חייב להיות exam');
+  if (!isStr(X.id) || !ID_RE.test(X.id)) err('id', 'מזהה לא תקין');
+  if (!['old', 'new'].includes(X.format)) err('format', 'old / new');
+  if (!PAPERS[X.format]?.includes('0' + X.code)) err('code', `השאלון ${X.code} לא שייך למתכונת ${X.format}`);
+  if (X.source?.label !== 'official') err('source.label', 'שאלון בגרות חייב להיות official');
+  if (!/^https:\/\/meyda\.education\.gov\.il\//.test(X.source?.url || '')) err('source.url', 'קישור לקובץ הרשמי באתר משרד החינוך');
+  if (!isStr(X.source?.copyright)) err('source.copyright', 'חסרה הודעת זכויות יוצרים');
+  if (X.solutions?.label !== 'original' || !isStr(X.solutions?.note)) err('solutions', 'הפתרונות חייבים להיות מסומנים original עם הסבר');
+  (X.instructions || []).forEach((t, i) => text(t, `instructions[${i}]`));
+  const nums = new Set((X.questions || []).map(q => q.n));
+  const inCh = (X.chapters || []).flatMap(c => c.questions);
+  if (inCh.length !== nums.size || inCh.some(n => !nums.has(n))) err('chapters', 'כל שאלה צריכה להופיע בדיוק בפרק אחד');
+  for (const q of X.questions || []) {
+    const qp = `q${q.n}`;
+    if (!Number.isInteger(q.page)) err(qp, 'חסר מספר עמוד בקובץ הרשמי');
+    (q.stem || []).forEach((b, i) => typeof b === 'string' ? text(b, `${qp}.stem[${i}]`) : fig(b, `${qp}.stem[${i}]`));
+    const ids = new Set();
+    for (const p of q.parts || []) {
+      const pp = `${qp}.${p.id}`;
+      if (ids.has(p.id)) err(pp, 'מזהה סעיף כפול'); ids.add(p.id);
+      if (!isStr(p.label)) err(pp, 'חסרה תווית סעיף');
+      text(p.text, `${pp}.text`);
+      (p.intro || []).forEach((t, i) => text(t, `${pp}.intro[${i}]`));
+      (p.list || []).forEach((t, i) => text(t, `${pp}.list[${i}]`));
+      if (p.figure) fig(p.figure, `${pp}.figure`);
+      if (p.sketch) fig(p.sketch, `${pp}.sketch`);
+      if (p.ambiguity) text(p.ambiguity, `${pp}.ambiguity`);
+      text(p.final, `${pp}.final`);
+      if (!Array.isArray(p.solution) || !p.solution.length) err(pp, 'חסר פתרון');
+      (p.solution || []).forEach((t, i) => text(t, `${pp}.solution[${i}]`));
+      const a = p.answer;
+      if (a === null || a === undefined) continue;
+      if (a.type === 'numeric') {
+        if (typeof a.value !== 'number' || !isStr(a.check)) { err(pp, 'תשובה מספרית צריכה value ו-check'); continue; }
+        if (a.prompt) text(a.prompt, `${pp}.answer.prompt`);
+        try {
+          const v = evalExpr(a.check);
+          const tol = Math.max(a.tol ?? 0, 1e-9);
+          if (Math.abs(v - a.value) > tol) err(pp, `check=${a.check} נותן ${v}, אבל value=${a.value}`);
+        } catch (e) { err(pp, `check: ${e.message}`); }
+      } else if (a.type === 'mc') {
+        if (!Array.isArray(a.options) || a.options.length < 2 || !(a.correct >= 0 && a.correct < a.options.length)) err(pp, 'שאלת בחירה: אפשרויות ותשובה נכונה');
+      } else err(pp, `סוג תשובה לא מוכר: ${a.type}`);
+    }
+  }
+  return { errors };
+}
+
 async function main() {
   const { TOPICS } = await import(resolve(ROOT, 'js/data/curriculum.js'));
   const topics = new Set(TOPICS.map(t => t.id));
@@ -340,7 +413,15 @@ async function main() {
   (TB.baseCheck?.probes || []).forEach(p => { if (!D.items.some(i => i.skill === p)) tbErr.push(`baseCheck: אין שאלה למיומנות ${p}`); });
   if (tbErr.length) { fail += tbErr.length; console.error(`✗ learning-content/toolbox.json – ${tbErr.length} שגיאות`); tbErr.forEach(e => console.error('   • ' + e)); }
   else console.log(`✓ learning-content/toolbox.json (${topicIds.size} נושאים, ${tbLessons.length} שיעורי יסוד)`);
-  console.log(fail ? `\n${fail} שגיאות` : `\nכל קובצי התוכן תקינים (${lessons.length} שיעורים, ${tbLessons.length} שיעורי יסוד, מפת ידע, אבחון)`);
+  const EX = JSON.parse(readFileSync(resolve(CONTENT, 'exams/index.json'), 'utf8'));
+  for (const id of EX.exams) {
+    const X = JSON.parse(readFileSync(resolve(CONTENT, `exams/${id}.json`), 'utf8'));
+    const r = validateExam(X);
+    if (X.id !== id) r.errors.push(`id: ${X.id} לא תואם לשם הקובץ`);
+    if (r.errors.length) { fail += r.errors.length; console.error(`✗ learning-content/exams/${id}.json – ${r.errors.length} שגיאות`); r.errors.forEach(e => console.error('   • ' + e)); }
+    else { const parts = X.questions.flatMap(q => q.parts); console.log(`✓ learning-content/exams/${id}.json (${X.questions.length} שאלות, ${parts.length} סעיפים, ${parts.filter(p => p.answer?.type === 'numeric').length} תשובות מספריות נבדקו)`); }
+  }
+  console.log(fail ? `\n${fail} שגיאות` : `\nכל קובצי התוכן תקינים (${lessons.length} שיעורים, ${tbLessons.length} שיעורי יסוד, ${EX.exams.length} שאלוני בגרות, מפת ידע, אבחון)`);
   process.exit(fail ? 1 : 0);
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

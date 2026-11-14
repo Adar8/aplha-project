@@ -30,6 +30,7 @@ export const empty = () => ({
   returnTo: null,   // לאן לחזור אחרי חיזוק בארגז הכלים: { hash, title, at }
   welcomeDismissed: false,
   lastLesson: null,
+  exams: {},        // examId -> { parts: { 'n.partId': { status: ok|wrong|self-ok|review, revealed, at } }, lastQ }
 });
 
 // מעבר מגרסה 1: ציונים לפרופיל, תשובות קיימות לרשומות ניסיון, מבחנים קודמים ללוח החזרות.
@@ -125,6 +126,16 @@ export const store = {
     state.reviews[lessonId] = afterReview(state.reviews[lessonId], score, now);
     save();
     return state.reviews[lessonId];
+  },
+  // שאלוני בגרות: מצב כל סעיף נשמר בנפרד מהשיעורים, כדי לא לשבש את מדד השליטה
+  recordExamPart(examId, key, patch, now = Date.now()) {
+    const E = state.exams[examId] || (state.exams[examId] = { parts: {}, lastQ: null });
+    E.parts[key] = { ...(E.parts[key] || {}), ...patch, at: now };
+    save();
+  },
+  setExamLast(examId, n) {
+    const E = state.exams[examId] || (state.exams[examId] = { parts: {}, lastQ: null });
+    if (E.lastQ !== n) { E.lastQ = n; save(); }
   },
   addTime(lessonId, sec, now = Date.now()) {
     const k = dateKey(now);

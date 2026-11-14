@@ -528,3 +528,49 @@ th, td { text-align: start; padding: var(--sp-3) var(--sp-2); border-block-end: 
 th { color: var(--text-2); font-weight: 500; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* ---------- שאלוני בגרות רשמיים ---------- */
+.x-hub-title { margin-block: var(--sp-6) var(--sp-2); }
+.badge.x-official { color: var(--teal); background: rgba(69, 214, 195, .12); }
+.x-hub .prog { margin-block: var(--sp-3) var(--sp-2); }
+.x-wrap { max-inline-size: 760px; margin-inline: auto; display: flex; flex-direction: column; gap: var(--sp-4); }
+.x-back { font: 600 15px var(--font-head); color: var(--text-2); text-decoration: none; }
+.x-head h1 { margin: 0 0 var(--sp-2); font-size: clamp(24px, 6.4vw, 34px); }
+.x-badges { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.x-info summary { cursor: pointer; font-family: var(--font-head); min-block-size: 32px; display: flex; align-items: center; }
+.x-info ul { padding-inline-start: 1.2em; line-height: 1.7; }
+.x-info .btn { margin-block-start: var(--sp-2); }
+.x-warn { background: rgba(255, 194, 92, .1); border: 2px solid rgba(255, 194, 92, .45); border-radius: var(--r-md); padding: var(--sp-3) var(--sp-4); line-height: 1.65; }
+.x-nav { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); }
+.x-chap { display: flex; flex-direction: column; gap: 6px; }
+.x-chap-name { font: 600 13px var(--font-head); color: var(--text-3); }
+.x-chips { display: flex; gap: var(--sp-2); }
+.x-chip { inline-size: 44px; block-size: 44px; display: grid; place-items: center; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); box-shadow: 0 4px 0 var(--line); color: var(--text); font: 700 18px var(--font-head); text-decoration: none; transition: transform 80ms ease, box-shadow 80ms ease; }
+.x-chip:active { transform: translateY(4px); box-shadow: none; }
+.x-chip.part { border-color: var(--amber); }
+.x-chip.done { border-color: var(--success); background: var(--success-soft); }
+.x-chip[aria-current] { border-color: var(--primary); background: var(--primary); color: var(--primary-ink); box-shadow: 0 4px 0 var(--primary-edge); }
+.x-q-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-1) var(--sp-3); margin-block-end: var(--sp-3); }
+.x-q-head h2 { margin: 0; }
+.x-q-head a { margin-inline-start: auto; }
+.x-stem p, .x-intro p { margin: 0 0 var(--sp-3); line-height: 1.75; font-size: 17px; }
+.x-intro { padding-inline: var(--sp-2); border-inline-start: 3px solid var(--line-strong); }
+.x-fig { margin: var(--sp-3) auto; text-align: center; }
+.x-fig img { max-inline-size: min(100%, 360px); block-size: auto; }
+.x-fig.wide img { max-inline-size: 100%; }
+.x-scan img { filter: invert(1) contrast(1.6); mix-blend-mode: screen; }
+.x-sketch img { max-inline-size: 100%; border-radius: var(--r-md); background: var(--bg); }
+.x-ptext { font: 600 19px/1.6 var(--font-head); margin-block-end: var(--sp-4); }
+.x-list { list-style: none; padding: 0; margin: 0 0 var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-2); line-height: 1.6; }
+.x-open { color: var(--text-2); background: var(--raised); border-radius: var(--r-md); padding: var(--sp-3) var(--sp-4); margin: 0; }
+.x-st { font: 600 14px var(--font-head); color: var(--text-3); }
+.x-st.ok, .x-st.self-ok { color: var(--success); }
+.x-st.wrong, .x-st.review { color: var(--amber); }
+.x-sol { margin-block-start: var(--sp-4); padding-block-start: var(--sp-4); border-block-start: 2px dashed var(--line); display: flex; flex-direction: column; gap: var(--sp-3); }
+.x-final { margin: 0; padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md); background: var(--primary-soft); line-height: 1.7; }
+.x-steps { margin: 0; padding-inline-start: 1.4em; display: flex; flex-direction: column; gap: var(--sp-2); line-height: 1.75; }
+.x-self { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.x-self span { font-family: var(--font-head); margin-inline-end: var(--sp-2); }
+.x-pager { display: flex; justify-content: space-between; gap: var(--sp-3); margin-block: var(--sp-2) var(--sp-8); }
+.x-stem .katex, .x-ptext .katex, .x-steps .katex { white-space: nowrap; }
+.x-steps li, .x-final, .x-stem p { overflow-x: auto; overflow-y: hidden; }

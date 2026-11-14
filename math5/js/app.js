@@ -3,6 +3,7 @@ import { TOPICS, STATUS, CONFIDENCE, SOURCES, EXAMS, VERIFIED_ON } from './data/
 import { LESSONS, LESSON_BY_ID, loadLessons, loadToolbox, LOAD_ERRORS } from './data/lessons/index.js';
 import * as tbx from './views/toolbox.js';
 import { checkAnswer } from './core/answers.js';
+import * as xm from './views/exams.js';
 import { streakInfo } from './core/plan.js';
 import { SECTIONS, lessonSections, SOURCE_LABEL, renderMath, fmtTime, weekSeconds, todaySeconds, meter, lessonState, recommend, ring, ICON, esc } from './ui.js';
 import * as extra from './views/extra.js';
@@ -183,7 +184,9 @@ function viewPractice() {
 
 function viewExams() {
   const st = store.get();
-  return `<h1>מבחנים</h1><p class="lead">מבחן קצר בסוף כל שיעור. נשמר הציון הטוב ביותר.</p>
+  return `<h1>מבחנים</h1><p class="lead">שאלוני בגרות אמיתיים, ומבחן קצר בסוף כל שיעור.</p>
+  ${xm.examsHubHTML()}
+  <h2 class="x-hub-title">מבחני סוף שיעור</h2>
   <ul class="hub-list">${LESSONS.map(l => { const Q = (st.lessons[l.id] || {}).quiz || { best: null, history: [] }; return `
     <li class="glass hub"><div class="hub-head"><b>${esc(l.title)}</b>
       <span class="score-pill ${Q.best === null ? '' : Q.best >= 80 ? 'good' : 'mid'}">${Q.best === null ? 'טרם נבחנת' : `<span class="num">${Q.best}</span> ציון הכי טוב`}</span></div>
@@ -713,6 +716,7 @@ function route() {
   else if (parts[0] === 'sources') { html = viewSources(); nav = 'progress'; }
   else if (parts[0] === 'practice') { html = viewPractice(); }
   else if (parts[0] === 'exams') { html = viewExams(); }
+  else if (parts[0] === 'exam') { const v = xm.examRoute(parts[1], parts[2]); html = v.html; bind = () => v.bind(app); nav = 'exams'; currentActivity = 'exam'; }
   else if (parts[0] === 'review') { const v = extra.reviewRoute(parts[1]); html = v.html; bind = v.bind; nav = 'practice'; currentActivity = 'review'; }
   else if (parts[0] === 'diagnostic') { const v = extra.diagnosticRoute(); html = v.html; bind = v.bind; nav = 'plan'; currentActivity = 'diagnostic'; }
   else if (parts[0] === 'map') { html = extra.viewMap(); nav = 'plan'; }
@@ -744,7 +748,7 @@ setInterval(() => {
 // ---------- אתחול ----------
 async function boot() {
   try {
-    await Promise.all([loadLessons().then(() => loadToolbox()), extra.loadExtraData()]);
+    await Promise.all([loadLessons().then(() => loadToolbox()), extra.loadExtraData(), xm.loadExams()]);
   } catch (e) {
     app.innerHTML = `<div class="card"><h1>התוכן לא נטען</h1><p>לא הצלחתי לטעון את קובצי השיעורים. אם האפליקציה נפתחה ישירות מקובץ, צריך להפעיל אותה דרך שרת (ראו README).</p><p class="muted small">${esc(e.message)}</p></div>`;
     return;
