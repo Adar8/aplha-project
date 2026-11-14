@@ -102,7 +102,7 @@
           "skills": [
             "f-factoring"
           ],
-          "lesson": null
+          "lesson": "tb-factoring"
         },
         {
           "id": "t-factoring",
@@ -110,7 +110,7 @@
           "skills": [
             "f-factoring"
           ],
-          "lesson": null
+          "lesson": "tb-factoring"
         },
         {
           "id": "t-alg-fractions",
@@ -160,7 +160,7 @@
           "skills": [
             "f-inequalities"
           ],
-          "lesson": null
+          "lesson": "tb-inequalities"
         },
         {
           "id": "t-systems",
@@ -168,7 +168,7 @@
           "skills": [
             "f-systems"
           ],
-          "lesson": null
+          "lesson": "tb-systems"
         },
         {
           "id": "t-substitution",
@@ -225,7 +225,7 @@
           "skills": [
             "f-line-eq"
           ],
-          "lesson": null
+          "lesson": "tb-intercepts"
         },
         {
           "id": "t-eq-graph",
@@ -234,7 +234,7 @@
             "f-line-eq",
             "f-parabola"
           ],
-          "lesson": null
+          "lesson": "tb-intercepts"
         }
       ]
     },
@@ -374,11 +374,15 @@
     "toolbox/tb-fractions.json",
     "toolbox/tb-powers.json",
     "toolbox/tb-brackets.json",
+    "toolbox/tb-factoring.json",
     "toolbox/tb-linear-eq.json",
     "toolbox/tb-quadratic.json",
+    "toolbox/tb-inequalities.json",
+    "toolbox/tb-systems.json",
     "toolbox/tb-substitution.json",
     "toolbox/tb-axes.json",
     "toolbox/tb-slope.json",
+    "toolbox/tb-intercepts.json",
     "toolbox/tb-pythagoras.json"
   ],
   "aids": [

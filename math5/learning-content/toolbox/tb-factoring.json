@@ -1,0 +1,470 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-factoring",
+  "title": "פירוק לגורמים וכפל מקוצר",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 35,
+  "summary": "גורם משותף, שלוש נוסחאות הכפל המקוצר, ופירוק טרינום.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "common",
+      "title": "הוצאת גורם משותף",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "פירוק הוא הכיוון ההפוך של פתיחת סוגריים: $6x + 9 = 3(2x + 3)$, ו-$x^2 - 3x = x(x - 3)$."
+        },
+        {
+          "type": "tip",
+          "text": "תמיד מתחילים בבדיקה: יש גורם משותף לכל האיברים?"
+        }
+      ]
+    },
+    {
+      "id": "short",
+      "title": "נוסחאות הכפל המקוצר",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "(a + b)^2 = a^2 + 2ab + b^2"
+        },
+        {
+          "type": "formula",
+          "latex": "(a - b)^2 = a^2 - 2ab + b^2"
+        },
+        {
+          "type": "formula",
+          "latex": "(a - b)(a + b) = a^2 - b^2"
+        },
+        {
+          "type": "warning",
+          "text": "$(a + b)^2 \\ne a^2 + b^2$. האיבר האמצעי $2ab$ חובה."
+        }
+      ]
+    },
+    {
+      "id": "trin",
+      "title": "פירוק טרינום",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "את $x^2 + bx + c$ מפרקים ל-$(x + p)(x + q)$ כש-$p\\cdot q = c$ ו-$p + q = b$."
+        },
+        {
+          "type": "text",
+          "text": "למשל $x^2 + 7x + 12$: מכפלה 12 וסכום 7 → 3 ו-4. לכן $(x + 3)(x + 4)$."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "ריבוע של סכום",
+      "problem": "פתחו: $(x + 3)^2$",
+      "steps": [
+        "$a = x$, $b = 3$: $x^2 + 2\\cdot x\\cdot 3 + 3^2$.",
+        "$x^2 + 6x + 9$."
+      ],
+      "answer": "$x^2 + 6x + 9$",
+      "checks": [
+        {
+          "expr": "(2+3)^2",
+          "equals": 25
+        },
+        {
+          "expr": "2^2+6*2+9",
+          "equals": 25
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "הפרש ריבועים",
+      "problem": "פרקו: $x^2 - 25$",
+      "steps": [
+        "$25 = 5^2$ – זה הפרש ריבועים.",
+        "$(x - 5)(x + 5)$."
+      ],
+      "answer": "$(x-5)(x+5)$",
+      "checks": [
+        {
+          "expr": "3^2-25",
+          "equals": -16
+        },
+        {
+          "expr": "(3-5)*(3+5)",
+          "equals": -16
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "טרינום",
+      "problem": "פרקו: $x^2 + 7x + 12$",
+      "steps": [
+        "מחפשים מכפלה 12 וסכום 7: 3 ו-4.",
+        "$(x + 3)(x + 4)$."
+      ],
+      "answer": "$(x+3)(x+4)$",
+      "checks": [
+        {
+          "expr": "1^2+7*1+12",
+          "equals": 20
+        },
+        {
+          "expr": "(1+3)*(1+4)",
+          "equals": 20
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$(x + 4)^2 = x^2 + bx + c$. מהו $b$?",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "2*4",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "middle-term"
+        },
+        {
+          "value": 0,
+          "mistake": "sq-sum"
+        }
+      ],
+      "hints": [
+        "האיבר האמצעי הוא $2ab$.",
+        "$2\\cdot x\\cdot 4$."
+      ],
+      "solution": {
+        "steps": [
+          "$8x$, ולכן $b = 8$."
+        ],
+        "final": "$8$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$(x - 5)^2 = x^2 + bx + c$. מהו $c$?",
+      "answer": {
+        "value": 25,
+        "tolerance": 0
+      },
+      "check": "(-5)^2",
+      "commonWrongAnswers": [
+        {
+          "value": -25,
+          "mistake": "sq-sign"
+        }
+      ],
+      "hints": [
+        "$c = b^2$ בנוסחה – הריבוע של 5."
+      ],
+      "solution": {
+        "steps": [
+          "$(-5)^2 = 25$."
+        ],
+        "final": "$25$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$x^2 - 49 = (x - a)(x + a)$. מהו $a$ (חיובי)?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "sqrt(49)",
+      "commonWrongAnswers": [
+        {
+          "value": 49,
+          "mistake": "sq-sum"
+        }
+      ],
+      "hints": [
+        "זה הפרש ריבועים.",
+        "$49 = ?^2$"
+      ],
+      "solution": {
+        "steps": [
+          "$49 = 7^2$, ולכן $a = 7$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$x^2 + 5x + 6 = (x + p)(x + q)$, כש-$p < q$. מהו $q$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(5+sqrt(25-24))/2",
+      "commonWrongAnswers": [
+        {
+          "value": 6,
+          "mistake": "factor-sign"
+        }
+      ],
+      "hints": [
+        "מכפלה 6 וסכום 5.",
+        "2 ו-3."
+      ],
+      "solution": {
+        "steps": [
+          "$(x + 2)(x + 3)$, ולכן $q = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$4x^2 - 12x = 4x(x - k)$. מהו $k$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "12/4",
+      "commonWrongAnswers": [
+        {
+          "value": 12,
+          "mistake": "factor-sign"
+        },
+        {
+          "value": -3,
+          "mistake": "factor-sign"
+        }
+      ],
+      "hints": [
+        "הגורם המשותף $4x$. מחלקים: $\\frac{-12x}{4x} = ?$"
+      ],
+      "solution": {
+        "steps": [
+          "$4x(x - 3)$, ולכן $k = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "איזה ביטוי שווה ל-$(a + b)^2$?",
+      "choices": [
+        {
+          "text": "$a^2 + 2ab + b^2$",
+          "correct": true
+        },
+        {
+          "text": "$a^2 + b^2$",
+          "mistake": "sq-sum"
+        },
+        {
+          "text": "$a^2 + ab + b^2$",
+          "mistake": "middle-term"
+        },
+        {
+          "text": "$2a + 2b$",
+          "mistake": "sq-sum"
+        }
+      ],
+      "hints": [
+        "$(a + b)^2 = (a + b)(a + b)$."
+      ],
+      "solution": {
+        "steps": [
+          "פותחים: $a^2 + ab + ab + b^2 = a^2 + 2ab + b^2$."
+        ],
+        "final": "$a^2 + 2ab + b^2$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$(x - 3)^2 = x^2 + bx + c$. מהו $b$?",
+      "answer": {
+        "value": -6,
+        "tolerance": 0
+      },
+      "check": "-2*3",
+      "commonWrongAnswers": [
+        {
+          "value": -3,
+          "mistake": "middle-term"
+        },
+        {
+          "value": 6,
+          "mistake": "sq-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$-2\\cdot x\\cdot 3 = -6x$."
+        ],
+        "final": "$-6$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$x^2 - 100 = (x - a)(x + a)$. מהו $a$ (חיובי)?",
+      "answer": {
+        "value": 10,
+        "tolerance": 0
+      },
+      "check": "sqrt(100)",
+      "commonWrongAnswers": [
+        {
+          "value": 50,
+          "mistake": "sq-sum"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$100 = 10^2$."
+        ],
+        "final": "$10$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$x^2 - x - 20 = (x + p)(x + q)$, כש-$p < q$. מהו $p$?",
+      "answer": {
+        "value": -5,
+        "tolerance": 0
+      },
+      "check": "(-1-sqrt(1+80))/2",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "factor-sign"
+        },
+        {
+          "value": -4,
+          "mistake": "factor-sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "מכפלה $-20$ וסכום $-1$: $-5$ ו-$4$."
+        ],
+        "final": "$-5$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "חשבו בעזרת הפרש ריבועים: $51^2 - 49^2$",
+      "answer": {
+        "value": 200,
+        "tolerance": 0
+      },
+      "check": "(51-49)*(51+49)",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "sq-sum"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$(51 - 49)(51 + 49) = 2\\cdot 100$."
+        ],
+        "final": "$200$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "sq-sum",
+      "label": "ריבוע של סכום בלי האיבר האמצעי",
+      "advice": "$(a+b)^2 = a^2 + 2ab + b^2$ – לא $a^2 + b^2$.",
+      "reviewSection": "explanations",
+      "reviewRef": "short"
+    },
+    {
+      "id": "middle-term",
+      "label": "האיבר האמצעי",
+      "advice": "האיבר האמצעי הוא $2ab$ – פעמיים המכפלה.",
+      "reviewSection": "explanations",
+      "reviewRef": "short"
+    },
+    {
+      "id": "sq-sign",
+      "label": "סימן בריבוע של הפרש",
+      "advice": "ב-$(a-b)^2$ האיבר האחרון $b^2$ חיובי, ורק האמצעי שלילי.",
+      "reviewSection": "explanations",
+      "reviewRef": "short"
+    },
+    {
+      "id": "factor-sign",
+      "label": "סימנים בפירוק טרינום",
+      "advice": "מחפשים שני מספרים שמכפלתם $c$ וסכומם $b$ – כולל הסימנים.",
+      "reviewSection": "explanations",
+      "reviewRef": "trin"
+    }
+  ]
+}

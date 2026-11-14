@@ -19,7 +19,7 @@ b, strong { font-weight: 600; color: var(--text); }
 .lead { font-size: var(--fs-lead); color: var(--text-2); max-inline-size: 62ch; }
 .eyebrow { font-size: var(--fs-sm); color: var(--text-2); font-weight: 500; margin: 0 0 2px; }
 .sr-only { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.katex { direction: ltr; unicode-bidi: isolate; font-size: 1.08em; }
+.katex { direction: ltr; unicode-bidi: isolate; font-size: 1.08em; white-space: nowrap; }  /* נוסחה בשורה לא נשברת באמצע – אחרת ב-RTL הסדר מתבלבל */
 .katex-display { margin: var(--sp-1) 0; overflow-x: auto; overflow-y: hidden; padding-block: var(--sp-1); }
 :focus-visible { outline: 3px solid #C8D6FF; outline-offset: 3px; border-radius: var(--r-sm); }
 main:focus, main:focus-visible { outline: none; }

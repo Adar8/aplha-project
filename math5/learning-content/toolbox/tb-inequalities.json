@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-inequalities",
+  "title": "אי־שוויונות",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "פותרים כמו משוואה – חוץ מכלל אחד חשוב.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "like-eq",
+      "title": "כמו משוואה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "פותרים אי-שוויון בדיוק כמו משוואה: מעבירים אגפים ומחלקים. התשובה היא לא מספר אחד אלא **תחום**: $2x + 3 < 11 \\Rightarrow x < 4$."
+        },
+        {
+          "type": "list",
+          "items": [
+            "$<$ קטן מ-, $>$ גדול מ-.",
+            "$\\le$ קטן או שווה, $\\ge$ גדול או שווה."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flip",
+      "title": "הכלל החשוב: מספר שלילי הופך את הסימן",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "כשכופלים או מחלקים את שני האגפים במספר **שלילי**, הסימן מתהפך: $-3x \\ge 12 \\Rightarrow x \\le -4$."
+        },
+        {
+          "type": "warning",
+          "text": "למה? $2 < 5$, אבל אחרי כפל ב-$(-1)$: $-2 > -5$. הסדר מתהפך."
+        }
+      ]
+    },
+    {
+      "id": "int",
+      "title": "פתרונות שלמים",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "אם $x < 4$, המספר השלם **הגדול** ביותר שמקיים הוא 3 (4 עצמו לא מקיים). אם $x \\le 4$ – זה 4."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "צעד רגיל",
+      "problem": "פתרו: $2x + 3 < 11$",
+      "steps": [
+        "$2x < 8$.",
+        "$x < 4$."
+      ],
+      "answer": "$x < 4$",
+      "checks": [
+        {
+          "expr": "(11-3)/2",
+          "equals": 4
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "חילוק במספר שלילי",
+      "problem": "פתרו: $-3x \\ge 12$",
+      "steps": [
+        "מחלקים ב-$(-3)$ – והסימן מתהפך.",
+        "$x \\le -4$."
+      ],
+      "answer": "$x \\le -4$",
+      "checks": [
+        {
+          "expr": "12/(-3)",
+          "equals": -4
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "משתנה עם מינוס",
+      "problem": "פתרו: $5 - x > 2$",
+      "steps": [
+        "$-x > -3$.",
+        "כופלים ב-$(-1)$ והופכים סימן: $x < 3$."
+      ],
+      "answer": "$x < 3$",
+      "checks": [
+        {
+          "expr": "5-2",
+          "equals": 3
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "פתרו: $x + 5 > 9$. התשובה היא $x > k$. מהו $k$?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "9-5",
+      "commonWrongAnswers": [
+        {
+          "value": 14,
+          "mistake": "solve-steps"
+        }
+      ],
+      "hints": [
+        "מעבירים את 5."
+      ],
+      "solution": {
+        "steps": [
+          "$x > 4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המספר השלם הגדול ביותר שמקיים $3x \\le 18$?",
+      "answer": {
+        "value": 6,
+        "tolerance": 0
+      },
+      "check": "18/3",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "strict"
+        }
+      ],
+      "hints": [
+        "$x \\le 6$.",
+        "\"קטן או שווה\" – 6 עצמו מקיים."
+      ],
+      "solution": {
+        "steps": [
+          "$x \\le 6$, ולכן 6."
+        ],
+        "final": "$6$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המספר השלם **הקטן** ביותר שמקיים $-2x < 10$?",
+      "answer": {
+        "value": -4,
+        "tolerance": 0
+      },
+      "check": "10/(-2)+1",
+      "commonWrongAnswers": [
+        {
+          "value": -5,
+          "mistake": "strict"
+        }
+      ],
+      "hints": [
+        "מחלקים ב-$(-2)$ והופכים סימן.",
+        "$x > -5$."
+      ],
+      "solution": {
+        "steps": [
+          "$x > -5$ – השלם הקטן ביותר הוא $-4$."
+        ],
+        "final": "$-4$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המספר השלם הגדול ביותר שמקיים $4 - x \\ge 1$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "4-1",
+      "commonWrongAnswers": [
+        {
+          "value": -3,
+          "mistake": "flip"
+        }
+      ],
+      "hints": [
+        "$-x \\ge -3$.",
+        "כפל במינוס אחד – הופכים סימן."
+      ],
+      "solution": {
+        "steps": [
+          "$x \\le 3$, ולכן 3."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מה קורה לסימן אי-השוויון כשמחלקים את שני האגפים במספר שלילי?",
+      "choices": [
+        {
+          "text": "הסימן מתהפך",
+          "correct": true
+        },
+        {
+          "text": "שום דבר",
+          "mistake": "flip"
+        },
+        {
+          "text": "הופך לשוויון",
+          "mistake": "flip"
+        },
+        {
+          "text": "תלוי במספר",
+          "mistake": "flip"
+        }
+      ],
+      "hints": [
+        "נסו: $2 < 5$, וכפלו ב-$(-1)$."
+      ],
+      "solution": {
+        "steps": [
+          "$-2 > -5$ – הסדר התהפך."
+        ],
+        "final": "הסימן מתהפך"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המספר השלם הקטן ביותר שמקיים $2(x - 1) > x + 3$?",
+      "answer": {
+        "value": 6,
+        "tolerance": 0
+      },
+      "check": "(3+2)/(2-1)+1",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "strict"
+        }
+      ],
+      "hints": [
+        "פותחים: $2x - 2 > x + 3$.",
+        "$x > 5$."
+      ],
+      "solution": {
+        "steps": [
+          "$x > 5$ – הקטן ביותר הוא 6."
+        ],
+        "final": "$6$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המספר השלם הגדול ביותר שמקיים $5x - 2 < 13$?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "(13+2)/5-1",
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "strict"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$5x < 15 \\Rightarrow x < 3$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המספר השלם הקטן ביותר שמקיים $-4x \\le 20$?",
+      "answer": {
+        "value": -5,
+        "tolerance": 0
+      },
+      "check": "20/(-4)",
+      "commonWrongAnswers": [
+        {
+          "value": -4,
+          "mistake": "strict"
+        },
+        {
+          "value": 5,
+          "mistake": "flip"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$x \\ge -5$."
+        ],
+        "final": "$-5$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו המספר השלם הגדול ביותר שמקיים $7 - 2x > 1$?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "(7-1)/2-1",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "flip"
+        },
+        {
+          "value": 3,
+          "mistake": "strict"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$-2x > -6 \\Rightarrow x < 3$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "איזה תיאור מתאים ל-$x \\ge 2$?",
+      "choices": [
+        {
+          "text": "כל המספרים מ-2 והלאה, כולל 2",
+          "correct": true
+        },
+        {
+          "text": "כל המספרים הגדולים מ-2, בלי 2",
+          "mistake": "strict"
+        },
+        {
+          "text": "כל המספרים עד 2",
+          "mistake": "flip"
+        },
+        {
+          "text": "רק המספר 2",
+          "mistake": "solve-steps"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\ge$ – גדול **או שווה**, ולכן 2 כלול."
+        ],
+        "final": "כל המספרים מ-2 והלאה, כולל 2"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "flip",
+      "label": "שכחת להפוך את הסימן",
+      "advice": "כופלים או מחלקים במספר שלילי – הסימן מתהפך.",
+      "reviewSection": "explanations",
+      "reviewRef": "flip"
+    },
+    {
+      "id": "strict",
+      "label": "כולל או לא כולל",
+      "advice": "ב-$<$ ו-$>$ הגבול עצמו לא כלול. ב-$\\le$ ו-$\\ge$ הוא כלול.",
+      "reviewSection": "explanations",
+      "reviewRef": "int"
+    },
+    {
+      "id": "solve-steps",
+      "label": "פתרון כמו משוואה",
+      "advice": "מעבירים אגפים ומחלקים בדיוק כמו במשוואה.",
+      "reviewSection": "explanations",
+      "reviewRef": "like-eq"
+    }
+  ]
+}

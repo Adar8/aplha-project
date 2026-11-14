@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-intercepts",
+  "title": "חיתוך עם הצירים ומשוואה מול גרף",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 25,
+  "summary": "איך מוצאים נקודות חיתוך עם הצירים, ואיך בודקים אם נקודה על גרף.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "idea",
+      "title": "גרף הוא כל הנקודות שמקיימות את המשוואה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "הגרף של $y = 2x - 6$ הוא אוסף כל הנקודות $(x, y)$ שמקיימות את המשוואה. לכן כדי לבדוק אם נקודה על הגרף – **מציבים** אותה ובודקים אם יוצא שוויון."
+        },
+        {
+          "type": "text",
+          "text": "למשל $(2, 1)$ על $y = 3x - 5$? $3\\cdot 2 - 5 = 1$ ✓ – כן."
+        }
+      ]
+    },
+    {
+      "id": "axes",
+      "title": "חיתוך עם הצירים",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**חיתוך עם ציר ה-$y$**: מציבים $x = 0$.",
+            "**חיתוך עם ציר ה-$x$**: מציבים $y = 0$ ופותרים משוואה."
+          ]
+        },
+        {
+          "type": "warning",
+          "text": "הבלבול הנפוץ: על ציר ה-$x$ דווקא **$y$** שווה אפס, ועל ציר ה-$y$ דווקא **$x$** שווה אפס."
+        },
+        {
+          "type": "tip",
+          "text": "בישר $y = mx + b$, החיתוך עם ציר ה-$y$ הוא תמיד $(0, b)$ – אפשר לקרוא אותו מהמשוואה."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "שני החיתוכים של ישר",
+      "problem": "מצאו את נקודות החיתוך של $y = 2x - 6$ עם הצירים.",
+      "steps": [
+        "ציר $y$: $x = 0 \\Rightarrow y = -6$. הנקודה $(0, -6)$.",
+        "ציר $x$: $0 = 2x - 6 \\Rightarrow x = 3$. הנקודה $(3, 0)$."
+      ],
+      "answer": "$(0,-6)$ ו-$(3,0)$",
+      "checks": [
+        {
+          "expr": "2*0-6",
+          "equals": -6
+        },
+        {
+          "expr": "6/2",
+          "equals": 3
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "האם הנקודה על הגרף?",
+      "problem": "האם הנקודה $(2, 1)$ נמצאת על הישר $y = 3x - 5$?",
+      "steps": [
+        "מציבים $x = 2$: $3\\cdot 2 - 5 = 1$.",
+        "יצא $y = 1$ – בדיוק ה-$y$ של הנקודה. כן."
+      ],
+      "answer": "כן",
+      "checks": [
+        {
+          "expr": "3*2-5",
+          "equals": 1
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "גם לפרבולה",
+      "problem": "מצאו את נקודות החיתוך של $y = x^2 - 4$ עם הצירים.",
+      "steps": [
+        "ציר $y$: $y = 0 - 4 = -4$.",
+        "ציר $x$: $x^2 = 4 \\Rightarrow x = \\pm 2$.",
+        "החיתוכים: $(0,-4)$, $(2,0)$, $(-2,0)$."
+      ],
+      "answer": "$(0,-4),\\ (\\pm2,0)$",
+      "checks": [
+        {
+          "expr": "2^2-4",
+          "equals": 0
+        },
+        {
+          "expr": "(-2)^2-4",
+          "equals": 0
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הישר $y = 3x + 9$ חותך את ציר ה-$y$ בנקודה $(0, k)$. מהו $k$?",
+      "answer": {
+        "value": 9,
+        "tolerance": 0
+      },
+      "check": "3*0+9",
+      "commonWrongAnswers": [
+        {
+          "value": -3,
+          "mistake": "x0-y0"
+        }
+      ],
+      "hints": [
+        "על ציר ה-$y$, $x = 0$."
+      ],
+      "solution": {
+        "steps": [
+          "$y = 9$."
+        ],
+        "final": "$9$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הישר $y = 3x + 9$ חותך את ציר ה-$x$ בנקודה $(k, 0)$. מהו $k$?",
+      "answer": {
+        "value": -3,
+        "tolerance": 0
+      },
+      "check": "-9/3",
+      "commonWrongAnswers": [
+        {
+          "value": 9,
+          "mistake": "x0-y0"
+        },
+        {
+          "value": 3,
+          "mistake": "sign-solve"
+        }
+      ],
+      "hints": [
+        "על ציר ה-$x$, $y = 0$: $0 = 3x + 9$."
+      ],
+      "solution": {
+        "steps": [
+          "$3x = -9 \\Rightarrow x = -3$."
+        ],
+        "final": "$-3$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "באיזה $x$ הישר $y = -2x + 8$ חותך את ציר ה-$x$?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "8/2",
+      "commonWrongAnswers": [
+        {
+          "value": -4,
+          "mistake": "sign-solve"
+        },
+        {
+          "value": 8,
+          "mistake": "x0-y0"
+        }
+      ],
+      "hints": [
+        "$0 = -2x + 8$."
+      ],
+      "solution": {
+        "steps": [
+          "$2x = 8 \\Rightarrow x = 4$."
+        ],
+        "final": "$4$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "האם הנקודה $(1, 4)$ נמצאת על הישר $y = 2x + 2$?",
+      "choices": [
+        {
+          "text": "כן",
+          "correct": true
+        },
+        {
+          "text": "לא",
+          "mistake": "on-graph"
+        },
+        {
+          "text": "רק אם השיפוע 4",
+          "mistake": "on-graph"
+        },
+        {
+          "text": "אי אפשר לדעת בלי גרף",
+          "mistake": "on-graph"
+        }
+      ],
+      "hints": [
+        "מציבים $x = 1$ ובודקים אם יוצא 4."
+      ],
+      "solution": {
+        "steps": [
+          "$2\\cdot 1 + 2 = 4$ ✓"
+        ],
+        "final": "כן"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מהו שיעור ה-$x$ **החיובי** של נקודת החיתוך של $y = x^2 - 9$ עם ציר ה-$x$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "sqrt(9)",
+      "commonWrongAnswers": [
+        {
+          "value": -9,
+          "mistake": "x0-y0"
+        }
+      ],
+      "hints": [
+        "$0 = x^2 - 9 \\Rightarrow x^2 = 9$."
+      ],
+      "solution": {
+        "steps": [
+          "$x = \\pm 3$. החיובי: 3."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הנקודה $(k, 5)$ נמצאת על הישר $y = 2x - 1$. מהו $k$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(5+1)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 9,
+          "mistake": "on-graph"
+        },
+        {
+          "value": 2,
+          "mistake": "sign-solve"
+        }
+      ],
+      "hints": [
+        "מציבים $y = 5$: $5 = 2k - 1$."
+      ],
+      "solution": {
+        "steps": [
+          "$2k = 6 \\Rightarrow k = 3$."
+        ],
+        "final": "$3$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "באיזה $x$ הישר $y = 4x - 12$ חותך את ציר ה-$x$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "12/4",
+      "commonWrongAnswers": [
+        {
+          "value": -12,
+          "mistake": "x0-y0"
+        },
+        {
+          "value": -3,
+          "mistake": "sign-solve"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$0 = 4x - 12 \\Rightarrow x = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "באיזה $y$ הישר $y = -x + 7$ חותך את ציר ה-$y$?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "-0+7",
+      "commonWrongAnswers": [
+        {
+          "value": -1,
+          "mistake": "x0-y0"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$x = 0 \\Rightarrow y = 7$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הגרף $y = x^2 - 2x$ חותך את ציר ה-$x$ בראשית ובנקודה נוספת. מהו ה-$x$ שלה?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "2/1",
+      "commonWrongAnswers": [
+        {
+          "value": -2,
+          "mistake": "sign-solve"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$x(x - 2) = 0 \\Rightarrow x = 0$ או $x = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "הנקודה $(3, m)$ נמצאת על הגרף $y = x^2 + 1$. מהו $m$?",
+      "answer": {
+        "value": 10,
+        "tolerance": 0
+      },
+      "check": "3^2+1",
+      "solution": {
+        "steps": [
+          "$m = 9 + 1 = 10$."
+        ],
+        "final": "$10$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "x0-y0",
+      "label": "איזה משתנה מאפסים",
+      "advice": "חיתוך עם ציר ה-$x$: מציבים $y = 0$. חיתוך עם ציר ה-$y$: מציבים $x = 0$.",
+      "reviewSection": "explanations",
+      "reviewRef": "axes"
+    },
+    {
+      "id": "sign-solve",
+      "label": "סימן בפתרון המשוואה",
+      "advice": "אחרי שמציבים, פותרים משוואה רגילה – וזוכרים להפוך סימן כשמעבירים אגף.",
+      "reviewSection": "examples"
+    },
+    {
+      "id": "on-graph",
+      "label": "נקודה על גרף",
+      "advice": "נקודה נמצאת על הגרף אם כשמציבים את ה-$x$ שלה, יוצא בדיוק ה-$y$ שלה.",
+      "reviewSection": "explanations",
+      "reviewRef": "idea"
+    }
+  ]
+}

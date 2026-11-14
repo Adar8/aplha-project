@@ -1,0 +1,451 @@
+{
+  "schemaVersion": 1,
+  "kind": "toolbox",
+  "id": "tb-systems",
+  "title": "מערכת משוואות",
+  "topic": "foundations",
+  "papers": {
+    "old": [],
+    "new": []
+  },
+  "topicStatus": "foundation",
+  "estimatedMinutes": 30,
+  "summary": "שתי משוואות, שני נעלמים: שיטת ההצבה ושיטת החיבור.",
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+  },
+  "formulas": [],
+  "video": {
+    "status": "pending",
+    "note": "שיעור יסוד – בלי סרטון בשלב זה.",
+    "links": []
+  },
+  "independentPractice": [],
+  "bagrutQuestions": [],
+  "next": null,
+  "explanations": [
+    {
+      "id": "what",
+      "title": "מה זה פתרון של מערכת?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "מערכת היא שתי משוואות עם שני נעלמים, למשל $x + y = 10$ ו-$x - y = 4$. **הפתרון הוא זוג** $(x, y)$ שמקיים את **שתיהן**: כאן $x = 7,\\ y = 3$."
+        },
+        {
+          "type": "warning",
+          "text": "אל תעצרו אחרי שמצאתם משתנה אחד – צריך את שניהם."
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "title": "שיטת החיבור",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "אם לאחד הנעלמים יש מקדמים נגדיים, מחברים את המשוואות והוא נעלם:"
+        },
+        {
+          "type": "formula",
+          "latex": "(x + y) + (x - y) = 10 + 4 \\;\\Rightarrow\\; 2x = 14 \\;\\Rightarrow\\; x = 7"
+        },
+        {
+          "type": "text",
+          "text": "ואז מציבים בחזרה: $7 + y = 10 \\Rightarrow y = 3$. אם המקדמים שווים – **מחסרים**."
+        }
+      ]
+    },
+    {
+      "id": "sub",
+      "title": "שיטת ההצבה",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "מבודדים נעלם מאחת המשוואות ומציבים בשנייה. אם $y = 2x$ ו-$x + y = 9$: $x + 2x = 9 \\Rightarrow x = 3$, ואז $y = 6$."
+        },
+        {
+          "type": "tip",
+          "text": "בסוף בודקים: מציבים את שני המספרים בשתי המשוואות."
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "חיבור",
+      "problem": "פתרו: $x + y = 10$, $x - y = 4$",
+      "steps": [
+        "מחברים: $2x = 14 \\Rightarrow x = 7$.",
+        "מציבים: $7 + y = 10 \\Rightarrow y = 3$.",
+        "בדיקה: $7 - 3 = 4$ ✓"
+      ],
+      "answer": "$x = 7,\\ y = 3$",
+      "checks": [
+        {
+          "expr": "(10+4)/2",
+          "equals": 7
+        },
+        {
+          "expr": "10-7",
+          "equals": 3
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "הצבה",
+      "problem": "פתרו: $y = 2x$, $x + y = 9$",
+      "steps": [
+        "מציבים $y = 2x$ בשנייה: $3x = 9 \\Rightarrow x = 3$.",
+        "$y = 2\\cdot 3 = 6$."
+      ],
+      "answer": "$x = 3,\\ y = 6$",
+      "checks": [
+        {
+          "expr": "9/3",
+          "equals": 3
+        },
+        {
+          "expr": "2*3",
+          "equals": 6
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "בידוד והצבה",
+      "problem": "פתרו: $2x + 3y = 12$, $x - y = 1$",
+      "steps": [
+        "מהשנייה: $x = 1 + y$.",
+        "מציבים: $2(1 + y) + 3y = 12 \\Rightarrow 5y = 10 \\Rightarrow y = 2$.",
+        "$x = 1 + 2 = 3$."
+      ],
+      "answer": "$x = 3,\\ y = 2$",
+      "checks": [
+        {
+          "expr": "(12-2)/5",
+          "equals": 2
+        },
+        {
+          "expr": "2*3+3*2",
+          "equals": 12
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "id": "g1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$x + y = 8$, $x - y = 2$. מהו $x$?",
+      "answer": {
+        "value": 5,
+        "tolerance": 0
+      },
+      "check": "(8+2)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 10,
+          "mistake": "sign-elim"
+        }
+      ],
+      "hints": [
+        "מחברים את המשוואות.",
+        "$2x = 10$."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 5$."
+        ],
+        "final": "$5$"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "באותה מערכת ($x + y = 8$, $x - y = 2$): מהו $y$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "8-(8+2)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "one-var-only"
+        }
+      ],
+      "hints": [
+        "מציבים $x = 5$ באחת המשוואות."
+      ],
+      "solution": {
+        "steps": [
+          "$5 + y = 8 \\Rightarrow y = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$y = 3x$, $x + y = 12$. מהו $x$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "12/4",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "sub-error"
+        },
+        {
+          "value": 9,
+          "mistake": "one-var-only"
+        }
+      ],
+      "hints": [
+        "מציבים $y = 3x$: $x + 3x = 12$."
+      ],
+      "solution": {
+        "steps": [
+          "$4x = 12 \\Rightarrow x = 3$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$2x + y = 7$, $x - y = 2$. מהו $x$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(7+2)/3",
+      "commonWrongAnswers": [
+        {
+          "value": 5,
+          "mistake": "sign-elim"
+        }
+      ],
+      "hints": [
+        "למקדמי $y$ יש סימנים נגדיים – מחברים.",
+        "$3x = 9$."
+      ],
+      "solution": {
+        "steps": [
+          "$x = 3$ (ואז $y = 1$)."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$3x + 2y = 16$, $x + 2y = 8$. מהו $y$?",
+      "answer": {
+        "value": 2,
+        "tolerance": 0
+      },
+      "check": "(8-(16-8)/2)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "one-var-only"
+        }
+      ],
+      "hints": [
+        "מקדמי $y$ שווים – מחסרים: $2x = 8$.",
+        "$x = 4$, ואז $4 + 2y = 8$."
+      ],
+      "solution": {
+        "steps": [
+          "$y = 2$."
+        ],
+        "final": "$2$"
+      }
+    },
+    {
+      "id": "g6",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "סכום שני מספרים הוא 20, וההפרש ביניהם 6. מהו המספר הגדול?",
+      "answer": {
+        "value": 13,
+        "tolerance": 0
+      },
+      "check": "(20+6)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 7,
+          "mistake": "one-var-only"
+        },
+        {
+          "value": 26,
+          "mistake": "sign-elim"
+        }
+      ],
+      "hints": [
+        "$x + y = 20$, $x - y = 6$.",
+        "מחברים."
+      ],
+      "solution": {
+        "steps": [
+          "$2x = 26 \\Rightarrow x = 13$ (והקטן 7)."
+        ],
+        "final": "$13$"
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$x + y = 11$, $x - y = 3$. מהו $x$?",
+      "answer": {
+        "value": 7,
+        "tolerance": 0
+      },
+      "check": "(11+3)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 4,
+          "mistake": "one-var-only"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2x = 14$."
+        ],
+        "final": "$7$"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$y = x + 2$, $2x + y = 11$. מהו $x$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(11-2)/3",
+      "commonWrongAnswers": [
+        {
+          "value": 4.5,
+          "mistake": "sub-error"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2x + x + 2 = 11 \\Rightarrow 3x = 9$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "$x + 3y = 10$, $x + y = 4$. מהו $y$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(10-4)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 1,
+          "mistake": "one-var-only"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "מחסרים: $2y = 6$."
+        ],
+        "final": "$3$"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "3 תפוחים ו-2 אגסים עולים 13 ₪. תפוח אחד ו-2 אגסים עולים 7 ₪. כמה עולה תפוח?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(13-7)/2",
+      "commonWrongAnswers": [
+        {
+          "value": 2,
+          "mistake": "one-var-only"
+        },
+        {
+          "value": 6,
+          "mistake": "sign-elim"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "מחסרים: $2$ תפוחים $= 6$ ₪."
+        ],
+        "final": "$3$"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "one-var-only",
+      "label": "משתנה אחד במקום שניים",
+      "advice": "הפתרון הוא זוג. אחרי שמוצאים משתנה אחד, מציבים ומוצאים את השני – ושמים לב מה השאלה מבקשת.",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    },
+    {
+      "id": "sign-elim",
+      "label": "חיבור או חיסור של משוואות",
+      "advice": "מקדמים נגדיים – מחברים. מקדמים שווים – מחסרים. ובסוף מחלקים במקדם.",
+      "reviewSection": "explanations",
+      "reviewRef": "add"
+    },
+    {
+      "id": "sub-error",
+      "label": "טעות בהצבה",
+      "advice": "מציבים את כל הביטוי, בסוגריים, במקום המשתנה.",
+      "reviewSection": "explanations",
+      "reviewRef": "sub"
+    }
+  ]
+}
