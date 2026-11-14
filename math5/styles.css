@@ -578,3 +578,161 @@ th { color: var(--text-2); font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* =====================================================================
+   סגנון v3 – אותם צבעים, סגנון אחר לגמרי:
+   ניווט צד במחשב וסרגל צף בטלפון, כפתורי גלולה, כרטיסים בלי מסגרת עם צל רך,
+   אריחי אייקון צבעוניים, וכותרות ב-Secular One.
+   ===================================================================== */
+
+/* --- טיפוגרפיה: ל-Secular One יש משקל אחד בלבד, לכן בלי הדגשה מלאכותית --- */
+h1, h2, h3, .cc-title, .metric-value, .huge, .big, .q-num, .ex-num, .quick-tile b, .hub-head b, .part-label,
+.goal-chip b, .count, .calc-row output, .lt-title h1, .section-title, .card-head h2, .card-title h2, .brand { font-weight: 400; }
+h1 { font-size: 36px; letter-spacing: 0; }
+h2 { letter-spacing: 0; }
+.home-head h1 { font-size: 46px; }
+.section-intro h2 { font-size: 32px; }
+.lt-title h1 { font-family: var(--font-head); font-size: 22px; }
+.brand { font-family: var(--font-head); font-size: 24px; }
+.metric-value { font-size: 34px; }
+.metric-value small { font-family: var(--font-body); font-weight: 500; }
+
+/* --- כפתורים: גלולה --- */
+.btn {
+  --b-bg: var(--primary-soft); --b-fg: var(--primary-text);
+  border: 0; border-radius: var(--r-full); min-block-size: 46px; padding: 0 var(--sp-6);
+  box-shadow: none; font-weight: 600;
+}
+.btn:hover { --b-bg: rgba(99, 139, 255, .22); color: var(--b-fg); transform: translateY(-1px); box-shadow: none; }
+.btn:active { transform: scale(.97); box-shadow: none; }
+.btn:focus-visible { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--primary-text); border-radius: var(--r-full); }
+.btn.secondary { --b-bg: var(--primary-soft); }
+.btn.primary {
+  background: var(--primary-grad); color: var(--primary-ink); border: 0; border-radius: var(--r-full);
+  min-block-size: 54px; padding: 0 var(--sp-8); font-weight: 700; font-size: 17px;
+  box-shadow: var(--primary-glow), inset 0 1px 0 rgba(255, 255, 255, .4);
+}
+.btn.primary:hover { filter: brightness(1.07); transform: translateY(-1px); box-shadow: 0 14px 32px -8px rgba(99, 139, 255, .85), inset 0 1px 0 rgba(255, 255, 255, .45); }
+.btn.primary:active { transform: scale(.97); filter: brightness(.96); box-shadow: 0 6px 16px -8px rgba(99, 139, 255, .7); }
+.btn.primary:focus-visible { box-shadow: var(--primary-glow), 0 0 0 2px var(--bg), 0 0 0 4px #C8D6FF; }
+.btn.primary .i { inline-size: 28px; block-size: 28px; padding: 4px; border-radius: 50%; background: rgba(10, 18, 41, .16); }
+.btn.lg, .btn.xl { min-block-size: 58px; padding: 0 var(--sp-8); border-radius: var(--r-full); font-size: 18px; }
+.btn.sm, .small-btn { min-block-size: 40px; padding: 0 var(--sp-4); border-radius: var(--r-full); }
+.btn.tertiary, .btn.ghost { --b-bg: transparent; border-radius: var(--r-full); }
+.btn.tertiary:hover, .btn.ghost:hover { --b-bg: var(--primary-soft); transform: none; }
+.btn.destructive, .btn.danger { --b-bg: var(--danger-soft); --b-fg: var(--danger); border: 0; }
+.btn.destructive:hover, .btn.danger:hover { --b-bg: rgba(255, 125, 141, .22); }
+.btn.is-success { background: var(--success); color: #062A1D; box-shadow: 0 10px 24px -8px rgba(69, 214, 160, .7); }
+.btn:disabled, .btn[aria-disabled="true"] { background: var(--raised); color: var(--text-3); box-shadow: none; filter: none; }
+.btn-icon { border: 0; border-radius: 50%; background: var(--raised); box-shadow: none; }
+.btn-icon:hover { background: var(--raised-hover); transform: none; box-shadow: none; }
+.btn-icon:active { transform: scale(.94); box-shadow: none; }
+
+/* --- כרטיסים: בלי קו מסגרת, צל רך, פינות גדולות --- */
+.card, .glass, .metric, .quick-tile, .hub, .topic, .map-area, .example, .q {
+  border: 1px solid rgba(255, 255, 255, .05); border-radius: var(--r-lg); box-shadow: var(--card-shadow);
+}
+.q.solved { border-color: var(--success-line); }
+.continue-card {
+  position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, .06); border-radius: var(--r-xl);
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(99, 139, 255, .22), transparent 55%),
+    radial-gradient(90% 120% at 0% 100%, rgba(69, 214, 195, .12), transparent 60%),
+    var(--surface);
+  box-shadow: var(--card-shadow);
+}
+.continue-card::after {
+  content: 'Σ'; position: absolute; inset-inline-end: -10px; inset-block-start: -60px; pointer-events: none;
+  font: 400 280px/1 'Times New Roman', serif; color: rgba(255, 255, 255, .035);
+}
+.continue-card > * { position: relative; z-index: 1; }
+.cc-board { border: 0; background: rgba(8, 13, 24, .55); border-radius: var(--r-lg); }
+.cc-title { font-size: 34px; }
+.cc-kicker { background: var(--teal-soft); padding: 4px 12px; border-radius: var(--r-full); }
+.cc-kicker::before { display: none; }
+.goal-chip { border: 0; background: var(--surface); box-shadow: var(--card-shadow); }
+
+/* --- אריחי אייקון צבעוניים --- */
+.ico-tile { display: inline-grid; place-items: center; inline-size: 40px; block-size: 40px; border-radius: 13px; flex: none; background: var(--primary-soft); color: var(--primary-text); }
+.ico-tile .i { inline-size: 20px; block-size: 20px; }
+.ico-tile.t-teal { background: var(--teal-soft); color: var(--teal); }
+.ico-tile.t-violet { background: var(--violet-soft); color: var(--violet); }
+.ico-tile.t-success { background: var(--success-soft); color: var(--success); }
+.ico-tile.t-warning { background: var(--warning-soft); color: var(--warning); }
+.metric-label { display: flex; align-items: center; gap: var(--sp-3); margin-block-end: var(--sp-2); }
+.card-title .i { inline-size: 36px; block-size: 36px; padding: 8px; border-radius: 12px; background: var(--primary-soft); }
+.quick-tile { gap: var(--sp-3); }
+.quick-tile .i { inline-size: 44px; block-size: 44px; padding: 11px; border-radius: 14px; background: var(--primary-soft); color: var(--primary-text); }
+.quick-grid .quick-tile:nth-child(1) .i { background: var(--teal-soft); color: var(--teal); }
+.quick-grid .quick-tile:nth-child(2) .i { background: var(--violet-soft); color: var(--violet); }
+.quick-grid .quick-tile:nth-child(4) .i { background: var(--success-soft); color: var(--success); }
+.quick-grid .quick-tile:nth-child(5) .i { background: var(--warning-soft); color: var(--warning); }
+.quick-tile:hover { background: var(--raised); transform: translateY(-2px); }
+.quick-tile { transition: transform var(--dur) var(--ease), background var(--dur) var(--ease); }
+.rec-row, .todo a { border-radius: 16px; }
+.rec-ico { inline-size: 40px; block-size: 40px; border-radius: 13px; }
+
+/* --- רכיבים קטנים --- */
+.badge { border-radius: var(--r-full); padding: 0 10px; border: 0; }
+.tabs, .seg { border-radius: var(--r-full); border: 0; background: var(--surface); box-shadow: var(--card-shadow); padding: 5px; }
+.tabs button, .seg button { border-radius: var(--r-full); }
+.tabs button[aria-selected=true], .seg button[aria-selected=true] { background: var(--primary-soft); color: var(--text); box-shadow: none; }
+.num-input input { border-radius: 16px; border-color: var(--border); background: rgba(8, 13, 24, .6); min-block-size: 58px; }
+.opt { border-radius: 16px; border-color: transparent; background: rgba(8, 13, 24, .55); }
+.feedback { border-radius: 16px; }
+.hints li { border-radius: 14px; }
+.formula { border: 0; border-radius: 16px; background: rgba(99, 139, 255, .08); }
+.callout, .tip, .ex-answer { border-radius: 16px; }
+.stepper .seg { block-size: 8px; border-radius: var(--r-full); }
+.seg-progress span { block-size: 8px; border-radius: var(--r-full); }
+.bar, .meter { block-size: 8px; }
+.mw-col { border-radius: 8px; }
+.chip { border: 0; border-radius: var(--r-full); background: var(--primary-soft); color: var(--text); }
+.chip:hover { background: rgba(99, 139, 255, .22); }
+.skill { border: 0; border-radius: 14px; }
+.settings-grid input, .settings-grid select, .name-form input { border-radius: 14px; }
+.day-chk { border-radius: var(--r-full); }
+
+/* --- מחשב: תפריט צד --- */
+@media (min-width: 1021px) {
+  body { padding-inline-start: var(--side-w); }
+  .topbar {
+    position: fixed; inset-block: 0; inset-inline-start: 0; top: 0; inline-size: var(--side-w); z-index: 30;
+    flex-direction: column; align-items: stretch; gap: var(--sp-8); padding: var(--sp-6) var(--sp-4);
+    background: var(--surface); border: 0; border-inline-end: 1px solid rgba(255, 255, 255, .05);
+  }
+  .brand { padding-inline: var(--sp-2); }
+  .mainnav { flex-direction: column; margin: 0; gap: 6px; }
+  .mainnav a { min-block-size: 52px; padding: 0 10px; border-radius: 16px; font-size: 16px; gap: 12px; color: var(--text-2); }
+  .mainnav a svg.ico { inline-size: 36px; block-size: 36px; padding: 8px; border-radius: 12px; background: var(--raised); }
+  .mainnav a:hover { background: var(--raised); color: var(--text); }
+  .mainnav a[aria-current] { background: var(--primary-soft); color: var(--text); }
+  .mainnav a[aria-current] svg.ico { background: var(--primary); color: var(--primary-ink); }
+  main { padding-block-start: var(--sp-10); }
+  .lesson-top { top: 0; margin-block-start: calc(-1 * var(--sp-10)); }
+}
+
+/* --- טלפון: סרגל ניווט צף --- */
+@media (max-width: 760px) {
+  .mainnav {
+    inset-inline: 12px; inset-block-end: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 6px;
+    border-radius: 24px; border: 1px solid rgba(255, 255, 255, .07);
+    background: rgba(17, 26, 43, .94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, .85);
+  }
+  .mainnav a { min-block-size: 54px; border-radius: 18px; }
+  .mainnav a[aria-current] { background: var(--primary-soft); color: var(--text); }
+  .mainnav a[aria-current] svg.ico { background: none; padding: 0; inline-size: 22px; block-size: 22px; color: var(--primary-text); }
+  body { padding-block-end: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .lesson-nav { inset-block-end: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  .home-head h1 { font-size: 36px; }
+  .cc-title { font-size: 28px; }
+  .continue-card::after { font-size: 200px; inset-block-start: -40px; }
+  .section-intro h2 { font-size: 26px; }
+}
+
+/* ניווט שלבים: בטלפון תווית קצרה, כדי שהטקסט לא ייחתך */
+.nav-short { display: none; }
+@media (max-width: 760px) { .lesson-nav .nav-label { display: none; } .lesson-nav .nav-short { display: inline; } }
+/* במחשב לוח הנוסחה תופס את הצד – בלי הסימן ברקע */
+@media (min-width: 1021px) { .continue-card::after { display: none; } }

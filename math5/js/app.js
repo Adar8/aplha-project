@@ -66,19 +66,19 @@ function viewDashboard() {
 
   <section class="metrics" aria-label="מדדי התקדמות">
     <div class="metric">
-      <span class="metric-label">ציון משוקלל</span>
+      <span class="metric-label"><span class="ico-tile t-teal">${ICON.flag}</span>ציון משוקלל</span>
       <span class="metric-value num">${current.toFixed(0)}<small>/ יעד ${T}</small></span>
       <span class="metric-sub">לפי הציונים הקודמים שלך (60% שאלון ראשון, 40% שני). חסרות ${Math.max(0, T - current).toFixed(0)} נקודות.</span>
       <span class="bar hue-teal"><span style="inline-size:${Math.min(100, current / T * 100)}%"></span></span>
     </div>
     <div class="metric">
-      <span class="metric-label">שליטה בשיעורים</span>
+      <span class="metric-label"><span class="ico-tile">${ICON.target}</span>שליטה בשיעורים</span>
       <span class="metric-value num">${strong}<small>/ ${LESSONS.length}</small></span>
       <span class="metric-sub">ברמת "טוב" ומעלה · ממוצע ${avg}</span>
       <span class="bar"><span style="inline-size:${LESSONS.length ? 100 * strong / LESSONS.length : 0}%"></span></span>
     </div>
     <div class="metric">
-      <span class="metric-label">זמן השבוע</span>
+      <span class="metric-label"><span class="ico-tile t-violet">${ICON.clock}</span>זמן השבוע</span>
       <span class="metric-value num">${wk.actualMin}<small>/ ${wk.plannedMin} דק׳</small></span>
       <span class="metric-sub">היום: ${fmtTime(todaySeconds())}</span>
       <span class="bar hue-violet"><span style="inline-size:${Math.min(100, wk.pct)}%"></span></span>
@@ -490,8 +490,8 @@ function viewLesson(id, sid) {
     <div class="section" data-section="${active}">${sectionBody(lesson, active)}</div>
   </div>
   <nav class="lesson-nav" aria-label="מעבר בין שלבים">
-    ${prevS ? `<a class="btn" href="#/lesson/${id}/${prevS.id}">${ICON.chevStart}<span class="nav-label">${prevS.label}</span></a>` : '<span></span>'}
-    ${nextS ? `<a class="btn primary" href="#/lesson/${id}/${nextS.id}" ${readOnly ? `data-done="${active}"` : ''}><span class="nav-label">${readOnly ? 'סיימתי, ל' : ''}${nextS.label}</span>${ICON.chevEnd}</a>`
+    ${prevS ? `<a class="btn" href="#/lesson/${id}/${prevS.id}" aria-label="לשלב הקודם: ${prevS.label}">${ICON.chevStart}<span class="nav-label">${prevS.label}</span><span class="nav-short">הקודם</span></a>` : '<span></span>'}
+    ${nextS ? `<a class="btn primary" href="#/lesson/${id}/${nextS.id}" ${readOnly ? `data-done="${active}"` : ''}><span class="nav-label">${readOnly ? 'סיימתי, ל' : ''}${nextS.label}</span><span class="nav-short">${readOnly ? 'סיימתי, הבא' : 'לשלב הבא'}</span>${ICON.chevEnd}</a>`
       : `<a class="btn primary" href="#/">לסיום השיעור${ICON.chevEnd}</a>`}
   </nav>`;
 }

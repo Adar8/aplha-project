@@ -35,9 +35,9 @@
   --warning-soft: rgba(244, 195, 107, 0.12);
 
   /* גופנים */
-  --font-head: 'Rubik', 'Heebo', system-ui, sans-serif;
+  --font-head: 'Secular One', 'Rubik', 'Heebo', system-ui, sans-serif;
   --font-body: 'Heebo', system-ui, sans-serif;
-  --font-num: 'Rubik', 'Heebo', system-ui, sans-serif;
+  --font-num: 'Secular One', 'Rubik', system-ui, sans-serif;
 
   /* סולם טיפוגרפי */
   --fs-xs: 13px;
@@ -55,9 +55,9 @@
 
   /* רדיוסים */
   --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 16px;
-  --r-xl: 20px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 28px;
   --r-full: 999px;
 
   /* צללים – עדינים, בלי זוהר */
@@ -75,6 +75,14 @@
   --tap: 44px;
   --btn-h: 44px;
   --btn-h-lg: 52px;
+
+  /* סגנון v3: צל רך במקום קווי מסגרת, זוהר לכפתור הראשי */
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 18px 40px -24px rgba(0, 0, 0, .75);
+  --primary-grad: linear-gradient(135deg, #82A3FF 0%, #5A80F6 55%, #4569E6 100%);
+  --primary-glow: 0 10px 26px -8px rgba(99, 139, 255, .7);
+  --violet: #A88BFF;
+  --violet-soft: rgba(168, 139, 255, .14);
+  --side-w: 248px;
 
   color-scheme: dark;
 }
