@@ -11,27 +11,7 @@ const angC = (a, b, c) => acos((a * a + b * b - c * c) / (2 * a * b));
 const polyD = (cs) => cs.slice(0, -1).map((c, i) => c * (cs.length - 1 - i)); // מקדמים מהחזקה הגבוהה
 const ev = (cs, x) => cs.reduce((s, c) => s * x + c, 0);
 
-// סדרה הנדסית – חישוב "בכוח": בונים את האיברים בכפל חוזר ומחברים בלולאה (בלי הנוסחאות של השיעור)
-const gTerms = (a1, q, n) => { const t = [a1]; while (t.length < n) t.push(t[t.length - 1] * q); return t; };
-const gTerm = (a1, q, n) => gTerms(a1, q, n)[n - 1];
-const gSum = (a1, q, n) => gTerms(a1, q, n).reduce((s, x) => s + x, 0);
-const gInf = (a1, q) => gSum(a1, q, 2000);            // סכום חלקי ארוך מספיק כשמנה בין -1 ל-1
-const rootBy = (f, lo, hi) => { for (let i = 0; i < 200; i++) { const m = (lo + hi) / 2; (f(lo) * f(m) <= 0) ? (hi = m) : (lo = m); } return (lo + hi) / 2; };
-
 const expected = {
-  'geometric-sequence': {
-    g1: gTerm(5, 3, 5),
-    g2: rootBy(q => gTerm(6 / q, q, 5) - 162, 1.5, 10),              // q שבעבורו a2=6 ו-a5=162
-    g3: gSum(2, 3, 5),
-    p1: gTerm(81, 1 / 3, 5), p2: gTerm(-2, -2, 6), p3: gInf(10, -1 / 4),
-    p4: (() => { let n = 1; while (gSum(1, 2, n) < 255) n++; return n; })(),
-    // b1: מחפשים q ב-(0,1) שבו סכום אין־סופי 12 וסכום שלושה ראשונים 10.5
-    b1a: rootBy(q => gSum(12 * (1 - q), q, 3) - 10.5, 0.01, 0.99),
-    b1b: 12 * (1 - 0.5),
-    b1c: gTerms(6, 0.5, 4000).filter((_, i) => i % 2 === 1).reduce((s, x) => s + x, 0),
-    b1d: gTerms(6, 0.5, 4000).reduce((s, x) => s + x * x, 0),
-    q1: gTerm(4, 2, 6), q2: -24 / ((-2) * (-2) * (-2)), q3: gSum(1, 2, 6), q5: gInf(3, 1 / 4),
-  },
   'arithmetic-sequence': {
     g1: an(7, -2, 15), g2: Sn(4, 3, 10), g3: an(4, 5, 50), p1: Sn(-3, 4, 12),
     p2: (() => { let n = 1; while (an(100, -7, n) >= 0) n++; return n; })(),
@@ -72,6 +52,16 @@ const extra = [
   ['trig ex2 b=10√2 R=10', Math.abs(10 * sin(45) / sin(30) - 10 * Math.SQRT2) < 1e-9 && Math.abs(10 / sin(30) / 2 - 10) < 1e-9],
   ['trig ex3 60° area 10√3', Math.abs(angC(5, 8, 7) - 60) < 1e-9 && Math.abs(0.5 * 5 * 8 * sin(60) - 10 * Math.sqrt(3)) < 1e-9],
 ];
+
+// חישובים בלתי תלויים לכל שיעור חדש בקובץ משלו: tests/verify/<lesson-id>.mjs
+// (export const expected = { 'lesson-id': { qid: value } }; ואופציונלי export const extra = [[label, bool], ...])
+// כך כמה בונים יכולים לכתוב שיעורים במקביל בלי להתנגש בקובץ הזה.
+import { readdirSync } from 'fs';
+for (const f of readdirSync(new URL('./verify/', import.meta.url)).filter(f => f.endsWith('.mjs')).sort()) {
+  const m = await import(new URL('./verify/' + f, import.meta.url));
+  for (const [id, v] of Object.entries(m.expected || {})) expected[id] = { ...(expected[id] || {}), ...v };
+  extra.push(...(m.extra || []));
+}
 
 let fail = 0, count = 0;
 for (const L of LESSONS) {

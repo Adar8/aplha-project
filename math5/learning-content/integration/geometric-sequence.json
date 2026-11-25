@@ -1,0 +1,12 @@
+{
+  "lesson": "geometric-sequence",
+  "file": "lessons/geometric-sequence.json",
+  "kind": "lesson",
+  "curriculumTopic": "sequences",
+  "insertAfter": "arithmetic-sequence",
+  "next": "derivative-extrema",
+  "prereqs": ["t-negatives", "t-linear-eq", "t-substitution", "t-powers"],
+  "knowledgeMapSkills": ["s-geom", "s-geom-inf"],
+  "newSkills": {},
+  "notes": "דוגמה לקובץ אינטגרציה: הבונה לא עורך קבצים משותפים; המשלב מחבר לפי הקובץ הזה."
+}
