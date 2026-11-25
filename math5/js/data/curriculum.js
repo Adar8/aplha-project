@@ -64,7 +64,7 @@ export const TOPICS = [
   // ---- שאלון ראשון (581 / 571) ----
   { id: 'word-problems', name: 'בעיות מילוליות: תנועה, הספק, קנייה ומכירה', old: '035581', new: null, status: 'old', confidence: 'secondary', src: ['s581', 'mmath'],
     note: 'בשאלון 571 אין פרק אלגברה, ולפי m-math שאלת הבעיה המילולית הוחלפה בשאלות קצרות. לא נמצא מסמך רשמי שאומר זאת במפורש.' },
-  { id: 'sequences', name: 'סדרות: חשבונית, הנדסית, נסיגה', old: '035581', new: '035571', status: 'common', confidence: 'official', src: ['s581', 's571', 'popStructure'], lessons: ['arithmetic-sequence'] },
+  { id: 'sequences', name: 'סדרות: חשבונית, הנדסית, נסיגה', old: '035581', new: '035571', status: 'common', confidence: 'official', src: ['s581', 's571', 'popStructure'], lessons: ['arithmetic-sequence', 'geometric-sequence'] },
   { id: 'probability', name: 'הסתברות: מותנית, דיאגרמת עץ, התפלגות בינומית', old: '035581', new: '035571', status: 'common', confidence: 'official', src: ['s581', 's571', 'popStructure'] },
   { id: 'induction', name: 'אינדוקציה מתמטית', old: null, new: '035571', status: 'new', confidence: 'official', src: ['s571', 'popStructure'], note: 'בכותרת פרק 2 של 571. לא מופיע בכותרות 581.' },
   { id: 'plane-geometry', name: 'גאומטריה במישור: מעגל, דמיון, משולשים', old: '035581', new: '035571', status: 'common', confidence: 'official', src: ['s581', 's571'] },

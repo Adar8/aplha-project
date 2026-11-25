@@ -27,8 +27,8 @@
     { "id": "f-trig-basics", "name": "טריגונומטריה במשולש ישר-זווית", "area": "foundations", "topic": "foundations", "prereqs": ["f-fractions"] },
 
     { "id": "s-arith", "name": "סדרה חשבונית", "area": "sequences", "topic": "sequences", "prereqs": ["f-linear-eq"], "lessons": ["arithmetic-sequence"] },
-    { "id": "s-geom", "name": "סדרה הנדסית", "area": "sequences", "topic": "sequences", "prereqs": ["f-powers"] },
-    { "id": "s-geom-inf", "name": "סכום סדרה הנדסית אינסופית", "area": "sequences", "topic": "sequences", "prereqs": ["s-geom"] },
+    { "id": "s-geom", "name": "סדרה הנדסית", "area": "sequences", "topic": "sequences", "prereqs": ["f-powers"], "lessons": ["geometric-sequence"] },
+    { "id": "s-geom-inf", "name": "סכום סדרה הנדסית אינסופית", "area": "sequences", "topic": "sequences", "prereqs": ["s-geom"], "lessons": ["geometric-sequence"] },
     { "id": "s-recursive", "name": "נוסחת נסיגה", "area": "sequences", "topic": "sequences", "prereqs": ["s-arith"] },
     { "id": "s-induction", "name": "אינדוקציה מתמטית", "area": "sequences", "topic": "induction", "prereqs": ["s-arith", "f-factoring"] },
 

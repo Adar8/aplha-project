@@ -1,0 +1,869 @@
+{
+  "schemaVersion": 1,
+  "id": "geometric-sequence",
+  "title": "סדרה הנדסית",
+  "topic": "sequences",
+  "papers": {
+    "old": [
+      "035581"
+    ],
+    "new": [
+      "035571"
+    ]
+  },
+  "topicStatus": "common",
+  "estimatedMinutes": 75,
+  "summary": "מנה, איבר כללי, סכום, סכום של סדרה אין־סופית, והוכחה שסדרה היא הנדסית.",
+  "covers": [
+    "geometric-sequence",
+    "geometric-infinite-sum",
+    "sequence-proof"
+  ],
+  "review": {
+    "status": "draft",
+    "mathCheckedBy": [],
+    "notes": "שיעור חדש (נבנה בעקבות דוח השופט והתלמיד: שאלה 2 בשאלון 35581 קיץ 2024 היא על סדרה הנדסית). כל התשובות נבדקות אוטומטית. ממתין לבדיקת מורה."
+  },
+  "explanations": [
+    {
+      "id": "what",
+      "title": "מה זו סדרה הנדסית?",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "חיידק מתחלק לשניים כל שעה: 3, 6, 12, 24, 48… כל איבר מתקבל מהקודם **בכפל** במספר קבוע."
+        },
+        {
+          "type": "text",
+          "text": "זו **סדרה הנדסית**: המנה בין כל איבר לאיבר שלפניו קבועה. המנה הזו נקראת **מנת הסדרה** ומסמנים אותה $q$."
+        },
+        {
+          "type": "formula",
+          "latex": "\\frac{a_{n+1}}{a_n} = q \\quad\\Longleftrightarrow\\quad a_{n+1} = a_n\\cdot q"
+        },
+        {
+          "type": "list",
+          "items": [
+            "$a_1>0$ ו-$q>1$: הסדרה עולה (3, 6, 12, …).",
+            "$a_1>0$ ו-$0<q<1$: הסדרה יורדת ומתקרבת ל-0 (16, 8, 4, …).",
+            "$q<0$: הסימנים מתחלפים, והסדרה **לא עולה ולא יורדת** (1, −2, 4, −8, …).",
+            "$q=1$: סדרה קבועה."
+          ]
+        },
+        {
+          "type": "warning",
+          "text": "בסדרה חשבונית **מוסיפים** את $d$. בסדרה הנדסית **כופלים** ב-$q$. זה ההבדל הכי חשוב בשיעור."
+        }
+      ]
+    },
+    {
+      "id": "general-term",
+      "title": "האיבר הכללי",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "מהאיבר הראשון לאיבר ה-$n$ יש $n-1$ קפיצות, ובכל קפיצה כופלים ב-$q$:"
+        },
+        {
+          "type": "formula",
+          "latex": "a_n = a_1\\cdot q^{\\,n-1}"
+        },
+        {
+          "type": "text",
+          "text": "דוגמה: $a_1=3$, $q=2$. אז $a_5 = 3\\cdot 2^4 = 48$."
+        },
+        {
+          "type": "list",
+          "items": [
+            "קיצור דרך בין שני איברים: $\\frac{a_m}{a_k} = q^{\\,m-k}$.",
+            "בין $a_2$ ל-$a_5$ יש 3 קפיצות, ולכן $\\frac{a_5}{a_2} = q^3$."
+          ]
+        },
+        {
+          "type": "warning",
+          "text": "טעות נפוצה: $a_n = a_1\\cdot q^{\\,n}$. מהאיבר הראשון לחמישי יש 4 קפיצות, לא 5."
+        }
+      ]
+    },
+    {
+      "id": "sum",
+      "title": "סכום של n איברים ראשונים",
+      "blocks": [
+        {
+          "type": "formula",
+          "latex": "S_n = \\frac{a_1\\,(q^{\\,n}-1)}{q-1} \\qquad (q\\neq 1)"
+        },
+        {
+          "type": "text",
+          "text": "דוגמה: $3+6+12+24+48$: כאן $a_1=3$, $q=2$, $n=5$, ולכן $S_5 = \\frac{3(2^5-1)}{2-1} = 3\\cdot 31 = 93$."
+        },
+        {
+          "type": "text",
+          "text": "אם $q=1$ כל האיברים שווים, ולכן $S_n = n\\cdot a_1$."
+        },
+        {
+          "type": "warning",
+          "text": "במונה כתוב $q^{\\,n}-1$, ולא $q^{\\,n-1}$. בסכום יש $n$ איברים, ולכן החזקה היא $n$."
+        }
+      ]
+    },
+    {
+      "id": "infinite",
+      "title": "סכום של סדרה הנדסית אין־סופית",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "אם $-1<q<1$ (ו-$q\\neq 0$), האיברים מתקרבים ל-0, והסכום של **כל** האיברים הוא מספר סופי:"
+        },
+        {
+          "type": "formula",
+          "latex": "S = \\frac{a_1}{1-q} \\qquad (-1<q<1)"
+        },
+        {
+          "type": "text",
+          "text": "דוגמה: $\\frac12+\\frac14+\\frac18+\\dots$: $a_1=\\frac12$, $q=\\frac12$, ולכן $S = \\frac{1/2}{1-1/2} = 1$."
+        },
+        {
+          "type": "warning",
+          "text": "הנוסחה עובדת **רק** כש-$-1<q<1$. אם $q=2$ הסכום גדל בלי סוף. וגם: במכנה $1-q$. אם $q$ שלילי, $1-q$ גדול מ-1 (למשל $q=-\\frac12$ נותן $1-q=\\frac32$)."
+        }
+      ]
+    },
+    {
+      "id": "proof",
+      "title": "איך מוכיחים שסדרה היא הנדסית",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "בבגרות שואלים הרבה: \"הוכיחו שהסדרה $b_n$ היא הנדסית ומצאו את מנתה\". הדרך: מחשבים $\\frac{b_{n+1}}{b_n}$ ומראים שהתוצאה **לא תלויה ב-$n$**."
+        },
+        {
+          "type": "text",
+          "text": "דוגמה: $a_n$ הנדסית עם מנה $q$, ו-$b_n = a_n\\cdot a_{n+1}$. אז:"
+        },
+        {
+          "type": "formula",
+          "latex": "\\frac{b_{n+1}}{b_n} = \\frac{a_{n+1}\\cdot a_{n+2}}{a_n\\cdot a_{n+1}} = \\frac{a_{n+2}}{a_n} = q^2"
+        },
+        {
+          "type": "text",
+          "text": "$q^2$ הוא מספר קבוע, ולכן $b_n$ הנדסית עם מנה $q^2$."
+        },
+        {
+          "type": "list",
+          "items": [
+            "האיברים במקומות הזוגיים ($a_2, a_4, a_6,\\dots$) יוצרים סדרה הנדסית עם מנה $q^2$: בין $a_2$ ל-$a_4$ יש 2 קפיצות.",
+            "כדי להראות שסדרה **לא** הנדסית מספיק להראות ש-$\\frac{b_2}{b_1}\\neq\\frac{b_3}{b_2}$."
+          ]
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "id": "general-term",
+      "name": "האיבר הכללי",
+      "latex": "a_n = a_1 q^{\\,n-1}",
+      "inFormulaSheet": "unknown"
+    },
+    {
+      "id": "sum",
+      "name": "סכום n איברים",
+      "latex": "S_n = \\frac{a_1(q^{\\,n}-1)}{q-1}",
+      "inFormulaSheet": "unknown"
+    },
+    {
+      "id": "infinite-sum",
+      "name": "סכום סדרה אין־סופית (−1<q<1)",
+      "latex": "S = \\frac{a_1}{1-q}",
+      "inFormulaSheet": "unknown"
+    }
+  ],
+  "video": {
+    "status": "pending",
+    "note": "עדיין לא נבחר סרטון ספציפי.",
+    "links": [
+      {
+        "label": "חיפוש ביוטיוב: סדרה הנדסית 5 יחידות",
+        "url": "https://www.youtube.com/results?search_query=%D7%A1%D7%93%D7%A8%D7%94+%D7%94%D7%A0%D7%93%D7%A1%D7%99%D7%AA+5+%D7%99%D7%97%D7%99%D7%93%D7%95%D7%AA",
+        "kind": "search",
+        "verified": false
+      }
+    ]
+  },
+  "examples": [
+    {
+      "id": "ex1",
+      "title": "איבר וסכום",
+      "problem": "בסדרה הנדסית $a_1=3$ ו-$q=2$. מצא את $a_8$ ואת $S_8$.",
+      "steps": [
+        "$a_8 = a_1\\cdot q^{7} = 3\\cdot 2^7 = 3\\cdot 128 = 384$.",
+        "$S_8 = \\frac{3\\,(2^8-1)}{2-1} = 3\\cdot 255 = 765$."
+      ],
+      "answer": "$a_8=384,\\ S_8=765$",
+      "checks": [
+        {
+          "label": "a8",
+          "expr": "3*2^7",
+          "equals": 384
+        },
+        {
+          "label": "S8",
+          "expr": "3*(2^8-1)/(2-1)",
+          "equals": 765
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "title": "מציאת הסדרה משני איברים",
+      "problem": "בסדרה הנדסית $a_3=12$ ו-$a_6=96$. מצא את $q$ ואת $a_1$.",
+      "steps": [
+        "בין $a_3$ ל-$a_6$ יש 3 קפיצות: $\\frac{a_6}{a_3} = q^3$.",
+        "$q^3 = \\frac{96}{12} = 8$, ולכן $q = 2$.",
+        "$a_3 = a_1 q^2$: $12 = a_1\\cdot 4$, ולכן $a_1 = 3$."
+      ],
+      "answer": "$q=2,\\ a_1=3$",
+      "checks": [
+        {
+          "label": "q",
+          "expr": "(96/12)^(1/3)",
+          "equals": 2
+        },
+        {
+          "label": "a1",
+          "expr": "12/2^2",
+          "equals": 3
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "title": "סכום אין־סופי – מציאת המנה",
+      "problem": "בסדרה הנדסית אין־סופית $a_1=6$ וסכום כל האיברים הוא 9. מצא את $q$.",
+      "steps": [
+        "$\\frac{a_1}{1-q} = 9$, כלומר $\\frac{6}{1-q} = 9$.",
+        "$1-q = \\frac{6}{9} = \\frac23$, ולכן $q = \\frac13$.",
+        "בדיקה: $-1<\\frac13<1$, אז הנוסחה מותרת."
+      ],
+      "answer": "$q=\\frac13$",
+      "checks": [
+        {
+          "label": "q",
+          "expr": "1-6/9",
+          "equals": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "id": "ex4",
+      "title": "בסגנון בגרות: הוכחה וסכום",
+      "problem": "$a_n$ סדרה הנדסית עם $a_1=1$ ו-$q=-\\frac12$. מגדירים $b_n = a_n + a_{n+1}$. הוכח ש-$b_n$ הנדסית, ומצא את סכום כל איבריה.",
+      "steps": [
+        "$b_n = a_n + a_n q = a_n(1+q)$.",
+        "$\\frac{b_{n+1}}{b_n} = \\frac{a_{n+1}(1+q)}{a_n(1+q)} = q = -\\frac12$. קבוע, ולכן $b_n$ הנדסית עם אותה מנה.",
+        "$b_1 = a_1(1+q) = 1\\cdot\\frac12 = \\frac12$.",
+        "$-1<q<1$, ולכן $S = \\frac{b_1}{1-q} = \\frac{1/2}{3/2} = \\frac13$."
+      ],
+      "answer": "$b_n$ הנדסית עם $q=-\\frac12$, וסכומה $\\frac13$",
+      "checks": [
+        {
+          "label": "b1",
+          "expr": "1*(1-1/2)",
+          "equals": 0.5
+        },
+        {
+          "label": "S",
+          "expr": "0.5/(1+1/2)",
+          "equals": 0.3333333333333333
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "g1",
+      "difficulty": 1,
+      "prompt": "בסדרה הנדסית $a_1=5$ ו-$q=3$. מהו $a_5$?",
+      "answer": {
+        "value": 405,
+        "tolerance": 0
+      },
+      "check": "5*3^4",
+      "hints": [
+        "השתמש ב-$a_n = a_1 q^{\\,n-1}$ עם $n=5$.",
+        "כמה קפיצות מהראשון לחמישי? 4. אז $q^4 = 81$.",
+        "$5\\cdot 81 = ?$"
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 1215,
+          "mistake": "n-vs-n-1"
+        },
+        {
+          "value": 17,
+          "mistake": "arith-confusion"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$a_5 = a_1 q^4 = 5\\cdot 3^4$",
+          "$= 5\\cdot 81$"
+        ],
+        "final": "$a_5 = 405$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "g2",
+      "difficulty": 2,
+      "prompt": "בסדרה הנדסית $a_2=6$ ו-$a_5=162$. מהי המנה $q$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "(162/6)^(1/3)",
+      "hints": [
+        "בין $a_2$ ל-$a_5$ יש 3 קפיצות, ולכן $\\frac{a_5}{a_2} = q^3$.",
+        "$q^3 = \\frac{162}{6} = 27$.",
+        "איזה מספר בחזקת 3 נותן 27?"
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 27,
+          "mistake": "forgot-root"
+        },
+        {
+          "value": 52,
+          "mistake": "arith-confusion"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$q^3 = \\frac{162}{6} = 27$",
+          "$q = \\sqrt[3]{27}$"
+        ],
+        "final": "$q = 3$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "g3",
+      "difficulty": 2,
+      "prompt": "בסדרה הנדסית $a_1=2$ ו-$q=3$. מהו סכום חמשת האיברים הראשונים, $S_5$?",
+      "answer": {
+        "value": 242,
+        "tolerance": 0
+      },
+      "check": "2*(3^5-1)/(3-1)",
+      "hints": [
+        "$S_n = \\frac{a_1(q^{\\,n}-1)}{q-1}$ עם $n=5$.",
+        "$3^5 = 243$.",
+        "$\\frac{2\\cdot 242}{2} = ?$"
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 80,
+          "mistake": "sum-power"
+        },
+        {
+          "value": 486,
+          "mistake": "sum-vs-term"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$S_5 = \\frac{2(3^5-1)}{3-1} = \\frac{2\\cdot 242}{2}$"
+        ],
+        "final": "$S_5 = 242$"
+      }
+    }
+  ],
+  "independentPractice": [
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "p1",
+      "difficulty": 1,
+      "prompt": "בסדרה הנדסית $a_1=81$ ו-$q=\\frac13$. מהו $a_5$?",
+      "answer": {
+        "value": 1,
+        "tolerance": 0
+      },
+      "check": "81*(1/3)^4",
+      "hints": [
+        "$a_5 = 81\\cdot\\left(\\frac13\\right)^4$."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 3,
+          "mistake": "n-vs-n-1"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\left(\\frac13\\right)^4 = \\frac{1}{81}$"
+        ],
+        "final": "$a_5 = 1$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "p2",
+      "difficulty": 2,
+      "prompt": "בסדרה הנדסית $a_1=-2$ ו-$q=-2$. מהו $a_6$?",
+      "answer": {
+        "value": 64,
+        "tolerance": 0
+      },
+      "check": "-2*(-2)^5",
+      "hints": [
+        "$(-2)^5$ שלילי, כי החזקה אי־זוגית."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": -64,
+          "mistake": "sign"
+        },
+        {
+          "value": 128,
+          "mistake": "n-vs-n-1"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$a_6 = -2\\cdot(-2)^5 = -2\\cdot(-32)$"
+        ],
+        "final": "$a_6 = 64$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "p3",
+      "difficulty": 2,
+      "prompt": "בסדרה הנדסית אין־סופית $a_1=10$ ו-$q=-\\frac14$. מהו סכום כל האיברים?",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "10/(1-(-1/4))",
+      "hints": [
+        "$S = \\frac{a_1}{1-q}$. שים לב ש-$q$ שלילי."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 13.33,
+          "mistake": "sign"
+        },
+        {
+          "value": 40,
+          "mistake": "inf-formula"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$1-q = 1+\\frac14 = \\frac54$",
+          "$S = \\frac{10}{5/4}$"
+        ],
+        "final": "$S = 8$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "p4",
+      "difficulty": 3,
+      "prompt": "בסדרה הנדסית $a_1=1$ ו-$q=2$. כמה איברים ראשונים צריך לחבר כדי לקבל סכום 255?",
+      "answer": {
+        "value": 8,
+        "tolerance": 0
+      },
+      "check": "8",
+      "hints": [
+        "$S_n = \\frac{1\\cdot(2^n-1)}{2-1} = 2^n - 1$.",
+        "$2^n - 1 = 255$, כלומר $2^n = 256$."
+      ],
+      "commonWrongAnswers": [
+        {
+          "value": 7,
+          "mistake": "n-vs-n-1"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$2^n = 256 = 2^8$"
+        ],
+        "final": "$n = 8$"
+      }
+    }
+  ],
+  "bagrutQuestions": [
+    {
+      "id": "b1",
+      "title": "סדרה אין־סופית: מנה, איבר ראשון וסדרות חדשות",
+      "difficulty": 3,
+      "source": {
+        "type": "original"
+      },
+      "context": "נתונה סדרה הנדסית אין־סופית $a_1, a_2, a_3, \\dots$ שמנתה $q$, $0<q<1$. סכום כל איברי הסדרה הוא 12, וסכום שלושת האיברים הראשונים הוא 10.5.",
+      "parts": [
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1a",
+          "label": "א",
+          "prompt": "מצאו את $q$.",
+          "answer": {
+            "value": 0.5,
+            "tolerance": 0
+          },
+          "check": "(1-10.5/12)^(1/3)",
+          "hints": [
+            "כתבו שתי משוואות: $\\frac{a_1}{1-q}=12$ ו-$\\frac{a_1(1-q^3)}{1-q} = 10.5$.",
+            "הציבו את הראשונה בשנייה: $12(1-q^3) = 10.5$.",
+            "$q^3 = 1 - \\frac{10.5}{12} = \\frac18$."
+          ],
+          "commonWrongAnswers": [
+            {
+              "value": 0.125,
+              "mistake": "forgot-root"
+            }
+          ],
+          "solution": {
+            "steps": [
+              "$12(1-q^3)=10.5 \\Rightarrow q^3=\\frac18$",
+              "$q = \\frac12$"
+            ],
+            "final": "$q = \\frac12$"
+          }
+        },
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1b",
+          "label": "ב",
+          "prompt": "מצאו את $a_1$.",
+          "answer": {
+            "value": 6,
+            "tolerance": 0
+          },
+          "check": "12*(1-0.5)",
+          "hints": [
+            "$a_1 = 12(1-q)$."
+          ],
+          "commonWrongAnswers": [
+            {
+              "value": 24,
+              "mistake": "inf-formula"
+            }
+          ],
+          "solution": {
+            "steps": [
+              "$a_1 = 12\\cdot\\frac12$"
+            ],
+            "final": "$a_1 = 6$"
+          }
+        },
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1c",
+          "label": "ג",
+          "prompt": "מצאו את סכום כל האיברים שנמצאים במקומות הזוגיים ($a_2 + a_4 + a_6 + \\dots$).",
+          "answer": {
+            "value": 4,
+            "tolerance": 0
+          },
+          "check": "3/(1-0.25)",
+          "hints": [
+            "האיברים הזוגיים הם סדרה הנדסית: איבר ראשון $a_2$, מנה $q^2$.",
+            "$a_2 = 3$ ו-$q^2 = \\frac14$."
+          ],
+          "commonWrongAnswers": [
+            {
+              "value": 6,
+              "mistake": "ratio-q2"
+            }
+          ],
+          "solution": {
+            "steps": [
+              "$a_2 = a_1 q = 3$",
+              "$\\frac{3}{1-1/4} = 4$"
+            ],
+            "final": "$4$"
+          }
+        },
+        {
+          "type": "numeric",
+          "source": {
+            "type": "original"
+          },
+          "id": "b1d",
+          "label": "ד",
+          "prompt": "מגדירים $c_n = a_n^2$. מצאו את סכום כל איברי הסדרה $c_n$.",
+          "answer": {
+            "value": 48,
+            "tolerance": 0
+          },
+          "check": "36/(1-0.25)",
+          "hints": [
+            "$\\frac{c_{n+1}}{c_n} = \\left(\\frac{a_{n+1}}{a_n}\\right)^2 = q^2$. אז $c_n$ הנדסית עם מנה $\\frac14$.",
+            "$c_1 = a_1^2 = 36$."
+          ],
+          "commonWrongAnswers": [
+            {
+              "value": 72,
+              "mistake": "ratio-q2"
+            }
+          ],
+          "solution": {
+            "steps": [
+              "$c_1 = 36$, מנה $\\frac14$",
+              "$\\frac{36}{3/4} = 48$"
+            ],
+            "final": "$48$"
+          }
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q1",
+      "prompt": "$a_1 = 4$, $q = 2$. מהו $a_6$?",
+      "answer": {
+        "value": 128,
+        "tolerance": 0
+      },
+      "check": "4*2^5",
+      "commonWrongAnswers": [
+        {
+          "value": 256,
+          "mistake": "n-vs-n-1"
+        },
+        {
+          "value": 14,
+          "mistake": "arith-confusion"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$4\\cdot 2^5 = 4\\cdot 32$"
+        ],
+        "final": "128"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q2",
+      "prompt": "בסדרה הנדסית $a_4 = -24$ ו-$q = -2$. מהו $a_1$?",
+      "answer": {
+        "value": 3,
+        "tolerance": 0
+      },
+      "check": "-24/(-2)^3",
+      "commonWrongAnswers": [
+        {
+          "value": -3,
+          "mistake": "sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$a_4 = a_1 q^3 = -8a_1$",
+          "$a_1 = \\frac{-24}{-8}$"
+        ],
+        "final": "3"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q3",
+      "prompt": "$a_1 = 1$, $q = 2$. מהו $S_6$?",
+      "answer": {
+        "value": 63,
+        "tolerance": 0
+      },
+      "check": "(2^6-1)/(2-1)",
+      "commonWrongAnswers": [
+        {
+          "value": 31,
+          "mistake": "sum-power"
+        },
+        {
+          "value": 32,
+          "mistake": "sum-vs-term"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$S_6 = 2^6 - 1$"
+        ],
+        "final": "63"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multipleChoice",
+      "source": {
+        "type": "original"
+      },
+      "prompt": "מתי אפשר לחשב סכום של **כל** איברי סדרה הנדסית אין־סופית?",
+      "choices": [
+        {
+          "text": "כאשר $-1<q<1$ (ו-$q\\neq 0$)",
+          "correct": true
+        },
+        {
+          "text": "כאשר $q<1$",
+          "mistake": "inf-condition"
+        },
+        {
+          "text": "כאשר $q>1$",
+          "mistake": "inf-condition"
+        },
+        {
+          "text": "תמיד",
+          "mistake": "inf-condition"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "אם $q\\le -1$ האיברים לא מתקרבים ל-0 (למשל $q=-2$: 1, −2, 4, −8…), ואין סכום סופי."
+        ],
+        "final": "$-1<q<1$"
+      }
+    },
+    {
+      "type": "numeric",
+      "source": {
+        "type": "original"
+      },
+      "id": "q5",
+      "prompt": "בסדרה הנדסית אין־סופית $a_1 = 3$ ו-$q = \\frac14$. מהו סכום כל האיברים?",
+      "answer": {
+        "value": 4,
+        "tolerance": 0
+      },
+      "check": "3/(1-1/4)",
+      "commonWrongAnswers": [
+        {
+          "value": 12,
+          "mistake": "inf-formula"
+        },
+        {
+          "value": 2.4,
+          "mistake": "sign"
+        }
+      ],
+      "solution": {
+        "steps": [
+          "$\\frac{3}{1-\\frac14} = \\frac{3}{3/4}$"
+        ],
+        "final": "4"
+      }
+    }
+  ],
+  "commonMistakes": [
+    {
+      "id": "n-vs-n-1",
+      "label": "חזקה $n$ במקום $n-1$",
+      "advice": "מהאיבר הראשון לאיבר ה-n יש n−1 קפיצות, ולכן כופלים ב-q בדיוק n−1 פעמים.",
+      "reviewSection": "explanations",
+      "reviewRef": "general-term"
+    },
+    {
+      "id": "arith-confusion",
+      "label": "חיבור במקום כפל",
+      "advice": "בסדרה הנדסית כופלים במנה q. חיבור של הפרש קבוע שייך לסדרה חשבונית.",
+      "reviewSection": "explanations",
+      "reviewRef": "what"
+    },
+    {
+      "id": "forgot-root",
+      "label": "שכחת להוציא שורש",
+      "advice": "מצאת את $q^3$ (או $q^2$). צריך עוד להוציא שורש כדי לקבל את q עצמו.",
+      "reviewSection": "examples",
+      "reviewRef": "ex2"
+    },
+    {
+      "id": "sum-power",
+      "label": "חזקה שגויה בנוסחת הסכום",
+      "advice": "במונה של נוסחת הסכום כתוב $q^n - 1$: חזקה n, כי יש n איברים.",
+      "reviewSection": "explanations",
+      "reviewRef": "sum"
+    },
+    {
+      "id": "sum-vs-term",
+      "label": "בלבול בין סכום לאיבר",
+      "advice": "השאלה ביקשה סכום של כמה איברים, לא איבר בודד. השתמש בנוסחת $S_n$.",
+      "reviewSection": "explanations",
+      "reviewRef": "sum"
+    },
+    {
+      "id": "sign",
+      "label": "טעות בסימן",
+      "advice": "מנה שלילית בחזקה אי־זוגית נותנת מספר שלילי, ובחזקה זוגית חיובי. ובסכום אין־סופי: $1-q$ עם q שלילי גדול מ-1.",
+      "reviewSection": "explanations",
+      "reviewRef": "infinite"
+    },
+    {
+      "id": "inf-formula",
+      "label": "נוסחת הסכום האין־סופי",
+      "advice": "הסכום הוא $\\frac{a_1}{1-q}$: מחלקים ב-$(1-q)$, לא כופלים ולא מחלקים ב-q.",
+      "reviewSection": "explanations",
+      "reviewRef": "infinite"
+    },
+    {
+      "id": "inf-condition",
+      "label": "תנאי לסכום אין־סופי",
+      "advice": "סכום של סדרה אין־סופית קיים רק כאשר $-1<q<1$.",
+      "reviewSection": "explanations",
+      "reviewRef": "infinite"
+    },
+    {
+      "id": "ratio-q2",
+      "label": "מנה של סדרה חדשה",
+      "advice": "בסדרה של כל איבר שני, או של ריבועי האיברים, המנה היא $q^2$.",
+      "reviewSection": "explanations",
+      "reviewRef": "proof"
+    }
+  ],
+  "next": "derivative-extrema"
+}

@@ -363,6 +363,12 @@
       "t-pythagoras",
       "t-quadratic",
       "t-powers"
+    ],
+    "geometric-sequence": [
+      "t-negatives",
+      "t-linear-eq",
+      "t-substitution",
+      "t-powers"
     ]
   },
   "plannedLessons": {

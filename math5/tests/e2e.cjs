@@ -269,8 +269,10 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await c.locator('input').fill('12'); await c.locator('[data-act=check]').click();
       expect(await c.locator('.feedback.ok').count() === 1, 'תשובה נכונה לא סומנה');
       await go(t, '#/exam/35581-2024-summer/2');
+      expect(await t.locator('.x-skills a[href="#/lesson/geometric-sequence"]').count() >= 1, 'שאלה 2 לא מקשרת לשיעור סדרה הנדסית');
+      await go(t, '#/exam/35581-2024-summer/3');
       const sk = await t.locator('.x-skills').innerText();
-      expect(sk.includes('סדרה הנדסית') && sk.includes('עוד אין שיעור'), 'שאלה 2 לא מסמנת שסדרה הנדסית עוד לא נלמדת');
+      expect(sk.includes('התפלגות בינומית') && sk.includes('עוד אין שיעור'), 'שאלה 3 לא מסמנת שהסתברות עוד לא נלמדת');
       await go(t, '#/exam/35581-2024-summer/5');
       expect(await t.locator('.x-skills a[href="#/lesson/sine-cosine-law"]').count() >= 1, 'שאלה 5 לא מקשרת לשיעור משפט הסינוסים');
       await go(t, '#/exam/35581-2024-summer/2');
@@ -291,7 +293,7 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
     await step('טלפון: גם כשכל הפתרונות והדוגמאות פתוחים – הדף לא רחב מהמסך', async () => {
       const m = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
       const routes = [1, 2, 3, 4, 5, 6, 7, 8].map(n => `#/exam/35581-2024-summer/${n}`)
-        .concat(['#/lesson/derivative-extrema/examples', '#/lesson/sine-cosine-law/examples', '#/lesson/arithmetic-sequence/examples']);
+        .concat(['#/lesson/derivative-extrema/examples', '#/lesson/sine-cosine-law/examples', '#/lesson/arithmetic-sequence/examples', '#/lesson/geometric-sequence/explain', '#/lesson/geometric-sequence/examples', '#/lesson/geometric-sequence/bagrut']);
       for (const h of routes) {
         await go(m, h);
         await m.$$eval('button', bs => bs.forEach(b => { if (/פתרון|הצג|שלב/.test(b.textContent)) b.click(); }));

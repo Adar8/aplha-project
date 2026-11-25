@@ -37,8 +37,10 @@ test('audit: usage only → level 1; quiz improvement → 2; official exam succe
 });
 
 test('audit: coverage is by skills – an arithmetic-sequence lesson does not cover a geometric-sequence question', () => {
-  const P = productAudit(content, undefined, NOW);
-  const q2 = P.examCoverage.find(x => x.code === '35581').questions.find(q => q.n === 2);
-  assert.equal(q2.frac, 0);
-  assert.ok(q2.missing.includes('geometric-sequence'));
+  const q2Of = c => productAudit(c, undefined, NOW).examCoverage.find(x => x.code === '35581').questions.find(q => q.n === 2);
+  const withoutGeo = { ...content, lessons: content.lessons.filter(L => L.id !== 'geometric-sequence') };
+  const before = q2Of(withoutGeo);
+  assert.equal(before.frac, 0, 'רק שיעור חשבונית – שאלה 2 לא מכוסה');
+  assert.ok(before.missing.includes('geometric-sequence'));
+  assert.equal(q2Of(content).frac, 1, 'עם שיעור הנדסית – שאלה 2 מכוסה');
 });

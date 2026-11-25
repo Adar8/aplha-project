@@ -331,3 +331,12 @@ test('מחשבון: קלט "אנושי" – ×, ÷, −, √, π, פסיק עש�
 test('מחשבון: דוחה קוד וביטויים לא תקינים', () => {
   for (const bad of ['alert(1)', 'process.exit()', '2+*', '', '1/0', 'x+1']) assert.throws(() => evaluate(bad));
 });
+
+test('adaptLesson: < ו-> בתוך נוסחת formula מוברחים (אחרת הדפדפן קורא אותם כתגית ושובר את הנוסחה)', async () => {
+  const { adaptLesson } = await import('../../js/core/adapter.js');
+  const { readFileSync } = await import('node:fs');
+  const J = JSON.parse(readFileSync(new URL('../../learning-content/lessons/geometric-sequence.json', import.meta.url), 'utf8'));
+  const html = adaptLesson(J).explain.map(e => e.body).join('');
+  assert.ok(html.includes('(-1&lt;q&lt;1)'), 'הנוסחה עם < לא הוברחה');
+  assert.ok(!/\(-1<q/.test(html), 'נשאר < לא מוברח');
+});

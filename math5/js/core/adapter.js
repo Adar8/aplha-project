@@ -1,5 +1,5 @@
 // ממיר שיעור בפורמט JSON (learning-content) למבנה שהממשק מציג.
-import { fmt } from './text.js';
+import { fmt, esc } from './text.js';
 
 const SECTION = { explanations: 'explain', video: 'video', examples: 'examples', guidedPractice: 'guided',
   independentPractice: 'practice', bagrutQuestions: 'bagrut', quiz: 'quiz' };
@@ -9,7 +9,7 @@ function blockHTML(b) {
     case 'text': return `<p>${fmt(b.text)}</p>`;
     case 'warning': return `<p class="callout">${fmt(b.text)}</p>`;
     case 'tip': return `<p class="tip">${fmt(b.text)}</p>`;
-    case 'formula': return `<div class="formula">$$${b.latex}$$</div>`;
+    case 'formula': return `<div class="formula">$$${esc(b.latex)}$$</div>`;  // esc: סימני < ו-> בנוסחה לא ייקראו כתגית HTML
     case 'list': return `<ul>${b.items.map(t => `<li>${fmt(t)}</li>`).join('')}</ul>`;
     default: return '';
   }
