@@ -278,7 +278,7 @@ export function validateKnowledgeMap(K, { topics = null, lessons = null } = {}) 
 
 // ---- שאלון בגרות רשמי (learning-content/exams) ----
 // נוסח רשמי + פתרונות של MATH 5: כל תשובה מספרית מחושבת מחדש משדה check, כל LaTeX מתרנדר, כל איור קיים.
-export function validateExam(X, { examDir = resolve(CONTENT, 'exams') } = {}) {
+export function validateExam(X, { examDir = resolve(CONTENT, 'exams'), topics = null } = {}) {
   const errors = [];
   const err = (path, msg) => errors.push(`${path}: ${msg}`);
   const isStr = v => typeof v === 'string' && v.trim().length > 0;
@@ -315,6 +315,8 @@ export function validateExam(X, { examDir = resolve(CONTENT, 'exams') } = {}) {
   for (const q of X.questions || []) {
     const qp = `q${q.n}`;
     if (!Number.isInteger(q.page)) err(qp, 'חסר מספר עמוד בקובץ הרשמי');
+    if (!Array.isArray(q.topicIds) || !q.topicIds.length) err(qp, 'חסר topicIds (נושאים מתוכנית הלימודים)');
+    else if (topics) q.topicIds.forEach(t => { if (!topics.has(t)) err(qp, `נושא לא קיים במפת הנושאים: ${t}`); });
     (q.stem || []).forEach((b, i) => typeof b === 'string' ? text(b, `${qp}.stem[${i}]`) : fig(b, `${qp}.stem[${i}]`));
     const ids = new Set();
     for (const p of q.parts || []) {
@@ -416,7 +418,7 @@ async function main() {
   const EX = JSON.parse(readFileSync(resolve(CONTENT, 'exams/index.json'), 'utf8'));
   for (const id of EX.exams) {
     const X = JSON.parse(readFileSync(resolve(CONTENT, `exams/${id}.json`), 'utf8'));
-    const r = validateExam(X);
+    const r = validateExam(X, { topics: new Set(TOPICS.map(t => t.id)) });
     if (X.id !== id) r.errors.push(`id: ${X.id} לא תואם לשם הקובץ`);
     if (r.errors.length) { fail += r.errors.length; console.error(`✗ learning-content/exams/${id}.json – ${r.errors.length} שגיאות`); r.errors.forEach(e => console.error('   • ' + e)); }
     else { const parts = X.questions.flatMap(q => q.parts); console.log(`✓ learning-content/exams/${id}.json (${X.questions.length} שאלות, ${parts.length} סעיפים, ${parts.filter(p => p.answer?.type === 'numeric').length} תשובות מספריות נבדקו)`); }
