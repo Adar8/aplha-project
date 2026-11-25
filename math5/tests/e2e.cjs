@@ -313,6 +313,9 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(t, '#/week');
       const week = await t.locator('#app').innerText();
       expect(!/שיעור: סדרה חשבונית/.test(week), 'התוכנית השבועית עדיין מציעה את השיעור שגמרתי');
+      expect(await t.locator('#app a[href="#/diagnostic"]').count() === 0, 'התוכנית השבועית עדיין דוחפת את מבחן האבחון');
+      await go(t, '#/');
+      expect(!(await t.locator('#app').innerText()).includes('מומלץ להתחיל כאן'), 'הבית עדיין ממליץ להתחיל באבחון');
       await t.context().close();
     });
 

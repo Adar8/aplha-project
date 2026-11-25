@@ -292,7 +292,7 @@ export function viewWeek() {
   <section class="grid-2">
     <div class="glass"><div class="card-title">${ICON.compass}<h2>מה לעשות השבוע</h2></div>
       <ol class="todo-list">
-        ${!st.diagnostic?.finishedAt ? '<li><a href="#/diagnostic">מבחן אבחון</a> <span class="muted">(כ-45 דק׳, פעם אחת)</span></li>' : ''}
+        ${!st.diagnostic?.finishedAt && !LESSONS.some(lessonFinished) ? '<li><a href="#/diagnostic">מבחן אבחון</a> <span class="muted">(כ-45 דק׳, פעם אחת)</span></li>' : ''}
         ${due.map(r => `<li><a href="#/review/${r.lessonId}">חזרה: ${esc(LESSON_BY_ID[r.lessonId].title)}</a> <span class="muted">(כ-15 דק׳)</span></li>`).join('')}
         ${next ? `<li><a href="#/lesson/${next.id}">שיעור: ${esc(next.title)}</a> <span class="muted">(כ-${next.minutes} דק׳)</span></li>` : ''}
         <li><a href="#/practice">תרגול ושאלות ברמת בגרות</a> <span class="muted">(את שאר הזמן)</span></li>

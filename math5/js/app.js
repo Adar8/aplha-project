@@ -5,7 +5,7 @@ import * as tbx from './views/toolbox.js';
 import { checkAnswer } from './core/answers.js';
 import * as xm from './views/exams.js';
 import { streakInfo } from './core/plan.js';
-import { SECTIONS, lessonSections, SOURCE_LABEL, renderMath, fmtTime, weekSeconds, todaySeconds, meter, lessonState, lessonFinished, recommend, ring, ICON, esc } from './ui.js';
+import { SECTIONS, lessonSections, SOURCE_LABEL, renderMath, markScrollable, fmtTime, weekSeconds, todaySeconds, meter, lessonState, lessonFinished, recommend, ring, ICON, esc } from './ui.js';
 import * as extra from './views/extra.js';
 
 const app = document.getElementById('app');
@@ -48,7 +48,10 @@ function viewDashboard() {
 
   // מסלול: אבחון, השיעורים הקיימים, ושני נושאים שבהכנה
   const diagDone = !!st.diagnostic?.finishedAt;
-  const nodes = [{ glyph: diagDone ? '✓' : '?', title: 'מבחן אבחון', sub: diagDone ? 'הושלם' : 'מומלץ להתחיל כאן', state: diagDone ? 'done' : 'open', href: '#/diagnostic' }];
+  // האבחון נועד לבחור מאיפה להתחיל. אחרי שגמרת שיעור כבר התחלת – לא דוחפים אותו יותר
+  const diagRelevant = !diagDone && !LESSONS.some(lessonFinished);
+  const nodes = diagDone ? [{ glyph: '✓', title: 'מבחן אבחון', sub: 'הושלם', state: 'done', href: '#/diagnostic' }]
+    : diagRelevant ? [{ glyph: '?', title: 'מבחן אבחון', sub: 'מומלץ להתחיל כאן', state: 'open', href: '#/diagnostic' }] : [];
   for (const l of LESSONS) {
     const s = lessonState(l);
     const state = l.id === cont.id ? 'now' : s.level >= 3 || s.done === SECTIONS.length ? 'done' : 'open';
@@ -707,6 +710,10 @@ function viewSources() {
 function setActiveNav(name) {
   document.querySelectorAll('[data-nav]').forEach(a => a.toggleAttribute('aria-current', a.dataset.nav === name));
 }
+
+// אחרי כל לחיצה (פתיחת פתרון, דוגמה, שלב) ובשינוי גודל – לבדוק מחדש אילו נוסחאות גוללות
+addEventListener('click', () => requestAnimationFrame(() => markScrollable(app)));
+addEventListener('resize', () => markScrollable(app));
 
 function route() {
   const parts = (location.hash || '#/').slice(2).split('#')[0].split('/');

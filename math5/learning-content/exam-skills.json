@@ -35,6 +35,7 @@
     "derivative-graph": "קשר בין גרף הפונקציה לגרף הנגזרת",
     "antiderivative": "פונקציה קדומה (כולל הצבה)",
     "definite-integral-area": "אינטגרל מסוים ושטח בין גרפים",
-    "optimization": "בעיית קיצון מילולית/גאומטרית"
+    "optimization": "בעיית קיצון מילולית/גאומטרית",
+    "fraction-equations": "משוואות ומערכות עם נעלם במכנה"
   }
 }

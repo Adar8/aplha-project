@@ -35,6 +35,19 @@ export function renderMath(el) {
       throwOnError: false,
     });
   }
+  markScrollable(el);
+}
+
+// נוסחה ארוכה מהקופסה שלה: דהייה בקצה, כדי שיהיה ברור שאפשר לגלול. בסוף הגלילה הדהייה נעלמת.
+export function markScrollable(root = document) {
+  root.querySelectorAll(':not(.katex-display) > .katex').forEach(k => {
+    const more = k.clientWidth > 0 && k.scrollWidth - k.clientWidth > 4;
+    k.classList.toggle('k-scroll', more);
+    if (more && !k.dataset.sl) {
+      k.dataset.sl = '1';
+      k.addEventListener('scroll', () => k.classList.toggle('k-end', k.scrollLeft + k.clientWidth >= k.scrollWidth - 4), { passive: true });
+    }
+  });
 }
 
 export function fmtTime(sec) {
