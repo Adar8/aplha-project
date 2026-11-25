@@ -14,6 +14,9 @@
   "topicStatus": "common",
   "estimatedMinutes": 60,
   "summary": "איבר כללי, סכום, ומציאת הסדרה משני נתונים.",
+  "covers": [
+    "arithmetic-sequence"
+  ],
   "review": {
     "status": "draft",
     "mathCheckedBy": [],

@@ -281,6 +281,41 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await t.context().close();
     });
 
+    await step('טלפון: גם כשכל הפתרונות והדוגמאות פתוחים – הדף לא רחב מהמסך', async () => {
+      const m = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+      const routes = [1, 2, 3, 4, 5, 6, 7, 8].map(n => `#/exam/35581-2024-summer/${n}`)
+        .concat(['#/lesson/derivative-extrema/examples', '#/lesson/sine-cosine-law/examples', '#/lesson/arithmetic-sequence/examples']);
+      for (const h of routes) {
+        await go(m, h);
+        await m.$$eval('button', bs => bs.forEach(b => { if (/פתרון|הצג|שלב/.test(b.textContent)) b.click(); }));
+        await m.waitForTimeout(150);
+        const w = await m.evaluate(() => [innerWidth, document.documentElement.scrollWidth]);
+        expect(w[0] <= 391 && w[1] <= 391, `${h}: רוחב הדף ${w[1]}px (חלון ${w[0]}px)`);
+      }
+      await m.context().close();
+    });
+
+    await step('אחרי שגומרים שיעור – הבית ממליץ על השיעור הבא, לא על אותו שיעור', async () => {
+      const t = await newPage();
+      await go(t, '#/');
+      await t.evaluate(() => {
+        const s = JSON.parse(localStorage.getItem('math5.progress.v1') || '{}');
+        const secs = ['explain', 'video', 'examples', 'guided', 'practice', 'bagrut', 'quiz', 'review'];
+        s.version = 2; s.lessons = s.lessons || {};
+        s.lessons['arithmetic-sequence'] = { sections: Object.fromEntries(secs.map(k => [k, true])), answers: {}, quiz: { best: 100, last: 100, history: [{ score: 100, at: Date.now() }] }, timeSec: 600, lastVisit: Date.now() };
+        s.lastLesson = 'arithmetic-sequence';
+        localStorage.setItem('math5.progress.v1', JSON.stringify(s));
+      });
+      await t.reload(); await t.waitForSelector('.hero');
+      const hero = await t.locator('.hero').innerText();
+      expect(!hero.includes('סדרה חשבונית'), 'הבית עדיין מציע את השיעור שגמרתי');
+      expect(!hero.includes('להמשיך מאיפה שעצרת'), 'הבית עדיין כותב "להמשיך" לשיעור גמור');
+      await go(t, '#/week');
+      const week = await t.locator('#app').innerText();
+      expect(!/שיעור: סדרה חשבונית/.test(week), 'התוכנית השבועית עדיין מציעה את השיעור שגמרתי');
+      await t.context().close();
+    });
+
     await step('טלפון: ניווט תחתון, בלי גלילה אופקית', async () => {
       const m = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
       for (const h of ['#/', '#/week', '#/map', '#/lesson/sine-cosine-law/bagrut', '#/progress', '#/exams', '#/exam/35581-2024-summer/4', '#/exam/35581-2024-summer/7']) {

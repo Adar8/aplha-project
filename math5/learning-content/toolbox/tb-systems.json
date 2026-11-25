@@ -11,6 +11,9 @@
   "topicStatus": "foundation",
   "estimatedMinutes": 30,
   "summary": "שתי משוואות, שני נעלמים: שיטת ההצבה ושיטת החיבור.",
+  "covers": [
+    "equation-system"
+  ],
   "review": {
     "status": "draft",
     "mathCheckedBy": [],

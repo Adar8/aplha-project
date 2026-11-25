@@ -11,6 +11,9 @@
   "topicStatus": "foundation",
   "estimatedMinutes": 35,
   "summary": "פירוק, נוסחת השורשים והדיסקרימיננטה.",
+  "covers": [
+    "quadratic-eq"
+  ],
   "review": {
     "status": "draft",
     "mathCheckedBy": [],

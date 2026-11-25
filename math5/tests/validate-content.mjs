@@ -415,7 +415,22 @@ async function main() {
   (TB.baseCheck?.probes || []).forEach(p => { if (!D.items.some(i => i.skill === p)) tbErr.push(`baseCheck: אין שאלה למיומנות ${p}`); });
   if (tbErr.length) { fail += tbErr.length; console.error(`✗ learning-content/toolbox.json – ${tbErr.length} שגיאות`); tbErr.forEach(e => console.error('   • ' + e)); }
   else console.log(`✓ learning-content/toolbox.json (${topicIds.size} נושאים, ${tbLessons.length} שיעורי יסוד)`);
+  // מיומנויות בגרות: כל covers (שיעורים) ו-skills (שאלות בגרות) חייבים להופיע ב-exam-skills.json
+  const SK = new Set(Object.keys(JSON.parse(readFileSync(resolve(CONTENT, 'exam-skills.json'), 'utf8')).skills));
+  const skErr = [];
+  const lessonFiles = [...manifest.lessons, ...(TB.lessons || [])];
+  for (const f of lessonFiles) {
+    const L = JSON.parse(readFileSync(resolve(CONTENT, f), 'utf8'));
+    if (L.covers !== undefined && !Array.isArray(L.covers)) skErr.push(`${f}: covers חייב להיות מערך`);
+    (L.covers || []).forEach(k => { if (!SK.has(k)) skErr.push(`${f}: מיומנות לא מוכרת ב-covers: ${k}`); });
+  }
   const EX = JSON.parse(readFileSync(resolve(CONTENT, 'exams/index.json'), 'utf8'));
+  for (const id of EX.exams) {
+    const X = JSON.parse(readFileSync(resolve(CONTENT, `exams/${id}.json`), 'utf8'));
+    X.questions.forEach(q => { if (!Array.isArray(q.skills) || !q.skills.length) skErr.push(`exams/${id} q${q.n}: חסר skills`); (q.skills || []).forEach(k => { if (!SK.has(k)) skErr.push(`exams/${id} q${q.n}: מיומנות לא מוכרת: ${k}`); }); });
+  }
+  if (skErr.length) { fail += skErr.length; console.error(`✗ מיומנויות בגרות – ${skErr.length} שגיאות`); skErr.forEach(e => console.error('   • ' + e)); }
+  else console.log(`✓ learning-content/exam-skills.json (${SK.size} מיומנויות)`);
   for (const id of EX.exams) {
     const X = JSON.parse(readFileSync(resolve(CONTENT, `exams/${id}.json`), 'utf8'));
     const r = validateExam(X, { topics: new Set(TOPICS.map(t => t.id)) });

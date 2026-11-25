@@ -64,10 +64,19 @@ export function lessonState(lesson) {
   return { done, total: secs.length, ...mastery(lesson) };
 }
 
+// שיעור "גמור לעכשיו": כל השלבים הושלמו והמבחן האחרון 80 ומעלה.
+// שליטה מלאה דורשת הצלחה גם אחרי כמה ימים – את זה עושות החזרות המרווחות, לא חזרה לאותו שיעור.
+export function lessonFinished(lesson) {
+  const L = store.get().lessons[lesson.id];
+  if (!L) return false;
+  const allDone = lessonSections(lesson).every(s => L.sections[s.id]);
+  return allDone && (L.quiz?.last ?? 0) >= 80;
+}
+
 export function recommend() {
-  // השיעור עם השליטה הנמוכה ביותר שכבר התחלת, ואם אין – השיעור הבא שלא התחלת.
-  const rows = LESSONS.map(l => ({ l, ...lessonState(l) }));
-  const started = rows.filter(r => r.done > 0 && r.score < 85).sort((a, b) => a.score - b.score);
+  // שיעור שהתחלת ועוד לא גמרת (החלש קודם), ואם אין – השיעור הבא שלא התחלת.
+  const rows = LESSONS.map(l => ({ l, ...lessonState(l), finished: lessonFinished(l) }));
+  const started = rows.filter(r => r.done > 0 && !r.finished).sort((a, b) => a.score - b.score);
   if (started.length) return { lesson: started[0].l, why: `רמת השליטה כאן ${started[0].score} מתוך 100. כדאי לחזק לפני שממשיכים.` };
   const fresh = rows.find(r => r.done === 0);
   if (fresh) return { lesson: fresh.l, why: 'השיעור הבא בתוכנית. נושא משותף לשתי המתכונות.' };

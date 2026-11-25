@@ -35,3 +35,10 @@ test('audit: usage only → level 1; quiz improvement → 2; official exam succe
   assert.equal(L3.evidenceLevel, 3);
   assert.equal(L3.exams[0].autoOk, 5);
 });
+
+test('audit: coverage is by skills – an arithmetic-sequence lesson does not cover a geometric-sequence question', () => {
+  const P = productAudit(content, undefined, NOW);
+  const q2 = P.examCoverage.find(x => x.code === '35581').questions.find(q => q.n === 2);
+  assert.equal(q2.frac, 0);
+  assert.ok(q2.missing.includes('geometric-sequence'));
+});

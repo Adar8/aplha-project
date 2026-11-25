@@ -7,7 +7,7 @@ import { dueReviews, pickReviewQuestions, PASS, INTERVALS } from '../core/schedu
 import { startDiagnostic, nextItem, recordAnswer, diagnosticResults, recommendedStart } from '../core/diagnostic.js';
 import { weekReport, weeksUntil, recommendations, DAY_NAMES, firstActivity } from '../core/plan.js';
 import { adaptQuestion } from '../core/adapter.js';
-import { esc, fmt, fmtTime, ring, ICON, recommend, lessonState, renderMath } from '../ui.js';
+import { esc, fmt, fmtTime, ring, ICON, recommend, lessonState, lessonFinished, renderMath } from '../ui.js';
 import { LEVELS } from '../core/mastery.js';
 
 export let KMAP = { areas: [], skills: [] };
@@ -44,11 +44,13 @@ export function nextLessonToStudy() {
   const d = store.get().diagnostic;
   if (d?.results) {
     for (const sid of recommendedStart(d.results, KMAP, DIAG.probes)) {
-      const lid = (SKILL[sid]?.lessons || []).find(id => LESSON_BY_ID[id] && lessonState(LESSON_BY_ID[id]).level < 4);
+      const lid = (SKILL[sid]?.lessons || []).find(id => LESSON_BY_ID[id] && LESSON_BY_ID[id].kind !== 'toolbox' && !lessonFinished(LESSON_BY_ID[id]));
       if (lid) return LESSON_BY_ID[lid];
     }
   }
-  return LESSONS.length ? recommend().lesson : null;
+  // אם כל השיעורים גמורים – אין "שיעור הבא" (במקומו: חזרות ושאלות בגרות)
+  const r = LESSONS.length ? recommend().lesson : null;
+  return r && !lessonFinished(r) ? r : null;
 }
 
 export function weekSummary(now = Date.now()) {
@@ -63,11 +65,12 @@ export function currentRecommendations(now = Date.now()) {
     firstActivity: firstActivity(st),
     thisWeek: weekReport(st.profile, st.daily, now),
     dueReviews: dueReviews(st.reviews, now).length,
-    diagnosticDone: !!st.diagnostic?.finishedAt,
-    nextLesson: nextLessonToStudy(),
+    // אחרי שגמרת שיעור כבר יודעים מאיפה להתחיל – האבחון מפסיק להיות המלצה
+    diagnosticDone: !!st.diagnostic?.finishedAt || LESSONS.some(lessonFinished),
+    nextLesson: (n => n && !lessonFinished(n) ? n : null)(nextLessonToStudy()),
     weeksLeft: weeksUntil(st.profile.examDate, now),
     lessonsAvailable: LESSONS.length,
-    lessonsMastered: LESSONS.filter(l => lessonState(l).level === 4).length,
+    lessonsMastered: LESSONS.filter(lessonFinished).length,
   });
 }
 
@@ -356,10 +359,11 @@ export function weeksLeft(now = Date.now()) { return weeksUntil(store.get().prof
 export function weekTodo(now = Date.now()) {
   const st = store.get();
   const items = [];
-  if (!st.diagnostic?.finishedAt) items.push({ text: 'מבחן אבחון', href: '#/diagnostic', min: 'כ-45 דק׳' });
+  if (!st.diagnostic?.finishedAt && !LESSONS.some(lessonFinished)) items.push({ text: 'מבחן אבחון', href: '#/diagnostic', min: 'כ-45 דק׳' });
   for (const r of dueReviews(st.reviews, now).filter(r => LESSON_BY_ID[r.lessonId])) items.push({ text: `חזרה: ${LESSON_BY_ID[r.lessonId].title}`, href: `#/review/${r.lessonId}`, min: 'כ-15 דק׳' });
   const next = nextLessonToStudy();
   if (next) items.push({ text: `שיעור: ${next.title}`, href: `#/lesson/${next.id}`, min: `כ-${next.minutes} דק׳` });
+  else items.push({ text: 'שאלה משאלון בגרות רשמי', href: '#/exams', min: 'כ-30 דק׳' });
   items.push({ text: 'תרגול ושאלות ברמת בגרות', href: '#/practice', min: 'שאר הזמן' });
   return items;
 }

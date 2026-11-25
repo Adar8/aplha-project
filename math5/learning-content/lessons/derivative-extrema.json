@@ -14,6 +14,11 @@
   "topicStatus": "common",
   "estimatedMinutes": 75,
   "summary": "גוזרים פולינום, מוצאים משיק, ובונים טבלת עלייה וירידה.",
+  "covers": [
+    "poly-derivative",
+    "tangent-line",
+    "poly-extrema"
+  ],
   "review": {
     "status": "draft",
     "mathCheckedBy": [],

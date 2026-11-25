@@ -5,7 +5,7 @@ import * as tbx from './views/toolbox.js';
 import { checkAnswer } from './core/answers.js';
 import * as xm from './views/exams.js';
 import { streakInfo } from './core/plan.js';
-import { SECTIONS, lessonSections, SOURCE_LABEL, renderMath, fmtTime, weekSeconds, todaySeconds, meter, lessonState, recommend, ring, ICON, esc } from './ui.js';
+import { SECTIONS, lessonSections, SOURCE_LABEL, renderMath, fmtTime, weekSeconds, todaySeconds, meter, lessonState, lessonFinished, recommend, ring, ICON, esc } from './ui.js';
 import * as extra from './views/extra.js';
 
 const app = document.getElementById('app');
@@ -29,7 +29,9 @@ function viewDashboard() {
   const wk = extra.weekSummary();
   const streak = streakInfo(st);
   const rec = recommend();
-  const last = st.lastLesson && LESSON_BY_ID[st.lastLesson];
+  // "להמשיך" רק לשיעור ראשי שעוד לא נגמר; אחרי שגמרת – השיעור הבא
+  const lastL = st.lastLesson && LESSON_BY_ID[st.lastLesson];
+  const last = lastL && lastL.kind !== 'toolbox' && !lessonFinished(lastL) ? lastL : null;
   const next = extra.nextLessonToStudy();
   const cont = last || next || rec.lesson;
   const L = st.lessons[cont.id];

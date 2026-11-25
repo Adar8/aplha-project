@@ -14,6 +14,12 @@
   "topicStatus": "common",
   "estimatedMinutes": 60,
   "summary": "פתרון משולש כללי, רדיוס המעגל החוסם ושטח משולש.",
+  "covers": [
+    "sine-law",
+    "cosine-law",
+    "circumradius",
+    "trig-area"
+  ],
   "review": {
     "status": "draft",
     "mathCheckedBy": [],

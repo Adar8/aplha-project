@@ -15,6 +15,7 @@ const DAY = 864e5;
 const DEFAULTS = { targetGrade: 80, hoursPerWeek: 7, examDate: '2027-06-01', grades: { q1: 58, q2: 43 } };
 const allQuestions = L => [...L.guided, ...L.practice, ...L.bagrut.flatMap(b => b.parts), ...L.quiz];
 const pct = (a, b) => (b ? Math.round((100 * a) / b) : 0);
+// כיסוי לפי נושא (topic) מנופח: שיעור על סדרה חשבונית "מכסה" גם שאלה על סדרה הנדסית. לכן הכיסוי בבחינות נמדד לפי מיומנויות.
 
 export function loadContent() {
   const lessons = C('index.json').lessons.map(f => C(f));
@@ -22,11 +23,12 @@ export function loadContent() {
   const toolLessons = (tb.lessons || []).map(f => C(f));
   const exIndex = existsSync(resolve(ROOT, 'learning-content/exams/index.json')) ? C('exams/index.json').exams : [];
   const exams = exIndex.map(id => C(`exams/${id}.json`));
-  return { lessons, toolLessons, toolbox: tb, exams };
+  const skillNames = existsSync(resolve(ROOT, 'learning-content/exam-skills.json')) ? C('exam-skills.json').skills : {};
+  return { lessons, toolLessons, toolbox: tb, exams, skillNames };
 }
 
 // ---------- 1. המוצר: כיסוי ואיכות ----------
-export function productAudit({ lessons, toolLessons, toolbox, exams }, profile = DEFAULTS, now = Date.now()) {
+export function productAudit({ lessons, toolLessons, toolbox, exams, skillNames = {} }, profile = DEFAULTS, now = Date.now()) {
   const byTopic = {};
   lessons.forEach(L => (byTopic[L.topic] ||= []).push(L.id));
   const examTopics = TOPICS.filter(t => t.id !== 'short-questions');
@@ -34,18 +36,24 @@ export function productAudit({ lessons, toolLessons, toolbox, exams }, profile =
   const track = k => verified.filter(t => (k === 'common' ? t.status === 'common' : k === 'old' ? !!t.old : !!t.new));
   const cov = list => ({ total: list.length, covered: list.filter(t => byTopic[t.id]).length, missing: list.filter(t => !byTopic[t.id]).map(t => t.name) });
 
-  // נקודות בבחינה אמיתית: שאלה "מכוסה" רק אם לכל נושא שלה יש שיעור
+  // נקודות בבחינה אמיתית, לפי מיומנויות: כל שאלה דורשת רשימת מיומנויות (skills),
+  // וכל שיעור (ראשי או יסוד) מסמן אילו מיומנויות הוא מלמד (covers). כיסוי = החלק מהמיומנויות שנלמד.
+  const taught = new Set([...lessons, ...toolLessons].flatMap(L => L.covers || []));
   const examCoverage = exams.map(X => {
     const qs = X.questions.map(q => {
-      const has = q.topicIds.filter(t => byTopic[t]);
-      return { n: q.n, points: q.points, topics: q.topicIds, full: has.length === q.topicIds.length, partial: has.length > 0 && has.length < q.topicIds.length };
+      const need = q.skills || [];
+      const have = need.filter(k => taught.has(k));
+      const frac = need.length ? have.length / need.length : 0;
+      return { n: q.n, points: q.points, topics: q.topicIds, skills: need, missing: need.filter(k => !taught.has(k)), frac,
+        full: need.length > 0 && frac === 1, partial: frac > 0 && frac < 1 };
     });
     const tot = qs.reduce((s, q) => s + q.points, 0);
     return {
       id: X.id, code: X.code, session: X.session, format: X.format,
+      skillsPct: pct(qs.reduce((s, q) => s + q.points * q.frac, 0), tot),
       fullPct: pct(qs.filter(q => q.full).reduce((s, q) => s + q.points, 0), tot),
       partialPct: pct(qs.filter(q => q.partial).reduce((s, q) => s + q.points, 0), tot),
-      uncovered: qs.filter(q => !q.full && !q.partial).map(q => q.n),
+      uncovered: qs.filter(q => q.frac === 0).map(q => q.n),
       questions: qs,
       parts: X.questions.reduce((s, q) => s + q.parts.length, 0),
       autoChecked: X.questions.flatMap(q => q.parts).filter(p => p.answer).length,
@@ -72,6 +80,7 @@ export function productAudit({ lessons, toolLessons, toolbox, exams }, profile =
     weights: { q1: EXAMS.old.papers[0].weight, q2: EXAMS.old.papers[1].weight },
     toolbox: { lessons: toolLessons.length, topics: tbTopics.length, topicsWithLesson: tbTopics.filter(t => t.lesson).length },
     humanReviewed: lessonInfo.filter(l => l.humanChecked).length,
+    skillNames,
   };
 }
 
@@ -140,7 +149,8 @@ export function formatReport(P, L) {
   }
   line(`- חסרים שיעורים (נושאים משותפים): ${P.coverage.common.missing.join(' · ') || 'אין'}.`);
   for (const e of P.examCoverage) {
-    line(`- שאלון ${e.code} ${e.session}: ${e.fullPct}% מהנקודות בשאלות שכל הנושאים שלהן נלמדים באפליקציה, עוד ${e.partialPct}% בכיסוי חלקי. שאלות בלי שום שיעור: ${e.uncovered.join(', ') || 'אין'}.`);
+    line(`- שאלון ${e.code} ${e.session}: האפליקציה מלמדת ${e.skillsPct}% מהמיומנויות שהשאלון דורש (משוקלל בנקודות). שאלות שכל המיומנויות שלהן נלמדות: ${e.fullPct}% מהנקודות. שאלות בלי אף מיומנות שנלמדת: ${e.uncovered.join(', ') || 'אין'}.`);
+    e.questions.forEach(q => line(`  - שאלה ${q.n} (${q.points} נק׳): ${Math.round(q.frac * 100)}% מהמיומנויות. חסר: ${q.missing.map(k => (P.skillNames || {})[k] || k).join(' · ') || '—'}`));
   }
   line(`- בדיקת אדם (מורה/מומחה) לשיעורים: ${P.humanReviewed}/${P.lessons.length}. בדיקה ממוחשבת של תשובות: בכל קובצי התוכן (npm test).`);
   if (P.unverifiedTopics.length) line(`- נושאים שלא אומת אם הם בבחינה: ${P.unverifiedTopics.join(' · ')}.`);
