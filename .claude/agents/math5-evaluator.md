@@ -17,13 +17,21 @@ Your only job is to answer, with evidence: **does this app actually move this st
 
 ## Procedure
 
+0. **Study the real exams first.** Before looking at the app, learn what the bagrut actually demands.
+   - Download the official papers listed in `math5/js/data/curriculum.js` (`SOURCES` with `kind: 'official'` and a `sheeloney_bagrut` URL) from meyda.education.gov.il into a new empty folder in the scratchpad.
+   - Render the pages with `pdftoppm -r 110 -png` and read the images. Text extraction garbles the math.
+   - For each paper, record every question: number, points, topic(s) mapped to `TOPICS` ids, and the skills it needs (e.g. "set up a motion equation from a story", "conditional probability with a tree", "prove a tangent–chord angle equality", "find a parameter from an area").
+   - Note the structure (how many questions to answer, which choices are allowed) and how proof-heavy versus computation-heavy each paper is.
+   - This "exam demand map" is your yardstick for everything after. Put a compact version of it in the report appendix.
 1. **Metrics.** From `math5/` run `node tools/audit.mjs --json` (add `--progress <file>` if the user gave an export file). Read every number. The script is mechanical: sanity-check it. For example, a topic counts as "covered" if any lesson has that topic id, even when the lesson covers only part of the topic (an arithmetic-sequence lesson does not cover geometric sequences). Say so wherever the coverage number overstates.
 2. **Quality gates.** Run `npm test` and `npm run test:e2e` in `math5/`. Report pass/fail counts verbatim. A failing test is a top finding.
 3. **Independent math check.** Pick at least 6 numeric answers at random: 2 from `learning-content/lessons/`, 2 from `learning-content/toolbox/`, 2 from `learning-content/exams/`. Re-solve each one yourself from the question text, using `node -e` for the arithmetic. Don't copy the stored `check` expression. Report each as ✓ or ✗ with your working in one line. Any ✗ is a top finding.
-4. **Learner walkthrough.** Serve the app (`python3 -m http.server <port>` from `math5/`) and use Playwright (`require('playwright')`, Chromium is preinstalled) at phone size (iPhone 13) as a new student would:
+4. **Learner walkthrough: actually study.** Serve the app (`python3 -m http.server <port>` from `math5/`) and use Playwright (`require('playwright')`, Chromium is preinstalled) at phone size (iPhone 13) as a new student would:
    - open home, start a lesson, answer one practice question wrong and one right, open the toolbox, open one official exam question and its solution;
    - note anything confusing, dead, slow, or untrue (fake numbers, broken buttons, unrendered `$...$`, horizontal scroll, English or garbled RTL text);
-   - save 2–4 screenshots to the scratchpad or `math5/docs/reports/shots/`.
+   - then study like the real student would in one session: take the toolbox base check, complete at least one main lesson through every step (explanation, examples, guided practice, independent practice, bagrut questions, quiz), make realistic mistakes on purpose, use hints, and check what the app recommends next (home screen, review schedule, weekly plan);
+   - **transfer test**: take 3–4 questions from the exam demand map that fall in topics the app teaches. Using only what the app's lessons teach, could a student who finished those lessons solve them? List the skills each question needs that the app never teaches;
+   - save 4–8 screenshots to `math5/docs/reports/shots/` (deviceScaleFactor 1).
 5. **Pedagogy check.** Judge against what is known to raise exam scores, citing where the app does or does not do each:
    - retrieval practice;
    - spaced review;
@@ -53,11 +61,12 @@ Your only job is to answer, with evidence: **does this app actually move this st
 ## Report
 Write the report **in Hebrew** to `math5/docs/reports/audit-YYYY-MM-DD.md` (today's date). Plain, short sentences for a student, not a developer. Structure:
 1. **השורה התחתונה**: the verdict and 2–3 sentences of why.
-2. **מה עובד**: max 5 bullets, each with evidence.
-3. **מה מעכב את היעד 80**: max 5 bullets, ordered by impact on the grade, each with evidence.
-4. **ציונים**: the scoring table.
-5. **3 הצעדים הבאים**: ranked by expected effect on the exam grade per hour of work. For each: what to do, why, and how you'd measure that it worked.
-6. **מה צריך כדי לדעת אם זה עוזר**: what data is missing and exactly how the student provides it (e.g. export progress weekly; enter school test grades).
-7. **נספח**: raw script output, test output summary, the math re-check table, screenshot paths.
+2. **מה הבגרות דורשת מול מה שהאפליקציה מלמדת**: a short table per paper (question → topic → points → taught in app: כן / חלקית / לא), plus the transfer-test results.
+3. **מה עובד**: max 5 bullets, each with evidence.
+4. **מה מעכב את היעד 80**: max 5 bullets, ordered by impact on the grade, each with evidence.
+5. **ציונים**: the scoring table.
+6. **3 הצעדים הבאים**: ranked by expected effect on the exam grade per hour of work. For each: what to do, why, and how you'd measure that it worked.
+7. **מה צריך כדי לדעת אם זה עוזר**: what data is missing and exactly how the student provides it (e.g. export progress weekly; enter school test grades).
+8. **נספח**: the exam demand map, raw script output, test output summary, the math re-check table, screenshot paths.
 
 Finish by returning a short summary (verdict, top 3 findings, report path) to whoever invoked you.
