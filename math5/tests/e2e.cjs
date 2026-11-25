@@ -278,6 +278,7 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(t, '#/exam/35581-2024-summer/2');
       const a = t.locator('.x-part[data-pid="a"]');
       expect(await a.locator('.x-sol').isHidden(), 'הפתרון גלוי מראש');
+      expect((await t.locator('.x-sol').evaluateAll(els => els.map(e => e.innerHTML.trim()).join(''))) === '', 'פתרונות נמצאים בדף (מוסתרים) לפני שביקשו אותם');
       await a.locator('[data-act=solution]').click();
       expect(await a.locator('.x-sol').isVisible(), 'הפתרון לא נפתח');
       await a.locator('[data-act=self-ok]').click();

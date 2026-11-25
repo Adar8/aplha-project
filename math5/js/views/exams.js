@@ -139,6 +139,20 @@ function figHTML(f, cls = '') {
 
 const STATUS_LABEL = { ok: '✓ נכון', 'self-ok': '✓ פתרתי', wrong: 'לא נכון עדיין', review: 'לחזור על זה' };
 
+function solHTML(p) {
+  const a = p.answer;
+  return `
+      ${p.ambiguity ? `<p class="x-warn">${fmt(p.ambiguity)}</p>` : ''}
+      <p class="x-final"><b>תשובה:</b> ${fmt(p.final)}</p>
+      <ol class="x-steps">${p.solution.map(t => `<li>${fmt(t)}</li>`).join('')}</ol>
+      ${p.sketch ? figHTML(p.sketch) : ''}
+      <p class="muted small">פתרון של MATH 5 – לא פתרון רשמי.</p>
+      ${!a ? `<div class="x-self"><span>איך הלך?</span>
+        <button class="btn green sm" data-act="self-ok">פתרתי נכון</button>
+        <button class="btn sm" data-act="self-review">צריך לחזור על זה</button></div>` : ''}
+  `;
+}
+
 function partHTML(X, q, p, st) {
   const key = `${q.n}.${p.id}`, a = p.answer;
   let answer;
@@ -164,16 +178,7 @@ function partHTML(X, q, p, st) {
     <div class="feedback"></div>
     <div class="q-check">${a ? `<button class="btn primary block" data-act="check" ${st?.status === 'ok' ? '' : 'disabled'}>בדיקה</button>` : ''}</div>
     <div class="q-tools"><button class="btn tertiary sm" data-act="solution" aria-expanded="false">הצגת פתרון</button></div>
-    <div class="x-sol" hidden>
-      ${p.ambiguity ? `<p class="x-warn">${fmt(p.ambiguity)}</p>` : ''}
-      <p class="x-final"><b>תשובה:</b> ${fmt(p.final)}</p>
-      <ol class="x-steps">${p.solution.map(t => `<li>${fmt(t)}</li>`).join('')}</ol>
-      ${p.sketch ? figHTML(p.sketch) : ''}
-      <p class="muted small">פתרון של MATH 5 – לא פתרון רשמי.</p>
-      ${!a ? `<div class="x-self"><span>איך הלך?</span>
-        <button class="btn green sm" data-act="self-ok">פתרתי נכון</button>
-        <button class="btn sm" data-act="self-review">צריך לחזור על זה</button></div>` : ''}
-    </div>
+    <div class="x-sol" hidden></div>
   </section>`;
 }
 
@@ -226,6 +231,8 @@ function bindExam(root, X, q) {
     const solBtn = card.querySelector('[data-act="solution"]'), sol = card.querySelector('.x-sol');
     solBtn.addEventListener('click', () => {
       const open = sol.hidden;
+      // הפתרון נכנס לדף רק כשלוחצים – כך הוא לא נמצא בדף (גם לא מוסתר) לפני שביקשו אותו
+      if (open && !sol.childElementCount) { sol.innerHTML = solHTML(p); bindSelf(sol); }
       sol.hidden = !open; solBtn.setAttribute('aria-expanded', String(open));
       solBtn.textContent = open ? 'הסתרת הפתרון' : 'הצגת פתרון';
       if (open) {
@@ -235,9 +242,11 @@ function bindExam(root, X, q) {
         if (!prev?.status && a) setStatus(card, 'review');
       }
     });
-    card.querySelectorAll('[data-act="self-ok"],[data-act="self-review"]').forEach(b => b.addEventListener('click', () => {
-      const st = b.dataset.act === 'self-ok' ? 'self-ok' : 'review';
-      store.recordExamPart(X.id, key, { status: st }); setStatus(card, st);
-    }));
+    function bindSelf(root) {
+      root.querySelectorAll('[data-act="self-ok"],[data-act="self-review"]').forEach(b => b.addEventListener('click', () => {
+        const st = b.dataset.act === 'self-ok' ? 'self-ok' : 'review';
+        store.recordExamPart(X.id, key, { status: st }); setStatus(card, st);
+      }));
+    }
   });
 }
