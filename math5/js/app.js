@@ -85,6 +85,8 @@ function viewDashboard() {
 
   <div class="home-layout">
     <div class="home-main">
+      <!-- חזרות שהגיע זמנן קודמות לחומר חדש – לכן מעל כרטיס ההמשך -->
+      ${due ? `<a class="review-banner" href="#/review">${art({ glyph: '↻', hue: 'violet' }, 'sm')}<span><b>חזרה להיום</b><span>${esc(due.text)}</span></span><span class="chev" aria-hidden="true">‹</span></a>` : ''}
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-top">
           ${art(cu)}
@@ -99,14 +101,13 @@ function viewDashboard() {
         <a class="btn primary block" href="#/lesson/${cont.id}/${nextSec.id}">${doneSet.size ? 'המשך' : 'להתחלת השיעור'}</a>
       </section>
 
-      ${due ? `<a class="review-banner" href="#/review">${art({ glyph: '↻', hue: 'violet' }, 'sm')}<span><b>חזרה להיום</b><span>${esc(due.text)}</span></span><span class="chev" aria-hidden="true">‹</span></a>` : ''}
 
       <section aria-labelledby="path-h">
         <div class="sec-title"><h2 id="path-h">המסלול שלך</h2><a href="#/plan">כל השיעורים</a></div>
         <ol class="path">
           ${nodes.map((n, i) => `<li class="path-row s-${n.state}" style="--i:${i}">
             ${n.href ? `<a class="node" href="${n.href}" aria-label="${esc(n.title)}">` : '<span class="node" aria-hidden="true">'}<b dir="ltr">${n.glyph}</b>${n.href ? '</a>' : '</span>'}
-            <span class="node-lab"><b>${esc(n.title)}</b><span>${esc(n.sub)}</span></span></li>`).join('')}
+            ${n.href ? `<a class="node-lab" href="${n.href}">` : '<span class="node-lab">'}<b>${esc(n.title)}</b><span>${esc(n.sub)}</span>${n.href ? '</a>' : '</span>'}</li>`).join('')}
         </ol>
       </section>
     </div>
@@ -522,12 +523,15 @@ function reviewHTML(lesson) {
   const general = counts.general || 0;
   const quizBest = L ? L.quiz.best : null;
   const quizLast = ms.lastQuiz;
-  const next = lesson.next && LESSON_BY_ID[lesson.next];
+  // השיעור הבא: מה שמוגדר בשיעור, ואם אין או שכבר גמור – מה שהאפליקציה ממליצה (לא אותו שיעור)
+  const nextDefined = lesson.next && LESSON_BY_ID[lesson.next];
+  const nextRec = extra.nextLessonToStudy();
+  const next = lesson.kind === 'toolbox' ? null : (nextDefined && !lessonFinished(nextDefined) ? nextDefined : nextRec && nextRec.id !== lesson.id ? nextRec : null);
   const rev = st.reviews[lesson.id];
 
   let advice;
   if (quizLast === null) advice = `<p>עוד לא עשית את המבחן הקצר. הוא מה שקובע את רוב רמת השליטה.</p><a class="btn primary" href="#/lesson/${lesson.id}/quiz">למבחן</a>`;
-  else if (quizLast >= 80 && ms.score >= 65) advice = `<p>שולט בנושא ברמה טובה. ${next ? 'אפשר להמשיך לשיעור הבא.' : 'זה השיעור האחרון שקיים כרגע. כדאי לחזור על השיעור החלש ביותר.'}</p>${next ? `<a class="btn primary" href="#/lesson/${next.id}">לשיעור הבא: ${esc(next.title)}</a>` : '<a class="btn primary" href="#/">ללוח הבקרה</a>'}`;
+  else if (quizLast >= 80 && ms.score >= 65) advice = `<p>שולט בנושא ברמה טובה. ${lesson.kind === 'toolbox' ? 'שיעור היסוד הושלם. אפשר לבחור את החיזוק הבא בארגז הכלים.' : next ? 'אפשר להמשיך לשיעור הבא.' : 'סיימת את כל השיעורים שקיימים כרגע. כדאי לתרגל שאלות משאלון בגרות רשמי.'}</p>${lesson.kind === 'toolbox' ? '<a class="btn primary" href="#/toolbox">לארגז הכלים</a>' : next ? `<a class="btn primary" href="#/lesson/${next.id}">לשיעור הבא: ${esc(next.title)}</a>` : '<a class="btn primary" href="#/exams">לשאלוני הבגרות</a>'}`;
   else if (top.length) { const t = lesson.tags[top[0][0]]; advice = `<p>הטעות שחוזרת הכי הרבה: <b>${t.label}</b>. ${t.advice}</p><a class="btn primary" href="#/lesson/${lesson.id}/${t.section}">לחזרה על ${SECTIONS.find(s => s.id === t.section).label}</a>`; }
   else advice = `<p>כדאי לעשות שוב את התרגול העצמאי ואז את המבחן.</p><a class="btn primary" href="#/lesson/${lesson.id}/practice">לתרגול העצמאי</a>`;
 

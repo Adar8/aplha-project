@@ -3,9 +3,11 @@ import { store } from '../store.js';
 import { esc, fmt } from '../core/text.js';
 import { checkAnswer } from '../core/answers.js';
 import { renderMath } from '../ui.js';
+import { LESSONS, TOOL_LESSONS } from '../data/lessons/index.js';
 
 export const EXAMS_LIST = [];
 export const EXAM_BY_ID = {};
+export const SKILL_NAMES = {};
 const BASE = 'learning-content/exams/';
 const FORMAT = { old: 'מתכונת ישנה', new: 'מתכונת חדשה' };
 
@@ -14,6 +16,7 @@ export async function loadExams(fetchJson = defaultFetch) {
   for (const k of Object.keys(EXAM_BY_ID)) delete EXAM_BY_ID[k];
   let manifest;
   try { manifest = await fetchJson(BASE + 'index.json'); } catch { return EXAMS_LIST; }
+  try { Object.assign(SKILL_NAMES, (await fetchJson('learning-content/exam-skills.json')).skills); } catch { /* בלי שמות מיומנויות – פשוט לא מציגים */ }
   const res = await Promise.allSettled(manifest.exams.map(id => fetchJson(`${BASE}${id}.json`)));
   res.forEach(r => { if (r.status === 'fulfilled') { EXAMS_LIST.push(r.value); EXAM_BY_ID[r.value.id] = r.value; } else console.warn('שאלון לא נטען', r.reason); });
   return EXAMS_LIST;
@@ -33,6 +36,24 @@ const qProgress = (X, q) => {
   const review = q.parts.filter(p => ['wrong', 'review'].includes(S[`${q.n}.${p.id}`]?.status)).length;
   return { done, review, total: q.parts.length };
 };
+
+// מה השאלה דורשת, ומה מזה נלמד באפליקציה (לפי covers של השיעורים)
+function skillsHTML(q) {
+  if (!q.skills?.length || !Object.keys(SKILL_NAMES).length) return '';
+  const by = {};
+  [...LESSONS, ...TOOL_LESSONS].forEach(L => (L.covers || []).forEach(k => { (by[k] ||= []).push(L); }));
+  const rows = q.skills.map(k => {
+    const L = (by[k] || [])[0];
+    return L ? `<li class="sk-yes"><span aria-hidden="true">✓</span> ${fmt(SKILL_NAMES[k] || k)} – <a href="#/lesson/${L.id}">${esc(L.title)}</a></li>`
+      : `<li class="sk-no"><span aria-hidden="true">○</span> ${fmt(SKILL_NAMES[k] || k)} – <span>עוד אין שיעור</span></li>`;
+  });
+  const missing = q.skills.filter(k => !by[k]).length;
+  return `<details class="x-skills" ${missing === q.skills.length ? 'open' : ''}>
+    <summary><b>מה צריך כדי לפתור</b> <span class="muted small">${missing ? `${q.skills.length - missing} מתוך ${q.skills.length} נלמדים באפליקציה` : 'הכול נלמד באפליקציה'}</span></summary>
+    <ul>${rows.join('')}</ul>
+    ${missing ? '<p class="muted small">חלק מהמיומנויות עוד לא נלמדות כאן. אפשר לנסות, לפתוח את הפתרון וללמוד ממנו, ולחזור לשאלה כשיהיה שיעור.</p>' : ''}
+  </details>`;
+}
 
 // ---------- כרטיס ברשימת המבחנים ----------
 export function examsHubHTML() {
@@ -96,6 +117,7 @@ export function examRoute(id, nRaw) {
         <span class="muted small">${esc(ch ? ch.title.split(' – ')[1] || ch.title : '')} · <span class="num">${q.points}</span> נק׳ · ${esc(q.topic)}</span>
         <a class="small" href="${pdf}" target="_blank" rel="noopener">עמוד ${q.page} בקובץ המקורי</a>
       </div>
+      ${skillsHTML(q)}
       <div class="x-stem">${q.stem.map(block).join('')}</div>
     </article>
 

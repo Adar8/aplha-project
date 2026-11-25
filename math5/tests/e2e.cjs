@@ -190,7 +190,9 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(t, '#/basecheck'); await t.click('#bcStart'); await t.waitForSelector('#bcForm');
       for (let i = 0; i < 20 && await t.locator('#bcSkip').count(); i++) { await t.click('#bcSkip'); await t.waitForTimeout(40); }
       await go(t, '#/lesson/arithmetic-sequence/guided');
-      const btn = t.locator('.prereq a.btn');
+      expect(await t.locator('.prereq-mini').count() === 1 && !(await t.locator('.prereq-mini').getAttribute('open')), 'מחוץ לשלב ההסבר החיזוק צריך להיות מקופל');
+      await t.click('.prereq-mini summary');
+      const btn = t.locator('.prereq-mini a.btn');
       expect(await btn.count() === 1, 'אין כפתור "צריך חיזוק"');
       const href = await btn.getAttribute('href');
       expect(href.startsWith('#/lesson/tb-'), 'הכפתור לא מוביל לשיעור יסוד: ' + href);
@@ -267,6 +269,11 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await c.locator('input').fill('12'); await c.locator('[data-act=check]').click();
       expect(await c.locator('.feedback.ok').count() === 1, 'תשובה נכונה לא סומנה');
       await go(t, '#/exam/35581-2024-summer/2');
+      const sk = await t.locator('.x-skills').innerText();
+      expect(sk.includes('סדרה הנדסית') && sk.includes('עוד אין שיעור'), 'שאלה 2 לא מסמנת שסדרה הנדסית עוד לא נלמדת');
+      await go(t, '#/exam/35581-2024-summer/5');
+      expect(await t.locator('.x-skills a[href="#/lesson/sine-cosine-law"]').count() >= 1, 'שאלה 5 לא מקשרת לשיעור משפט הסינוסים');
+      await go(t, '#/exam/35581-2024-summer/2');
       const a = t.locator('.x-part[data-pid="a"]');
       expect(await a.locator('.x-sol').isHidden(), 'הפתרון גלוי מראש');
       await a.locator('[data-act=solution]').click();
@@ -292,6 +299,22 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
         const w = await m.evaluate(() => [innerWidth, document.documentElement.scrollWidth]);
         expect(w[0] <= 391 && w[1] <= 391, `${h}: רוחב הדף ${w[1]}px (חלון ${w[0]}px)`);
       }
+      await m.context().close();
+    });
+
+    await step('טלפון: מסך הסיום של שיעור (ניתוח והמשך) לא רחב מהמסך, והמסלול בבית לחיץ', async () => {
+      const m = await newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+      await go(m, '#/lesson/arithmetic-sequence/quiz');
+      for (const [id, v] of Object.entries({ q1: '47', q2: '136', q3: '5', q5: '13' })) await m.locator(`.q[data-q="${id}"] input`).fill(v);
+      await m.click('#quiz [type=submit]'); await m.waitForSelector('#quizResult .huge');
+      await go(m, '#/lesson/arithmetic-sequence/review');
+      const w = await m.evaluate(() => [innerWidth, document.documentElement.scrollWidth]);
+      expect(w[0] <= 391 && w[1] <= 391, `מסך הסיום רחב מהמסך: ${w[1]}px`);
+      await go(m, '#/');
+      const lab = m.locator('.path a.node-lab').first();
+      expect(await lab.count() === 1, 'השם של שלב במסלול לא לחיץ');
+      await lab.click(); await m.waitForTimeout(300);
+      expect(/#\/(lesson|diagnostic)/.test(m.url()), 'לחיצה על שם במסלול לא פתחה כלום');
       await m.context().close();
     });
 

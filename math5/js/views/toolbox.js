@@ -52,13 +52,17 @@ export function prereqBanner(lesson, onExplain) {
   const list = gaps.length ? gaps : (!checked && onExplain ? unknown : []);
   if (!list.length) return '';
   const target = list.find(t => t.lesson && LESSON_BY_ID[t.lesson]);
+  const btn = target ? `<a class="btn sm" href="#/lesson/${target.lesson}" data-return="${esc(location.hash)}" data-return-title="${esc(lesson.title)}">לחיזוק: ${esc(target.name)}</a>`
+    : `<a class="btn sm" href="#/toolbox" data-return="${esc(location.hash)}" data-return-title="${esc(lesson.title)}">לארגז הכלים</a>`;
+  // מחוץ לשלב ההסבר: שורה אחת מקופלת, כדי לא לדחוף את השאלה למטה בטלפון
+  if (!onExplain) return `<details class="prereq-mini"><summary><span aria-hidden="true">🧰</span> צריך חיזוק? <span class="muted">(${list.length} ${list.length === 1 ? 'נושא' : 'נושאים'})</span></summary>
+    <div class="prereq-mini-body"><span class="prereq-list">${list.map(t => `<span class="badge b-found">${esc(t.name)}</span>`).join('')}</span>${btn}</div></details>`;
   return `<aside class="prereq" aria-label="דרישות קדם">
     ${art('🧰', 'amber')}
     <div class="prereq-txt"><b>צריך חיזוק? בוא נשלים את הבסיס</b>
       <span>${gaps.length ? 'לפי הבדיקה, כדאי לחזק לפני השיעור:' : 'השיעור נשען על הנושאים האלה. אם משהו לא יושב טוב, כדאי לחזק:'}</span>
       <span class="prereq-list">${list.map(t => `<span class="badge b-found">${esc(t.name)}</span>`).join('')}</span></div>
-    ${target ? `<a class="btn sm" href="#/lesson/${target.lesson}" data-return="${esc(location.hash)}" data-return-title="${esc(lesson.title)}">לחיזוק: ${esc(target.name)}</a>`
-      : `<a class="btn sm" href="#/toolbox" data-return="${esc(location.hash)}" data-return-title="${esc(lesson.title)}">לארגז הכלים</a>`}
+    ${btn}
   </aside>`;
 }
 // לוחצים על כפתור החיזוק – שומרים לאן לחזור
@@ -94,7 +98,7 @@ export function viewToolbox() {
   <section class="tb-check">
     ${art('✓', 'teal')}
     <div class="tb-check-txt">${bc?.finishedAt
-      ? `<h2>בדיקת הבסיס: ${recs.length ? `נמצאו ${recs.length} נושאים לחיזוק` : 'לא נמצאו פערים'}</h2><p>${recLessons.length ? 'המסלול האישי שלך מסומן למטה בכתום.' : recs.length ? 'שיעורי היסוד לנושאים האלה בהכנה. בינתיים כדאי לתרגל במחברת ובמחשבון.' : 'אפשר להתחיל ישר בשיעורים, ולחזור לכאן כשצריך.'}</p>`
+      ? `<h2>בדיקת הבסיס: ${recs.length ? `נשארו ${recs.length} נושאים לחיזוק` : 'לא נשארו פערים'}</h2><p class="small muted">${recs.length ? `${recLessons.length} מהם עם שיעור יסוד מוכן${recs.length > recLessons.length ? `, ${recs.length - recLessons.length} בהכנה` : ''}. המספר יורד כשמסיימים שיעור יסוד.` : ''}</p><p>${recLessons.length ? 'המסלול האישי שלך מסומן למטה בכתום.' : recs.length ? 'שיעורי היסוד לנושאים האלה בהכנה. בינתיים כדאי לתרגל במחברת ובמחשבון.' : 'אפשר להתחיל ישר בשיעורים, ולחזור לכאן כשצריך.'}</p>`
       : '<h2>בדיקת בסיס קצרה</h2><p>12 שאלות קלות, בערך 10 דקות. היא לא בגרות – רק מראה מה כבר יושב ומה כדאי לחזק. אפשר גם לדלג.</p>'}</div>
     <div class="tb-check-actions">${bc?.finishedAt
       ? `${recLessons.length ? `<a class="btn primary" href="#/lesson/${recLessons[0].lesson}">להתחיל במסלול</a>` : ''}<a class="btn" href="#/basecheck">לתוצאות</a>`
@@ -226,10 +230,11 @@ function baseResults(d) {
     <div class="grid-2">
       <section class="card"><div class="card-title">${art('✓', 'green', 'xs')}<h2>מה כבר יושב</h2></div>
         ${known.length ? `<ul class="topics">${known.map(t => topicRow(t)).join('')}</ul>` : '<p class="muted">עוד לא זיהינו נושאים שאתה שולט בהם. זה בסדר – בדיוק בשביל זה יש ארגז כלים.</p>'}</section>
-      <section class="card"><div class="card-title">${art('!', 'amber', 'xs')}<h2>מה כדאי לחזק</h2></div>
+      <section class="card"><div class="card-title">${art('!', 'amber', 'xs')}<h2>מה כדאי לחזק${gaps.length ? ` (${gaps.length})` : ''}</h2></div>
         ${gaps.length ? `<ul class="topics">${gaps.map(t => topicRow(t)).join('')}</ul>` : '<p class="muted">לא נמצאו פערים ביסודות שנבדקו.</p>'}</section>
     </div>
     <section class="card"><div class="card-title">${art('→', 'blue', 'xs')}<h2>מסלול ההשלמה האישי שלך</h2></div>
+      ${gaps.length ? `<p class="small muted">${pathTopics.length} מתוך ${gaps.length} הנושאים לחיזוק כבר יש להם שיעור יסוד, והם במסלול${gaps.length > pathTopics.length ? `. ל-${gaps.length - pathTopics.length} האחרים השיעור בהכנה` : ''}.</p>` : ''}
       ${pathTopics.length ? `<ol class="topics found-path">${pathTopics.map(t => topicRow(t)).join('')}</ol>
         <p class="fine">נושאים שעוד אין להם שיעור יסוד מופיעים ברשימת "מה כדאי לחזק" ויתווספו בהמשך.</p>
         <div class="section-end" style="justify-content:flex-start"><a class="btn primary" href="#/lesson/${pathTopics[0].lesson}">להתחיל במסלול</a></div>`
