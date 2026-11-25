@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-25",
+  "generatedBy": "tools/gen-exam-catalog.mjs — מרכיב רק מ-js/data/curriculum.js (SOURCES הרשמיים) ומהקבצים שכבר קיימים בפרויקט",
+  "note": "קטלוג זה כולל רק שאלוני מועד קיץ שכבר אומתו ישירות מול קובץ רשמי של משרד החינוך. לא נוספו שאלונים שהקישור הרשמי שלהם לא נבדק.",
+  "exams": [
+    {
+      "id": "35581-2024-summer",
+      "code": "35581",
+      "session": "קיץ תשפ\"ד, 2024",
+      "format": "old",
+      "source": "https://meyda.education.gov.il/sheeloney_bagrut/2024/6/HEB/35581.pdf",
+      "status": "transcribed_and_blueprinted",
+      "choose": null,
+      "questions": [
+        {
+          "n": 1,
+          "points": 25,
+          "topicIds": [
+            "word-problems"
+          ],
+          "skills": [
+            "word-motion",
+            "fraction-equations"
+          ]
+        },
+        {
+          "n": 2,
+          "points": 25,
+          "topicIds": [
+            "sequences"
+          ],
+          "skills": [
+            "geometric-sequence",
+            "geometric-infinite-sum",
+            "sequence-proof"
+          ]
+        },
+        {
+          "n": 3,
+          "points": 25,
+          "topicIds": [
+            "probability"
+          ],
+          "skills": [
+            "binomial-prob",
+            "conditional-prob"
+          ]
+        },
+        {
+          "n": 4,
+          "points": 25,
+          "topicIds": [
+            "plane-geometry",
+            "plane-trig"
+          ],
+          "skills": [
+            "circle-angles",
+            "tangent-chord",
+            "isosceles-props",
+            "sine-law",
+            "angle-bisector-thm",
+            "area-ratio"
+          ]
+        },
+        {
+          "n": 5,
+          "points": 25,
+          "topicIds": [
+            "plane-trig"
+          ],
+          "skills": [
+            "sine-law",
+            "circumradius",
+            "trig-area",
+            "double-angle",
+            "median-props"
+          ]
+        },
+        {
+          "n": 6,
+          "points": 25,
+          "topicIds": [
+            "calc-rational-root",
+            "integrals"
+          ],
+          "skills": [
+            "rational-func-analysis",
+            "asymptotes",
+            "quotient-rule",
+            "concavity",
+            "antiderivative"
+          ]
+        },
+        {
+          "n": 7,
+          "points": 25,
+          "topicIds": [
+            "calc-trig",
+            "integrals"
+          ],
+          "skills": [
+            "trig-func-analysis",
+            "root-func-derivative",
+            "chain-rule",
+            "derivative-graph",
+            "definite-integral-area"
+          ]
+        },
+        {
+          "n": 8,
+          "points": 25,
+          "topicIds": [
+            "calc-rational-root"
+          ],
+          "skills": [
+            "optimization",
+            "root-func-derivative",
+            "chain-rule"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "35582-2025-summer",
+      "code": "35582",
+      "session": "קיץ תשפ\"ה, 2025",
+      "format": "old",
+      "source": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35582.PDF",
+      "status": "catalogued_only",
+      "choose": null,
+      "questions": []
+    },
+    {
+      "id": "35571-2025-summer",
+      "code": "35571",
+      "session": "קיץ תשפ\"ה, 2025",
+      "format": "new",
+      "source": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35571.pdf",
+      "status": "catalogued_only",
+      "choose": null,
+      "questions": []
+    },
+    {
+      "id": "35572-2025-summer",
+      "code": "35572",
+      "session": "קיץ תשפ\"ה, 2025",
+      "format": "new",
+      "source": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35572.pdf",
+      "status": "catalogued_only",
+      "choose": null,
+      "questions": []
+    }
+  ],
+  "statusLegend": {
+    "transcribed_and_blueprinted": "יש קובץ שאלון מלא באפליקציה (learning-content/exams) עם נוסח, פתרונות ותיוג מיומנויות לכל שאלה.",
+    "blueprinted": "אין העתקת נוסח השאלות (זכויות יוצרים), אבל יש מיפוי שאלה→ניקוד→מיומנויות (learning-content/exams/blueprints).",
+    "catalogued_only": "הקישור הרשמי ידוע ומאומת, אבל עוד לא נותח לשאלות ומיומנויות. ממתין להרצת exam-analyst."
+  },
+  "notYetCollected": {
+    "note": "לא אומתו עדיין קישורים רשמיים למועדי חורף, מועד ב׳, או שנים נוספות. אין להוסיף שורה כאן בלי קישור רשמי שנבדק בפועל (לא להמציא כתובת).",
+    "sessionsSuspectedToExist": [
+      "מועד חורף (ככל שקיים ל-5 יח\"ל)",
+      "מועד ב׳",
+      "שנים קודמות ל-2024"
+    ],
+    "howToFill": "exam-analyst מאתר קישור רשמי תקין באתר meyda.education.gov.il/sheeloney_bagrut, מוסיף אותו ל-SOURCES ב-curriculum.js (באחריות curriculum-architect), ואז מריץ בלופרינט."
+  }
+}

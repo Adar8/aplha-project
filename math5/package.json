@@ -5,6 +5,10 @@
     "test:e2e": "node tests/e2e.cjs",
     "test:all": "npm test && npm run test:e2e",
     "validate": "node tests/validate-content.mjs",
-    "audit": "node tools/audit.mjs"
+    "audit": "node tools/audit.mjs",
+    "gen:curriculum-map": "node tools/gen-curriculum-map.mjs",
+    "gen:coverage-matrix": "node tools/gen-coverage-matrix.mjs",
+    "gen:exam-catalog": "node tools/gen-exam-catalog.mjs",
+    "gen:all": "npm run gen:curriculum-map && npm run gen:coverage-matrix && npm run gen:exam-catalog"
   }
 }

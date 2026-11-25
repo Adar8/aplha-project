@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-25",
+  "generatedBy": "tools/gen-curriculum-map.mjs (מתוך js/data/curriculum.js ומתוך learning-content/lessons בפועל)",
+  "note": "נוצר אוטומטית. אל תערכו ידנית — הריצו מחדש את הסקריפט אחרי כל שינוי בשיעורים או בתוכנית הלימודים.",
+  "weights": {
+    "old": {
+      "035581": 60,
+      "035582": 40
+    }
+  },
+  "topics": [
+    {
+      "id": "word-problems",
+      "name": "בעיות מילוליות: תנועה, הספק, קנייה ומכירה",
+      "status": "old",
+      "confidence": "secondary",
+      "old": "035581",
+      "new": null,
+      "lessons": []
+    },
+    {
+      "id": "sequences",
+      "name": "סדרות: חשבונית, הנדסית, נסיגה",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": [
+        "arithmetic-sequence",
+        "geometric-sequence"
+      ]
+    },
+    {
+      "id": "probability",
+      "name": "הסתברות: מותנית, דיאגרמת עץ, התפלגות בינומית",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "induction",
+      "name": "אינדוקציה מתמטית",
+      "status": "new",
+      "confidence": "official",
+      "old": null,
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "plane-geometry",
+      "name": "גאומטריה במישור: מעגל, דמיון, משולשים",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "plane-trig",
+      "name": "טריגונומטריה במישור: משפט הסינוסים והקוסינוסים",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": [
+        "sine-cosine-law"
+      ]
+    },
+    {
+      "id": "calc-poly",
+      "name": "חדו\"א: פולינומים – נגזרת, משיק, קיצון",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": [
+        "derivative-extrema"
+      ]
+    },
+    {
+      "id": "calc-rational-root",
+      "name": "חדו\"א: פונקציות רציונליות ופונקציות שורש",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "calc-trig",
+      "name": "חדו\"א: פונקציות טריגונומטריות",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "integrals",
+      "name": "אינטגרלים ושטחים",
+      "status": "common",
+      "confidence": "official",
+      "old": "035581",
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "accum-integral",
+      "name": "האינטגרל כפונקציה צוברת שטח",
+      "status": "check",
+      "confidence": "secondary",
+      "old": null,
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "pre-analysis",
+      "name": "קדם-אנליזה: תכונות גרפיות וטרנספורמציות של פונקציות",
+      "status": "check",
+      "confidence": "secondary",
+      "old": null,
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "short-questions",
+      "name": "שאלות קצרות מכל החומר (מבנה, לא נושא)",
+      "status": "new",
+      "confidence": "official-varies",
+      "old": null,
+      "new": "035571",
+      "lessons": []
+    },
+    {
+      "id": "analytic",
+      "name": "גאומטריה אנליטית: ישר, מעגל, מקומות גאומטריים",
+      "status": "common",
+      "confidence": "official",
+      "old": "035582",
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "conics",
+      "name": "חתכי חרוט: פרבולה, אליפסה",
+      "status": "check",
+      "confidence": "unverified",
+      "old": "035582",
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "hyperbola",
+      "name": "היפרבולה",
+      "status": "check",
+      "confidence": "secondary",
+      "old": null,
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "vectors",
+      "name": "וקטורים במרחב: ישרים ומישורים",
+      "status": "common",
+      "confidence": "official",
+      "old": "035582",
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "space-trig",
+      "name": "טריגונומטריה במרחב",
+      "status": "common",
+      "confidence": "official",
+      "old": "035582",
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "complex",
+      "name": "מספרים מרוכבים",
+      "status": "common",
+      "confidence": "official",
+      "old": "035582",
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "growth",
+      "name": "גדילה ודעיכה",
+      "status": "common",
+      "confidence": "official-varies",
+      "old": "035582",
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "power-func",
+      "name": "פונקציות חזקה עם מעריך רציונלי",
+      "status": "check",
+      "confidence": "official-varies",
+      "old": "035582",
+      "new": null,
+      "lessons": []
+    },
+    {
+      "id": "exp-log",
+      "name": "חדו\"א: פונקציות מעריכיות ולוגריתמיות",
+      "status": "common",
+      "confidence": "official",
+      "old": "035582",
+      "new": "035572",
+      "lessons": []
+    },
+    {
+      "id": "solids",
+      "name": "גופים: גליל, חרוט, כדור",
+      "status": "check",
+      "confidence": "unverified",
+      "old": null,
+      "new": null,
+      "lessons": []
+    }
+  ],
+  "coveredCount": 3,
+  "totalCount": 23
+}

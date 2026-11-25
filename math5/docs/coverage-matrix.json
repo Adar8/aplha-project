@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-25",
+  "generatedBy": "tools/gen-coverage-matrix.mjs → tools/audit.mjs (productAudit) — אין כאן נתוני לומד, רק כיסוי תוכן",
+  "note": "כיסוי שאלון נמדד לפי מיומנויות (exam-skills.json), לא לפי נושא בלבד. לשאלון יש כיסוי כאן רק אחרי שיש לו קובץ exam/blueprint עם skills לכל שאלה.",
+  "product": {
+    "weeksLeft": 27,
+    "hoursAvailable": 189,
+    "lessons": [
+      {
+        "id": "arithmetic-sequence",
+        "title": "סדרה חשבונית",
+        "topic": "sequences",
+        "minutes": 60,
+        "questions": 16,
+        "officialQuestions": 0,
+        "review": "draft",
+        "humanChecked": false
+      },
+      {
+        "id": "geometric-sequence",
+        "title": "סדרה הנדסית",
+        "topic": "sequences",
+        "minutes": 75,
+        "questions": 16,
+        "officialQuestions": 0,
+        "review": "draft",
+        "humanChecked": false
+      },
+      {
+        "id": "derivative-extrema",
+        "title": "נגזרת, משיק ונקודות קיצון של פולינום",
+        "topic": "calc-poly",
+        "minutes": 75,
+        "questions": 16,
+        "officialQuestions": 0,
+        "review": "draft",
+        "humanChecked": false
+      },
+      {
+        "id": "sine-cosine-law",
+        "title": "משפט הסינוסים ומשפט הקוסינוסים",
+        "topic": "plane-trig",
+        "minutes": 60,
+        "questions": 16,
+        "officialQuestions": 0,
+        "review": "draft",
+        "humanChecked": false
+      }
+    ],
+    "contentHours": 11.3,
+    "coverage": {
+      "common": {
+        "total": 14,
+        "covered": 3,
+        "missing": [
+          "הסתברות: מותנית, דיאגרמת עץ, התפלגות בינומית",
+          "גאומטריה במישור: מעגל, דמיון, משולשים",
+          "חדו\"א: פונקציות רציונליות ופונקציות שורש",
+          "חדו\"א: פונקציות טריגונומטריות",
+          "אינטגרלים ושטחים",
+          "גאומטריה אנליטית: ישר, מעגל, מקומות גאומטריים",
+          "וקטורים במרחב: ישרים ומישורים",
+          "טריגונומטריה במרחב",
+          "מספרים מרוכבים",
+          "גדילה ודעיכה",
+          "חדו\"א: פונקציות מעריכיות ולוגריתמיות"
+        ]
+      },
+      "old": {
+        "total": 15,
+        "covered": 3,
+        "missing": [
+          "הסתברות: מותנית, דיאגרמת עץ, התפלגות בינומית",
+          "גאומטריה במישור: מעגל, דמיון, משולשים",
+          "חדו\"א: פונקציות רציונליות ופונקציות שורש",
+          "חדו\"א: פונקציות טריגונומטריות",
+          "אינטגרלים ושטחים",
+          "גאומטריה אנליטית: ישר, מעגל, מקומות גאומטריים",
+          "וקטורים במרחב: ישרים ומישורים",
+          "טריגונומטריה במרחב",
+          "מספרים מרוכבים",
+          "גדילה ודעיכה",
+          "פונקציות חזקה עם מעריך רציונלי",
+          "חדו\"א: פונקציות מעריכיות ולוגריתמיות"
+        ]
+      },
+      "new": {
+        "total": 15,
+        "covered": 3,
+        "missing": [
+          "הסתברות: מותנית, דיאגרמת עץ, התפלגות בינומית",
+          "אינדוקציה מתמטית",
+          "גאומטריה במישור: מעגל, דמיון, משולשים",
+          "חדו\"א: פונקציות רציונליות ופונקציות שורש",
+          "חדו\"א: פונקציות טריגונומטריות",
+          "אינטגרלים ושטחים",
+          "גאומטריה אנליטית: ישר, מעגל, מקומות גאומטריים",
+          "וקטורים במרחב: ישרים ומישורים",
+          "טריגונומטריה במרחב",
+          "מספרים מרוכבים",
+          "גדילה ודעיכה",
+          "חדו\"א: פונקציות מעריכיות ולוגריתמיות"
+        ]
+      }
+    },
+    "unverifiedTopics": [
+      "בעיות מילוליות: תנועה, הספק, קנייה ומכירה",
+      "האינטגרל כפונקציה צוברת שטח",
+      "קדם-אנליזה: תכונות גרפיות וטרנספורמציות של פונקציות",
+      "חתכי חרוט: פרבולה, אליפסה",
+      "היפרבולה",
+      "גופים: גליל, חרוט, כדור"
+    ],
+    "examCoverage": [
+      {
+        "id": "35581-2024-summer",
+        "code": "35581",
+        "session": "קיץ תשפ\"ד, 2024",
+        "format": "old",
+        "skillsPct": 22,
+        "fullPct": 13,
+        "partialPct": 25,
+        "uncovered": [
+          1,
+          3,
+          6,
+          7,
+          8
+        ],
+        "questions": [
+          {
+            "n": 1,
+            "points": 25,
+            "topics": [
+              "word-problems"
+            ],
+            "skills": [
+              "word-motion",
+              "fraction-equations"
+            ],
+            "missing": [
+              "word-motion",
+              "fraction-equations"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          },
+          {
+            "n": 2,
+            "points": 25,
+            "topics": [
+              "sequences"
+            ],
+            "skills": [
+              "geometric-sequence",
+              "geometric-infinite-sum",
+              "sequence-proof"
+            ],
+            "missing": [],
+            "frac": 1,
+            "full": true,
+            "partial": false
+          },
+          {
+            "n": 3,
+            "points": 25,
+            "topics": [
+              "probability"
+            ],
+            "skills": [
+              "binomial-prob",
+              "conditional-prob"
+            ],
+            "missing": [
+              "binomial-prob",
+              "conditional-prob"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          },
+          {
+            "n": 4,
+            "points": 25,
+            "topics": [
+              "plane-geometry",
+              "plane-trig"
+            ],
+            "skills": [
+              "circle-angles",
+              "tangent-chord",
+              "isosceles-props",
+              "sine-law",
+              "angle-bisector-thm",
+              "area-ratio"
+            ],
+            "missing": [
+              "circle-angles",
+              "tangent-chord",
+              "isosceles-props",
+              "angle-bisector-thm",
+              "area-ratio"
+            ],
+            "frac": 0.16666666666666666,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 5,
+            "points": 25,
+            "topics": [
+              "plane-trig"
+            ],
+            "skills": [
+              "sine-law",
+              "circumradius",
+              "trig-area",
+              "double-angle",
+              "median-props"
+            ],
+            "missing": [
+              "double-angle",
+              "median-props"
+            ],
+            "frac": 0.6,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 6,
+            "points": 25,
+            "topics": [
+              "calc-rational-root",
+              "integrals"
+            ],
+            "skills": [
+              "rational-func-analysis",
+              "asymptotes",
+              "quotient-rule",
+              "concavity",
+              "antiderivative"
+            ],
+            "missing": [
+              "rational-func-analysis",
+              "asymptotes",
+              "quotient-rule",
+              "concavity",
+              "antiderivative"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          },
+          {
+            "n": 7,
+            "points": 25,
+            "topics": [
+              "calc-trig",
+              "integrals"
+            ],
+            "skills": [
+              "trig-func-analysis",
+              "root-func-derivative",
+              "chain-rule",
+              "derivative-graph",
+              "definite-integral-area"
+            ],
+            "missing": [
+              "trig-func-analysis",
+              "root-func-derivative",
+              "chain-rule",
+              "derivative-graph",
+              "definite-integral-area"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          },
+          {
+            "n": 8,
+            "points": 25,
+            "topics": [
+              "calc-rational-root"
+            ],
+            "skills": [
+              "optimization",
+              "root-func-derivative",
+              "chain-rule"
+            ],
+            "missing": [
+              "optimization",
+              "root-func-derivative",
+              "chain-rule"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          }
+        ],
+        "parts": 40,
+        "autoChecked": 19
+      }
+    ],
+    "weights": {
+      "q1": 60,
+      "q2": 40
+    },
+    "toolbox": {
+      "lessons": 15,
+      "topics": 37,
+      "topicsWithLesson": 20
+    },
+    "humanReviewed": 0,
+    "skillNames": {
+      "word-motion": "בניית משוואות מבעיית תנועה",
+      "equation-system": "פתרון מערכת משוואות",
+      "quadratic-eq": "משוואה ריבועית",
+      "arithmetic-sequence": "סדרה חשבונית: איבר כללי וסכום",
+      "geometric-sequence": "סדרה הנדסית: איבר כללי וסכום",
+      "geometric-infinite-sum": "סכום סדרה הנדסית אין־סופית",
+      "sequence-proof": "הוכחה שסדרה היא חשבונית/הנדסית",
+      "binomial-prob": "התפלגות בינומית (ברנולי)",
+      "conditional-prob": "הסתברות מותנית",
+      "circle-angles": "זוויות במעגל (היקפיות ומרכזיות)",
+      "tangent-chord": "זווית בין משיק למיתר",
+      "isosceles-props": "תכונות משולש שווה שוקיים",
+      "angle-bisector-thm": "משפט חוצה הזווית",
+      "area-ratio": "יחס שטחים של משולשים",
+      "sine-law": "משפט הסינוסים",
+      "cosine-law": "משפט הקוסינוסים",
+      "circumradius": "רדיוס המעגל החוסם ($2R$)",
+      "trig-area": "שטח משולש בעזרת סינוס",
+      "double-angle": "זהויות זווית כפולה ומשולשת",
+      "median-props": "תיכון: תכונות ושימוש",
+      "poly-derivative": "נגזרת של פולינום",
+      "tangent-line": "משוואת משיק",
+      "poly-extrema": "נקודות קיצון ותחומי עלייה וירידה",
+      "rational-func-analysis": "חקירת פונקציה רציונלית",
+      "asymptotes": "אסימפטוטות",
+      "quotient-rule": "נגזרת של מנה",
+      "chain-rule": "כלל השרשרת",
+      "root-func-derivative": "נגזרת של פונקציית שורש",
+      "concavity": "קעירות ונגזרת שנייה",
+      "trig-func-analysis": "חקירת פונקציה טריגונומטרית",
+      "derivative-graph": "קשר בין גרף הפונקציה לגרף הנגזרת",
+      "antiderivative": "פונקציה קדומה (כולל הצבה)",
+      "definite-integral-area": "אינטגרל מסוים ושטח בין גרפים",
+      "optimization": "בעיית קיצון מילולית/גאומטרית",
+      "fraction-equations": "משוואות ומערכות עם נעלם במכנה",
+      "word-work": "בניית משוואות מבעיית הספק/עבודה",
+      "word-buy-sell": "בניית משוואות מבעיית קנייה ומכירה",
+      "recursive-sequence": "סדרה המוגדרת בנוסחת נסיגה",
+      "sequence-sum-notation": "סכומים של סדרות מעורבות וסדרות חדשות מסדרה נתונה",
+      "induction": "הוכחה באינדוקציה מתמטית",
+      "prob-basic": "הסתברות בסיסית ומרחב מדגם",
+      "prob-tree": "דיאגרמת עץ והסתברות שלמה",
+      "bayes": "הסתברות מותנית הפוכה (בייס)",
+      "prob-independence": "מאורעות בלתי תלויים",
+      "prob-table": "טבלה דו-ממדית (טבלת שכיחויות/הסתברויות)",
+      "angle-sum": "סכום זוויות במשולש וזוויות צמודות וקודקודיות",
+      "parallel-angles": "זוויות בין ישרים מקבילים",
+      "polygon-area": "שטחי משולש, מלבן, מקבילית, טרפז",
+      "quadrilateral-props": "תכונות מקבילית, מלבן, מעוין, ריבוע וטרפז",
+      "congruence": "חפיפת משולשים",
+      "similarity": "דמיון משולשים ויחס דמיון",
+      "right-triangle-trig": "טריגונומטריה במשולש ישר זווית (sin, cos, tan)",
+      "pythagoras": "משפט פיתגורס",
+      "midsegment": "קטע אמצעים במשולש ובטרפז",
+      "cyclic-quad": "מרובע חסום במעגל",
+      "tangent-props": "תכונות משיקים למעגל (רדיוס מאונך, משיקים שווים)",
+      "inscribed-circle": "מעגל חסום ומעגל חוסם משולש",
+      "trig-identities": "זהויות טריגונומטריות בסיסיות",
+      "trig-equations": "משוואות טריגונומטריות",
+      "domain": "תחום הגדרה",
+      "func-analysis-general": "חקירת פונקציה: חיתוך צירים, עלייה וירידה, קיצון, סקיצה",
+      "product-rule": "נגזרת של מכפלה",
+      "trig-derivative": "נגזרות של פונקציות טריגונומטריות",
+      "tangent-normal": "משיק ונורמל לגרף",
+      "parameter-problems": "פונקציה עם פרמטר: מציאת הפרמטר מנתון",
+      "inflection": "נקודות פיתול",
+      "integral-basic": "אינטגרל לא מסוים ופונקציה קדומה",
+      "area-between-curves": "שטח בין שני גרפים",
+      "volume-revolution": "נפח גוף סיבוב",
+      "accumulation-function": "האינטגרל כפונקציה צוברת שטח",
+      "transformations": "הזזה, מתיחה ושיקוף של גרפים",
+      "even-odd": "פונקציה זוגית ואי־זוגית",
+      "line-eq": "משוואת ישר, שיפוע, ישרים מקבילים ומאונכים",
+      "distance-point-line": "מרחק בין נקודות ומרחק נקודה מישר",
+      "circle-eq": "משוואת מעגל",
+      "circle-line": "חיתוך ישר ומעגל, משיק למעגל",
+      "locus": "מקום גאומטרי",
+      "parabola": "פרבולה (מוקד ומדריך)",
+      "ellipse": "אליפסה",
+      "hyperbola": "היפרבולה",
+      "vectors-basic": "וקטורים: חיבור, כפל בסקלר, הצגה אלגברית",
+      "dot-product": "מכפלה סקלרית וזווית בין וקטורים",
+      "line-space": "ישר במרחב",
+      "plane-eq": "משוואת מישור",
+      "line-plane": "מצבים הדדיים: ישר-מישור, מישור-מישור, זוויות ומרחקים",
+      "space-trig": "טריגונומטריה במרחב (תיבה, פירמידה, מנסרה)",
+      "complex-algebraic": "מספרים מרוכבים: הצגה אלגברית ופעולות",
+      "complex-polar": "הצגה קוטבית, דה-מואבר ושורשים",
+      "complex-equations": "משוואות עם מספרים מרוכבים",
+      "growth-decay": "גדילה ודעיכה מעריכית",
+      "exp-log-rules": "חוקי חזקות ולוגריתמים, משוואות מעריכיות ולוגריתמיות",
+      "exp-derivative": "נגזרת של פונקציה מעריכית",
+      "log-derivative": "נגזרת של פונקציה לוגריתמית",
+      "exp-log-analysis": "חקירת פונקציות מעריכיות ולוגריתמיות",
+      "exp-log-integral": "אינטגרלים של פונקציות מעריכיות ולוגריתמיות",
+      "power-functions": "פונקציות חזקה עם מעריך רציונלי"
+    }
+  }
+}
