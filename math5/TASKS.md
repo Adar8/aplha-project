@@ -8,9 +8,9 @@
 
 | # | משימה | סטטוס | ראיה |
 |---|---|---|---|
-| 1 | Smoke Test אמיתי לכל אחד מ-8 הסוכנים (לא רק frontmatter) | **בתהליך** — סבב ראשון הופעל | דוחות סוכנים יתווספו ל-`docs/reports/` |
-| 2 | אימות הפרדת תפקידים בפועל (לא רק בתיאוריה) | **בתהליך** — חלק מ-#1 | ראו תוצאות הסבב |
-| 3 | אימות שה-student-simulator וה-independent-examiner לא יכולים לגשת לפתרונות/קוד בזמן "מבחן" | **בתהליך** — חלק מ-#1, כולל בדיקת DOM לפני לחיצה | ראו תוצאות הסבב |
+| 1 | Smoke Test אמיתי לכל אחד מ-8 הסוכנים (לא רק frontmatter) | **בתהליך (3/8 עברו, 1 חשף בעיה אמיתית ותוקן, 4 ממתינים)**: `curriculum-architect` ✓ (אידמפוטנטי, `npm test` 45/45), `math-auditor` ✓ (ביקורת עצמאית שנייה על `geometric-sequence`, 0 ✗ מתמטי, 3 ממצאים קוסמטיים — ראו שורה למטה), `qa-regression` רץ, `supervisor` ✗→תוקן (ראו #11 למטה — חשף שסוכן-משנה לא יכול לשגר סוכן נוסף; `exam-analyst` שוגר ישירות במקום). `exam-analyst`×2 (35582, 35571) רצים כעת ישירות. `lesson-builder`, `student-simulator`, `independent-examiner` עדיין בתור | דוחות ב-`docs/reports/`, שורות ביומן ההחלטות |
+| 2 | אימות הפרדת תפקידים בפועל (לא רק בתיאוריה) | **אומת חלקית**: `math-auditor` סירב (במובנה — לא כתב את השיעור) לאשר את עצמו, ביקר שיעור שנכתב לפני שהיה קיים כסוכן נפרד. `curriculum-architect` לא בנה תוכן, רק הריץ אינטגרציה. נותר לאמת מול `lesson-builder`/`independent-examiner` כשיגיעו | ראו ממצאי הסבב למעלה |
+| 3 | אימות שה-student-simulator וה-independent-examiner לא יכולים לגשת לפתרונות/קוד בזמן "מבחן" | **ממתין** — עדיין בתור ל-Batch 2 | — |
 | 4 | מנגנון אוטומטי שמזהה שינוי בקובץ תוכן ומריץ בדיקות | **הושלם (עם הסתייגות מתועדת)** | `.claude/settings.json` (PostToolUse hook) + `math5/tools/hooks/content-guard.sh`. נבדק חי: גרסה תקינה עברה, גרסה שבורה (תשובה שגויה בכוונה) נתפסה על ידי **שתי** שיטות עצמאיות (`validate-content.mjs` וגם `check-lesson.mjs`/`tests/verify`) והחזירה קוד יציאה 2; הקובץ שוחזר, `git status` נקי. **הסתייגות:** זהו מנגנון דטרמיניסטי (סקריפטים קבועים) ולא הפעלה אוטונומית של סוכן AI — ביקורת מתמטית/פדגוגית אמיתית עדיין דורשת הפעלה מפורשת (`/math5-audit`, `/math5-qa` וכו'). ראו `content-guard.sh` לפירוט המגבלה. |
 | 5 | שער CI ברמת המאגר (לא תלוי בסשן חי) | **נוצר, לא אומת בפועל** | `.github/workflows/math5-ci.yml` (מריץ `npm test` על push/PR שנוגע ב-`math5/**`, לא ב-`main`). **לא הייתה לי גישה ל-API/CLI של GitHub בסשן הזה כדי לאשר שהריצה בפועל הצליחה ב-Actions** — יש לבדוק בלשונית Actions של המאגר אחרי ה-push, או לבקש בדיקה עם `gh`/MCP כשיהיה זמין. |
 | 6 | בדיקת מודלים מחדש (Opus/Sonnet) | **הושלם** | `exam-analyst`/`lesson-builder`/`math-auditor`/`independent-examiner` → opus (חשיבה מתמטית/נכונות קריטית); `curriculum-architect`/`student-simulator`/`qa-regression`/`supervisor` → sonnet (שגרתי/תיאום). שורה ב-`docs/decision-log.md`. |
@@ -18,6 +18,8 @@
 | 8 | ביקורת רלוונטיות של כל 4 השיעורים הקיימים (9 קריטריונים: מיומנויות, כיסוי אמיתי, פתרון עצמאי, הסברים, גיוון וכו') | **מתוכנן לסבב הבא** אחרי שה-blueprints של 571/582 יהיו זמינים | `math-auditor` + `independent-examiner` |
 | 9 | 11 פקודות ניהול (`/math5-*`) | **הושלם ואומת חי** | `.claude/skills/math5-{status,audit,exams,coverage,build,verify,student,exam,qa,report,cycle}/SKILL.md` — כל 11 הופיעו ברשימת ה-Skills הזמינים בסשן זה מיד אחרי היצירה |
 | 10 | מדדי התקדמות לאורך זמן (היסטוריה, לא רק תמונה אחת) | **הושלם** | `docs/coverage-history.jsonl` (append-only) + שדה `diffFromPrevious` ב-`docs/coverage-matrix.json`; נבדק: הרצה ראשונה דיווחה בכנות "אין ריצה קודמת להשוואה" במקום להמציא מגמה |
+| 11 | **ממצא תשתיתי אמיתי:** סוכן-משנה לא יכול לשגר סוכן-משנה נוסף (כלי `Agent` לא זמין בזמן ריצה גם כשמופיע ב-frontmatter) | **תוקן בתיעוד** | `.claude/agents/supervisor.md` ו-`.claude/skills/math5-cycle/SKILL.md` עודכנו: תיאום בפועל (שיגור סוכנים) חייב לקרות בסשן הראשי/עליון, לא דרך `supervisor` כסוכן-משנה. התגלה ב-Smoke Test של #1. |
+| 12 | (קוסמטי, לא חוסם) 3 מסיחים ב-`geometric-sequence` מתויגים בטעות שלא מתאימה למספר עצמו (p1=3 ו-p2=128 מתויגים `n-vs-n-1` אבל לא נותנים את החזקה n; g3=486 מתויג `sum-vs-term` אבל זה a6 לא a5) | **פתוח, עדיפות נמוכה** | ממצא `math-auditor` ב-`docs/reports/audit-geometric-sequence-smoketest.md`; לתקן דרך `lesson-builder` בסבב תחזוקה, לא דוחה את ה-P0 |
 
 ## פעיל / מוכן להתחלה (שיעורי תוכן — ממתינים לסיום P0 למעלה)
 
@@ -28,8 +30,9 @@
 | P1 | שיעור ראשי: $e^x$ ו-$\ln$ (`exp-log`) | אין | **לא התחיל** (אותה סיבה) | `lesson-builder` | כנ"ל |
 | P1 | שיעור ראשי: גאומטריה אנליטית ישר-מעגל (`analytic-line-circle`) | אין | **לא התחיל** (אותה סיבה) | `lesson-builder` | כנ"ל |
 | P1 | שיעור ראשי: הסתברות (`probability`) | אין | **לא התחיל** (אותה סיבה) | `lesson-builder` | כנ"ל |
-| P1 | Blueprint ל-35582 (קיץ 2025) | אין | **לא התחיל.** ניסיון קודם היום נכשל (מגבלת קצב API) | `exam-analyst` | קובץ תקין ב-`learning-content/exams/blueprints/35582-2025-summer.json`, כל `skills` קיימים ב-`exam-skills.json` או ב-`missingSkills` |
-| P1 | Blueprint ל-35571 ול-35572 (קיץ 2025) | אין | **לא התחיל** | `exam-analyst` | כנ"ל, שני קבצים |
+| P1 | Blueprint ל-35582 (קיץ 2025) | אין | **רץ עכשיו (26.11.2026) — שיגור ישיר מהסשן הראשי אחרי שניסיון supervisor כסוכן-משנה נכשל** (ראו #11 ב-P0 למעלה) | `exam-analyst` | קובץ תקין ב-`learning-content/exams/blueprints/35582-2025-summer.json`, כל `skills` קיימים ב-`exam-skills.json` או ב-`missingSkills` |
+| P1 | Blueprint ל-35571 (קיץ 2025) | אין | **רץ עכשיו (26.11.2026)**, שיגור ישיר | `exam-analyst` | כנ"ל |
+| P1 | Blueprint ל-35572 (קיץ 2025) | אין | **לא התחיל** | `exam-analyst` | כנ"ל |
 | P2 | חיפוש קישורים רשמיים נוספים (מועד חורף / מועד ב׳ / שנים קודמות) | אין | **לא התחיל** — ראו `docs/exam-catalog.json` → `notYetCollected` | `exam-analyst` | קישור נבדק בפועל (לא מומצא) נוסף ל-`SOURCES` ב-`curriculum.js` דרך `curriculum-architect` |
 | P2 | הרצת `npm run test:e2e` מלאה בסבב הנוכחי (לא הורץ בסבב הזה — רק `npm test`) | אין | **ממתין** | `qa-regression` | פלט מילולי מלא, pass/fail לכל בדיקה |
 
