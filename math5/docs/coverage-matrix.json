@@ -1,8 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25",
+  "generatedAt": "2026-11-26",
   "generatedBy": "tools/gen-coverage-matrix.mjs → tools/audit.mjs (productAudit) — אין כאן נתוני לומד, רק כיסוי תוכן",
   "note": "כיסוי שאלון נמדד לפי מיומנויות (exam-skills.json), לא לפי נושא בלבד. לשאלון יש כיסוי כאן רק אחרי שיש לו קובץ exam/blueprint עם skills לכל שאלה.",
+  "diffFromPrevious": null,
   "product": {
     "weeksLeft": 27,
     "hoursAvailable": 189,

@@ -1,0 +1,30 @@
+name: MATH5 content quality gate
+# שער איכות אוטומטי שרץ על תשתית GitHub Actions (חלק מ-GitHub עצמו — לא שירות תשלום צד-שלישי
+# נוסף; רוב התוכניות כוללות דקות ריצה חינמיות). רץ על כל push/PR שנוגע בתיקיית math5.
+# מריץ רק את סוללת הבדיקות המהירה (אימות תוכן + 72 בדיקות מתמטיות עצמאיות + יחידה).
+# npm run test:e2e (Playwright) לא נכלל כאן כברירת מחדל כי הוא דורש התקנת דפדפן וצורך
+# יותר דקות ריצה — אם רוצים אותו גם ב-CI, להוסיף job נפרד ולאשר מראש (docs/quality-standards.md §5).
+on:
+  push:
+    branches-ignore: [main]
+    paths: ["math5/**"]
+  pull_request:
+    paths: ["math5/**"]
+  workflow_dispatch: {}
+
+jobs:
+  fast-suite:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: math5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: npm test (validate-content + 72 independent math checks + unit tests)
+        run: npm test
+      - name: תזכורת אם תוכן נכשל
+        if: failure()
+        run: echo "::error::שער האיכות של MATH5 נכשל — ראו docs/quality-standards.md. אסור לשלב תוכן כל עוד npm test אדום."

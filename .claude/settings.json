@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          { "type": "command", "command": "bash math5/tools/hooks/content-guard.sh", "timeout": 30 }
+        ]
+      }
+    ]
+  }
+}
