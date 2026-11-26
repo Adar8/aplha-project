@@ -19,6 +19,32 @@ const r = validateLesson(J);
 r.errors.forEach(e => bad(e));
 r.warnings.forEach(w => console.log('⚠ ' + w));
 
+// אזהרה (לא חוסמת): מקטע מתמטי שבו שני אסימונים צמודים בלי אופרטור ביניהם, למשל "$f'(0) = -9 0$" או "$x3$".
+// זה סימן ההיכר של טקסט שנמחק בין "<" ל-">" (תקלת ההמרה ב-e842911, ראו
+// docs/lessons-learned/2026-11-26-json-conversion-stripped-inequalities.md). פקודות LaTeX (\Rightarrow, \cdot, \le, \text{…})
+// נחשבות לאופרטור כדי לא לסמן אותן, וגם הקיצור \frac k2. נבדק 26.11.2026: 3 מתוך 3 המקומות המשובשים נתפסו בגרסה הישנה
+// של derivative-extrema. 0 התרעות שווא בכל השיעורים ושיעורי היסוד הנוכחיים. האזהרה לא חוסמת עד ששיעור התרעות השווא יימדד על יותר תוכן.
+function adjacentMathTokens(obj) {
+  const hits = [];
+  const walk = (v, path) => {
+    if (typeof v === 'string') {
+      for (const m of v.replace(/\\\$/g, '').matchAll(/\$\$([\s\S]+?)\$\$|\$([^$]+?)\$/g)) {
+        const tex = m[1] ?? m[2];
+        const t = tex
+          .replace(/\\text\{[^}]*\}/g, ' @ ')
+          .replace(/\\[dt]?frac\s*([^{\s\\])\s*([^{\s\\])/g, ' @ ')
+          .replace(/\\[,;:! ]/g, ' ')
+          .replace(/\\[a-zA-Z]+/g, ' @ ');
+        if (/[0-9A-Za-z)\]}]\s+[0-9]/.test(t) || /(^|[^A-Za-z@])[A-Za-z][0-9]/.test(t)) hits.push(`${path}: $${tex}$`);
+      }
+    } else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${path}[${i}]`));
+    else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) walk(x, path ? `${path}.${k}` : k);
+  };
+  walk(obj, '');
+  return hits;
+}
+adjacentMathTokens(J).forEach(h => console.log(`⚠ אסימונים צמודים בלי אופרטור (אולי טקסט שנמחק בין < ל->): ${h}`));
+
 const L = adaptLesson(J);
 const qs = [...L.guided, ...L.practice, ...L.bagrut.flatMap(b => b.parts), ...L.quiz];
 const vf = resolve(ROOT, `tests/verify/${J.id}.mjs`);

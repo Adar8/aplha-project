@@ -1,0 +1,11 @@
+{
+  "lesson": "derivative-extrema",
+  "file": "lessons/derivative-extrema.json",
+  "kind": "lesson",
+  "curriculumTopic": "calc-poly",
+  "next": "sine-cosine-law",
+  "prereqs": ["t-powers", "t-substitution", "t-quadratic", "t-slope"],
+  "knowledgeMapSkills": ["c-derivative-rules", "c-tangent", "c-extrema"],
+  "newSkills": {},
+  "notes": "השיעור כבר מחובר (index.json, curriculum.js calc-poly, toolbox.json, knowledge-map.json). הקובץ הזה רק מתעד את החיבור הקיים, ולא נדרש שינוי בקבצים משותפים. בסבב התיקון הזה (26.11.2026) לא נוספו מיומנויות חדשות. התוכן החדש (מקדם מוביל שלילי, אין החלפת סימן, פרמטר) נכלל ב-poly-extrema וב-c-extrema."
+}
