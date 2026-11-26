@@ -86,6 +86,72 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       expect((await storeOf(page)).attempts.filter(a => a.qid === 'g1').length === 2, 'שאלה שנפתרה נספרה שוב');
     });
 
+    await step('תרגול: "המשך" בכרטיס המשוב עובר לשאלה הבאה בכל השלב, ולשלב הבא (לא לסוף השיעור) רק אחרי האחרונה', async () => {
+      // בדיקת רגרסיה ל-development cycle 03: student-simulator דיווח שאחרי תשובה נכונה ראשונה
+      // בתרגול מודרך, "המשך" מדלג לשלב האחרון (8/8) במקום לשאלה הבאה. ניסיון שחזור מקיף (דסקטופ+טלפון,
+      // קליק+tap, עם/בלי תשובה שגויה קודם) לא שחזר את התקלה על הקוד הנוכחי — הבדיקה הזו נשארת קבועה
+      // כרשת ביטחון, ומכסה בדיוק את מה שהתיאור ביקש: סדר, נכון/שגוי, מעבר מהאחרונה לשלב הבא, טעינה מחדש, חזרה אמצע.
+      const t = await newPage();
+      await go(t, '#/lesson/geometric-sequence/guided');
+      const nextSectionHref = await t.evaluate(() => document.querySelector('.lesson-nav .btn.primary')?.getAttribute('href'));
+      expect(nextSectionHref === '#/lesson/geometric-sequence/practice', 'href השלב הבא שגוי לפני תחילת התרגול: ' + nextSectionHref);
+      const order = ['g1', 'g2', 'g3'];
+      const wrong = { g1: '1215', g2: '27', g3: '486' };
+      const right = { g1: '405', g2: '3', g3: '242' };
+      for (let i = 0; i < order.length; i++) {
+        const qid = order[i];
+        expect(await t.locator(`.q[data-q="${qid}"]`).isVisible(), `שאלה ${qid} לא מוצגת בתורה (סדר שגוי)`);
+        const card = t.locator(`.q[data-q="${qid}"]`);
+        await card.locator('.num-input input').fill(wrong[qid]); await card.locator('[data-act=check]').click();
+        expect(await card.locator('.feedback.bad').count() === 1, `${qid}: תשובה שגויה לא סומנה`);
+        await card.locator('.num-input input').fill(right[qid]); await card.locator('[data-act=check]').click();
+        expect(await t.locator('#fbSheet').count() === 1, `${qid}: כרטיס המשוב לא נפתח אחרי תשובה נכונה`);
+        const label = await t.locator('#fbSheet [data-sheet="0"]').textContent();
+        if (i < order.length - 1) expect(label.trim() === 'המשך', `${qid}: הכפתור אמור לומר "המשך" (עוד שאלות בשלב), נמצא "${label}"`);
+        else expect(label.trim() === 'לשלב הבא', `${qid} (אחרונה): הכפתור אמור לומר "לשלב הבא", נמצא "${label}"`);
+        await t.click('#fbSheet [data-sheet="0"]'); await t.waitForTimeout(250);
+        if (i < order.length - 1) {
+          expect(await t.evaluate(() => location.hash) === '#/lesson/geometric-sequence/guided', `${qid}: "המשך" ניווט החוצה מהשלב לפני הזמן`);
+          expect(await t.locator(`.q[data-q="${order[i + 1]}"]`).isVisible(), `${qid}: לא עבר לשאלה הבאה (${order[i + 1]}) באותו שלב`);
+        } else {
+          expect(await t.evaluate(() => location.hash) === '#/lesson/geometric-sequence/practice', `אחרי השאלה האחרונה לא עבר לשלב "practice" — עבר ל-${await t.evaluate(() => location.hash)} (זה בדיוק התקלה המדווחת, אם תחזור)`);
+        }
+      }
+      // טעינה מחדש אחרי סיום השלב: כל 3 השאלות עדיין מסומנות כפתורות
+      await go(t, '#/lesson/geometric-sequence/guided'); await t.waitForSelector('.q[data-q="g1"]');
+      for (const qid of order) expect(await t.locator(`.q[data-q="${qid}"].solved`).count() === 1, `${qid}: לא נשמר כפתור אחרי טעינה מחדש`);
+      // חזרה לשיעור "באמצע" (אחרי שהשלב כבר הושלם) מציגה שוב את השאלה הראשונה דרך נקודות הניווט
+      await t.click('.qdot[data-goto="0"]');
+      expect(await t.locator('.q[data-q="g1"]').isVisible(), 'חזרה לאמצע השיעור לא מציגה שאלה קודמת שנפתרה');
+      await t.context().close();
+    });
+
+    await step('תרגול: אותה התנהגות מעבר "המשך" נכונה בכל השיעורים הקיימים (לא רק geometric-sequence)', async () => {
+      const t = await newPage();
+      await go(t, '#/');
+      const lessons = await t.evaluate(async () => {
+        const idx = await (await fetch('learning-content/index.json')).json();
+        return Promise.all(idx.lessons.map(async f => (await (await fetch('learning-content/' + f)).json()).id));
+      });
+      for (const id of lessons) {
+        await go(t, `#/lesson/${id}/guided`);
+        const qs = await t.locator('.q[data-mode="practice"]').evaluateAll(els => els.map(e => e.dataset.q));
+        if (qs.length < 2) continue;  // הבדיקה רלוונטית רק כששלב ה"המשך" בין שאלות קיים
+        const first = t.locator(`.q[data-q="${qs[0]}"]`);
+        const isNum = await first.locator('.num-input input').count();
+        if (isNum) await first.locator('.num-input input').fill('999999'); else await first.locator('.opt input').first().check();
+        await first.locator('[data-act=check]').click(); await t.waitForTimeout(150);
+        // לא בודקים אם התשובה "נכונה" (לא יודעים את הערך) — רק, אם המשוב "ok" נפתח, שהוא לא מדלג לשלב אחרון
+        if (await t.locator('#fbSheet.ok').count()) {
+          const label = (await t.locator('#fbSheet [data-sheet="0"]').textContent()).trim();
+          await t.click('#fbSheet [data-sheet="0"]'); await t.waitForTimeout(200);
+          const hash = await t.evaluate(() => location.hash);
+          expect(label === 'המשך' ? hash.endsWith('/guided') : true, `${id}: "המשך" בין שאלות ניווט החוצה מהשלב (${hash})`);
+        }
+      }
+      await t.context().close();
+    });
+
     await step('מבחן: ציון מחושב נכון, נרשם לכל שאלה, ונכנס ללוח החזרות', async () => {
       await go(page, '#/lesson/arithmetic-sequence/quiz');
       const answers = { q1: '47', q2: '136', q3: '4.5', q5: '13' };   // q3 שגוי, q4 בלי תשובה
