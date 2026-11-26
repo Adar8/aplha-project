@@ -31,9 +31,11 @@ Default to **B** unless told otherwise, or **D** when the task is specifically a
 6. **Feedback quality check**: when you get something wrong, does the feedback actually help you understand the mistake (not just "wrong")?
 7. **Post-test**: re-answer the same 3 questions, honestly.
 8. **New-question check**: try a question that is *not* one of the lesson's own examples/practice items (a variation you make up yourself, matching the skill) — can you solve it independently?
+8b. **Self-explanation check** (per `docs/quality-standards.md` §10, "Teaching Quality"): for the new question in step 8, write out — in your own words, before checking it against anything the lesson said — *why* your method works, not just the steps. Compare that explanation to the lesson's own "why" text: does it match in substance, or did you only reproduce steps without the underlying reasoning actually transferring?
+8c. **Difficulty-jump check**: walking through the lesson's own sequence of examples/guided/independent items in order, flag any adjacent pair where the jump in difficulty felt sharp rather than gradual — name the two items and what specifically jumped (a new skill combination, a harder number, an unstated assumption), not just a feeling.
 9. Try one real bagrut question (exams tab) that touches the topic just studied; note exactly what stopped you, if anything.
 10. Check what the app suggests for "tomorrow" (home screen, due reviews), and whether you felt dependent on hints to get through.
-11. Document any gap: knowledge the lesson assumed you already had.
+11. Document any gap: knowledge the lesson assumed you already had, and any concept you encountered but that was never actually explained (name/formula used without a definition anywhere you saw).
 
 ## The 9 questions every report must explicitly answer
 האם ההסבר ברור לתלמיד בפרופיל שבחרת? האם נדרש ידע שלא נלמד? האם המעבר בין הרמות הדרגתי? האם הדוגמאות מספיק מגוונות? האם המשוב עוזר להבין את הטעות? האם הצלחת לפתור שאלה שונה מהדוגמאות (סעיף 8 למעלה)? האם אתה מבין מדוע השיטה עובדת, לא רק איך? האם אתה יודע לבחור שיטה מתאימה בעצמך בפעם הבאה? האם הממשק הפריע ללמידה בשום שלב?
@@ -49,6 +51,7 @@ Hebrew, first person, to the given path (default `math5/docs/reports/student-YYY
 - The before/after table reflects what you genuinely would have answered, not a post-hoc rationalization.
 
 ## Must fail / must say so
+- **AI success ≠ human achievement — say this explicitly in every report, not just once in the project's docs.** Never present your own pass/fail on a question, your pretest/posttest delta, or a smooth self-explanation as evidence the lesson works pedagogically for a real human. Your report's scores/metrics section must contain a one-line explicit statement to this effect, not just rely on a reader remembering it from elsewhere.
 - You are an AI and cannot truly erase prior knowledge — if you suspect outside knowledge (not from this lesson) helped you answer, say so explicitly; don't present it as something the lesson taught.
 - If you accidentally see hidden solution text, source, content JSON, or eval-reserved material, you must say so explicitly and flag which conclusions might be tainted — never silently keep going as if nothing happened.
 - Never report "I learned this" without the before-answer being genuinely wrong/different first; don't fabricate a learning arc.
