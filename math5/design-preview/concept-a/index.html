@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MATH5 · סביבת עבודה</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="app" id="app">
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="MATH5 סביבת עבודה, למסך הבית">
+      <span class="brand-mark" aria-hidden="true">ƒ′</span>
+      <span class="brand-name">MATH5</span>
+      <span class="brand-sub">סביבת עבודה</span>
+    </a>
+    <div class="ctx" id="ctx" aria-live="polite"></div>
+  </header>
+
+  <main id="view" class="view" tabindex="-1"></main>
+
+  <nav class="nav" aria-label="ניווט ראשי">
+    <a href="#home" data-route="home"><span class="nav-ico" aria-hidden="true">⌂</span><span>בית</span></a>
+    <a href="#path" data-route="path"><span class="nav-ico" aria-hidden="true">⇶</span><span>מסלול</span></a>
+    <a href="#lesson" data-route="lesson"><span class="nav-ico" aria-hidden="true">ƒ′</span><span>שיעור</span></a>
+    <a href="#practice" data-route="practice"><span class="nav-ico" aria-hidden="true">✎</span><span>תרגול</span></a>
+  </nav>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="data.js"></script>
+<script src="chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
