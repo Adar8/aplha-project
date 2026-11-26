@@ -2,7 +2,7 @@
 // הרצה: node tests/validate-content.mjs [קובץ.json ...]   (בלי ארגומנטים: כל הקבצים שב-index.json)
 // בודק מבנה, מזהים, הפניות לטעויות נפוצות, סיווג מקור, ארבע אפשרויות עם תשובה נכונה אחת,
 // חישוב בלתי תלוי של כל תשובה מספרית (שדה check), ותקינות LaTeX (רינדור אמיתי ב-KaTeX).
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync } from 'fs';
 import { dirname, resolve, relative } from 'path';
 import { fileURLToPath } from 'url';
 import vm from 'vm';
@@ -429,6 +429,31 @@ async function main() {
     const X = JSON.parse(readFileSync(resolve(CONTENT, `exams/${id}.json`), 'utf8'));
     X.questions.forEach(q => { if (!Array.isArray(q.skills) || !q.skills.length) skErr.push(`exams/${id} q${q.n}: חסר skills`); (q.skills || []).forEach(k => { if (!SK.has(k)) skErr.push(`exams/${id} q${q.n}: מיומנות לא מוכרת: ${k}`); }); });
   }
+  // Blueprints (exam-analyst): לא מכילים נוסח רשמי, אבל חייבים skills/topicIds תקינים כדי שכיסוי יימדד נכון
+  const bpDir = resolve(CONTENT, 'exams/blueprints');
+  const bpErr = [];
+  const topicSet = new Set(TOPICS.map(t => t.id));
+  let bpCount = 0;
+  if (existsSync(bpDir)) {
+    for (const f of readdirSync(bpDir).filter(f => f.endsWith('.json'))) {
+      bpCount++;
+      const B = JSON.parse(readFileSync(resolve(bpDir, f), 'utf8'));
+      const miss = new Set(Object.keys(B.missingSkills || {}));
+      if (B.schemaVersion !== 1) bpErr.push(`blueprints/${f}: schemaVersion חייב להיות 1`);
+      if (B.kind !== 'blueprint') bpErr.push(`blueprints/${f}: kind חייב להיות blueprint`);
+      if (!PAPERS[B.format]?.includes('0' + B.code)) bpErr.push(`blueprints/${f}: שאלון ${B.code} לא שייך למתכונת ${B.format}`);
+      for (const q of B.questions || []) {
+        const qp = `blueprints/${f} q${q.n}`;
+        if (typeof q.points !== 'number') bpErr.push(`${qp}: חסר points`);
+        (q.topicIds || []).forEach(t => { if (!topicSet.has(t)) bpErr.push(`${qp}: נושא לא קיים: ${t}`); });
+        if (!Array.isArray(q.skills) || !q.skills.length) bpErr.push(`${qp}: חסר skills`);
+        (q.skills || []).forEach(k => { if (!SK.has(k) && !miss.has(k)) bpErr.push(`${qp}: מיומנות לא מוכרת ולא ב-missingSkills: ${k}`); });
+        if (typeof q.summary !== 'string' || !q.summary.trim()) bpErr.push(`${qp}: חסר summary (תקציר, לא נוסח רשמי)`);
+      }
+    }
+  }
+  if (bpErr.length) { fail += bpErr.length; console.error(`✗ learning-content/exams/blueprints – ${bpErr.length} שגיאות`); bpErr.forEach(e => console.error('   • ' + e)); }
+  else if (bpCount) console.log(`✓ learning-content/exams/blueprints (${bpCount} שאלונים ממופים)`);
   if (skErr.length) { fail += skErr.length; console.error(`✗ מיומנויות בגרות – ${skErr.length} שגיאות`); skErr.forEach(e => console.error('   • ' + e)); }
   else console.log(`✓ learning-content/exam-skills.json (${SK.size} מיומנויות)`);
   for (const id of EX.exams) {

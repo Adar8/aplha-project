@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "kind": "blueprint",
+  "code": "35582",
+  "session": "קיץ תשפ\"ה, 2025",
+  "format": "old",
+  "url": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35582.PDF",
+  "durationMin": 165,
+  "choose": "3 מתוך 5, לפחות אחת מכל פרק (33⅓ נקודות לשאלה)",
+  "chapters": [
+    { "title": "פרק ראשון – גאומטריה אנליטית, וקטורים, טריגונומטריה במרחב, מספרים מרוכבים", "questions": [1, 2, 3] },
+    { "title": "פרק שני – גדילה ודעיכה, פונקציות חזקה, פונקציות מעריכיות ולוגריתמיות", "questions": [4, 5] }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "points": 33.33,
+      "topicIds": ["analytic", "conics"],
+      "skills": ["circle-eq", "circle-line", "distance-point-line", "transformations", "locus", "ellipse", "polygon-area", "quadratic-eq"],
+      "summary": "מעגל עם פרמטר: רדיוס כפונקציה של הפרמטר, מציאתו מתנאי השקה לישר, ואז הזזת המעגל וגזירת מקום גאומטרי שמתברר כאליפסה, כולל היקף ושטח של משולש עם המוקדים."
+    },
+    {
+      "n": 2,
+      "points": 33.33,
+      "topicIds": ["vectors"],
+      "skills": ["vectors-basic", "dot-product", "quadrilateral-props", "pythagoras", "plane-eq", "line-space", "line-plane", "midsegment"],
+      "summary": "פירמידה שבסיסה מקבילית וגובהה במקצוע צדדי: הבעת וקטור באמצעות בסיס, הוכחת שוויון אורכים מניצבות, מציאת קודקודים בקואורדינטות, משוואת מישור דרך אלכסון ומקביל למקצוע, ובדיקת טענות על מקבילות וניצבות."
+    },
+    {
+      "n": 3,
+      "points": 33.33,
+      "topicIds": ["complex"],
+      "skills": ["complex-algebraic", "locus", "line-eq", "complex-equations", "quadratic-eq", "quadrilateral-props", "complex-polar"],
+      "summary": "מקום גאומטרי של מרוכבים השווים מרחק משתי נקודות, פתרון משוואה ריבועית מרוכבת והראיה שהשורשים על המקום, ואז ריבוע שמסובב סביב הראשית כך שקודקודיו המקוריים והמסובבים הם שורשי משוואה מהצורה z^n=b – מציאת n ו-b."
+    },
+    {
+      "n": 4,
+      "points": 33.33,
+      "topicIds": ["exp-log"],
+      "skills": ["parameter-problems", "domain", "exp-log-rules", "asymptotes", "quotient-rule", "exp-derivative", "poly-extrema", "exp-log-analysis", "func-analysis-general", "rational-func-analysis", "antiderivative", "exp-log-integral", "definite-integral-area"],
+      "summary": "מנה של פונקציות מעריכיות עם פרמטר: תחום, אסימפטוטות ומונוטוניות לפי סימן הפרמטר, זיהוי גרפים, ואז חקירה וסקיצה של ההופכי של הפונקציה מוזזת והשוואה בין שני אינטגרלים מסוימים שלה."
+    },
+    {
+      "n": 5,
+      "points": 33.33,
+      "topicIds": ["exp-log"],
+      "skills": ["domain", "exp-log-rules", "even-odd", "func-analysis-general", "chain-rule", "log-derivative", "poly-extrema", "asymptotes", "exp-log-analysis", "antiderivative", "exp-log-integral", "definite-integral-area"],
+      "summary": "לוגריתם של חזקה זוגית: תחום וזיהוי גרף, ואז חקירה של ריבוע הפונקציה פחות קבוע (חיתוכים, קיצון, סקיצה) וחישוב שטח מתחת למנת הנגזרת בפונקציה על קטע נתון."
+    }
+  ],
+  "missingSkills": {}
+}

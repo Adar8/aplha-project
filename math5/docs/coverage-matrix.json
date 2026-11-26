@@ -1,9 +1,87 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "generatedAt": "2026-11-26",
-  "generatedBy": "tools/gen-coverage-matrix.mjs → tools/audit.mjs (productAudit) — אין כאן נתוני לומד, רק כיסוי תוכן",
-  "note": "כיסוי שאלון נמדד לפי מיומנויות (exam-skills.json), לא לפי נושא בלבד. לשאלון יש כיסוי כאן רק אחרי שיש לו קובץ exam/blueprint עם skills לכל שאלה.",
-  "diffFromPrevious": null,
+  "generatedBy": "tools/gen-coverage-matrix.mjs → tools/audit.mjs (productAudit) — אין כאן נתוני לומד אמיתיים, רק כיסוי תוכן + אחרון שנמדד בסימולציה",
+  "note": "ארבעה מדדים נפרדים (metrics) — אין לאחד אותם לציון אחד. ראו docs/quality-standards.md §6.",
+  "metrics": {
+    "curriculumCoverage": {
+      "metric": "curriculumCoverage",
+      "description": "אחוז נושאי תוכנית הלימודים הרשמית (ברמת כותרת נושא) שיש להם שיעור באפליקציה. לא מודד אם כל המיומנויות בתוך הנושא נלמדו.",
+      "checkedAt": "2026-11-26",
+      "contentVersion": "96ef298",
+      "byTrack": {
+        "common": {
+          "covered": 3,
+          "total": 14
+        },
+        "old": {
+          "covered": 3,
+          "total": 15
+        },
+        "new": {
+          "covered": 3,
+          "total": 15
+        }
+      }
+    },
+    "examSkillCoverage": {
+      "metric": "examSkillCoverage",
+      "description": "לכל שאלון שנאסף (קובץ exam מלא או blueprint): אחוז נקודות שהמיומנויות הנדרשות להן נלמדות באפליקציה. blueprint = מופה אבל אין עדיין תרגול אינטראקטיבי על השאלון עצמו.",
+      "checkedAt": "2026-11-26",
+      "contentVersion": "96ef298",
+      "byExam": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "questionsCount": 8,
+          "skillsPctWeighted": 22,
+          "fullyCoveredPctOfPoints": 13
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "questionsCount": 8,
+          "skillsPctWeighted": 19,
+          "fullyCoveredPctOfPoints": 0
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "questionsCount": 5,
+          "skillsPctWeighted": 9,
+          "fullyCoveredPctOfPoints": 0
+        }
+      ]
+    },
+    "verifiedSolveCapability": {
+      "metric": "verifiedSolveCapability",
+      "description": "ציון שהושג על ידי independent-examiner (למד רק מהאפליקציה) על שאלוני בגרות אמיתיים, מנוקד על ידי math-auditor. לא תחזית לציון התלמיד האמיתי.",
+      "lastMeasuredAt": "2026-11-25",
+      "contentVersionAtMeasurement": "pre-geometric-sequence (ראו docs/decision-log.md 25.11.2026)",
+      "source": "docs/reports/examinee/grading.md",
+      "status": "needsRefresh",
+      "note": "הריצה האחרונה קדמה להוספת geometric-sequence ול-blueprints של 35582/35571. המספרים (0 מחמיר, 30.25 מקל, 45.25 גבול עליון) ישנים ואינם משקפים את התוכן הנוכחי. יש להריץ /math5-exam מחדש לפני הסתמכות עליהם."
+    },
+    "realUserAchievement": {
+      "metric": "realUserAchievement",
+      "description": "נתוני התקדמות אמיתיים של התלמיד (לא סימולציה). מגיעים רק מייצוא התקדמות מהאפליקציה (התקדמות ← ייצוא).",
+      "status": "noData",
+      "note": "אין עדיין קובץ ייצוא. node tools/audit.mjs --progress <קובץ> יפיק את המדד הזה כשיסופק."
+    }
+  },
+  "diffFromPrevious": {
+    "mainLessons": 0,
+    "toolboxLessons": 0,
+    "curriculumTopicsCovered": 0,
+    "examSkillsPct": {
+      "35571": 0,
+      "35581": 0,
+      "35582": 0
+    }
+  },
   "product": {
     "weeksLeft": 27,
     "hoursAvailable": 189,
@@ -119,6 +197,7 @@
         "code": "35581",
         "session": "קיץ תשפ\"ד, 2024",
         "format": "old",
+        "kind": "full",
         "skillsPct": 22,
         "fullPct": 13,
         "partialPct": 25,
@@ -302,6 +381,479 @@
         ],
         "parts": 40,
         "autoChecked": 19
+      },
+      {
+        "id": "35571-blueprint",
+        "code": "35571",
+        "session": "קיץ תשפ\"ה, 2025",
+        "format": "new",
+        "kind": "blueprint",
+        "skillsPct": 19,
+        "fullPct": 0,
+        "partialPct": 75,
+        "uncovered": [
+          4,
+          6
+        ],
+        "questions": [
+          {
+            "n": 1,
+            "points": 20,
+            "topics": [
+              "short-questions",
+              "induction",
+              "sequences",
+              "plane-geometry",
+              "calc-poly",
+              "calc-rational-root",
+              "integrals"
+            ],
+            "skills": [
+              "induction",
+              "sequence-sum-notation",
+              "parallel-angles",
+              "angle-sum",
+              "isosceles-props",
+              "congruence",
+              "quadrilateral-props",
+              "pythagoras",
+              "similarity",
+              "derivative-graph",
+              "poly-extrema",
+              "concavity",
+              "inflection",
+              "antiderivative",
+              "definite-integral-area",
+              "area-between-curves",
+              "domain",
+              "rational-func-analysis",
+              "asymptotes",
+              "chain-rule"
+            ],
+            "missing": [
+              "induction",
+              "sequence-sum-notation",
+              "parallel-angles",
+              "angle-sum",
+              "isosceles-props",
+              "congruence",
+              "quadrilateral-props",
+              "pythagoras",
+              "similarity",
+              "derivative-graph",
+              "concavity",
+              "inflection",
+              "antiderivative",
+              "definite-integral-area",
+              "area-between-curves",
+              "domain",
+              "rational-func-analysis",
+              "asymptotes",
+              "chain-rule"
+            ],
+            "frac": 0.05,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 2,
+            "points": 20,
+            "topics": [
+              "sequences"
+            ],
+            "skills": [
+              "geometric-sequence",
+              "equation-system",
+              "quadratic-eq",
+              "sequence-proof",
+              "sequence-sum-notation",
+              "geometric-infinite-sum",
+              "parameter-problems"
+            ],
+            "missing": [
+              "sequence-sum-notation",
+              "parameter-problems"
+            ],
+            "frac": 0.7142857142857143,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 3,
+            "points": 20,
+            "topics": [
+              "probability"
+            ],
+            "skills": [
+              "binomial-prob",
+              "prob-basic",
+              "quadratic-eq",
+              "conditional-prob",
+              "prob-tree",
+              "prob-independence"
+            ],
+            "missing": [
+              "binomial-prob",
+              "prob-basic",
+              "conditional-prob",
+              "prob-tree",
+              "prob-independence"
+            ],
+            "frac": 0.16666666666666666,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 4,
+            "points": 20,
+            "topics": [
+              "plane-geometry"
+            ],
+            "skills": [
+              "circle-angles",
+              "tangent-chord",
+              "tangent-props",
+              "isosceles-props",
+              "angle-sum",
+              "congruence",
+              "similarity",
+              "median-props",
+              "area-ratio"
+            ],
+            "missing": [
+              "circle-angles",
+              "tangent-chord",
+              "tangent-props",
+              "isosceles-props",
+              "angle-sum",
+              "congruence",
+              "similarity",
+              "median-props",
+              "area-ratio"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          },
+          {
+            "n": 5,
+            "points": 20,
+            "topics": [
+              "plane-geometry",
+              "plane-trig"
+            ],
+            "skills": [
+              "inscribed-circle",
+              "tangent-props",
+              "isosceles-props",
+              "angle-sum",
+              "right-triangle-trig",
+              "trig-identities",
+              "double-angle",
+              "trig-equations",
+              "cosine-law",
+              "sine-law",
+              "trig-area"
+            ],
+            "missing": [
+              "inscribed-circle",
+              "tangent-props",
+              "isosceles-props",
+              "angle-sum",
+              "right-triangle-trig",
+              "trig-identities",
+              "double-angle",
+              "trig-equations"
+            ],
+            "frac": 0.2727272727272727,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 6,
+            "points": 20,
+            "topics": [
+              "calc-rational-root",
+              "integrals"
+            ],
+            "skills": [
+              "domain",
+              "asymptotes",
+              "even-odd",
+              "root-func-derivative",
+              "quotient-rule",
+              "chain-rule",
+              "func-analysis-general",
+              "rational-func-analysis",
+              "derivative-graph",
+              "integral-basic",
+              "definite-integral-area",
+              "parameter-problems"
+            ],
+            "missing": [
+              "domain",
+              "asymptotes",
+              "even-odd",
+              "root-func-derivative",
+              "quotient-rule",
+              "chain-rule",
+              "func-analysis-general",
+              "rational-func-analysis",
+              "derivative-graph",
+              "integral-basic",
+              "definite-integral-area",
+              "parameter-problems"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          },
+          {
+            "n": 7,
+            "points": 20,
+            "topics": [
+              "calc-trig"
+            ],
+            "skills": [
+              "derivative-graph",
+              "trig-func-analysis",
+              "trig-derivative",
+              "quotient-rule",
+              "chain-rule",
+              "trig-identities",
+              "trig-equations",
+              "quadratic-eq",
+              "poly-extrema",
+              "func-analysis-general",
+              "transformations"
+            ],
+            "missing": [
+              "derivative-graph",
+              "trig-func-analysis",
+              "trig-derivative",
+              "quotient-rule",
+              "chain-rule",
+              "trig-identities",
+              "trig-equations",
+              "func-analysis-general",
+              "transformations"
+            ],
+            "frac": 0.18181818181818182,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 8,
+            "points": 20,
+            "topics": [
+              "calc-rational-root"
+            ],
+            "skills": [
+              "asymptotes",
+              "rational-func-analysis",
+              "chain-rule",
+              "tangent-line",
+              "line-eq",
+              "polygon-area",
+              "optimization",
+              "parameter-problems"
+            ],
+            "missing": [
+              "asymptotes",
+              "rational-func-analysis",
+              "chain-rule",
+              "line-eq",
+              "polygon-area",
+              "optimization",
+              "parameter-problems"
+            ],
+            "frac": 0.125,
+            "full": false,
+            "partial": true
+          }
+        ],
+        "parts": 0,
+        "autoChecked": 0
+      },
+      {
+        "id": "35582-blueprint",
+        "code": "35582",
+        "session": "קיץ תשפ\"ה, 2025",
+        "format": "old",
+        "kind": "blueprint",
+        "skillsPct": 9,
+        "fullPct": 0,
+        "partialPct": 80,
+        "uncovered": [
+          2
+        ],
+        "questions": [
+          {
+            "n": 1,
+            "points": 33.33,
+            "topics": [
+              "analytic",
+              "conics"
+            ],
+            "skills": [
+              "circle-eq",
+              "circle-line",
+              "distance-point-line",
+              "transformations",
+              "locus",
+              "ellipse",
+              "polygon-area",
+              "quadratic-eq"
+            ],
+            "missing": [
+              "circle-eq",
+              "circle-line",
+              "distance-point-line",
+              "transformations",
+              "locus",
+              "ellipse",
+              "polygon-area"
+            ],
+            "frac": 0.125,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 2,
+            "points": 33.33,
+            "topics": [
+              "vectors"
+            ],
+            "skills": [
+              "vectors-basic",
+              "dot-product",
+              "quadrilateral-props",
+              "pythagoras",
+              "plane-eq",
+              "line-space",
+              "line-plane",
+              "midsegment"
+            ],
+            "missing": [
+              "vectors-basic",
+              "dot-product",
+              "quadrilateral-props",
+              "pythagoras",
+              "plane-eq",
+              "line-space",
+              "line-plane",
+              "midsegment"
+            ],
+            "frac": 0,
+            "full": false,
+            "partial": false
+          },
+          {
+            "n": 3,
+            "points": 33.33,
+            "topics": [
+              "complex"
+            ],
+            "skills": [
+              "complex-algebraic",
+              "locus",
+              "line-eq",
+              "complex-equations",
+              "quadratic-eq",
+              "quadrilateral-props",
+              "complex-polar"
+            ],
+            "missing": [
+              "complex-algebraic",
+              "locus",
+              "line-eq",
+              "complex-equations",
+              "quadrilateral-props",
+              "complex-polar"
+            ],
+            "frac": 0.14285714285714285,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 4,
+            "points": 33.33,
+            "topics": [
+              "exp-log"
+            ],
+            "skills": [
+              "parameter-problems",
+              "domain",
+              "exp-log-rules",
+              "asymptotes",
+              "quotient-rule",
+              "exp-derivative",
+              "poly-extrema",
+              "exp-log-analysis",
+              "func-analysis-general",
+              "rational-func-analysis",
+              "antiderivative",
+              "exp-log-integral",
+              "definite-integral-area"
+            ],
+            "missing": [
+              "parameter-problems",
+              "domain",
+              "exp-log-rules",
+              "asymptotes",
+              "quotient-rule",
+              "exp-derivative",
+              "exp-log-analysis",
+              "func-analysis-general",
+              "rational-func-analysis",
+              "antiderivative",
+              "exp-log-integral",
+              "definite-integral-area"
+            ],
+            "frac": 0.07692307692307693,
+            "full": false,
+            "partial": true
+          },
+          {
+            "n": 5,
+            "points": 33.33,
+            "topics": [
+              "exp-log"
+            ],
+            "skills": [
+              "domain",
+              "exp-log-rules",
+              "even-odd",
+              "func-analysis-general",
+              "chain-rule",
+              "log-derivative",
+              "poly-extrema",
+              "asymptotes",
+              "exp-log-analysis",
+              "antiderivative",
+              "exp-log-integral",
+              "definite-integral-area"
+            ],
+            "missing": [
+              "domain",
+              "exp-log-rules",
+              "even-odd",
+              "func-analysis-general",
+              "chain-rule",
+              "log-derivative",
+              "asymptotes",
+              "exp-log-analysis",
+              "antiderivative",
+              "exp-log-integral",
+              "definite-integral-area"
+            ],
+            "frac": 0.08333333333333333,
+            "full": false,
+            "partial": true
+          }
+        ],
+        "parts": 0,
+        "autoChecked": 0
       }
     ],
     "weights": {

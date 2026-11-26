@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "kind": "blueprint",
+  "code": "35571",
+  "session": "קיץ תשפ\"ה, 2025",
+  "format": "new",
+  "url": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35571.pdf",
+  "choose": "5 מתוך 8 (20 נקודות לכל שאלה): לפחות אחת מפרק ראשון או שני, ולפחות אחת מכל אחד מהפרקים השלישי והרביעי. בשאלה 1 עונים על 2 מתוך 4 סעיפים (א-ד).",
+  "duration": "4.25 שעות",
+  "chapters": [
+    { "title": "פרק ראשון – שאלות קצרות", "questions": [1] },
+    { "title": "פרק שני – אינדוקציה, סדרות והסתברות", "questions": [2, 3] },
+    { "title": "פרק שלישי – גאומטריה וטריגונומטריה במישור", "questions": [4, 5] },
+    { "title": "פרק רביעי – חשבון דיפרנציאלי ואינטגרלי של פולינומים, פונקציות שורש, רציונליות וטריגונומטריות", "questions": [6, 7, 8] }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "points": 20,
+      "topicIds": ["short-questions", "induction", "sequences", "plane-geometry", "calc-poly", "calc-rational-root", "integrals"],
+      "chooseParts": "2 מתוך 4",
+      "skills": ["induction", "sequence-sum-notation", "parallel-angles", "angle-sum", "isosceles-props", "congruence", "quadrilateral-props", "pythagoras", "similarity", "derivative-graph", "poly-extrema", "concavity", "inflection", "antiderivative", "definite-integral-area", "area-between-curves", "domain", "rational-func-analysis", "asymptotes", "chain-rule"],
+      "parts": [
+        { "part": "א", "skills": ["induction", "sequence-sum-notation"], "summary": "הוכחת נוסחת סכום ריבועי המספרים הזוגיים באינדוקציה, ושימוש בה לחישוב סכום חלקי של ריבועים זוגיים." },
+        { "part": "ב", "skills": ["parallel-angles", "angle-sum", "isosceles-props", "congruence", "quadrilateral-props", "pythagoras", "similarity"], "summary": "הוכחה שטרפז עם זוויות שוות בין האלכסונים לבסיסים הוא שווה שוקיים, וחישוב קטע מקביל לבסיסים דרך נקודת מפגש אלכסונים מאונכים." },
+        { "part": "ג", "skills": ["derivative-graph", "poly-extrema", "concavity", "inflection", "antiderivative", "definite-integral-area", "area-between-curves"], "summary": "התאמת שלושה גרפים לפונקציה, לנגזרת ולנגזרת השנייה, ספירת נקודות פיתול וחישוב שטח בין גרפי הנגזרות בעזרת ערכי הפונקציה." },
+        { "part": "ד", "skills": ["domain", "rational-func-analysis", "asymptotes", "chain-rule", "antiderivative", "definite-integral-area"], "summary": "פונקציה רציונלית שמכנה שלה ריבוע של ביטוי ריבועי: תחומי חיוביות, זיהוי הגרף מתוך כמה אפשרויות ושטח מתחת לגרף בעזרת פונקציה קדומה בהצבה." }
+      ],
+      "summary": "ארבעה סעיפים קצרים לבחירה (עונים על שניים): אינדוקציה לסכום ריבועים, טרפז שווה שוקיים, התאמת גרפי פונקציה ונגזרותיה עם שטח, וחקירה ושטח של פונקציה רציונלית."
+    },
+    {
+      "n": 2,
+      "points": 20,
+      "topicIds": ["sequences"],
+      "skills": ["geometric-sequence", "equation-system", "quadratic-eq", "sequence-proof", "sequence-sum-notation", "geometric-infinite-sum", "parameter-problems"],
+      "summary": "סדרה הנדסית אין־סופית לפי שני קשרים בין איבריה: מציאת איבר, הוכחה שסדרת ההופכיים של מכפלות איברים סמוכים היא הנדסית, סדרה חדשה עם פרמטר – מנה ותנאי לעלייה – ומציאת הפרמטר מיחס בין סכומים אין־סופיים."
+    },
+    {
+      "n": 3,
+      "points": 20,
+      "topicIds": ["probability"],
+      "skills": ["binomial-prob", "prob-basic", "quadratic-eq", "conditional-prob", "prob-tree", "prob-independence"],
+      "summary": "מצביעים לשתי מפלגות: מציאת הסתברות הבחירה מתנאי בינומי, הסתברות מותנית שכל הנבחרים הצביעו לאותה מפלגה, הסתברות שלמה לפי גיל, והסתברות שסוקר יסיים בדיוק בשיחה מסוימת."
+    },
+    {
+      "n": 4,
+      "points": 20,
+      "topicIds": ["plane-geometry"],
+      "skills": ["circle-angles", "tangent-chord", "tangent-props", "isosceles-props", "angle-sum", "congruence", "similarity", "median-props", "area-ratio"],
+      "summary": "שני מעגלים נחתכים כשמרכז הקטן על הגדול ומשיק לקטן חותך את הגדול: הוכחת קשר בין זוויות, הוכחה שנקודה היא מרכז המעגל הגדול, דמיון משולשים והבעת שטח משולש באמצעות שטח אחר לפי יחס הרדיוסים."
+    },
+    {
+      "n": 5,
+      "points": 20,
+      "topicIds": ["plane-geometry", "plane-trig"],
+      "skills": ["inscribed-circle", "tangent-props", "isosceles-props", "angle-sum", "right-triangle-trig", "trig-identities", "double-angle", "trig-equations", "cosine-law", "sine-law", "trig-area"],
+      "summary": "משולש שווה שוקיים עם מעגל חסום: הבעת מרחק קודקוד מהמרכז ואורך שוק באמצעות רדיוס וזווית, מציאת הזווית מיחס בין אורכים, מציאת הרדיוס ממרחק נתון וחישוב קטע על הבסיס משטח משולש נתון."
+    },
+    {
+      "n": 6,
+      "points": 20,
+      "topicIds": ["calc-rational-root", "integrals"],
+      "skills": ["domain", "asymptotes", "even-odd", "root-func-derivative", "quotient-rule", "chain-rule", "func-analysis-general", "rational-func-analysis", "derivative-graph", "integral-basic", "definite-integral-area", "parameter-problems"],
+      "summary": "פונקציה של מנה עם שורש ופרמטר: תחום, אסימפטוטות, אי־זוגיות, עלייה וירידה וסקיצה; אחר כך פונקציה הופכית לריבועה – מונוטוניות, זיהוי גרף, ומציאת הפרמטר משטח נתון."
+    },
+    {
+      "n": 7,
+      "points": 20,
+      "topicIds": ["calc-trig"],
+      "skills": ["derivative-graph", "trig-func-analysis", "trig-derivative", "quotient-rule", "chain-rule", "trig-identities", "trig-equations", "quadratic-eq", "poly-extrema", "func-analysis-general", "transformations"],
+      "summary": "פונקציה טריגונומטרית שהיא מנה של סינוס בביטוי ריבועי בו בתחום מחזור אחד: זיהוי גרף הפונקציה מול הנגזרת, חיתוך עם ציר x וקיצון, ואז חקירה וסקיצה של ערך מוחלט של הזזה אנכית שלה."
+    },
+    {
+      "n": 8,
+      "points": 20,
+      "topicIds": ["calc-rational-root"],
+      "skills": ["asymptotes", "rational-func-analysis", "chain-rule", "tangent-line", "line-eq", "polygon-area", "optimization", "parameter-problems"],
+      "summary": "פונקציה רציונלית עם פרמטר בצורת הופכי לריבוע בתוספת קבוע: אסימפטוטות, משיק בנקודה נתונה, שטח משולש שנוצר מהמשיק, ישר אנכי ונקודה קבועה, ומציאת הפרמטר שממזער את השטח."
+    }
+  ],
+  "missingSkills": {}
+}

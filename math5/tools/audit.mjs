@@ -1,7 +1,7 @@
 // בדיקת "האם האפליקציה באמת עוזרת" – מדדים קשים, בלי תחושות.
 // הרצה:  node tools/audit.mjs [--progress קובץ-ייצוא.json] [--json] [--now 2026-11-25]
 // בלי --progress נבדק רק המוצר (כיסוי, איכות). עם קובץ ייצוא מהאפליקציה (התקדמות ← ייצוא) נבדקות גם ראיות מהלומד.
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { TOPICS, EXAMS } from '../js/data/curriculum.js';
@@ -22,7 +22,16 @@ export function loadContent() {
   const tb = C('toolbox.json');
   const toolLessons = (tb.lessons || []).map(f => C(f));
   const exIndex = existsSync(resolve(ROOT, 'learning-content/exams/index.json')) ? C('exams/index.json').exams : [];
-  const exams = exIndex.map(id => C(`exams/${id}.json`));
+  const fullExams = exIndex.map(id => ({ ...C(`exams/${id}.json`), _kind: 'full' }));
+  // Blueprints (exam-analyst): אין בהם נוסח רשמי/סעיפים אינטראקטיביים, רק מפת ניקוד→נושא→מיומנויות לכל שאלה.
+  // משמשים לכיסוי (tools/audit.mjs), לא לתרגול. שאלון עם exam מלא לא נספר פעמיים כ-blueprint.
+  const bpDir = resolve(ROOT, 'learning-content/exams/blueprints');
+  const haveFullCode = new Set(fullExams.map(X => X.code));
+  const blueprints = existsSync(bpDir)
+    ? readdirSync(bpDir).filter(f => f.endsWith('.json')).map(f => JSON.parse(readFileSync(resolve(bpDir, f), 'utf8')))
+      .filter(B => !haveFullCode.has(B.code)).map(B => ({ ...B, id: `${B.code}-blueprint`, _kind: 'blueprint' }))
+    : [];
+  const exams = [...fullExams, ...blueprints];
   const skillNames = existsSync(resolve(ROOT, 'learning-content/exam-skills.json')) ? C('exam-skills.json').skills : {};
   return { lessons, toolLessons, toolbox: tb, exams, skillNames };
 }
@@ -49,14 +58,15 @@ export function productAudit({ lessons, toolLessons, toolbox, exams, skillNames 
     });
     const tot = qs.reduce((s, q) => s + q.points, 0);
     return {
-      id: X.id, code: X.code, session: X.session, format: X.format,
+      id: X.id, code: X.code, session: X.session, format: X.format, kind: X._kind || 'full',
       skillsPct: pct(qs.reduce((s, q) => s + q.points * q.frac, 0), tot),
       fullPct: pct(qs.filter(q => q.full).reduce((s, q) => s + q.points, 0), tot),
       partialPct: pct(qs.filter(q => q.partial).reduce((s, q) => s + q.points, 0), tot),
       uncovered: qs.filter(q => q.frac === 0).map(q => q.n),
       questions: qs,
-      parts: X.questions.reduce((s, q) => s + q.parts.length, 0),
-      autoChecked: X.questions.flatMap(q => q.parts).filter(p => p.answer).length,
+      // blueprint: אין סעיפים אינטראקטיביים (רק מיפוי כיסוי) — 0, לא שגיאה
+      parts: X._kind === 'blueprint' ? 0 : X.questions.reduce((s, q) => s + (q.parts || []).length, 0),
+      autoChecked: X._kind === 'blueprint' ? 0 : X.questions.flatMap(q => q.parts || []).filter(p => p.answer).length,
     };
   });
 
@@ -109,7 +119,7 @@ export function learnerAudit(S, content, now = Date.now()) {
     const v = Object.values(P);
     return { id: X.id, attempted: v.filter(p => p.status).length, correct: v.filter(p => p.status === 'ok' || p.status === 'self-ok').length,
       autoOk: v.filter(p => p.status === 'ok').length, needWork: v.filter(p => p.status === 'wrong' || p.status === 'review').length,
-      total: X.questions.reduce((s, q) => s + q.parts.length, 0) };
+      total: X._kind === 'blueprint' ? 0 : X.questions.reduce((s, q) => s + (q.parts || []).length, 0) };
   });
 
   // רמת הראיה: 0 אין נתונים · 1 יש שימוש · 2 שיפור בתוך האפליקציה · 3 הצלחה בשאלות בגרות אמיתיות
@@ -149,7 +159,7 @@ export function formatReport(P, L) {
   }
   line(`- חסרים שיעורים (נושאים משותפים): ${P.coverage.common.missing.join(' · ') || 'אין'}.`);
   for (const e of P.examCoverage) {
-    line(`- שאלון ${e.code} ${e.session}: האפליקציה מלמדת ${e.skillsPct}% מהמיומנויות שהשאלון דורש (משוקלל בנקודות). שאלות שכל המיומנויות שלהן נלמדות: ${e.fullPct}% מהנקודות. שאלות בלי אף מיומנות שנלמדת: ${e.uncovered.join(', ') || 'אין'}.`);
+    line(`- שאלון ${e.code} ${e.session}${e.kind === 'blueprint' ? ' (מיפוי מיומנויות בלבד, אין עדיין תרגול אינטראקטיבי על השאלון עצמו)' : ''}: האפליקציה מלמדת ${e.skillsPct}% מהמיומנויות שהשאלון דורש (משוקלל בנקודות). שאלות שכל המיומנויות שלהן נלמדות: ${e.fullPct}% מהנקודות. שאלות בלי אף מיומנות שנלמדת: ${e.uncovered.join(', ') || 'אין'}.`);
     e.questions.forEach(q => line(`  - שאלה ${q.n} (${q.points} נק׳): ${Math.round(q.frac * 100)}% מהמיומנויות. חסר: ${q.missing.map(k => (P.skillNames || {})[k] || k).join(' · ') || '—'}`));
   }
   line(`- בדיקת אדם (מורה/מומחה) לשיעורים: ${P.humanReviewed}/${P.lessons.length}. בדיקה ממוחשבת של תשובות: בכל קובצי התוכן (npm test).`);
