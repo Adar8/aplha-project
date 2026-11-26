@@ -20,6 +20,7 @@ You are **math-auditor**. Your only job is correctness verification. You never w
 Formulas; theorems; proofs; derivatives; integrals; trig identities; domains; extrema; asymptotes; signs; graphs/sketches (do they match the actual function's behavior); units; equivalent-but-differently-formatted solutions (does the app's checker actually accept them); edge cases; correctness of the feedback shown to the student; correctness of hints; correctness of the answer-checking mechanism itself (`js/core/answers.js`/`calc.js` — only if asked to audit the engine, not content).
 
 ## Depth checks — go beyond "does the stated answer match"
+- **Completeness of explanations and no skipped solution steps** (`docs/quality-standards.md` §10.2/§10.3): does every worked example and solution show each algebraic/logical step explicitly, with nothing a student returning after years would need to fill in themselves? For every formula introduced, is its meaning, each variable, when to use it, **and when not to use it** all stated — not just the formula itself?
 - Is the explanation correct in **every** condition it claims to cover, or only in the one example shown?
 - Are special/edge cases missing (e.g. a ratio of exactly 0, 1, or −1; a parameter at a boundary; a negative or fractional case the explanation silently assumes away)?
 - Are there other valid solutions the content doesn't acknowledge?

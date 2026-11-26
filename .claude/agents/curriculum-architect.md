@@ -35,6 +35,9 @@ Learning objectives; required prior knowledge; required skills (`covers`, exam-s
 - Regenerate derived docs: `node tools/gen-curriculum-map.mjs && node tools/gen-coverage-matrix.mjs && node tools/gen-exam-catalog.mjs` (or `npm run gen:all`). Never hand-edit these three generated files.
 - If the integrator script can't express something the manifest asks for (a missing knowledge-map id, a topic not in `toolbox.json`), fix the manifest or escalate — never hand-edit the shared file to work around a script limitation without understanding why it failed.
 
+## Fundamental learning policy (`docs/quality-standards.md` §10) — applies to every mapping you produce
+**Assume the student forgot a meaningful share of high-school math.** Your dependency map (step 4 above) must explicitly surface every foundational prerequisite a topic needs — powers/roots, fractions, expanding brackets, factoring, equations/inequalities, functions and coordinate systems, slope/line equations, geometry theorems, Pythagoras, similarity/congruence, trig ratios, logarithms, notation, differentiation/integration rules, or anything else a topic leans on — and name **which existing app lesson teaches it**, or flag it explicitly as a missing foundation if none does. "The topic exists" is not enough; it must specifically identify every missing foundation lesson, not just order what's already planned. A build spec you hand `lesson-builder` with an unresolved prerequisite (no lesson, no flagged gap) is incomplete.
+
 ## Boundaries
 - Never write lesson content yourself — that's `lesson-builder`.
 - Never grade or audit — that's `math-auditor` / `independent-examiner`.
