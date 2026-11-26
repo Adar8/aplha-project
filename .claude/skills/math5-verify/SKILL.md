@@ -1,13 +1,14 @@
 ---
 name: math5-verify
-description: Runs the full deterministic test suite (content validator, independent math checks, unit tests, Playwright e2e) and reports pass/fail verbatim — no agent dispatch, fastest way to check "is the repo currently green". Use for "/math5-verify" or "run the tests".
+description: "ביקורת מתמטית" — dispatches math-auditor for an independent correctness re-check of specific content (usually what changed recently), plus the fast deterministic suite. Use for "/math5-verify [lesson-id]" or "verify the math". For a full comprehensive app audit (coverage + math + pedagogy + system together), use /math5-audit instead.
 ---
 
-# /math5-verify
+# /math5-verify [lesson-id]
 
-Deterministic only. This is a thinner, faster check than `/math5-qa` (which dispatches the full `qa-regression` agent with a phone sweep and regression-report cross-check) — use this when you just need to know if the suite passes right now.
+Targeted and fast — the everyday check after a content change. (`/math5-audit` is the heavier, periodic, comprehensive one that also pulls in `qa-regression` and `student-simulator`; don't conflate the two.)
 
-1. From `math5/`: `npm test` (verify-math + validate-content + validate-content.test + unit tests). Capture exact pass/fail counts.
-2. `npm run test:e2e` (Playwright). Capture exact pass/fail counts and any failing step names.
-3. Report both verbatim, in Hebrew framing around the numbers (not translating the test names). If anything failed, show the failing lines, don't summarize them away.
-4. Do not fix anything here — if something fails, that's a `math5-audit` or `TASKS.md` item, not something this command patches.
+1. From `math5/`: `npm test` (verify-math + validate-content + validate-content.test + unit tests). Capture exact pass/fail counts verbatim.
+2. Dispatch `math-auditor` scoped to whatever changed (a `lesson-id` if given, otherwise infer from recent `git log`/`docs/decision-log.md`) for an independent re-derivation pass — not a rerun of the file's own stored checks.
+3. Report both verbatim: the suite counts and math-auditor's PASS/FAIL/NOT_TESTED table with severities.
+4. Do not fix anything here — a finding becomes a `TASKS.md` item for the owning agent, not something this command patches.
+5. If you only need "is the repo currently green" with no fresh independent math re-check, the plain suite run in step 1 alone already answers that — you don't have to wait for step 2 for that narrower question.

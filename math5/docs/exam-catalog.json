@@ -11,6 +11,7 @@
       "format": "old",
       "source": "https://meyda.education.gov.il/sheeloney_bagrut/2024/6/HEB/35581.pdf",
       "status": "transcribed_and_blueprinted",
+      "reserved": false,
       "choose": null,
       "questions": [
         {
@@ -128,6 +129,7 @@
       "format": "old",
       "source": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35582.PDF",
       "status": "blueprinted",
+      "reserved": false,
       "choose": "3 מתוך 5, לפחות אחת מכל פרק (33⅓ נקודות לשאלה)",
       "questions": [
         {
@@ -237,7 +239,8 @@
       "session": "קיץ תשפ\"ה, 2025",
       "format": "new",
       "source": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35571.pdf",
-      "status": "blueprinted",
+      "status": "eval_reserved",
+      "reserved": true,
       "choose": "5 מתוך 8 (20 נקודות לכל שאלה): לפחות אחת מפרק ראשון או שני, ולפחות אחת מכל אחד מהפרקים השלישי והרביעי. בשאלה 1 עונים על 2 מתוך 4 סעיפים (א-ד).",
       "questions": [
         {
@@ -470,13 +473,15 @@
       "format": "new",
       "source": "https://meyda.education.gov.il/sheeloney_bagrut/2025/6/HEB/35572.pdf",
       "status": "catalogued_only",
+      "reserved": false,
       "choose": null,
       "questions": []
     }
   ],
   "statusLegend": {
     "transcribed_and_blueprinted": "יש קובץ שאלון מלא באפליקציה (learning-content/exams) עם נוסח, פתרונות ותיוג מיומנויות לכל שאלה.",
-    "blueprinted": "אין העתקת נוסח השאלות (זכויות יוצרים), אבל יש מיפוי שאלה→ניקוד→מיומנויות (learning-content/exams/blueprints).",
+    "blueprinted": "אין העתקת נוסח השאלות (זכויות יוצרים), אבל יש מיפוי שאלה→ניקוד→מיומנויות (learning-content/exams/blueprints). זמין ל-lesson-builder.",
+    "eval_reserved": "מופה כמו blueprint, אבל שמור ב-learning-content/exams/eval-reserved ואסור לגמרי ל-lesson-builder/student-simulator לקרוא אותו (docs/quality-standards.md §8). משמש למדידת כיסוי ול-independent-examiner בלבד.",
     "catalogued_only": "הקישור הרשמי ידוע ומאומת, אבל עוד לא נותח לשאלות ומיומנויות. ממתין להרצת exam-analyst."
   },
   "notYetCollected": {

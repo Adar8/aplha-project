@@ -1,14 +1,16 @@
 ---
 name: math5-audit
-description: Dispatches math-auditor to independently re-verify the mathematical correctness of MATH 5 content (one lesson, or all of it). Use for "/math5-audit [lesson-id]" or "run a math audit".
+description: "ביקורת מלאה של האפליקציה" — the comprehensive periodic audit, combining exam coverage, math correctness (math-auditor), pedagogy (student-simulator) and system QA (qa-regression) into one report. Use for "/math5-audit" (weekly cadence per docs/quality-standards.md §9) or "full app audit". For a quick targeted math re-check after one change, use /math5-verify instead.
 ---
 
-# /math5-audit [lesson-id]
+# /math5-audit
 
-1. If `lesson-id` given: dispatch the `math-auditor` agent to independently re-derive every numeric answer in `math5/learning-content/lessons/<id>.json` or `math5/learning-content/toolbox/<id>.json` (whichever exists), from scratch — not by trusting the stored `check`/`tests/verify/<id>.mjs`.
-2. If no argument: dispatch `math-auditor` for a full-repo pass — `node tests/validate-content.mjs` + `npm test`, plus an independent spot-check of every main lesson's quiz answers (at minimum).
-3. `math-auditor` must never be the agent that wrote the content under audit — if the content was written in this same session by `lesson-builder` moments ago, that's fine (different agent type); refuse only if you'd literally be asking the same agent to check its own prior output.
-4. Wait for the report, then:
-   - append one line to `math5/docs/decision-log.md` (date, scope, verdict, evidence path),
-   - surface the ✓/✗ table to the user in Hebrew, verbatim where it matters,
-   - if any ✗, open/update a `math5/TASKS.md` entry and do NOT mark anything "done".
+The heavy, periodic one — don't run this reflexively on every small edit (see `supervisor.md`'s resource-management rules); use `/math5-verify` or `/math5-qa` for a targeted check and save this for the weekly cadence or a genuine "how healthy is the whole project" question.
+
+1. Refresh coverage: `/math5-coverage` (or its underlying `npm run gen:all`).
+2. Dispatch `math-auditor` for a full-repo correctness pass: `node tests/validate-content.mjs` + `npm test`, plus an independent re-derivation of every main lesson's quiz/bagrut answers (not a sample).
+3. Dispatch `student-simulator` (profile B, the project's real student level, unless told otherwise) on the most recently changed or highest-priority lesson, for a pedagogy check.
+4. Dispatch `qa-regression` for the full system checklist (see its agent file) including the solution-leak-channel check.
+5. `math-auditor` must never audit content it wrote itself in this same session — a different agent type having written it is fine.
+6. Consolidate into one Hebrew report (you can reuse `/math5-report`'s format): coverage (all 4 separate metrics), math findings by severity, pedagogy findings, QA checklist, and an overall verdict per `docs/quality-standards.md` §7 (the 100-point rubric plus its hard-fail gates — a high score never overrides an open CRITICAL finding).
+7. Append to `docs/decision-log.md`; update `TASKS.md` for anything that failed. Never mark anything "done" without this cycle's own evidence.

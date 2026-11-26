@@ -429,31 +429,37 @@ async function main() {
     const X = JSON.parse(readFileSync(resolve(CONTENT, `exams/${id}.json`), 'utf8'));
     X.questions.forEach(q => { if (!Array.isArray(q.skills) || !q.skills.length) skErr.push(`exams/${id} q${q.n}: חסר skills`); (q.skills || []).forEach(k => { if (!SK.has(k)) skErr.push(`exams/${id} q${q.n}: מיומנות לא מוכרת: ${k}`); }); });
   }
-  // Blueprints (exam-analyst): לא מכילים נוסח רשמי, אבל חייבים skills/topicIds תקינים כדי שכיסוי יימדד נכון
-  const bpDir = resolve(CONTENT, 'exams/blueprints');
-  const bpErr = [];
+  // Blueprints (exam-analyst): לא מכילים נוסח רשמי, אבל חייבים skills/topicIds תקינים כדי שכיסוי יימדד נכון.
+  // נבדקים באותה דרך גם exams/blueprints (למדידה+תרגול עתידי) וגם exams/eval-reserved (שמור להערכה עצמאית – ראו docs/quality-standards.md §8).
   const topicSet = new Set(TOPICS.map(t => t.id));
-  let bpCount = 0;
-  if (existsSync(bpDir)) {
-    for (const f of readdirSync(bpDir).filter(f => f.endsWith('.json'))) {
-      bpCount++;
-      const B = JSON.parse(readFileSync(resolve(bpDir, f), 'utf8'));
+  function checkBlueprintDir(dirName) {
+    const dir = resolve(CONTENT, `exams/${dirName}`);
+    const errs = []; let count = 0;
+    if (!existsSync(dir)) return { errs, count };
+    for (const f of readdirSync(dir).filter(f => f.endsWith('.json'))) {
+      count++;
+      const B = JSON.parse(readFileSync(resolve(dir, f), 'utf8'));
       const miss = new Set(Object.keys(B.missingSkills || {}));
-      if (B.schemaVersion !== 1) bpErr.push(`blueprints/${f}: schemaVersion חייב להיות 1`);
-      if (B.kind !== 'blueprint') bpErr.push(`blueprints/${f}: kind חייב להיות blueprint`);
-      if (!PAPERS[B.format]?.includes('0' + B.code)) bpErr.push(`blueprints/${f}: שאלון ${B.code} לא שייך למתכונת ${B.format}`);
+      const tag = `${dirName}/${f}`;
+      if (B.schemaVersion !== 1) errs.push(`${tag}: schemaVersion חייב להיות 1`);
+      if (B.kind !== 'blueprint') errs.push(`${tag}: kind חייב להיות blueprint`);
+      if (!PAPERS[B.format]?.includes('0' + B.code)) errs.push(`${tag}: שאלון ${B.code} לא שייך למתכונת ${B.format}`);
       for (const q of B.questions || []) {
-        const qp = `blueprints/${f} q${q.n}`;
-        if (typeof q.points !== 'number') bpErr.push(`${qp}: חסר points`);
-        (q.topicIds || []).forEach(t => { if (!topicSet.has(t)) bpErr.push(`${qp}: נושא לא קיים: ${t}`); });
-        if (!Array.isArray(q.skills) || !q.skills.length) bpErr.push(`${qp}: חסר skills`);
-        (q.skills || []).forEach(k => { if (!SK.has(k) && !miss.has(k)) bpErr.push(`${qp}: מיומנות לא מוכרת ולא ב-missingSkills: ${k}`); });
-        if (typeof q.summary !== 'string' || !q.summary.trim()) bpErr.push(`${qp}: חסר summary (תקציר, לא נוסח רשמי)`);
+        const qp = `${tag} q${q.n}`;
+        if (typeof q.points !== 'number') errs.push(`${qp}: חסר points`);
+        (q.topicIds || []).forEach(t => { if (!topicSet.has(t)) errs.push(`${qp}: נושא לא קיים: ${t}`); });
+        if (!Array.isArray(q.skills) || !q.skills.length) errs.push(`${qp}: חסר skills`);
+        (q.skills || []).forEach(k => { if (!SK.has(k) && !miss.has(k)) errs.push(`${qp}: מיומנות לא מוכרת ולא ב-missingSkills: ${k}`); });
+        if (typeof q.summary !== 'string' || !q.summary.trim()) errs.push(`${qp}: חסר summary (תקציר, לא נוסח רשמי)`);
       }
     }
+    return { errs, count };
   }
-  if (bpErr.length) { fail += bpErr.length; console.error(`✗ learning-content/exams/blueprints – ${bpErr.length} שגיאות`); bpErr.forEach(e => console.error('   • ' + e)); }
-  else if (bpCount) console.log(`✓ learning-content/exams/blueprints (${bpCount} שאלונים ממופים)`);
+  for (const dirName of ['blueprints', 'eval-reserved']) {
+    const { errs: bpErr, count: bpCount } = checkBlueprintDir(dirName);
+    if (bpErr.length) { fail += bpErr.length; console.error(`✗ learning-content/exams/${dirName} – ${bpErr.length} שגיאות`); bpErr.forEach(e => console.error('   • ' + e)); }
+    else if (bpCount) console.log(`✓ learning-content/exams/${dirName} (${bpCount} שאלונים ממופים${dirName === 'eval-reserved' ? ', שמור להערכה עצמאית' : ''})`);
+  }
   if (skErr.length) { fail += skErr.length; console.error(`✗ מיומנויות בגרות – ${skErr.length} שגיאות`); skErr.forEach(e => console.error('   • ' + e)); }
   else console.log(`✓ learning-content/exam-skills.json (${SK.size} מיומנויות)`);
   for (const id of EX.exams) {

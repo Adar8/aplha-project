@@ -27,11 +27,15 @@ export function loadContent() {
   // משמשים לכיסוי (tools/audit.mjs), לא לתרגול. שאלון עם exam מלא לא נספר פעמיים כ-blueprint.
   const bpDir = resolve(ROOT, 'learning-content/exams/blueprints');
   const haveFullCode = new Set(fullExams.map(X => X.code));
-  const blueprints = existsSync(bpDir)
-    ? readdirSync(bpDir).filter(f => f.endsWith('.json')).map(f => JSON.parse(readFileSync(resolve(bpDir, f), 'utf8')))
-      .filter(B => !haveFullCode.has(B.code)).map(B => ({ ...B, id: `${B.code}-blueprint`, _kind: 'blueprint' }))
+  const loadBp = (dir, kind) => existsSync(dir)
+    ? readdirSync(dir).filter(f => f.endsWith('.json')).map(f => JSON.parse(readFileSync(resolve(dir, f), 'utf8')))
+      .filter(B => !haveFullCode.has(B.code)).map(B => ({ ...B, id: `${B.code}-${kind}`, _kind: kind }))
     : [];
-  const exams = [...fullExams, ...blueprints];
+  const blueprints = loadBp(bpDir, 'blueprint');
+  // eval-reserved: אותו שימוש למדידת כיסוי, אבל שמור בנפרד — lesson-builder/student-simulator אסורים לקרוא אותו
+  // (ראו docs/quality-standards.md §8). קריאה כאן (למדידת כיסוי בלבד) מותרת לכלי הבנייה/ביקורת, לא לסוכנים האלה.
+  const evalReserved = loadBp(resolve(ROOT, 'learning-content/exams/eval-reserved'), 'eval-reserved');
+  const exams = [...fullExams, ...blueprints, ...evalReserved];
   const skillNames = existsSync(resolve(ROOT, 'learning-content/exam-skills.json')) ? C('exam-skills.json').skills : {};
   return { lessons, toolLessons, toolbox: tb, exams, skillNames };
 }
@@ -65,8 +69,8 @@ export function productAudit({ lessons, toolLessons, toolbox, exams, skillNames 
       uncovered: qs.filter(q => q.frac === 0).map(q => q.n),
       questions: qs,
       // blueprint: אין סעיפים אינטראקטיביים (רק מיפוי כיסוי) — 0, לא שגיאה
-      parts: X._kind === 'blueprint' ? 0 : X.questions.reduce((s, q) => s + (q.parts || []).length, 0),
-      autoChecked: X._kind === 'blueprint' ? 0 : X.questions.flatMap(q => q.parts || []).filter(p => p.answer).length,
+      parts: X._kind !== 'full' ? 0 : X.questions.reduce((s, q) => s + (q.parts || []).length, 0),
+      autoChecked: X._kind !== 'full' ? 0 : X.questions.flatMap(q => q.parts || []).filter(p => p.answer).length,
     };
   });
 
@@ -119,7 +123,7 @@ export function learnerAudit(S, content, now = Date.now()) {
     const v = Object.values(P);
     return { id: X.id, attempted: v.filter(p => p.status).length, correct: v.filter(p => p.status === 'ok' || p.status === 'self-ok').length,
       autoOk: v.filter(p => p.status === 'ok').length, needWork: v.filter(p => p.status === 'wrong' || p.status === 'review').length,
-      total: X._kind === 'blueprint' ? 0 : X.questions.reduce((s, q) => s + (q.parts || []).length, 0) };
+      total: X._kind !== 'full' ? 0 : X.questions.reduce((s, q) => s + (q.parts || []).length, 0) };
   });
 
   // רמת הראיה: 0 אין נתונים · 1 יש שימוש · 2 שיפור בתוך האפליקציה · 3 הצלחה בשאלות בגרות אמיתיות
@@ -159,7 +163,8 @@ export function formatReport(P, L) {
   }
   line(`- חסרים שיעורים (נושאים משותפים): ${P.coverage.common.missing.join(' · ') || 'אין'}.`);
   for (const e of P.examCoverage) {
-    line(`- שאלון ${e.code} ${e.session}${e.kind === 'blueprint' ? ' (מיפוי מיומנויות בלבד, אין עדיין תרגול אינטראקטיבי על השאלון עצמו)' : ''}: האפליקציה מלמדת ${e.skillsPct}% מהמיומנויות שהשאלון דורש (משוקלל בנקודות). שאלות שכל המיומנויות שלהן נלמדות: ${e.fullPct}% מהנקודות. שאלות בלי אף מיומנות שנלמדת: ${e.uncovered.join(', ') || 'אין'}.`);
+    const kindNote = e.kind === 'eval-reserved' ? ' (שמור להערכה עצמאית בלבד — ראו docs/quality-standards.md §8, אסור ל-lesson-builder/student-simulator)' : e.kind === 'blueprint' ? ' (מיפוי מיומנויות בלבד, אין עדיין תרגול אינטראקטיבי על השאלון עצמו)' : '';
+    line(`- שאלון ${e.code} ${e.session}${kindNote}: האפליקציה מלמדת ${e.skillsPct}% מהמיומנויות שהשאלון דורש (משוקלל בנקודות). שאלות שכל המיומנויות שלהן נלמדות: ${e.fullPct}% מהנקודות. שאלות בלי אף מיומנות שנלמדת: ${e.uncovered.join(', ') || 'אין'}.`);
     e.questions.forEach(q => line(`  - שאלה ${q.n} (${q.points} נק׳): ${Math.round(q.frac * 100)}% מהמיומנויות. חסר: ${q.missing.map(k => (P.skillNames || {})[k] || k).join(' · ') || '—'}`));
   }
   line(`- בדיקת אדם (מורה/מומחה) לשיעורים: ${P.humanReviewed}/${P.lessons.length}. בדיקה ממוחשבת של תשובות: בכל קובצי התוכן (npm test).`);
