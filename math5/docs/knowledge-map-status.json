@@ -5,11 +5,11 @@
   "note": "נוצר אוטומטית. אל תערכו ידנית — הריצו מחדש אחרי כל שינוי בתוכן. coverageStatus/auditStatus/openGaps מחושבים מצומת-חוצה אמיתי, לא מהונחתים.",
   "summary": {
     "totalSkills": 61,
-    "untaught": 44,
+    "untaught": 43,
     "mentionedNotPracticed": 0,
-    "taughtPracticed": 17,
+    "taughtPracticed": 18,
     "audited": 0,
-    "unaudited": 17
+    "unaudited": 18
   },
   "untaughtRequiredByExam": [
     {
@@ -27,15 +27,6 @@
         "35571"
       ],
       "questions": 1
-    },
-    {
-      "id": "f-pythagoras",
-      "name": "משפט פיתגורס",
-      "papers": [
-        "35582",
-        "35571"
-      ],
-      "questions": 2
     },
     {
       "id": "s-sum-notation",
@@ -324,18 +315,7 @@
     }
   ],
   "mentionedNotPracticedList": [],
-  "knowledgeMapInconsistencies": [
-    {
-      "id": "f-pythagoras",
-      "name": "משפט פיתגורס",
-      "issues": [
-        {
-          "lid": "tb-pythagoras",
-          "reason": "covers-does-not-include-examSkillIds"
-        }
-      ]
-    }
-  ],
+  "knowledgeMapInconsistencies": [],
   "examSkillsWithoutKnowledgeMapNode": [
     "word-motion",
     "word-work",
@@ -1336,14 +1316,64 @@
       "examSkillNames": [
         "משפט פיתגורס"
       ],
-      "taughtByLessons": [],
-      "rejectedLessonClaims": [
+      "taughtByLessons": [
+        "tb-pythagoras"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
         {
-          "lid": "tb-pythagoras",
-          "reason": "covers-does-not-include-examSkillIds"
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-pythagoras",
+          "exerciseId": "q4"
         }
       ],
-      "exercisesVerified": [],
       "papers": [
         "35582",
         "35571"
@@ -1370,12 +1400,9 @@
           ]
         }
       ],
-      "coverageStatus": "untaught",
-      "auditStatus": "n/a_no_lesson",
-      "openGaps": [
-        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: pythagoras)",
-        "knowledge-map מציין \"tb-pythagoras\" כשיעור מלמד אבל: covers-does-not-include-examSkillIds — נדרש תיקון ב-knowledge-map.json או ב-lesson.covers"
-      ]
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
     },
     {
       "id": "f-notation",

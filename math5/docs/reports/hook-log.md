@@ -49,3 +49,26 @@
 
 ## 2026-11-26T13:20:23Z — learning-content/lessons/geometric-sequence.json
 ✓ עבר (validate-content + check-lesson)
+
+## 2026-11-27T11:18:33Z — learning-content/toolbox/tb-pythagoras.json
+✗ נכשל
+```
+
+--- check-lesson.mjs learning-content/toolbox/tb-pythagoras.json ---
+✗ חסר קובץ חישוב בלתי תלוי: tests/verify/tb-pythagoras.mjs
+✗ g1: אין חישוב בלתי תלוי
+✗ g2: אין חישוב בלתי תלוי
+✗ g3: אין חישוב בלתי תלוי
+✗ g4: אין חישוב בלתי תלוי
+✗ g6: אין חישוב בלתי תלוי
+✗ q1: אין חישוב בלתי תלוי
+✗ q2: אין חישוב בלתי תלוי
+✗ q3: אין חישוב בלתי תלוי
+✗ q4: אין חישוב בלתי תלוי
+✗ חסר קובץ אינטגרציה: learning-content/integration/tb-pythagoras.json
+
+11 בעיות ב-tb-pythagoras
+```
+
+## 2026-11-27T11:18:52Z — learning-content/toolbox.json
+✓ עבר (validate-content)

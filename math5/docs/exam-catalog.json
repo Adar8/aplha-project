@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26",
+  "generatedAt": "2026-11-27",
   "generatedBy": "tools/gen-exam-catalog.mjs — מרכיב רק מ-js/data/curriculum.js (SOURCES הרשמיים) ומהקבצים שכבר קיימים בפרויקט",
   "note": "קטלוג זה כולל רק שאלוני מועד קיץ שכבר אומתו ישירות מול קובץ רשמי של משרד החינוך. לא נוספו שאלונים שהקישור הרשמי שלהם לא נבדק.",
   "exams": [

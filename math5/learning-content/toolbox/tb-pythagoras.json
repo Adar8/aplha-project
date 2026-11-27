@@ -11,10 +11,11 @@
   "topicStatus": "foundation",
   "estimatedMinutes": 25,
   "summary": "מציאת יתר וניצב במשולש ישר-זווית, והמשפט ההפוך.",
+  "covers": ["pythagoras"],
   "review": {
     "status": "draft",
     "mathCheckedBy": [],
-    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו."
+    "notes": "שיעור יסוד בארגז הכלים. אינו נושא בחינה בפני עצמו. 27.11.2026 (curriculum-architect): נוסף covers=[\"pythagoras\"] — היה חסר, ולכן gen-knowledge-map-status.mjs לא הצליח לאמת את הטענה ש-f-pythagoras נלמד כאן (ראו docs/decision-log.md)."
   },
   "formulas": [],
   "video": {

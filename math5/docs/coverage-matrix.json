@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-26",
+  "generatedAt": "2026-11-27",
   "generatedBy": "tools/gen-coverage-matrix.mjs → tools/audit.mjs (productAudit) — אין כאן נתוני לומד אמיתיים, רק כיסוי תוכן + אחרון שנמדד בסימולציה",
   "note": "ארבעה מדדים נפרדים (metrics) — אין לאחד אותם לציון אחד. ראו docs/quality-standards.md §6.",
   "metrics": {
     "curriculumCoverage": {
       "metric": "curriculumCoverage",
       "description": "אחוז נושאי תוכנית הלימודים הרשמית (ברמת כותרת נושא) שיש להם שיעור באפליקציה. לא מודד אם כל המיומנויות בתוך הנושא נלמדו.",
-      "checkedAt": "2026-11-26",
-      "contentVersion": "6bced08",
+      "checkedAt": "2026-11-27",
+      "contentVersion": "7bece9e",
       "byTrack": {
         "common": {
           "covered": 3,
@@ -27,8 +27,8 @@
     "examSkillCoverage": {
       "metric": "examSkillCoverage",
       "description": "לכל שאלון שנאסף (קובץ exam מלא או blueprint): אחוז נקודות שהמיומנויות הנדרשות להן נלמדות באפליקציה. blueprint = מופה אבל אין עדיין תרגול אינטראקטיבי על השאלון עצמו.",
-      "checkedAt": "2026-11-26",
-      "contentVersion": "6bced08",
+      "checkedAt": "2026-11-27",
+      "contentVersion": "7bece9e",
       "byExam": [
         {
           "code": "35581",
@@ -43,7 +43,7 @@
           "session": "קיץ תשפ\"ה, 2025",
           "kind": "blueprint",
           "questionsCount": 5,
-          "skillsPctWeighted": 9,
+          "skillsPctWeighted": 11,
           "fullyCoveredPctOfPoints": 0
         },
         {
@@ -51,7 +51,7 @@
           "session": "קיץ תשפ\"ה, 2025",
           "kind": "eval-reserved",
           "questionsCount": 8,
-          "skillsPctWeighted": 19,
+          "skillsPctWeighted": 20,
           "fullyCoveredPctOfPoints": 0
         }
       ]
@@ -77,9 +77,9 @@
     "toolboxLessons": 0,
     "curriculumTopicsCovered": 0,
     "examSkillsPct": {
-      "35571": 0,
+      "35571": 1,
       "35581": 0,
-      "35582": 0
+      "35582": 2
     }
   },
   "product": {
@@ -100,8 +100,8 @@
         "id": "geometric-sequence",
         "title": "סדרה הנדסית",
         "topic": "sequences",
-        "minutes": 75,
-        "questions": 16,
+        "minutes": 90,
+        "questions": 21,
         "officialQuestions": 0,
         "review": "draft",
         "humanChecked": false
@@ -110,8 +110,8 @@
         "id": "derivative-extrema",
         "title": "נגזרת, משיק ונקודות קיצון של פולינום",
         "topic": "calc-poly",
-        "minutes": 75,
-        "questions": 16,
+        "minutes": 95,
+        "questions": 22,
         "officialQuestions": 0,
         "review": "draft",
         "humanChecked": false
@@ -127,7 +127,7 @@
         "humanChecked": false
       }
     ],
-    "contentHours": 11.3,
+    "contentHours": 11.9,
     "coverage": {
       "common": {
         "total": 14,
@@ -388,12 +388,10 @@
         "session": "קיץ תשפ\"ה, 2025",
         "format": "old",
         "kind": "blueprint",
-        "skillsPct": 9,
+        "skillsPct": 11,
         "fullPct": 0,
-        "partialPct": 80,
-        "uncovered": [
-          2
-        ],
+        "partialPct": 100,
+        "uncovered": [],
         "questions": [
           {
             "n": 1,
@@ -445,15 +443,14 @@
               "vectors-basic",
               "dot-product",
               "quadrilateral-props",
-              "pythagoras",
               "plane-eq",
               "line-space",
               "line-plane",
               "midsegment"
             ],
-            "frac": 0,
+            "frac": 0.125,
             "full": false,
-            "partial": false
+            "partial": true
           },
           {
             "n": 3,
@@ -568,7 +565,7 @@
         "session": "קיץ תשפ\"ה, 2025",
         "format": "new",
         "kind": "eval-reserved",
-        "skillsPct": 19,
+        "skillsPct": 20,
         "fullPct": 0,
         "partialPct": 75,
         "uncovered": [
@@ -618,7 +615,6 @@
               "isosceles-props",
               "congruence",
               "quadrilateral-props",
-              "pythagoras",
               "similarity",
               "derivative-graph",
               "concavity",
@@ -631,7 +627,7 @@
               "asymptotes",
               "chain-rule"
             ],
-            "frac": 0.05,
+            "frac": 0.1,
             "full": false,
             "partial": true
           },

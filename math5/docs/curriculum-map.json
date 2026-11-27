@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26",
+  "generatedAt": "2026-11-27",
   "generatedBy": "tools/gen-curriculum-map.mjs (מתוך js/data/curriculum.js ומתוך learning-content/lessons בפועל)",
   "note": "נוצר אוטומטית. אל תערכו ידנית — הריצו מחדש את הסקריפט אחרי כל שינוי בשיעורים או בתוכנית הלימודים.",
   "weights": {
