@@ -1,0 +1,4034 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-27",
+  "generatedBy": "tools/gen-knowledge-map-status.mjs (מתוך learning-content/knowledge-map.json + exam-skills.json + lessons/*.covers + toolbox/*.covers + exams/*/blueprints/*/eval-reserved/*)",
+  "note": "נוצר אוטומטית. אל תערכו ידנית — הריצו מחדש אחרי כל שינוי בתוכן. coverageStatus/auditStatus/openGaps מחושבים מצומת-חוצה אמיתי, לא מהונחתים.",
+  "summary": {
+    "totalSkills": 61,
+    "untaught": 44,
+    "mentionedNotPracticed": 0,
+    "taughtPracticed": 17,
+    "audited": 0,
+    "unaudited": 17
+  },
+  "untaughtRequiredByExam": [
+    {
+      "id": "f-algebraic-fractions",
+      "name": "שברים אלגבריים",
+      "papers": [
+        "35581"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "f-trig-basics",
+      "name": "טריגונומטריה במשולש ישר-זווית",
+      "papers": [
+        "35571"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "f-pythagoras",
+      "name": "משפט פיתגורס",
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "s-sum-notation",
+      "name": "סכומים של סדרות מעורבות/נגזרות",
+      "papers": [
+        "35571"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "s-induction",
+      "name": "אינדוקציה מתמטית",
+      "papers": [
+        "35571"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "p-basic",
+      "name": "הסתברות בסיסית",
+      "papers": [
+        "35571"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "p-tree",
+      "name": "דיאגרמת עץ והסתברות מותנית",
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "p-binomial",
+      "name": "התפלגות בינומית (ברנולי)",
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "g-triangles",
+      "name": "משולשים וחפיפה",
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "questions": 9
+    },
+    {
+      "id": "g-similarity",
+      "name": "דמיון משולשים",
+      "papers": [
+        "35571"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "g-circle",
+      "name": "משפטים במעגל",
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "questions": 3
+    },
+    {
+      "id": "g-trig-identities",
+      "name": "זהויות טריגונומטריות",
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "questions": 3
+    },
+    {
+      "id": "c-investigation",
+      "name": "חקירת פולינום מלאה",
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "questions": 7
+    },
+    {
+      "id": "c-product-quotient",
+      "name": "נגזרת מכפלה, מנה ופונקציה מורכבת",
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "questions": 9
+    },
+    {
+      "id": "c-rational",
+      "name": "חקירת פונקציה רציונלית",
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "questions": 6
+    },
+    {
+      "id": "c-root",
+      "name": "חקירת פונקציית שורש",
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "questions": 3
+    },
+    {
+      "id": "c-trig-deriv",
+      "name": "חדו\"א של פונקציות טריגונומטריות",
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "c-optimization",
+      "name": "בעיות קיצון",
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "c-transform",
+      "name": "תכונות גרפיות וטרנספורמציות",
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "questions": 4
+    },
+    {
+      "id": "c-integral-basic",
+      "name": "פונקציה קדומה ואינטגרל מסוים",
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "questions": 5
+    },
+    {
+      "id": "c-area",
+      "name": "שטחים בעזרת אינטגרל",
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "questions": 5
+    },
+    {
+      "id": "e-exp-laws",
+      "name": "פונקציה מעריכית ומשוואות מעריכיות",
+      "papers": [
+        "35582"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "e-log",
+      "name": "לוגריתמים וחוקיהם",
+      "papers": [
+        "35582"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "e-exp-log-eq",
+      "name": "משוואות לוגריתמיות",
+      "papers": [
+        "35582"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "e-exp-deriv",
+      "name": "חקירת פונקציות מעריכיות",
+      "papers": [
+        "35582"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "e-log-deriv",
+      "name": "חקירת פונקציות לוגריתמיות",
+      "papers": [
+        "35582"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "a-line",
+      "name": "ישרים במישור: מרחק, אמצע, ניצבות",
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "questions": 3
+    },
+    {
+      "id": "a-circle",
+      "name": "מעגל: משוואה ומשיק",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "a-locus",
+      "name": "מקומות גאומטריים",
+      "papers": [
+        "35582"
+      ],
+      "questions": 2
+    },
+    {
+      "id": "a-conics",
+      "name": "פרבולה ואליפסה",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "v-basic",
+      "name": "וקטורים: פעולות ואורך",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "v-dot",
+      "name": "מכפלה סקלרית וזווית",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "v-line",
+      "name": "ישר במרחב",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "v-plane",
+      "name": "מישור במרחב",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "z-basic",
+      "name": "מספרים מרוכבים: פעולות וערך מוחלט",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    },
+    {
+      "id": "z-polar",
+      "name": "הצגה קוטבית ודה-מואבר",
+      "papers": [
+        "35582"
+      ],
+      "questions": 1
+    }
+  ],
+  "mentionedNotPracticedList": [],
+  "knowledgeMapInconsistencies": [
+    {
+      "id": "f-pythagoras",
+      "name": "משפט פיתגורס",
+      "issues": [
+        {
+          "lid": "tb-pythagoras",
+          "reason": "covers-does-not-include-examSkillIds"
+        }
+      ]
+    }
+  ],
+  "examSkillsWithoutKnowledgeMapNode": [
+    "word-motion",
+    "word-work",
+    "word-buy-sell",
+    "parameter-problems",
+    "volume-revolution",
+    "exp-log-integral"
+  ],
+  "examSkillsWithoutKnowledgeMapNodeAndRequiredByCollectedExam": [
+    "word-motion",
+    "parameter-problems",
+    "exp-log-integral"
+  ],
+  "skills": [
+    {
+      "id": "f-fractions",
+      "name": "שברים ופעולות חשבון",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-fractions"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-fractions",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-linear-eq",
+      "name": "משוואה ממעלה ראשונה",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-linear-eq"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-linear-eq",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-factoring",
+      "name": "פירוק לגורמים וכפל מקוצר",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-factoring"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-factoring",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-quadratic-eq",
+      "name": "משוואה ריבועית",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [
+        "quadratic-eq"
+      ],
+      "examSkillNames": [
+        "משוואה ריבועית"
+      ],
+      "taughtByLessons": [
+        "tb-quadratic"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-quadratic",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 1,
+          "points": 33.33,
+          "matchedSkills": [
+            "quadratic-eq"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 3,
+          "points": 33.33,
+          "matchedSkills": [
+            "quadratic-eq"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 2,
+          "points": 20,
+          "matchedSkills": [
+            "quadratic-eq"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 3,
+          "points": 20,
+          "matchedSkills": [
+            "quadratic-eq"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 7,
+          "points": 20,
+          "matchedSkills": [
+            "quadratic-eq"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-algebraic-fractions",
+      "name": "שברים אלגבריים",
+      "area": "foundations",
+      "difficulty": 2,
+      "examSkillIds": [
+        "fraction-equations"
+      ],
+      "examSkillNames": [
+        "משוואות ומערכות עם נעלם במכנה"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 1,
+          "points": 25,
+          "matchedSkills": [
+            "fraction-equations"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: fraction-equations)"
+      ]
+    },
+    {
+      "id": "f-inequalities",
+      "name": "אי-שוויונות",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-inequalities"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-inequalities",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-systems",
+      "name": "מערכת משוואות",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [
+        "equation-system"
+      ],
+      "examSkillNames": [
+        "פתרון מערכת משוואות"
+      ],
+      "taughtByLessons": [
+        "tb-systems"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-systems",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 2,
+          "points": 20,
+          "matchedSkills": [
+            "equation-system"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-powers",
+      "name": "חוקי חזקות ושורשים",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-powers"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-powers",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-function-concept",
+      "name": "פונקציה, הצבה וגרף",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-axes",
+        "tb-substitution"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-axes",
+          "exerciseId": "q4"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-substitution",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-line-eq",
+      "name": "ישר: שיפוע ומשוואה",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-slope",
+        "tb-intercepts"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-slope",
+          "exerciseId": "q4"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-intercepts",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-parabola",
+      "name": "פרבולה וקודקוד",
+      "area": "foundations",
+      "difficulty": 2,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור יסוד קיים המלמד מיומנות זו"
+      ]
+    },
+    {
+      "id": "f-trig-basics",
+      "name": "טריגונומטריה במשולש ישר-זווית",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [
+        "right-triangle-trig"
+      ],
+      "examSkillNames": [
+        "טריגונומטריה במשולש ישר זווית (sin, cos, tan)"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 5,
+          "points": 20,
+          "matchedSkills": [
+            "right-triangle-trig"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: right-triangle-trig)"
+      ]
+    },
+    {
+      "id": "f-brackets",
+      "name": "פתיחת סוגריים וכינוס איברים",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [
+        "tb-brackets"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "g6"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "tb-brackets",
+          "exerciseId": "q4"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "f-pythagoras",
+      "name": "משפט פיתגורס",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [
+        "pythagoras"
+      ],
+      "examSkillNames": [
+        "משפט פיתגורס"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [
+        {
+          "lid": "tb-pythagoras",
+          "reason": "covers-does-not-include-examSkillIds"
+        }
+      ],
+      "exercisesVerified": [],
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 2,
+          "points": 33.33,
+          "matchedSkills": [
+            "pythagoras"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "pythagoras"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: pythagoras)",
+        "knowledge-map מציין \"tb-pythagoras\" כשיעור מלמד אבל: covers-does-not-include-examSkillIds — נדרש תיקון ב-knowledge-map.json או ב-lesson.covers"
+      ]
+    },
+    {
+      "id": "f-notation",
+      "name": "סימונים מתמטיים בסיסיים",
+      "area": "foundations",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "examSkillNames": [],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור יסוד קיים המלמד מיומנות זו"
+      ]
+    },
+    {
+      "id": "s-arith",
+      "name": "סדרה חשבונית",
+      "area": "sequences",
+      "difficulty": 2,
+      "examSkillIds": [
+        "arithmetic-sequence",
+        "sequence-proof"
+      ],
+      "examSkillNames": [
+        "סדרה חשבונית: איבר כללי וסכום",
+        "הוכחה שסדרה היא חשבונית/הנדסית"
+      ],
+      "taughtByLessons": [
+        "arithmetic-sequence"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "p1"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "p2"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "p3"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "p4"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "q4"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "q5"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "b1.b1a"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "b1.b1b"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "b1.b1c"
+        },
+        {
+          "lessonId": "arithmetic-sequence",
+          "exerciseId": "b1.b1d"
+        }
+      ],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 2,
+          "points": 25,
+          "matchedSkills": [
+            "sequence-proof"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 2,
+          "points": 20,
+          "matchedSkills": [
+            "sequence-proof"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "s-geom",
+      "name": "סדרה הנדסית",
+      "area": "sequences",
+      "difficulty": 2,
+      "examSkillIds": [
+        "geometric-sequence",
+        "sequence-proof"
+      ],
+      "examSkillNames": [
+        "סדרה הנדסית: איבר כללי וסכום",
+        "הוכחה שסדרה היא חשבונית/הנדסית"
+      ],
+      "taughtByLessons": [
+        "geometric-sequence"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "p1"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "p2"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "b1.b1a"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "b1.b1b"
+        }
+      ],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 2,
+          "points": 25,
+          "matchedSkills": [
+            "geometric-sequence",
+            "sequence-proof"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 2,
+          "points": 20,
+          "matchedSkills": [
+            "geometric-sequence",
+            "sequence-proof"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "s-geom-inf",
+      "name": "סכום סדרה הנדסית אינסופית",
+      "area": "sequences",
+      "difficulty": 3,
+      "examSkillIds": [
+        "geometric-infinite-sum"
+      ],
+      "examSkillNames": [
+        "סכום סדרה הנדסית אין־סופית"
+      ],
+      "taughtByLessons": [
+        "geometric-sequence"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "p3"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "p4"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "q4"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "q5"
+        },
+        {
+          "lessonId": "geometric-sequence",
+          "exerciseId": "b1.b1c"
+        }
+      ],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 2,
+          "points": 25,
+          "matchedSkills": [
+            "geometric-infinite-sum"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 2,
+          "points": 20,
+          "matchedSkills": [
+            "geometric-infinite-sum"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "s-sum-notation",
+      "name": "סכומים של סדרות מעורבות/נגזרות",
+      "area": "sequences",
+      "difficulty": 3,
+      "examSkillIds": [
+        "sequence-sum-notation"
+      ],
+      "examSkillNames": [
+        "סכומים של סדרות מעורבות וסדרות חדשות מסדרה נתונה"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "sequence-sum-notation"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 2,
+          "points": 20,
+          "matchedSkills": [
+            "sequence-sum-notation"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: sequence-sum-notation)"
+      ]
+    },
+    {
+      "id": "s-recursive",
+      "name": "נוסחת נסיגה",
+      "area": "sequences",
+      "difficulty": 3,
+      "examSkillIds": [
+        "recursive-sequence"
+      ],
+      "examSkillNames": [
+        "סדרה המוגדרת בנוסחת נסיגה"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: recursive-sequence)"
+      ]
+    },
+    {
+      "id": "s-induction",
+      "name": "אינדוקציה מתמטית",
+      "area": "sequences",
+      "difficulty": 3,
+      "examSkillIds": [
+        "induction"
+      ],
+      "examSkillNames": [
+        "הוכחה באינדוקציה מתמטית"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "induction"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: induction)"
+      ]
+    },
+    {
+      "id": "p-basic",
+      "name": "הסתברות בסיסית",
+      "area": "probability",
+      "difficulty": 2,
+      "examSkillIds": [
+        "prob-basic",
+        "prob-table"
+      ],
+      "examSkillNames": [
+        "הסתברות בסיסית ומרחב מדגם",
+        "טבלה דו-ממדית (טבלת שכיחויות/הסתברויות)"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 3,
+          "points": 20,
+          "matchedSkills": [
+            "prob-basic"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: prob-basic, prob-table)"
+      ]
+    },
+    {
+      "id": "p-tree",
+      "name": "דיאגרמת עץ והסתברות מותנית",
+      "area": "probability",
+      "difficulty": 3,
+      "examSkillIds": [
+        "prob-tree",
+        "conditional-prob",
+        "bayes",
+        "prob-independence"
+      ],
+      "examSkillNames": [
+        "דיאגרמת עץ והסתברות שלמה",
+        "הסתברות מותנית",
+        "הסתברות מותנית הפוכה (בייס)",
+        "מאורעות בלתי תלויים"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 3,
+          "points": 25,
+          "matchedSkills": [
+            "conditional-prob"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 3,
+          "points": 20,
+          "matchedSkills": [
+            "conditional-prob",
+            "prob-tree",
+            "prob-independence"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: prob-tree, conditional-prob, bayes, prob-independence)"
+      ]
+    },
+    {
+      "id": "p-binomial",
+      "name": "התפלגות בינומית (ברנולי)",
+      "area": "probability",
+      "difficulty": 3,
+      "examSkillIds": [
+        "binomial-prob"
+      ],
+      "examSkillNames": [
+        "התפלגות בינומית (ברנולי)"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 3,
+          "points": 25,
+          "matchedSkills": [
+            "binomial-prob"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 3,
+          "points": 20,
+          "matchedSkills": [
+            "binomial-prob"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: binomial-prob)"
+      ]
+    },
+    {
+      "id": "g-triangles",
+      "name": "משולשים וחפיפה",
+      "area": "geometry",
+      "difficulty": 2,
+      "examSkillIds": [
+        "angle-sum",
+        "parallel-angles",
+        "polygon-area",
+        "quadrilateral-props",
+        "congruence",
+        "isosceles-props",
+        "median-props",
+        "angle-bisector-thm",
+        "area-ratio",
+        "midsegment"
+      ],
+      "examSkillNames": [
+        "סכום זוויות במשולש וזוויות צמודות וקודקודיות",
+        "זוויות בין ישרים מקבילים",
+        "שטחי משולש, מלבן, מקבילית, טרפז",
+        "תכונות מקבילית, מלבן, מעוין, ריבוע וטרפז",
+        "חפיפת משולשים",
+        "תכונות משולש שווה שוקיים",
+        "תיכון: תכונות ושימוש",
+        "משפט חוצה הזווית",
+        "יחס שטחים של משולשים",
+        "קטע אמצעים במשולש ובטרפז"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 4,
+          "points": 25,
+          "matchedSkills": [
+            "isosceles-props",
+            "angle-bisector-thm",
+            "area-ratio"
+          ]
+        },
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 5,
+          "points": 25,
+          "matchedSkills": [
+            "median-props"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 1,
+          "points": 33.33,
+          "matchedSkills": [
+            "polygon-area"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 2,
+          "points": 33.33,
+          "matchedSkills": [
+            "quadrilateral-props",
+            "midsegment"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 3,
+          "points": 33.33,
+          "matchedSkills": [
+            "quadrilateral-props"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "parallel-angles",
+            "angle-sum",
+            "isosceles-props",
+            "congruence",
+            "quadrilateral-props"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 4,
+          "points": 20,
+          "matchedSkills": [
+            "isosceles-props",
+            "angle-sum",
+            "congruence",
+            "median-props",
+            "area-ratio"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 5,
+          "points": 20,
+          "matchedSkills": [
+            "isosceles-props",
+            "angle-sum"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 8,
+          "points": 20,
+          "matchedSkills": [
+            "polygon-area"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: angle-sum, parallel-angles, polygon-area, quadrilateral-props, congruence, isosceles-props, median-props, angle-bisector-thm, area-ratio, midsegment)"
+      ]
+    },
+    {
+      "id": "g-similarity",
+      "name": "דמיון משולשים",
+      "area": "geometry",
+      "difficulty": 3,
+      "examSkillIds": [
+        "similarity"
+      ],
+      "examSkillNames": [
+        "דמיון משולשים ויחס דמיון"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "similarity"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 4,
+          "points": 20,
+          "matchedSkills": [
+            "similarity"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: similarity)"
+      ]
+    },
+    {
+      "id": "g-circle",
+      "name": "משפטים במעגל",
+      "area": "geometry",
+      "difficulty": 3,
+      "examSkillIds": [
+        "circle-angles",
+        "tangent-chord",
+        "cyclic-quad",
+        "tangent-props",
+        "inscribed-circle"
+      ],
+      "examSkillNames": [
+        "זוויות במעגל (היקפיות ומרכזיות)",
+        "זווית בין משיק למיתר",
+        "מרובע חסום במעגל",
+        "תכונות משיקים למעגל (רדיוס מאונך, משיקים שווים)",
+        "מעגל חסום ומעגל חוסם משולש"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 4,
+          "points": 25,
+          "matchedSkills": [
+            "circle-angles",
+            "tangent-chord"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 4,
+          "points": 20,
+          "matchedSkills": [
+            "circle-angles",
+            "tangent-chord",
+            "tangent-props"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 5,
+          "points": 20,
+          "matchedSkills": [
+            "inscribed-circle",
+            "tangent-props"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: circle-angles, tangent-chord, cyclic-quad, tangent-props, inscribed-circle)"
+      ]
+    },
+    {
+      "id": "g-sine-cos",
+      "name": "משפט הסינוסים והקוסינוסים",
+      "area": "geometry",
+      "difficulty": 3,
+      "examSkillIds": [
+        "sine-law",
+        "cosine-law",
+        "circumradius",
+        "trig-area"
+      ],
+      "examSkillNames": [
+        "משפט הסינוסים",
+        "משפט הקוסינוסים",
+        "רדיוס המעגל החוסם ($2R$)",
+        "שטח משולש בעזרת סינוס"
+      ],
+      "taughtByLessons": [
+        "sine-cosine-law"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "sine-cosine-law",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "sine-cosine-law",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "sine-cosine-law",
+          "exerciseId": "p2"
+        },
+        {
+          "lessonId": "sine-cosine-law",
+          "exerciseId": "p4"
+        },
+        {
+          "lessonId": "sine-cosine-law",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "sine-cosine-law",
+          "exerciseId": "b1.b1b"
+        }
+      ],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 4,
+          "points": 25,
+          "matchedSkills": [
+            "sine-law"
+          ]
+        },
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 5,
+          "points": 25,
+          "matchedSkills": [
+            "sine-law",
+            "circumradius",
+            "trig-area"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 5,
+          "points": 20,
+          "matchedSkills": [
+            "cosine-law",
+            "sine-law",
+            "trig-area"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "g-trig-identities",
+      "name": "זהויות טריגונומטריות",
+      "area": "geometry",
+      "difficulty": 3,
+      "examSkillIds": [
+        "trig-identities",
+        "trig-equations",
+        "double-angle"
+      ],
+      "examSkillNames": [
+        "זהויות טריגונומטריות בסיסיות",
+        "משוואות טריגונומטריות",
+        "זהויות זווית כפולה ומשולשת"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 5,
+          "points": 25,
+          "matchedSkills": [
+            "double-angle"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 5,
+          "points": 20,
+          "matchedSkills": [
+            "trig-identities",
+            "double-angle",
+            "trig-equations"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 7,
+          "points": 20,
+          "matchedSkills": [
+            "trig-identities",
+            "trig-equations"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: trig-identities, trig-equations, double-angle)"
+      ]
+    },
+    {
+      "id": "c-derivative-rules",
+      "name": "כללי גזירה",
+      "area": "calculus",
+      "difficulty": 2,
+      "examSkillIds": [
+        "poly-derivative"
+      ],
+      "examSkillNames": [
+        "נגזרת של פולינום"
+      ],
+      "taughtByLessons": [
+        "derivative-extrema"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "g2"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "p1"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "q1"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "q4"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "b1.b1c"
+        }
+      ],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "c-tangent",
+      "name": "משוואת משיק",
+      "area": "calculus",
+      "difficulty": 2,
+      "examSkillIds": [
+        "tangent-line",
+        "tangent-normal"
+      ],
+      "examSkillNames": [
+        "משוואת משיק",
+        "משיק ונורמל לגרף"
+      ],
+      "taughtByLessons": [
+        "derivative-extrema"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "ex2"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "p4"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "b1.b1c"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "b1.b1d"
+        }
+      ],
+      "papers": [
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 8,
+          "points": 20,
+          "matchedSkills": [
+            "tangent-line"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "c-extrema",
+      "name": "נקודות קיצון, עלייה וירידה",
+      "area": "calculus",
+      "difficulty": 3,
+      "examSkillIds": [
+        "poly-extrema"
+      ],
+      "examSkillNames": [
+        "נקודות קיצון ותחומי עלייה וירידה"
+      ],
+      "taughtByLessons": [
+        "derivative-extrema"
+      ],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "ex1"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "ex3"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "ex4"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "ex5"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "g1"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "g3"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "g4"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "g5"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "p2"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "p3"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "p5"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "p6"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "q2"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "q3"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "q5"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "q6"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "q7"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "b1.b1a"
+        },
+        {
+          "lessonId": "derivative-extrema",
+          "exerciseId": "b1.b1b"
+        }
+      ],
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "poly-extrema"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "poly-extrema"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "poly-extrema"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 7,
+          "points": 20,
+          "matchedSkills": [
+            "poly-extrema"
+          ]
+        }
+      ],
+      "coverageStatus": "taught_practiced",
+      "auditStatus": "unaudited",
+      "openGaps": []
+    },
+    {
+      "id": "c-investigation",
+      "name": "חקירת פולינום מלאה",
+      "area": "calculus",
+      "difficulty": 3,
+      "examSkillIds": [
+        "func-analysis-general",
+        "derivative-graph",
+        "concavity",
+        "inflection"
+      ],
+      "examSkillNames": [
+        "חקירת פונקציה: חיתוך צירים, עלייה וירידה, קיצון, סקיצה",
+        "קשר בין גרף הפונקציה לגרף הנגזרת",
+        "קעירות ונגזרת שנייה",
+        "נקודות פיתול"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 6,
+          "points": 25,
+          "matchedSkills": [
+            "concavity"
+          ]
+        },
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 7,
+          "points": 25,
+          "matchedSkills": [
+            "derivative-graph"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "func-analysis-general"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "func-analysis-general"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "derivative-graph",
+            "concavity",
+            "inflection"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 6,
+          "points": 20,
+          "matchedSkills": [
+            "func-analysis-general",
+            "derivative-graph"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 7,
+          "points": 20,
+          "matchedSkills": [
+            "derivative-graph",
+            "func-analysis-general"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: func-analysis-general, derivative-graph, concavity, inflection)"
+      ]
+    },
+    {
+      "id": "c-product-quotient",
+      "name": "נגזרת מכפלה, מנה ופונקציה מורכבת",
+      "area": "calculus",
+      "difficulty": 3,
+      "examSkillIds": [
+        "product-rule",
+        "quotient-rule",
+        "chain-rule"
+      ],
+      "examSkillNames": [
+        "נגזרת של מכפלה",
+        "נגזרת של מנה",
+        "כלל השרשרת"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 6,
+          "points": 25,
+          "matchedSkills": [
+            "quotient-rule"
+          ]
+        },
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 7,
+          "points": 25,
+          "matchedSkills": [
+            "chain-rule"
+          ]
+        },
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 8,
+          "points": 25,
+          "matchedSkills": [
+            "chain-rule"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "quotient-rule"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "chain-rule"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "chain-rule"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 6,
+          "points": 20,
+          "matchedSkills": [
+            "quotient-rule",
+            "chain-rule"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 7,
+          "points": 20,
+          "matchedSkills": [
+            "quotient-rule",
+            "chain-rule"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 8,
+          "points": 20,
+          "matchedSkills": [
+            "chain-rule"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: product-rule, quotient-rule, chain-rule)"
+      ]
+    },
+    {
+      "id": "c-rational",
+      "name": "חקירת פונקציה רציונלית",
+      "area": "calculus",
+      "difficulty": 4,
+      "examSkillIds": [
+        "rational-func-analysis",
+        "asymptotes",
+        "domain"
+      ],
+      "examSkillNames": [
+        "חקירת פונקציה רציונלית",
+        "אסימפטוטות",
+        "תחום הגדרה"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 6,
+          "points": 25,
+          "matchedSkills": [
+            "rational-func-analysis",
+            "asymptotes"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "domain",
+            "asymptotes",
+            "rational-func-analysis"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "domain",
+            "asymptotes"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "domain",
+            "rational-func-analysis",
+            "asymptotes"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 6,
+          "points": 20,
+          "matchedSkills": [
+            "domain",
+            "asymptotes",
+            "rational-func-analysis"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 8,
+          "points": 20,
+          "matchedSkills": [
+            "asymptotes",
+            "rational-func-analysis"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: rational-func-analysis, asymptotes, domain)"
+      ]
+    },
+    {
+      "id": "c-root",
+      "name": "חקירת פונקציית שורש",
+      "area": "calculus",
+      "difficulty": 4,
+      "examSkillIds": [
+        "root-func-derivative"
+      ],
+      "examSkillNames": [
+        "נגזרת של פונקציית שורש"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 7,
+          "points": 25,
+          "matchedSkills": [
+            "root-func-derivative"
+          ]
+        },
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 8,
+          "points": 25,
+          "matchedSkills": [
+            "root-func-derivative"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 6,
+          "points": 20,
+          "matchedSkills": [
+            "root-func-derivative"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: root-func-derivative)"
+      ]
+    },
+    {
+      "id": "c-trig-deriv",
+      "name": "חדו\"א של פונקציות טריגונומטריות",
+      "area": "calculus",
+      "difficulty": 4,
+      "examSkillIds": [
+        "trig-func-analysis",
+        "trig-derivative"
+      ],
+      "examSkillNames": [
+        "חקירת פונקציה טריגונומטרית",
+        "נגזרות של פונקציות טריגונומטריות"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 7,
+          "points": 25,
+          "matchedSkills": [
+            "trig-func-analysis"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 7,
+          "points": 20,
+          "matchedSkills": [
+            "trig-func-analysis",
+            "trig-derivative"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: trig-func-analysis, trig-derivative)"
+      ]
+    },
+    {
+      "id": "c-optimization",
+      "name": "בעיות קיצון",
+      "area": "calculus",
+      "difficulty": 4,
+      "examSkillIds": [
+        "optimization"
+      ],
+      "examSkillNames": [
+        "בעיית קיצון מילולית/גאומטרית"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 8,
+          "points": 25,
+          "matchedSkills": [
+            "optimization"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 8,
+          "points": 20,
+          "matchedSkills": [
+            "optimization"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: optimization)"
+      ]
+    },
+    {
+      "id": "c-transform",
+      "name": "תכונות גרפיות וטרנספורמציות",
+      "area": "calculus",
+      "difficulty": 3,
+      "examSkillIds": [
+        "transformations",
+        "even-odd"
+      ],
+      "examSkillNames": [
+        "הזזה, מתיחה ושיקוף של גרפים",
+        "פונקציה זוגית ואי־זוגית"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 1,
+          "points": 33.33,
+          "matchedSkills": [
+            "transformations"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "even-odd"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 6,
+          "points": 20,
+          "matchedSkills": [
+            "even-odd"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 7,
+          "points": 20,
+          "matchedSkills": [
+            "transformations"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: transformations, even-odd)"
+      ]
+    },
+    {
+      "id": "c-integral-basic",
+      "name": "פונקציה קדומה ואינטגרל מסוים",
+      "area": "calculus",
+      "difficulty": 3,
+      "examSkillIds": [
+        "integral-basic",
+        "antiderivative"
+      ],
+      "examSkillNames": [
+        "אינטגרל לא מסוים ופונקציה קדומה",
+        "פונקציה קדומה (כולל הצבה)"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 6,
+          "points": 25,
+          "matchedSkills": [
+            "antiderivative"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "antiderivative"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "antiderivative"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "antiderivative"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 6,
+          "points": 20,
+          "matchedSkills": [
+            "integral-basic"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: integral-basic, antiderivative)"
+      ]
+    },
+    {
+      "id": "c-area",
+      "name": "שטחים בעזרת אינטגרל",
+      "area": "calculus",
+      "difficulty": 3,
+      "examSkillIds": [
+        "definite-integral-area",
+        "area-between-curves"
+      ],
+      "examSkillNames": [
+        "אינטגרל מסוים ושטח בין גרפים",
+        "שטח בין שני גרפים"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35581",
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35581",
+          "session": "קיץ תשפ\"ד, 2024",
+          "kind": "full",
+          "n": 7,
+          "points": 25,
+          "matchedSkills": [
+            "definite-integral-area"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "definite-integral-area"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "definite-integral-area"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 1,
+          "points": 20,
+          "matchedSkills": [
+            "definite-integral-area",
+            "area-between-curves"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 6,
+          "points": 20,
+          "matchedSkills": [
+            "definite-integral-area"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: definite-integral-area, area-between-curves)"
+      ]
+    },
+    {
+      "id": "c-accum",
+      "name": "האינטגרל כפונקציה צוברת שטח",
+      "area": "calculus",
+      "difficulty": 4,
+      "examSkillIds": [
+        "accumulation-function"
+      ],
+      "examSkillNames": [
+        "האינטגרל כפונקציה צוברת שטח"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: accumulation-function)"
+      ]
+    },
+    {
+      "id": "e-exp-laws",
+      "name": "פונקציה מעריכית ומשוואות מעריכיות",
+      "area": "explog",
+      "difficulty": 2,
+      "examSkillIds": [
+        "exp-log-rules"
+      ],
+      "examSkillNames": [
+        "חוקי חזקות ולוגריתמים, משוואות מעריכיות ולוגריתמיות"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-rules"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-rules"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: exp-log-rules)"
+      ]
+    },
+    {
+      "id": "e-log",
+      "name": "לוגריתמים וחוקיהם",
+      "area": "explog",
+      "difficulty": 2,
+      "examSkillIds": [
+        "exp-log-rules"
+      ],
+      "examSkillNames": [
+        "חוקי חזקות ולוגריתמים, משוואות מעריכיות ולוגריתמיות"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-rules"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-rules"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: exp-log-rules)"
+      ]
+    },
+    {
+      "id": "e-exp-log-eq",
+      "name": "משוואות לוגריתמיות",
+      "area": "explog",
+      "difficulty": 3,
+      "examSkillIds": [
+        "exp-log-rules"
+      ],
+      "examSkillNames": [
+        "חוקי חזקות ולוגריתמים, משוואות מעריכיות ולוגריתמיות"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-rules"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-rules"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: exp-log-rules)"
+      ]
+    },
+    {
+      "id": "e-exp-deriv",
+      "name": "חקירת פונקציות מעריכיות",
+      "area": "explog",
+      "difficulty": 4,
+      "examSkillIds": [
+        "exp-derivative",
+        "exp-log-analysis"
+      ],
+      "examSkillNames": [
+        "נגזרת של פונקציה מעריכית",
+        "חקירת פונקציות מעריכיות ולוגריתמיות"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-derivative",
+            "exp-log-analysis"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-analysis"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: exp-derivative, exp-log-analysis)"
+      ]
+    },
+    {
+      "id": "e-log-deriv",
+      "name": "חקירת פונקציות לוגריתמיות",
+      "area": "explog",
+      "difficulty": 4,
+      "examSkillIds": [
+        "log-derivative",
+        "exp-log-analysis"
+      ],
+      "examSkillNames": [
+        "נגזרת של פונקציה לוגריתמית",
+        "חקירת פונקציות מעריכיות ולוגריתמיות"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 4,
+          "points": 33.33,
+          "matchedSkills": [
+            "exp-log-analysis"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 5,
+          "points": 33.33,
+          "matchedSkills": [
+            "log-derivative",
+            "exp-log-analysis"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: log-derivative, exp-log-analysis)"
+      ]
+    },
+    {
+      "id": "e-growth",
+      "name": "גדילה ודעיכה",
+      "area": "explog",
+      "difficulty": 3,
+      "examSkillIds": [
+        "growth-decay"
+      ],
+      "examSkillNames": [
+        "גדילה ודעיכה מעריכית"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: growth-decay)"
+      ]
+    },
+    {
+      "id": "e-power-func",
+      "name": "פונקציות חזקה עם מעריך רציונלי",
+      "area": "explog",
+      "difficulty": 4,
+      "examSkillIds": [
+        "power-functions"
+      ],
+      "examSkillNames": [
+        "פונקציות חזקה עם מעריך רציונלי"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: power-functions)"
+      ]
+    },
+    {
+      "id": "a-line",
+      "name": "ישרים במישור: מרחק, אמצע, ניצבות",
+      "area": "analytic",
+      "difficulty": 3,
+      "examSkillIds": [
+        "line-eq",
+        "distance-point-line"
+      ],
+      "examSkillNames": [
+        "משוואת ישר, שיפוע, ישרים מקבילים ומאונכים",
+        "מרחק בין נקודות ומרחק נקודה מישר"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582",
+        "35571"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 1,
+          "points": 33.33,
+          "matchedSkills": [
+            "distance-point-line"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 3,
+          "points": 33.33,
+          "matchedSkills": [
+            "line-eq"
+          ]
+        },
+        {
+          "code": "35571",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "eval-reserved",
+          "n": 8,
+          "points": 20,
+          "matchedSkills": [
+            "line-eq"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: line-eq, distance-point-line)"
+      ]
+    },
+    {
+      "id": "a-circle",
+      "name": "מעגל: משוואה ומשיק",
+      "area": "analytic",
+      "difficulty": 3,
+      "examSkillIds": [
+        "circle-eq",
+        "circle-line"
+      ],
+      "examSkillNames": [
+        "משוואת מעגל",
+        "חיתוך ישר ומעגל, משיק למעגל"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 1,
+          "points": 33.33,
+          "matchedSkills": [
+            "circle-eq",
+            "circle-line"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: circle-eq, circle-line)"
+      ]
+    },
+    {
+      "id": "a-locus",
+      "name": "מקומות גאומטריים",
+      "area": "analytic",
+      "difficulty": 4,
+      "examSkillIds": [
+        "locus"
+      ],
+      "examSkillNames": [
+        "מקום גאומטרי"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 1,
+          "points": 33.33,
+          "matchedSkills": [
+            "locus"
+          ]
+        },
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 3,
+          "points": 33.33,
+          "matchedSkills": [
+            "locus"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: locus)"
+      ]
+    },
+    {
+      "id": "a-conics",
+      "name": "פרבולה ואליפסה",
+      "area": "analytic",
+      "difficulty": 4,
+      "examSkillIds": [
+        "parabola",
+        "ellipse"
+      ],
+      "examSkillNames": [
+        "פרבולה (מוקד ומדריך)",
+        "אליפסה"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 1,
+          "points": 33.33,
+          "matchedSkills": [
+            "ellipse"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: parabola, ellipse)"
+      ]
+    },
+    {
+      "id": "a-hyperbola",
+      "name": "היפרבולה",
+      "area": "analytic",
+      "difficulty": 4,
+      "examSkillIds": [
+        "hyperbola"
+      ],
+      "examSkillNames": [
+        "היפרבולה"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: hyperbola)"
+      ]
+    },
+    {
+      "id": "v-basic",
+      "name": "וקטורים: פעולות ואורך",
+      "area": "vectors",
+      "difficulty": 3,
+      "examSkillIds": [
+        "vectors-basic"
+      ],
+      "examSkillNames": [
+        "וקטורים: חיבור, כפל בסקלר, הצגה אלגברית"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 2,
+          "points": 33.33,
+          "matchedSkills": [
+            "vectors-basic"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: vectors-basic)"
+      ]
+    },
+    {
+      "id": "v-dot",
+      "name": "מכפלה סקלרית וזווית",
+      "area": "vectors",
+      "difficulty": 3,
+      "examSkillIds": [
+        "dot-product"
+      ],
+      "examSkillNames": [
+        "מכפלה סקלרית וזווית בין וקטורים"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 2,
+          "points": 33.33,
+          "matchedSkills": [
+            "dot-product"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: dot-product)"
+      ]
+    },
+    {
+      "id": "v-line",
+      "name": "ישר במרחב",
+      "area": "vectors",
+      "difficulty": 3,
+      "examSkillIds": [
+        "line-space"
+      ],
+      "examSkillNames": [
+        "ישר במרחב"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 2,
+          "points": 33.33,
+          "matchedSkills": [
+            "line-space"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: line-space)"
+      ]
+    },
+    {
+      "id": "v-plane",
+      "name": "מישור במרחב",
+      "area": "vectors",
+      "difficulty": 4,
+      "examSkillIds": [
+        "plane-eq",
+        "line-plane"
+      ],
+      "examSkillNames": [
+        "משוואת מישור",
+        "מצבים הדדיים: ישר-מישור, מישור-מישור, זוויות ומרחקים"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 2,
+          "points": 33.33,
+          "matchedSkills": [
+            "plane-eq",
+            "line-plane"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: plane-eq, line-plane)"
+      ]
+    },
+    {
+      "id": "v-space-trig",
+      "name": "טריגונומטריה במרחב",
+      "area": "vectors",
+      "difficulty": 4,
+      "examSkillIds": [
+        "space-trig"
+      ],
+      "examSkillNames": [
+        "טריגונומטריה במרחב (תיבה, פירמידה, מנסרה)"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [],
+      "bagrutQuestionsRequiring": [],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: space-trig)"
+      ]
+    },
+    {
+      "id": "z-basic",
+      "name": "מספרים מרוכבים: פעולות וערך מוחלט",
+      "area": "complex",
+      "difficulty": 3,
+      "examSkillIds": [
+        "complex-algebraic",
+        "complex-equations"
+      ],
+      "examSkillNames": [
+        "מספרים מרוכבים: הצגה אלגברית ופעולות",
+        "משוואות עם מספרים מרוכבים"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 3,
+          "points": 33.33,
+          "matchedSkills": [
+            "complex-algebraic",
+            "complex-equations"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: complex-algebraic, complex-equations)"
+      ]
+    },
+    {
+      "id": "z-polar",
+      "name": "הצגה קוטבית ודה-מואבר",
+      "area": "complex",
+      "difficulty": 4,
+      "examSkillIds": [
+        "complex-polar"
+      ],
+      "examSkillNames": [
+        "הצגה קוטבית, דה-מואבר ושורשים"
+      ],
+      "taughtByLessons": [],
+      "rejectedLessonClaims": [],
+      "exercisesVerified": [],
+      "papers": [
+        "35582"
+      ],
+      "bagrutQuestionsRequiring": [
+        {
+          "code": "35582",
+          "session": "קיץ תשפ\"ה, 2025",
+          "kind": "blueprint",
+          "n": 3,
+          "points": 33.33,
+          "matchedSkills": [
+            "complex-polar"
+          ]
+        }
+      ],
+      "coverageStatus": "untaught",
+      "auditStatus": "n/a_no_lesson",
+      "openGaps": [
+        "אין שיעור קיים המלמד מיומנות זו (examSkillIds: complex-polar)"
+      ]
+    }
+  ]
+}

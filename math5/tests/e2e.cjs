@@ -63,6 +63,30 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       expect(s.lessons['derivative-extrema'].sections.explain === true, 'שלב ההסבר לא נשמר');
     });
 
+    await step('דוגמאות פתורות: הפתרון לא נמצא ב-DOM (אפילו מוסתר) לפני לחיצה, בכל 4 השיעורים הקיימים', async () => {
+      // בדיקת רגרסיה ל-CRITICAL שנמצא ב-26.11.2026 (qa-regression + student-simulator): examples[].steps/answer
+      // היו מוטבעים ב-DOM עם hidden="" לפני לחיצה בכל 4 השיעורים (17/17 דוגמאות) — תוקן ב-js/app.js (sectionBody/bindLesson,
+      // case 'examples'), באותה שיטת lazy-render הקיימת כבר ב-js/views/exams.js (.x-sol). ראו docs/reports/qa-solution-leak-2026-11-26.md.
+      for (const id of ['derivative-extrema', 'geometric-sequence', 'arithmetic-sequence', 'sine-cosine-law']) {
+        await go(page, `#/lesson/${id}/examples`);
+        const exCount = await page.locator('.example').count();
+        expect(exCount > 0, `${id}: אין דוגמאות בשלב`);
+        for (let i = 0; i < exCount; i++) {
+          const ex = page.locator('.example').nth(i);
+          const stepsEmpty = await ex.locator('.steps').evaluate(el => el.childElementCount === 0);
+          const answerEmpty = await ex.locator('.ex-answer').evaluate(el => el.hidden && el.innerHTML.trim() === '');
+          expect(stepsEmpty, `${id} דוגמה ${i}: שלבי הפתרון נמצאים ב-DOM לפני לחיצה`);
+          expect(answerEmpty, `${id} דוגמה ${i}: התשובה נמצאת ב-DOM לפני לחיצה`);
+        }
+        // מוודאים שהחשיפה בלחיצה עדיין עובדת (לא רק שהיא נעדרת לפני)
+        const first = page.locator('.example').first();
+        const total = await first.locator('.steps').evaluate(el => +el.dataset.count);
+        await first.locator('[data-all]').click(); await page.waitForTimeout(150);
+        expect(await first.locator('.steps li').count() === total, `${id}: הצגת כל הפתרון לא חשפה את כל השלבים`);
+        expect(await first.locator('.ex-answer').evaluate(el => !el.hidden && el.innerHTML.trim().length > 0), `${id}: התשובה לא נחשפה בלחיצה`);
+      }
+    });
+
     await step('תרגול: תשובה שגויה מזהה סוג טעות, נכונה מסומנת ונשמרת אחרי טעינה מחדש', async () => {
       await go(page, '#/lesson/derivative-extrema/guided');
       const card = page.locator('.q[data-q="g1"]');
@@ -95,16 +119,24 @@ const expect = (cond, msg) => { if (!cond) throw new Error(msg); };
       await go(t, '#/lesson/geometric-sequence/guided');
       const nextSectionHref = await t.evaluate(() => document.querySelector('.lesson-nav .btn.primary')?.getAttribute('href'));
       expect(nextSectionHref === '#/lesson/geometric-sequence/practice', 'href השלב הבא שגוי לפני תחילת התרגול: ' + nextSectionHref);
-      const order = ['g1', 'g2', 'g3'];
-      const wrong = { g1: '1215', g2: '27', g3: '486' };
-      const right = { g1: '405', g2: '3', g3: '242' };
+      // g4/g5 נוספו ב-26.11.2026 (Development Cycle 03, השלמת פער המונוטוניות) — העדכון הזה מרחיב את
+      // הבדיקה בהתאם, כדי שלא תזהה בטעות שינוי תוכן לגיטימי (יותר שאלות מודרכות) כבאג ניווט.
+      const order = ['g1', 'g2', 'g3', 'g4', 'g5'];
+      const wrong = { g1: '1215', g2: '27', g3: '486', g5: '-0.25' };
+      const right = { g1: '405', g2: '3', g3: '242', g5: '0.25' };
       for (let i = 0; i < order.length; i++) {
         const qid = order[i];
         expect(await t.locator(`.q[data-q="${qid}"]`).isVisible(), `שאלה ${qid} לא מוצגת בתורה (סדר שגוי)`);
         const card = t.locator(`.q[data-q="${qid}"]`);
-        await card.locator('.num-input input').fill(wrong[qid]); await card.locator('[data-act=check]').click();
-        expect(await card.locator('.feedback.bad').count() === 1, `${qid}: תשובה שגויה לא סומנה`);
-        await card.locator('.num-input input').fill(right[qid]); await card.locator('[data-act=check]').click();
+        if (qid === 'g4') { // שאלת רב-ברירה: אפשרות שגויה (index 1) ואז הנכונה (index 0)
+          await card.locator('input[type=radio]').nth(1).check(); await card.locator('[data-act=check]').click();
+          expect(await card.locator('.feedback.bad').count() === 1, `${qid}: תשובה שגויה לא סומנה`);
+          await card.locator('input[type=radio]').nth(0).check(); await card.locator('[data-act=check]').click();
+        } else {
+          await card.locator('.num-input input').fill(wrong[qid]); await card.locator('[data-act=check]').click();
+          expect(await card.locator('.feedback.bad').count() === 1, `${qid}: תשובה שגויה לא סומנה`);
+          await card.locator('.num-input input').fill(right[qid]); await card.locator('[data-act=check]').click();
+        }
         expect(await t.locator('#fbSheet').count() === 1, `${qid}: כרטיס המשוב לא נפתח אחרי תשובה נכונה`);
         const label = await t.locator('#fbSheet [data-sheet="0"]').textContent();
         if (i < order.length - 1) expect(label.trim() === 'המשך', `${qid}: הכפתור אמור לומר "המשך" (עוד שאלות בשלב), נמצא "${label}"`);

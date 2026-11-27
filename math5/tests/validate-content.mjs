@@ -378,16 +378,8 @@ async function main() {
     else console.log(`✓ ${name}`);
     warnings.forEach(w => console.log('   ⚠ ' + w));
   }
-  // מפת ידע ומבחן אבחון
-  const K = JSON.parse(readFileSync(resolve(CONTENT, 'knowledge-map.json'), 'utf8'));
-  const km = validateKnowledgeMap(K, { topics, lessons: known });
-  if (km.errors.length) { fail += km.errors.length; console.error(`✗ learning-content/knowledge-map.json – ${km.errors.length} שגיאות`); km.errors.forEach(e => console.error('   • ' + e)); }
-  else console.log(`✓ learning-content/knowledge-map.json (${km.skills.size} מיומנויות)`);
-  const D = JSON.parse(readFileSync(resolve(CONTENT, 'diagnostic.json'), 'utf8'));
-  const dg = validateDiagnostic(D, { skills: km.skills });
-  if (dg.errors.length) { fail += dg.errors.length; console.error(`✗ learning-content/diagnostic.json – ${dg.errors.length} שגיאות`); dg.errors.forEach(e => console.error('   • ' + e)); }
-  else console.log(`✓ learning-content/diagnostic.json (${D.items.length} שאלות)`);
-  // ארגז הכלים: מפה, שיעורי יסוד, דרישות קדם
+  // ארגז הכלים: נטען פה (לפני מפת הידע) כי שיעורי יסוד (tb-*) הם שיעורים לכל דבר וגם
+  // skills[].lessons במפת הידע יכולים (וצריכים) להצביע עליהם, לא רק על 4 השיעורים הראשיים.
   const TB = JSON.parse(readFileSync(resolve(CONTENT, 'toolbox.json'), 'utf8'));
   const tbErr = [];
   const topicIds = new Set();
@@ -402,6 +394,15 @@ async function main() {
     tbLessons.push(TL.id);
     if (!r.errors.length) console.log(`✓ learning-content/${f}`);
   }
+  // מפת ידע ומבחן אבחון
+  const K = JSON.parse(readFileSync(resolve(CONTENT, 'knowledge-map.json'), 'utf8'));
+  const km = validateKnowledgeMap(K, { topics, lessons: new Set([...known, ...tbLessons]) });
+  if (km.errors.length) { fail += km.errors.length; console.error(`✗ learning-content/knowledge-map.json – ${km.errors.length} שגיאות`); km.errors.forEach(e => console.error('   • ' + e)); }
+  else console.log(`✓ learning-content/knowledge-map.json (${km.skills.size} מיומנויות)`);
+  const D = JSON.parse(readFileSync(resolve(CONTENT, 'diagnostic.json'), 'utf8'));
+  const dg = validateDiagnostic(D, { skills: km.skills });
+  if (dg.errors.length) { fail += dg.errors.length; console.error(`✗ learning-content/diagnostic.json – ${dg.errors.length} שגיאות`); dg.errors.forEach(e => console.error('   • ' + e)); }
+  else console.log(`✓ learning-content/diagnostic.json (${D.items.length} שאלות)`);
   for (const t of TB.tools || []) for (const tp of t.topics || []) {
     if (topicIds.has(tp.id)) tbErr.push(`toolbox: נושא כפול ${tp.id}`); topicIds.add(tp.id);
     (tp.skills || []).forEach(sk => { if (!km.skills.has(sk)) tbErr.push(`toolbox ${tp.id}: מיומנות לא קיימת ${sk}`); });

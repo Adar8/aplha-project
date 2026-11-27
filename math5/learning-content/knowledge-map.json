@@ -1,82 +1,1043 @@
 {
-  "schemaVersion": 1,
-  "note": "מפת מיומנויות. topic מקשר לנושא במפת הנושאים (curriculum.js), וממנו נגזרים השאלונים ורמת הוודאות. foundations = ידע מקדים שאינו נושא בחינה בפני עצמו.",
+  "schemaVersion": 2,
+  "note": "מפת מיומנויות (schemaVersion 2, הורחבה 26.11.2026 — ראו docs/decision-log.md). topic מקשר לנושא במפת הנושאים (curriculum.js), וממנו נגזרים השאלונים ורמת הוודאות. foundations = ידע מקדים שאינו נושא בחינה בפני עצמו. שדות סטטיים (מתוחזקים כאן על ידי curriculum-architect, לא מחושבים אוטומטית): definition (הגדרה חד-משפטית), difficulty (1=יסוד טרום-בגרותי · 2=בגרות: יישום ישיר/שלב בודד · 3=בגרות: הליך רב-שלבי/שילוב כמה מיומנויות יסוד · 4=בגרות: שילוב בין נושאים/פרמטר/הוכחה/נושא נדיר), examSkillIds (אילו מזהי learning-content/exam-skills.json מתאימים למיומנות הזו — ריק אם זו מיומנות יסוד שלא נבדקת כשלעצמה בבגרות), lessons (שיעור/י יסוד או שיעור ראשי שבהם סומן covers עם אחד מ-examSkillIds, או — למיומנויות יסוד בלי examSkillIds — שיעור שבאמת מתרגל את המושג, לא רק מזכיר אותו בשמו). prereqs עודכן כדי לכלול תלות בפיתגורס/פתיחת סוגריים שלא היו מסומנות קודם (ראו docs/decision-log.md 26.11.2026). שדות מחושבים (coverageStatus, auditStatus, exams/questions שבהם המיומנות נדרשת, תרגילים שבודקים אותה, ופערים פתוחים) אינם נשמרים כאן — הם נוצרים אוטומטית על ידי tools/gen-knowledge-map-status.mjs אל docs/knowledge-map-status.json, כדי שלא יתיישנו. אין לערוך את docs/knowledge-map-status.json ביד.",
   "areas": [
-    { "id": "foundations", "name": "ידע מקדים" },
-    { "id": "sequences", "name": "סדרות ואינדוקציה" },
-    { "id": "probability", "name": "הסתברות" },
-    { "id": "geometry", "name": "גאומטריה וטריגונומטריה במישור" },
-    { "id": "calculus", "name": "חדו\"א" },
-    { "id": "explog", "name": "מעריכיות, לוגריתמים, גדילה ודעיכה" },
-    { "id": "analytic", "name": "גאומטריה אנליטית" },
-    { "id": "vectors", "name": "וקטורים וטריגונומטריה במרחב" },
-    { "id": "complex", "name": "מספרים מרוכבים" }
+    {
+      "id": "foundations",
+      "name": "ידע מקדים"
+    },
+    {
+      "id": "sequences",
+      "name": "סדרות ואינדוקציה"
+    },
+    {
+      "id": "probability",
+      "name": "הסתברות"
+    },
+    {
+      "id": "geometry",
+      "name": "גאומטריה וטריגונומטריה במישור"
+    },
+    {
+      "id": "calculus",
+      "name": "חדו\"א"
+    },
+    {
+      "id": "explog",
+      "name": "מעריכיות, לוגריתמים, גדילה ודעיכה"
+    },
+    {
+      "id": "analytic",
+      "name": "גאומטריה אנליטית"
+    },
+    {
+      "id": "vectors",
+      "name": "וקטורים וטריגונומטריה במרחב"
+    },
+    {
+      "id": "complex",
+      "name": "מספרים מרוכבים"
+    }
   ],
   "skills": [
-    { "id": "f-fractions", "name": "שברים ופעולות חשבון", "area": "foundations", "topic": "foundations", "prereqs": [] },
-    { "id": "f-linear-eq", "name": "משוואה ממעלה ראשונה", "area": "foundations", "topic": "foundations", "prereqs": ["f-fractions"] },
-    { "id": "f-factoring", "name": "פירוק לגורמים וכפל מקוצר", "area": "foundations", "topic": "foundations", "prereqs": [] },
-    { "id": "f-quadratic-eq", "name": "משוואה ריבועית", "area": "foundations", "topic": "foundations", "prereqs": ["f-factoring"] },
-    { "id": "f-algebraic-fractions", "name": "שברים אלגבריים", "area": "foundations", "topic": "foundations", "prereqs": ["f-factoring", "f-fractions"] },
-    { "id": "f-inequalities", "name": "אי-שוויונות", "area": "foundations", "topic": "foundations", "prereqs": ["f-linear-eq"] },
-    { "id": "f-systems", "name": "מערכת משוואות", "area": "foundations", "topic": "foundations", "prereqs": ["f-linear-eq"] },
-    { "id": "f-powers", "name": "חוקי חזקות ושורשים", "area": "foundations", "topic": "foundations", "prereqs": ["f-fractions"] },
-    { "id": "f-function-concept", "name": "פונקציה, הצבה וגרף", "area": "foundations", "topic": "foundations", "prereqs": [] },
-    { "id": "f-line-eq", "name": "ישר: שיפוע ומשוואה", "area": "foundations", "topic": "foundations", "prereqs": ["f-function-concept"] },
-    { "id": "f-parabola", "name": "פרבולה וקודקוד", "area": "foundations", "topic": "foundations", "prereqs": ["f-quadratic-eq", "f-function-concept"] },
-    { "id": "f-trig-basics", "name": "טריגונומטריה במשולש ישר-זווית", "area": "foundations", "topic": "foundations", "prereqs": ["f-fractions"] },
-
-    { "id": "s-arith", "name": "סדרה חשבונית", "area": "sequences", "topic": "sequences", "prereqs": ["f-linear-eq"], "lessons": ["arithmetic-sequence"] },
-    { "id": "s-geom", "name": "סדרה הנדסית", "area": "sequences", "topic": "sequences", "prereqs": ["f-powers"], "lessons": ["geometric-sequence"] },
-    { "id": "s-geom-inf", "name": "סכום סדרה הנדסית אינסופית", "area": "sequences", "topic": "sequences", "prereqs": ["s-geom"], "lessons": ["geometric-sequence"] },
-    { "id": "s-recursive", "name": "נוסחת נסיגה", "area": "sequences", "topic": "sequences", "prereqs": ["s-arith"] },
-    { "id": "s-induction", "name": "אינדוקציה מתמטית", "area": "sequences", "topic": "induction", "prereqs": ["s-arith", "f-factoring"] },
-
-    { "id": "p-basic", "name": "הסתברות בסיסית", "area": "probability", "topic": "probability", "prereqs": ["f-fractions"] },
-    { "id": "p-tree", "name": "דיאגרמת עץ והסתברות מותנית", "area": "probability", "topic": "probability", "prereqs": ["p-basic"] },
-    { "id": "p-binomial", "name": "התפלגות בינומית (ברנולי)", "area": "probability", "topic": "probability", "prereqs": ["p-tree", "f-powers"] },
-
-    { "id": "g-triangles", "name": "משולשים וחפיפה", "area": "geometry", "topic": "plane-geometry", "prereqs": [] },
-    { "id": "g-similarity", "name": "דמיון משולשים", "area": "geometry", "topic": "plane-geometry", "prereqs": ["g-triangles"] },
-    { "id": "g-circle", "name": "משפטים במעגל", "area": "geometry", "topic": "plane-geometry", "prereqs": ["g-triangles"] },
-    { "id": "g-sine-cos", "name": "משפט הסינוסים והקוסינוסים", "area": "geometry", "topic": "plane-trig", "prereqs": ["f-trig-basics", "f-quadratic-eq"], "lessons": ["sine-cosine-law"] },
-    { "id": "g-trig-identities", "name": "זהויות טריגונומטריות", "area": "geometry", "topic": "plane-trig", "prereqs": ["f-trig-basics"] },
-
-    { "id": "c-derivative-rules", "name": "כללי גזירה", "area": "calculus", "topic": "calc-poly", "prereqs": ["f-powers", "f-function-concept"], "lessons": ["derivative-extrema"] },
-    { "id": "c-tangent", "name": "משוואת משיק", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-derivative-rules", "f-line-eq"], "lessons": ["derivative-extrema"] },
-    { "id": "c-extrema", "name": "נקודות קיצון, עלייה וירידה", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-derivative-rules", "f-quadratic-eq"], "lessons": ["derivative-extrema"] },
-    { "id": "c-investigation", "name": "חקירת פולינום מלאה", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-extrema", "c-tangent"] },
-    { "id": "c-product-quotient", "name": "נגזרת מכפלה, מנה ופונקציה מורכבת", "area": "calculus", "topic": "calc-rational-root", "prereqs": ["c-derivative-rules", "f-algebraic-fractions"] },
-    { "id": "c-rational", "name": "חקירת פונקציה רציונלית", "area": "calculus", "topic": "calc-rational-root", "prereqs": ["c-product-quotient", "f-inequalities"] },
-    { "id": "c-root", "name": "חקירת פונקציית שורש", "area": "calculus", "topic": "calc-rational-root", "prereqs": ["c-product-quotient", "f-powers", "f-inequalities"] },
-    { "id": "c-trig-deriv", "name": "חדו\"א של פונקציות טריגונומטריות", "area": "calculus", "topic": "calc-trig", "prereqs": ["c-product-quotient", "g-trig-identities"] },
-    { "id": "c-optimization", "name": "בעיות קיצון", "area": "calculus", "topic": "calc-poly", "prereqs": ["c-extrema"] },
-    { "id": "c-transform", "name": "תכונות גרפיות וטרנספורמציות", "area": "calculus", "topic": "pre-analysis", "prereqs": ["f-function-concept", "f-parabola"] },
-    { "id": "c-integral-basic", "name": "פונקציה קדומה ואינטגרל מסוים", "area": "calculus", "topic": "integrals", "prereqs": ["c-derivative-rules"] },
-    { "id": "c-area", "name": "שטחים בעזרת אינטגרל", "area": "calculus", "topic": "integrals", "prereqs": ["c-integral-basic", "f-quadratic-eq"] },
-    { "id": "c-accum", "name": "האינטגרל כפונקציה צוברת שטח", "area": "calculus", "topic": "accum-integral", "prereqs": ["c-area"] },
-
-    { "id": "e-exp-laws", "name": "פונקציה מעריכית ומשוואות מעריכיות", "area": "explog", "topic": "exp-log", "prereqs": ["f-powers"] },
-    { "id": "e-log", "name": "לוגריתמים וחוקיהם", "area": "explog", "topic": "exp-log", "prereqs": ["e-exp-laws"] },
-    { "id": "e-exp-log-eq", "name": "משוואות לוגריתמיות", "area": "explog", "topic": "exp-log", "prereqs": ["e-log", "f-quadratic-eq"] },
-    { "id": "e-exp-deriv", "name": "חקירת פונקציות מעריכיות", "area": "explog", "topic": "exp-log", "prereqs": ["e-exp-laws", "c-product-quotient"] },
-    { "id": "e-log-deriv", "name": "חקירת פונקציות לוגריתמיות", "area": "explog", "topic": "exp-log", "prereqs": ["e-log", "c-product-quotient"] },
-    { "id": "e-growth", "name": "גדילה ודעיכה", "area": "explog", "topic": "growth", "prereqs": ["e-exp-laws"] },
-    { "id": "e-power-func", "name": "פונקציות חזקה עם מעריך רציונלי", "area": "explog", "topic": "power-func", "prereqs": ["f-powers", "c-derivative-rules"] },
-
-    { "id": "a-line", "name": "ישרים במישור: מרחק, אמצע, ניצבות", "area": "analytic", "topic": "analytic", "prereqs": ["f-line-eq", "f-systems"] },
-    { "id": "a-circle", "name": "מעגל: משוואה ומשיק", "area": "analytic", "topic": "analytic", "prereqs": ["a-line", "f-factoring"] },
-    { "id": "a-locus", "name": "מקומות גאומטריים", "area": "analytic", "topic": "analytic", "prereqs": ["a-circle"] },
-    { "id": "a-conics", "name": "פרבולה ואליפסה", "area": "analytic", "topic": "conics", "prereqs": ["a-circle"] },
-    { "id": "a-hyperbola", "name": "היפרבולה", "area": "analytic", "topic": "hyperbola", "prereqs": ["a-conics"] },
-
-    { "id": "v-basic", "name": "וקטורים: פעולות ואורך", "area": "vectors", "topic": "vectors", "prereqs": ["f-powers"] },
-    { "id": "v-dot", "name": "מכפלה סקלרית וזווית", "area": "vectors", "topic": "vectors", "prereqs": ["v-basic", "f-trig-basics"] },
-    { "id": "v-line", "name": "ישר במרחב", "area": "vectors", "topic": "vectors", "prereqs": ["v-basic", "f-systems"] },
-    { "id": "v-plane", "name": "מישור במרחב", "area": "vectors", "topic": "vectors", "prereqs": ["v-dot", "v-line"] },
-    { "id": "v-space-trig", "name": "טריגונומטריה במרחב", "area": "vectors", "topic": "space-trig", "prereqs": ["v-dot", "g-sine-cos"] },
-
-    { "id": "z-basic", "name": "מספרים מרוכבים: פעולות וערך מוחלט", "area": "complex", "topic": "complex", "prereqs": ["f-quadratic-eq"] },
-    { "id": "z-polar", "name": "הצגה קוטבית ודה-מואבר", "area": "complex", "topic": "complex", "prereqs": ["z-basic", "f-trig-basics"] }
+    {
+      "id": "f-fractions",
+      "name": "שברים ופעולות חשבון",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [],
+      "definition": "פעולות חישוב עם שברים פשוטים ועשרוניים (חיבור, כפל, חילוק, המרה).",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-fractions"
+      ]
+    },
+    {
+      "id": "f-linear-eq",
+      "name": "משוואה ממעלה ראשונה",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-fractions",
+        "f-brackets"
+      ],
+      "definition": "בידוד נעלם במשוואה ממעלה ראשונה עם אחד או שני אגפים.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-linear-eq"
+      ]
+    },
+    {
+      "id": "f-factoring",
+      "name": "פירוק לגורמים וכפל מקוצר",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-brackets"
+      ],
+      "definition": "פירוק ביטוי אלגברי למכפלת גורמים, כולל נוסחאות הכפל המקוצר.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-factoring"
+      ]
+    },
+    {
+      "id": "f-quadratic-eq",
+      "name": "משוואה ריבועית",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-factoring"
+      ],
+      "definition": "פתרון משוואה ריבועית בפירוק לגורמים או בנוסחת השורשים.",
+      "difficulty": 1,
+      "examSkillIds": [
+        "quadratic-eq"
+      ],
+      "lessons": [
+        "tb-quadratic"
+      ]
+    },
+    {
+      "id": "f-algebraic-fractions",
+      "name": "שברים אלגבריים",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-factoring",
+        "f-fractions"
+      ],
+      "definition": "פישוט, כפל, חילוק וחיבור של שברים שבהם המשתנה במכנה, כולל תחומי הגדרה.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "fraction-equations"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "f-inequalities",
+      "name": "אי-שוויונות",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-linear-eq"
+      ],
+      "definition": "פתרון אי-שוויון ממעלה ראשונה או שנייה והצגתו על ציר המספרים.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-inequalities"
+      ]
+    },
+    {
+      "id": "f-systems",
+      "name": "מערכת משוואות",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-linear-eq"
+      ],
+      "definition": "פתרון מערכת של שתי משוואות (הצבה או השוואת מקדמים) בשני נעלמים.",
+      "difficulty": 1,
+      "examSkillIds": [
+        "equation-system"
+      ],
+      "lessons": [
+        "tb-systems"
+      ]
+    },
+    {
+      "id": "f-powers",
+      "name": "חוקי חזקות ושורשים",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-fractions"
+      ],
+      "definition": "חוקי החזקות (כפל/חילוק/חזקת-חזקה, מעריך שלילי ואפס) ושורש ריבועי.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-powers"
+      ]
+    },
+    {
+      "id": "f-function-concept",
+      "name": "פונקציה, הצבה וגרף",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [],
+      "definition": "פונקציה כהתאמה מספר-לכל-מספר, הצבה בפונקציה $f(x)$, וקריאת גרף במערכת צירים.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-axes",
+        "tb-substitution"
+      ]
+    },
+    {
+      "id": "f-line-eq",
+      "name": "ישר: שיפוע ומשוואה",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-function-concept"
+      ],
+      "definition": "משמעות השיפוע, משוואת ישר בצורה $y=mx+b$, וחיתוך עם הצירים.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-slope",
+        "tb-intercepts"
+      ]
+    },
+    {
+      "id": "f-parabola",
+      "name": "פרבולה וקודקוד",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-quadratic-eq",
+        "f-function-concept"
+      ],
+      "definition": "צורת הגרף של פונקציה ריבועית, קודקוד הפרבולה וכיוון הפתיחה.",
+      "difficulty": 2,
+      "examSkillIds": [],
+      "lessons": []
+    },
+    {
+      "id": "f-trig-basics",
+      "name": "טריגונומטריה במשולש ישר-זווית",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-fractions",
+        "f-pythagoras"
+      ],
+      "definition": "היחסים $\\sin,\\cos,\\tan$ במשולש ישר-זווית, לפי זווית חדה נתונה.",
+      "difficulty": 1,
+      "examSkillIds": [
+        "right-triangle-trig"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "f-brackets",
+      "name": "פתיחת סוגריים וכינוס איברים",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [],
+      "definition": "הפעלת חוק הפילוג (כולל מינוס לפני סוגריים) וכינוס איברים דומים בביטוי אלגברי.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": [
+        "tb-brackets"
+      ]
+    },
+    {
+      "id": "f-pythagoras",
+      "name": "משפט פיתגורס",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [
+        "f-powers"
+      ],
+      "definition": "הקשר $a^2+b^2=c^2$ במשולש ישר-זווית, ושימושו למציאת צלע חסרה.",
+      "difficulty": 1,
+      "examSkillIds": [
+        "pythagoras"
+      ],
+      "lessons": [
+        "tb-pythagoras"
+      ]
+    },
+    {
+      "id": "f-notation",
+      "name": "סימונים מתמטיים בסיסיים",
+      "area": "foundations",
+      "topic": "foundations",
+      "prereqs": [],
+      "definition": "קריאה ושימוש בסימונים כגון $f(x)$, $\\sum$, $\\in$, $\\infty$, אי-שוויון וערך מוחלט, הנדרשים בהבנת כל שיעור אחר.",
+      "difficulty": 1,
+      "examSkillIds": [],
+      "lessons": []
+    },
+    {
+      "id": "s-arith",
+      "name": "סדרה חשבונית",
+      "area": "sequences",
+      "topic": "sequences",
+      "prereqs": [
+        "f-linear-eq"
+      ],
+      "lessons": [
+        "arithmetic-sequence"
+      ],
+      "definition": "סדרה שבה ההפרש בין איברים סמוכים קבוע: איבר כללי וסכום $n$ איברים.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "arithmetic-sequence",
+        "sequence-proof"
+      ]
+    },
+    {
+      "id": "s-geom",
+      "name": "סדרה הנדסית",
+      "area": "sequences",
+      "topic": "sequences",
+      "prereqs": [
+        "f-powers"
+      ],
+      "lessons": [
+        "geometric-sequence"
+      ],
+      "definition": "סדרה שבה המנה בין איברים סמוכים קבועה: איבר כללי וסכום $n$ איברים.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "geometric-sequence",
+        "sequence-proof"
+      ]
+    },
+    {
+      "id": "s-geom-inf",
+      "name": "סכום סדרה הנדסית אינסופית",
+      "area": "sequences",
+      "topic": "sequences",
+      "prereqs": [
+        "s-geom"
+      ],
+      "lessons": [
+        "geometric-sequence"
+      ],
+      "definition": "סכום כל איברי סדרה הנדסית אינסופית, מתי הוא קיים ($|q|<1$) ואיך מחשבים אותו.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "geometric-infinite-sum"
+      ]
+    },
+    {
+      "id": "s-sum-notation",
+      "name": "סכומים של סדרות מעורבות/נגזרות",
+      "area": "sequences",
+      "topic": "sequences",
+      "prereqs": [
+        "s-arith",
+        "s-geom"
+      ],
+      "definition": "חישוב סכומים של סדרות המורכבות/נגזרות מסדרה חשבונית או הנדסית נתונה (למשל איברים במקומות זוגיים, או $c_n=a_n^2$).",
+      "difficulty": 3,
+      "examSkillIds": [
+        "sequence-sum-notation"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "s-recursive",
+      "name": "נוסחת נסיגה",
+      "area": "sequences",
+      "topic": "sequences",
+      "prereqs": [
+        "s-arith"
+      ],
+      "definition": "סדרה המוגדרת דרך קשר בין איבר לקודמיו (נוסחת נסיגה), ולא דרך נוסחה מפורשת.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "recursive-sequence"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "s-induction",
+      "name": "אינדוקציה מתמטית",
+      "area": "sequences",
+      "topic": "induction",
+      "prereqs": [
+        "s-arith",
+        "f-factoring"
+      ],
+      "definition": "הוכחת טענה התלויה במספר טבעי $n$ עבור כל $n$, בעזרת בסיס האינדוקציה ושלב המעבר.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "induction"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "p-basic",
+      "name": "הסתברות בסיסית",
+      "area": "probability",
+      "topic": "probability",
+      "prereqs": [
+        "f-fractions"
+      ],
+      "definition": "הסתברות בסיסית: מרחב מדגם, מאורע, וחישוב הסתברות קלאסית.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "prob-basic",
+        "prob-table"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "p-tree",
+      "name": "דיאגרמת עץ והסתברות מותנית",
+      "area": "probability",
+      "topic": "probability",
+      "prereqs": [
+        "p-basic"
+      ],
+      "definition": "הסתברות מותנית ודיאגרמת עץ להצגת מאורעות עצמאיים/תלויים ברצף.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "prob-tree",
+        "conditional-prob",
+        "bayes",
+        "prob-independence"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "p-binomial",
+      "name": "התפלגות בינומית (ברנולי)",
+      "area": "probability",
+      "topic": "probability",
+      "prereqs": [
+        "p-tree",
+        "f-powers"
+      ],
+      "definition": "התפלגות בינומית (ניסויי ברנולי חזורים): חישוב הסתברות למספר הצלחות נתון.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "binomial-prob"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "g-triangles",
+      "name": "משולשים וחפיפה",
+      "area": "geometry",
+      "topic": "plane-geometry",
+      "prereqs": [],
+      "definition": "תכונות משולשים וחפיפה: סכום זוויות, משולש שווה-שוקיים, תיכון, חוצה זווית, שטחי מצולעים.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "angle-sum",
+        "parallel-angles",
+        "polygon-area",
+        "quadrilateral-props",
+        "congruence",
+        "isosceles-props",
+        "median-props",
+        "angle-bisector-thm",
+        "area-ratio",
+        "midsegment"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "g-similarity",
+      "name": "דמיון משולשים",
+      "area": "geometry",
+      "topic": "plane-geometry",
+      "prereqs": [
+        "g-triangles"
+      ],
+      "definition": "דמיון משולשים, יחס דמיון והשימוש בו ליחס אורכים/שטחים.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "similarity"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "g-circle",
+      "name": "משפטים במעגל",
+      "area": "geometry",
+      "topic": "plane-geometry",
+      "prereqs": [
+        "g-triangles"
+      ],
+      "definition": "משפטים במעגל: זוויות היקפיות/מרכזיות, משיק-מיתר, מרובע חסום, תכונות משיקים ומעגל חסום.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "circle-angles",
+        "tangent-chord",
+        "cyclic-quad",
+        "tangent-props",
+        "inscribed-circle"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "g-sine-cos",
+      "name": "משפט הסינוסים והקוסינוסים",
+      "area": "geometry",
+      "topic": "plane-trig",
+      "prereqs": [
+        "f-trig-basics",
+        "f-quadratic-eq",
+        "f-pythagoras"
+      ],
+      "lessons": [
+        "sine-cosine-law"
+      ],
+      "definition": "משפט הסינוסים ומשפט הקוסינוסים, רדיוס המעגל החוסם, ושטח משולש בעזרת סינוס.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "sine-law",
+        "cosine-law",
+        "circumradius",
+        "trig-area"
+      ]
+    },
+    {
+      "id": "g-trig-identities",
+      "name": "זהויות טריגונומטריות",
+      "area": "geometry",
+      "topic": "plane-trig",
+      "prereqs": [
+        "f-trig-basics"
+      ],
+      "definition": "זהויות טריגונומטריות בסיסיות וזהות זווית כפולה, ופתרון משוואות טריגונומטריות.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "trig-identities",
+        "trig-equations",
+        "double-angle"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-derivative-rules",
+      "name": "כללי גזירה",
+      "area": "calculus",
+      "topic": "calc-poly",
+      "prereqs": [
+        "f-powers",
+        "f-function-concept"
+      ],
+      "lessons": [
+        "derivative-extrema"
+      ],
+      "definition": "כללי גזירה של פולינום: חזקה, קבוע, וגזירת סכום איבר-איבר.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "poly-derivative"
+      ]
+    },
+    {
+      "id": "c-tangent",
+      "name": "משוואת משיק",
+      "area": "calculus",
+      "topic": "calc-poly",
+      "prereqs": [
+        "c-derivative-rules",
+        "f-line-eq"
+      ],
+      "lessons": [
+        "derivative-extrema"
+      ],
+      "definition": "משוואת המשיק לגרף בנקודה, לפי גובה הנקודה ושיפוע הנגזרת בה.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "tangent-line",
+        "tangent-normal"
+      ]
+    },
+    {
+      "id": "c-extrema",
+      "name": "נקודות קיצון, עלייה וירידה",
+      "area": "calculus",
+      "topic": "calc-poly",
+      "prereqs": [
+        "c-derivative-rules",
+        "f-quadratic-eq"
+      ],
+      "lessons": [
+        "derivative-extrema"
+      ],
+      "definition": "מציאת נקודות קיצון ותחומי עלייה/ירידה מטבלת סימני הנגזרת.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "poly-extrema"
+      ]
+    },
+    {
+      "id": "c-investigation",
+      "name": "חקירת פולינום מלאה",
+      "area": "calculus",
+      "topic": "calc-poly",
+      "prereqs": [
+        "c-extrema",
+        "c-tangent"
+      ],
+      "definition": "חקירה מלאה של פולינום: חיתוך צירים, קיצון, עלייה/ירידה, קעירות ונקודות פיתול, וסקיצה.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "func-analysis-general",
+        "derivative-graph",
+        "concavity",
+        "inflection"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-product-quotient",
+      "name": "נגזרת מכפלה, מנה ופונקציה מורכבת",
+      "area": "calculus",
+      "topic": "calc-rational-root",
+      "prereqs": [
+        "c-derivative-rules",
+        "f-algebraic-fractions"
+      ],
+      "definition": "נגזרת של מכפלה, מנה, ופונקציה מורכבת (כלל השרשרת).",
+      "difficulty": 3,
+      "examSkillIds": [
+        "product-rule",
+        "quotient-rule",
+        "chain-rule"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-rational",
+      "name": "חקירת פונקציה רציונלית",
+      "area": "calculus",
+      "topic": "calc-rational-root",
+      "prereqs": [
+        "c-product-quotient",
+        "f-inequalities"
+      ],
+      "definition": "חקירת פונקציה רציונלית: תחום הגדרה, אסימפטוטות, קיצון ועלייה/ירידה.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "rational-func-analysis",
+        "asymptotes",
+        "domain"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-root",
+      "name": "חקירת פונקציית שורש",
+      "area": "calculus",
+      "topic": "calc-rational-root",
+      "prereqs": [
+        "c-product-quotient",
+        "f-powers",
+        "f-inequalities"
+      ],
+      "definition": "חקירת פונקציית שורש: תחום הגדרה, נגזרת ותחומי עלייה/ירידה.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "root-func-derivative"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-trig-deriv",
+      "name": "חדו\"א של פונקציות טריגונומטריות",
+      "area": "calculus",
+      "topic": "calc-trig",
+      "prereqs": [
+        "c-product-quotient",
+        "g-trig-identities"
+      ],
+      "definition": "נגזרות של פונקציות טריגונומטריות וחקירתן.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "trig-func-analysis",
+        "trig-derivative"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-optimization",
+      "name": "בעיות קיצון",
+      "area": "calculus",
+      "topic": "calc-poly",
+      "prereqs": [
+        "c-extrema"
+      ],
+      "definition": "בעיית קיצון מילולית/גאומטרית: בניית פונקציה ממשתנה אחד ומציאת הערך הקיצוני שלה.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "optimization"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-transform",
+      "name": "תכונות גרפיות וטרנספורמציות",
+      "area": "calculus",
+      "topic": "pre-analysis",
+      "prereqs": [
+        "f-function-concept",
+        "f-parabola"
+      ],
+      "definition": "זיהוי הזזה, מתיחה ושיקוף של גרף, וזוגיות/אי-זוגיות של פונקציה.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "transformations",
+        "even-odd"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-integral-basic",
+      "name": "פונקציה קדומה ואינטגרל מסוים",
+      "area": "calculus",
+      "topic": "integrals",
+      "prereqs": [
+        "c-derivative-rules"
+      ],
+      "definition": "פונקציה קדומה (אינטגרל לא מסוים) ואינטגרל מסוים.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "integral-basic",
+        "antiderivative"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-area",
+      "name": "שטחים בעזרת אינטגרל",
+      "area": "calculus",
+      "topic": "integrals",
+      "prereqs": [
+        "c-integral-basic",
+        "f-quadratic-eq"
+      ],
+      "definition": "שטח בין גרף לציר, ושטח בין שני גרפים, בעזרת אינטגרל מסוים.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "definite-integral-area",
+        "area-between-curves"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "c-accum",
+      "name": "האינטגרל כפונקציה צוברת שטח",
+      "area": "calculus",
+      "topic": "accum-integral",
+      "prereqs": [
+        "c-area"
+      ],
+      "definition": "האינטגרל המסוים כפונקציה צוברת שטח התלויה בגבול עליון משתנה.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "accumulation-function"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "e-exp-laws",
+      "name": "פונקציה מעריכית ומשוואות מעריכיות",
+      "area": "explog",
+      "topic": "exp-log",
+      "prereqs": [
+        "f-powers"
+      ],
+      "definition": "פונקציה מעריכית $a^x$ וחוקיה, ופתרון משוואות מעריכיות בסיסיות.",
+      "difficulty": 2,
+      "examSkillIds": [
+        "exp-log-rules"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "e-log",
+      "name": "לוגריתמים וחוקיהם",
+      "area": "explog",
+      "topic": "exp-log",
+      "prereqs": [
+        "e-exp-laws"
+      ],
+      "definition": "הגדרת הלוגריתם וחוקיו (מכפלה, מנה, חזקה, מעבר בסיס).",
+      "difficulty": 2,
+      "examSkillIds": [
+        "exp-log-rules"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "e-exp-log-eq",
+      "name": "משוואות לוגריתמיות",
+      "area": "explog",
+      "topic": "exp-log",
+      "prereqs": [
+        "e-log",
+        "f-quadratic-eq"
+      ],
+      "definition": "פתרון משוואות מעריכיות ולוגריתמיות, כולל הצבה למשוואה ריבועית.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "exp-log-rules"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "e-exp-deriv",
+      "name": "חקירת פונקציות מעריכיות",
+      "area": "explog",
+      "topic": "exp-log",
+      "prereqs": [
+        "e-exp-laws",
+        "c-product-quotient"
+      ],
+      "definition": "נגזרת וחקירה של פונקציה מעריכית.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "exp-derivative",
+        "exp-log-analysis"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "e-log-deriv",
+      "name": "חקירת פונקציות לוגריתמיות",
+      "area": "explog",
+      "topic": "exp-log",
+      "prereqs": [
+        "e-log",
+        "c-product-quotient"
+      ],
+      "definition": "נגזרת וחקירה של פונקציה לוגריתמית.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "log-derivative",
+        "exp-log-analysis"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "e-growth",
+      "name": "גדילה ודעיכה",
+      "area": "explog",
+      "topic": "growth",
+      "prereqs": [
+        "e-exp-laws"
+      ],
+      "definition": "מודל גדילה/דעיכה מעריכי: $N(t)=N_0\\cdot a^t$ ושימושיו.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "growth-decay"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "e-power-func",
+      "name": "פונקציות חזקה עם מעריך רציונלי",
+      "area": "explog",
+      "topic": "power-func",
+      "prereqs": [
+        "f-powers",
+        "c-derivative-rules"
+      ],
+      "definition": "פונקציית חזקה עם מעריך רציונלי (למשל $x^{3/2}$) ונגזרתה.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "power-functions"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "a-line",
+      "name": "ישרים במישור: מרחק, אמצע, ניצבות",
+      "area": "analytic",
+      "topic": "analytic",
+      "prereqs": [
+        "f-line-eq",
+        "f-systems",
+        "f-pythagoras"
+      ],
+      "definition": "ישרים במישור: מרחק בין נקודות, אמצע קטע, תנאי ניצבות/מקביליות.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "line-eq",
+        "distance-point-line"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "a-circle",
+      "name": "מעגל: משוואה ומשיק",
+      "area": "analytic",
+      "topic": "analytic",
+      "prereqs": [
+        "a-line",
+        "f-factoring"
+      ],
+      "definition": "משוואת מעגל לפי מרכז ורדיוס, וחיתוך/השקה עם ישר.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "circle-eq",
+        "circle-line"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "a-locus",
+      "name": "מקומות גאומטריים",
+      "area": "analytic",
+      "topic": "analytic",
+      "prereqs": [
+        "a-circle"
+      ],
+      "definition": "מציאת משוואת מקום גאומטרי של נקודות המקיימות תנאי מרחק נתון.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "locus"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "a-conics",
+      "name": "פרבולה ואליפסה",
+      "area": "analytic",
+      "topic": "conics",
+      "prereqs": [
+        "a-circle"
+      ],
+      "definition": "פרבולה ואליפסה: הגדרה לפי מוקד/מדריך או מוקדים, ומשוואתן הקנונית.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "parabola",
+        "ellipse"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "a-hyperbola",
+      "name": "היפרבולה",
+      "area": "analytic",
+      "topic": "hyperbola",
+      "prereqs": [
+        "a-conics"
+      ],
+      "definition": "היפרבולה: הגדרה ומשוואתה הקנונית.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "hyperbola"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "v-basic",
+      "name": "וקטורים: פעולות ואורך",
+      "area": "vectors",
+      "topic": "vectors",
+      "prereqs": [
+        "f-powers",
+        "f-pythagoras"
+      ],
+      "definition": "וקטורים במרחב: חיבור, כפל בסקלר, ואורך וקטור.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "vectors-basic"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "v-dot",
+      "name": "מכפלה סקלרית וזווית",
+      "area": "vectors",
+      "topic": "vectors",
+      "prereqs": [
+        "v-basic",
+        "f-trig-basics"
+      ],
+      "definition": "מכפלה סקלרית של שני וקטורים וחישוב הזווית בין וקטורים.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "dot-product"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "v-line",
+      "name": "ישר במרחב",
+      "area": "vectors",
+      "topic": "vectors",
+      "prereqs": [
+        "v-basic",
+        "f-systems"
+      ],
+      "definition": "ייצוג ישר במרחב בעזרת נקודה ווקטור כיוון.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "line-space"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "v-plane",
+      "name": "מישור במרחב",
+      "area": "vectors",
+      "topic": "vectors",
+      "prereqs": [
+        "v-dot",
+        "v-line"
+      ],
+      "definition": "משוואת מישור במרחב, ומצבים הדדיים בין ישר/מישור למישור.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "plane-eq",
+        "line-plane"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "v-space-trig",
+      "name": "טריגונומטריה במרחב",
+      "area": "vectors",
+      "topic": "space-trig",
+      "prereqs": [
+        "v-dot",
+        "g-sine-cos"
+      ],
+      "definition": "טריגונומטריה במרחב: זוויות ומרחקים בגופים (תיבה, פירמידה, מנסרה) בעזרת וקטורים.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "space-trig"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "z-basic",
+      "name": "מספרים מרוכבים: פעולות וערך מוחלט",
+      "area": "complex",
+      "topic": "complex",
+      "prereqs": [
+        "f-quadratic-eq"
+      ],
+      "definition": "מספר מרוכב בהצגה אלגברית $a+bi$: פעולות חשבון, צמוד וערך מוחלט, ופתרון משוואות עם שורשים מרוכבים.",
+      "difficulty": 3,
+      "examSkillIds": [
+        "complex-algebraic",
+        "complex-equations"
+      ],
+      "lessons": []
+    },
+    {
+      "id": "z-polar",
+      "name": "הצגה קוטבית ודה-מואבר",
+      "area": "complex",
+      "topic": "complex",
+      "prereqs": [
+        "z-basic",
+        "f-trig-basics"
+      ],
+      "definition": "הצגה קוטבית של מספר מרוכב, נוסחת דה-מואבר, ושורשי מספר מרוכב.",
+      "difficulty": 4,
+      "examSkillIds": [
+        "complex-polar"
+      ],
+      "lessons": []
+    }
   ]
 }

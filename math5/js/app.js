@@ -438,12 +438,14 @@ function sectionBody(lesson, sid) {
         <p class="muted small">קישורי חיפוש אינם המלצה על סרטון מסוים. סרטונים ייבחרו אחרי בדיקת תוכן.</p>
       </div>`;
     case 'examples':
+      // שלבי הפתרון והתשובה לא מוטבעים ב-HTML כאן (אפילו לא hidden) — הם נכנסים לדף
+      // רק כשלוחצים "לצעד הבא"/"הצגת כל הפתרון", בדיוק כמו .x-sol ב-js/views/exams.js.
       return lesson.examples.map((ex, i) => `
         <article class="card example" data-ex="${i}" data-step="0">
           <div class="ex-head"><span class="ex-num">דוגמה ${i + 1}</span><span class="ex-title">${esc(ex.title)}</span></div>
           <div class="ex-problem">${ex.problem}</div>
-          <ol class="steps">${ex.steps.map(s => `<li hidden>${s}</li>`).join('')}</ol>
-          <div class="ex-answer" hidden><b>תשובה:</b> ${ex.answer}</div>
+          <ol class="steps" data-count="${ex.steps.length}"></ol>
+          <div class="ex-answer" hidden></div>
           <div class="ex-actions"><button class="btn" data-step>לצעד הראשון</button><button class="btn tertiary" data-all>הצגת כל הפתרון</button></div>
         </article>`).join('');
     case 'guided':
@@ -625,21 +627,28 @@ function bindLesson(id) {
   });
   sec.addEventListener('click', e => {
     const ex = e.target.closest('.example'); if (!ex) return;
-    const steps = [...ex.querySelectorAll('.steps li')];
+    const exData = lesson.examples[+ex.dataset.ex];
+    const list = ex.querySelector('.steps');
+    const total = +list.dataset.count;
     const showAll = !!e.target.closest('[data-all]');
     const stepBtn = e.target.closest('[data-step]');
     if (!showAll && !stepBtn) return;
     let n = +ex.dataset.step;
-    n = showAll ? steps.length : n + 1;
-    steps.forEach((li, k) => { li.hidden = k >= n; });
+    n = showAll ? total : n + 1;
+    // כל שלב נכנס ל-DOM רק כאן, בלחיצה — לא מוטבע מראש אפילו עם hidden (ראו sectionBody/case 'examples')
+    for (let k = list.childElementCount; k < n; k++) {
+      const li = document.createElement('li'); li.innerHTML = exData.steps[k]; list.appendChild(li);
+    }
+    renderMath(list);
     ex.dataset.step = n;
     const b = ex.querySelector('[data-step]');
-    if (n >= steps.length) {
-      ex.querySelector('.ex-answer').hidden = false;
+    if (n >= total) {
+      const ans = ex.querySelector('.ex-answer');
+      ans.innerHTML = `<b>תשובה:</b> ${exData.answer}`; ans.hidden = false; renderMath(ans);
       ex.querySelector('.ex-actions').hidden = true;
-      if ([...app.querySelectorAll('.example')].every(x => +x.dataset.step >= x.querySelectorAll('.steps li').length)) store.markSection(id, 'examples');
+      if ([...app.querySelectorAll('.example')].every(x => +x.dataset.step >= +x.querySelector('.steps').dataset.count)) store.markSection(id, 'examples');
       updateStepper(lesson);
-    } else b.textContent = `לצעד הבא: ${n + 1} מתוך ${steps.length}`;
+    } else b.textContent = `לצעד הבא: ${n + 1} מתוך ${total}`;
   });
   if (location.hash.endsWith('/review')) { store.markSection(id, 'review'); updateStepper(lesson); }
 }
